@@ -35,7 +35,7 @@ class Watchlist(models.Model): #creates a watchlist
         return
 
 #this is the Model for our movies ==================
- 
+
 
 class MovieReview(models.Model):
     user_id = models.CharField(max_length=100)
@@ -52,7 +52,7 @@ class MovieReview(models.Model):
     def create_review(self, data):
 
         try:
-            MovieReview.objects.get(user_id= data['user_id'])
+            MovieReview.objects.get(api_code=data['id'], user_id= data['user_id'])
             print "already wrote a review"
             return None
         except:
@@ -85,7 +85,7 @@ class TVReview(models.Model):
     @classmethod
     def create_review(self, data):
         try:
-            TVReview.objects.get(user_id=data['user_id'])
+            TVReview.objects.get(api_code=data['id'], user_id=data['user_id'])
             return None
         except:
             pass
@@ -118,7 +118,7 @@ class EpisodeReview(models.Model):
     @classmethod
     def create_review(self, data):
         try:
-            EpisodeReview.objects.get(user_id=data['user_id'])
+            EpisodeReview.objects.get(api_code=data['id'], user_id=data['user_id'])
             return None
         except:
             pass

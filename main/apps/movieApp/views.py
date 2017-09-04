@@ -21,12 +21,14 @@ def movie_page(request, id): # this renders the selected individual movie page
     user_id = request.session['user']
     try:
         MovieReview.objects.get(api_code=id, user_id=user_id)
+        print "user has already written a review"
         review_completed = True
-    except Exception as e:
+    except:
         pass
+
     movie = movie_services.get_movie(id)
     reviews = review_services.all_movie_reviews(id)
-
+    print reviews
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
