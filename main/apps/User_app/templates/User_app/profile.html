@@ -98,8 +98,8 @@
       <h1>My Reviews</h1>
       {% for review in reviews %}
       <h2>{{review.score}}</h2>
-      <img style="width:100px"src="https://image.tmdb.org/t/p/w500/{{review.poster_path}}" >
-      <h3>{{review.movie_title}}</h3>
+      <!-- <img style="width:100px"src="https://image.tmdb.org/t/p/w500/{{review.poster_path}}" > -->
+      <h3>{{review.title}}</h3>
       <p>{{review.content}}</p>
       {% endfor %}
 

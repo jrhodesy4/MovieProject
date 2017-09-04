@@ -14,8 +14,9 @@
     <p>{{tv_episode.overview}}</p>
     <div class="review">
       <h3>Write a review of this episode:</h3>
-      <form class="" action="/" method="post">
+      <form class="" action="/makeReview/{{id}}/{{season}}/{{episode}}" method="post">
         {% csrf_token %}
+        <input type="hidden" name="type" value="episode">
         <input type="number" max="100" name="score" value="">
         <textarea name="content" rows="8" cols="80" placeholder="Enter Your Comment Here"></textarea>
         <input type="submit" name="" value="Submit">

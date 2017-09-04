@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from ..User_app.models import User
 from django.db import models
-from . import services
+from . import movie_services
 
 
 class Watchlist(models.Model): #creates a watchlist
@@ -49,7 +49,7 @@ class MovieReview(models.Model):
 
     @classmethod
     def create_review(self, data):
-        movie = services.get_movie(data['id'])['movie_info']
+        movie = movie_services.get_movie(data['id'])['movie_info']
         movie_review = MovieReview.objects.create(
             api_code = data['id'],
             content = data['content'],
@@ -71,22 +71,57 @@ class TVReview(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @classmethod
+    def create_review(self, data):
+        tv = movie_services.get_show(data['id'])
+        tv_review = TVReview.objects.create(
+            api_code = data['id'],
+            content = data['content'],
+            score = data['score'],
+            title = tv['name'],
+            poster_path = tv["poster_path"],
+            backdrop_path = tv['backdrop_path']
+        )
+        return tv_review
+
 class EpisodeReview(models.Model):
     api_code = models.CharField(max_length=100)
+    season = models.CharField(max_length=10)
+    episode = models.CharField(max_length=10)
     series_title = models.CharField(max_length=50)
     episode_title = models.CharField(max_length=50)
+    still_path = models.CharField(max_length=100)
     poster_path = models.CharField(max_length=100)
-    backdrop_path = models.CharField(max_length=100)
     content = models.CharField(max_length=140)
     score = models.PositiveIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @classmethod
+    def create_review(self, data):
+        epi = movie_services.get_episode(data['id'], data['season'], data['episode'])
+        season = movie_services.get_season(data['id'], data['season'])
+        print "*********************************"
+        epi_review = EpisodeReview.objects.create(
+            api_code = data['id'],
+            season = data['season'],
+            episode = data['episode'],
+            episode_title = epi['name'],
+            series_title = season['name'],
+            still_path = epi['still_path'],
+            poster_path = season['poster_path'],
+            content = data['content'],
+            score = data['score'],
+            
+
+        )
+        return epi_review
+
 class UserReview(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='users')
-    movie_review = models.ManyToManyField(MovieReview, related_name='m_review_user')
-    tv_review = models.ManyToManyField(TVReview, related_name='m_review_user')
-    episode_review = models.ManyToManyField(EpisodeReview, related_name='m_review_user')
+    movie_review = models.ManyToManyField(MovieReview, related_name='movies')
+    tv_review = models.ManyToManyField(TVReview, related_name='tvs')
+    episode_review = models.ManyToManyField(EpisodeReview, related_name='episodes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

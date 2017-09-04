@@ -153,10 +153,11 @@
   </div>
   {% endif %}
 
-
+{% if request.session %}
   <div class="notifications">
     <a href="/user/notifications">Notifications</a>
   </div>
+  {% endif %}
   <div class="review-feed">
     <h2>Review Feed</h2>
     <a href="/reviewfeed">Click here for feed</a>

@@ -32,7 +32,11 @@ def movie_page(request, id): # this renders the selected individual movie page
 
 def show_page(request, id):
     show = movie_services.get_show(id)
-    return render(request, 'movieApp/tv_page.html', {'show': show})
+    context = {
+        "show": show,
+        "id": id,
+    }
+    return render(request, 'movieApp/tv_page.html', context)
 
 def movie_home(request):
     result = services.get_discover()
@@ -56,7 +60,13 @@ def show_season(request, id, season):
 
 def show_episode(request, id, season, episode):
     tv_episode = movie_services.get_episode(id, season, episode)
-    return render(request, 'movieApp/episode_page.html', {'tv_episode': tv_episode})
+    context = {
+        'tv_episode': tv_episode,
+        "id": id,
+        "season": season,
+        "episode": episode
+    }
+    return render(request, 'movieApp/episode_page.html', context)
 
 
 
@@ -91,17 +101,56 @@ def delete_from_watchlist(request, id):
     return redirect("/profile")
 
 
-def makeReview(request, id):
+def makeReview(request, id, season, episode):
     if 'user' not in request.session:
         return redirect('/')
     if request.method == "POST":
-        # print movie['poster_path']
-        data = {
-            "id": id,
-            "content": request.POST['content'],
-            "score": request.POST['score'],
-        }
-        mr = MovieReview.create_review(data)
+
         user_id = request.session['user']
-        UserReview.add_review(mr, "movie", user_id)
-    return redirect('/movie/' + id)
+        if request.POST['type'] == "movie":
+            data = {
+                "id": id,
+                "content": request.POST['content'],
+                "score": request.POST['score'],
+            }
+            # mr = MovieReview.create_review(data)
+
+            # UserReview.add_review(mr, "movie", user_id)
+            return redirect('/movie/' + id)
+
+        if request.POST['type'] == "tv":
+            data = {
+                "id": id,
+                "content": request.POST['content'],
+                "score": request.POST['score'],
+            }
+            tr = TVReview.create_review(data)
+            UserReview.add_review(tr, "tv", user_id)
+            return redirect('/')
+
+        if request.POST['type'] == "episode":
+            print "episode"
+            data = {
+                "id": id,
+                "season": season,
+                "episode": episode,
+                "content": request.POST['content'],
+                "score": request.POST['score'],
+            }
+            epi = EpisodeReview.create_review(data)
+            UserReview.add_review(epi, "episode", user_id)
+            return redirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+# end

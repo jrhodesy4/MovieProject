@@ -12,7 +12,7 @@ def popular_actors(): #this gets the popular actors at from the TMDB api
     json_data = requests.get(url).json()
     return json_data['results']
 
-def popular_tv():
+def popular_tv(): # <-- this return the popular tv shows
     url = 'https://api.themoviedb.org/3/tv/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
     json_data = requests.get(url).json()
     return json_data['results']
@@ -34,24 +34,27 @@ def get_movie(id): #this gets the popular movies at from the TMDB api
     }
     return movie
 
-def get_show(id):
+def get_show(id): # <---- this is function to to the the entire TV
 
     tv_url = 'https://api.themoviedb.org/3/tv/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     tv_data = requests.get(tv_url).json()
     return tv_data
 
-def get_season(id, season):
+def get_season(id, season): # <---- this is function to to the the entire TV season
+    season = season
+    print season
     season_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     season_data = requests.get(season_url).json()
     return season_data
 
-def get_episode(id, season, episode):
+def get_episode(id, season, episode): # <---- this is function to return the indivdual episode
     episode_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '/episode/' + episode + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     episode_data = requests.get(episode_url).json()
     return episode_data
 
 
-def get_person(id):
+
+def get_person(id): # <---- this is function to to the actor
 
     person_url = 'https://api.themoviedb.org/3/person/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     person_data = requests.get(person_url).json()

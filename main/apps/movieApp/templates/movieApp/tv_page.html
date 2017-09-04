@@ -19,8 +19,9 @@
     </ul>
     <div class="review">
       <h3>Write a review of this show:</h3>
-      <form class="" action="/makeReview/{{movie.id}}" method="post">
+      <form class="" action="/makeReview/{{id}}/0/0" method="post">
         {% csrf_token %}
+        <input type="hidden" name="type" value="tv">
         <input type="number" max="100" name="score" value="">
         <textarea name="content" rows="8" cols="80" placeholder="Enter Your Comment Here"></textarea>
         <input type="submit" name="" value="Submit">
