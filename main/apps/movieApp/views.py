@@ -31,7 +31,8 @@ def movie_page(request, id): # this renders the selected individual movie page
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
         'reviews' : reviews,
-        'in_list': in_list
+        'in_list': in_list,
+        'completed': review_completed
     }
     return render(request, 'movieApp/movie_page.html', context)
 

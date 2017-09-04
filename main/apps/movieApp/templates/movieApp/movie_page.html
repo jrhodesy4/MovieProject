@@ -27,7 +27,9 @@
     {% else %}
     <p>remove</p>
     {% endif %}
+
     <div class="review">
+      {% if completed == False%}
       <h3>Write a review of this movie:</h3>
       <form class="" action="/makeReview/{{movie.id}}/0/0" method="post">
         {% csrf_token %}
@@ -37,6 +39,7 @@
         <input type="submit" name="" value="Submit">
 
       </form>
+      {%endif%}
 
         {% for review in reviews %}
         <div class="review">

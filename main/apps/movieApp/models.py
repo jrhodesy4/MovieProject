@@ -35,7 +35,7 @@ class Watchlist(models.Model): #creates a watchlist
         return
 
 #this is the Model for our movies ==================
-
+ 
 
 class MovieReview(models.Model):
     user_id = models.CharField(max_length=100)
