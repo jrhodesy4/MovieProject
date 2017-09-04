@@ -32,9 +32,11 @@ def movie_page(request, id): # this renders the selected individual movie page
 
 def show_page(request, id):
     show = movie_services.get_show(id)
+    reviews = TVReview.objects.filter(api_code=id)
     context = {
         "show": show,
         "id": id,
+        "reviews": reviews,
     }
     return render(request, 'movieApp/tv_page.html', context)
 
@@ -105,17 +107,17 @@ def makeReview(request, id, season, episode):
     if 'user' not in request.session:
         return redirect('/')
     if request.method == "POST":
-
         user_id = request.session['user']
+
         if request.POST['type'] == "movie":
+
             data = {
                 "id": id,
                 "content": request.POST['content'],
                 "score": request.POST['score'],
             }
-            # mr = MovieReview.create_review(data)
-
-            # UserReview.add_review(mr, "movie", user_id)
+            mr = MovieReview.create_review(data)
+            UserReview.add_review(mr, "movie", user_id)
             return redirect('/movie/' + id)
 
         if request.POST['type'] == "tv":
@@ -126,7 +128,7 @@ def makeReview(request, id, season, episode):
             }
             tr = TVReview.create_review(data)
             UserReview.add_review(tr, "tv", user_id)
-            return redirect('/')
+            return redirect('/show/' + id)
 
         if request.POST['type'] == "episode":
             print "episode"
@@ -139,7 +141,7 @@ def makeReview(request, id, season, episode):
             }
             epi = EpisodeReview.create_review(data)
             UserReview.add_review(epi, "episode", user_id)
-            return redirect('/')
+            return redirect('/episode/' + id + "/" + season + "/" + episode)
 
 
 
