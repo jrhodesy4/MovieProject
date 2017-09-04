@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . import movie_services
+from . import movie_services, review_services
 from ..homeApp import services
 from .models import Watchlist
 from ..User_app.models import User
@@ -17,11 +17,16 @@ def movie_page(request, id): # this renders the selected individual movie page
         for movie in watchlist: #<-- this is to check if movie is already in watchlist
             if movie.api_Movie_code == id:
                 in_list = True
-
-
+    review_completed = False
+    user_id = request.session['user']
+    try:
+        MovieReview.objects.get(api_code=id, user_id=user_id)
+        review_completed = True
+    except Exception as e:
+        pass
     movie = movie_services.get_movie(id)
-    reviews = MovieReview.objects.filter(api_code=id)
-    print reviews
+    reviews = review_services.all_movie_reviews(id)
+
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
@@ -115,20 +120,28 @@ def makeReview(request, id, season, episode):
                 "id": id,
                 "content": request.POST['content'],
                 "score": request.POST['score'],
+                "user_id": user_id
             }
             mr = MovieReview.create_review(data)
-            UserReview.add_review(mr, "movie", user_id)
-            return redirect('/movie/' + id)
+            if mr == None:
+                return redirect('/movie/' + id)
+            else:
+                UserReview.add_review(mr, "movie", user_id)
+                return redirect('/movie/' + id)
 
         if request.POST['type'] == "tv":
             data = {
                 "id": id,
                 "content": request.POST['content'],
                 "score": request.POST['score'],
+                "user_id": user_id
             }
             tr = TVReview.create_review(data)
-            UserReview.add_review(tr, "tv", user_id)
-            return redirect('/show/' + id)
+            if tr == None:
+                return redirect('/show/' + id)
+            else:
+                UserReview.add_review(tr, "tv", user_id)
+                return redirect('/show/' + id)
 
         if request.POST['type'] == "episode":
             print "episode"
@@ -138,10 +151,14 @@ def makeReview(request, id, season, episode):
                 "episode": episode,
                 "content": request.POST['content'],
                 "score": request.POST['score'],
+                "user_id": user_id
             }
             epi = EpisodeReview.create_review(data)
-            UserReview.add_review(epi, "episode", user_id)
-            return redirect('/episode/' + id + "/" + season + "/" + episode)
+            if epi == None:
+                return redirect('/episode/' + id + "/" + season + "/" + episode)
+            else:
+                UserReview.add_review(epi, "episode", user_id)
+                return redirect('/episode/' + id + "/" + season + "/" + episode)
 
 
 

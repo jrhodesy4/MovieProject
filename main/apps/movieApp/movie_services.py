@@ -6,7 +6,7 @@ YOU MIGHT HAVE TO PIP INSTALL REQUESTS IF YOU DO NOT ALREADY HAVE IT
 
 api key = 286abf6056d0a1338f772d1b7202e728
 """
-
+# requests =======================================
 def popular_actors(): #this gets the popular actors at from the TMDB api
     url = 'https://api.themoviedb.org/3/person/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
     json_data = requests.get(url).json()
@@ -52,8 +52,6 @@ def get_episode(id, season, episode): # <---- this is function to return the ind
     episode_data = requests.get(episode_url).json()
     return episode_data
 
-
-
 def get_person(id): # <---- this is function to to the actor
 
     person_url = 'https://api.themoviedb.org/3/person/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
@@ -66,5 +64,4 @@ def get_person(id): # <---- this is function to to the actor
         "details": person_data,
         "credits": credit_date
     }
-
     return person

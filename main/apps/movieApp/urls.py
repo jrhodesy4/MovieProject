@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
 
-    # get routes
+    # get routes ===============
     url(r'^movie/(?P<id>\d+)$', views.movie_page),
     url(r'^people/(?P<id>\d+)', views.cast_page),
     url(r'^show/(?P<id>\d+)', views.show_page),

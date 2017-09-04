@@ -6,6 +6,7 @@ Accounts
 james@jones.com
 donny@james.com
 lebron@james.com
+TESTING
 
 
 =============schedule================
@@ -29,10 +30,10 @@ sept-----
 =============thing that are needed to be added still ================
 
 - need to fix the profile
-    -followers --done
-    -following --done
-    -info should be hidden --done
-    -recent reviews --done
+    -followers --done (complete)
+    -following --done (complete)
+    -info should be hidden --done(complete)
+    -recent reviews --done (complete)
 
 - form validations - validations are in, just need to be made prettier. no bcrypt yet
 
@@ -47,10 +48,14 @@ sept-----
           - how much
           - how many thing to input ()
 
+          validations for reviews (i am currently working on)
 
-- movie search function
 
-- new feed -- done
+- movie search function (complete)
+
+- new feed (complete)
+
+
 
 - icons for things that are not in the in the database (actors movies)
 

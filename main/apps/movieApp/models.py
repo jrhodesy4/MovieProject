@@ -38,6 +38,7 @@ class Watchlist(models.Model): #creates a watchlist
 
 
 class MovieReview(models.Model):
+    user_id = models.CharField(max_length=100)
     api_code = models.CharField(max_length=100)
     title = models.CharField(max_length=50)
     poster_path = models.CharField(max_length=100)
@@ -49,8 +50,17 @@ class MovieReview(models.Model):
 
     @classmethod
     def create_review(self, data):
+
+        try:
+            MovieReview.objects.get(user_id= data['user_id'])
+            print "already wrote a review"
+            return None
+        except:
+            pass
         movie = movie_services.get_movie(data['id'])['movie_info']
+
         movie_review = MovieReview.objects.create(
+            user_id = data['user_id'],
             api_code = data['id'],
             content = data['content'],
             score = data['score'],
@@ -62,6 +72,7 @@ class MovieReview(models.Model):
 
 
 class TVReview(models.Model):
+    user_id = models.CharField(max_length=100)
     api_code = models.CharField(max_length=100)
     title = models.CharField(max_length=50)
     poster_path = models.CharField(max_length=100)
@@ -73,8 +84,14 @@ class TVReview(models.Model):
 
     @classmethod
     def create_review(self, data):
+        try:
+            TVReview.objects.get(user_id=data['user_id'])
+            return None
+        except:
+            pass
         tv = movie_services.get_show(data['id'])
         tv_review = TVReview.objects.create(
+            user_id = data['user_id'],
             api_code = data['id'],
             content = data['content'],
             score = data['score'],
@@ -85,6 +102,7 @@ class TVReview(models.Model):
         return tv_review
 
 class EpisodeReview(models.Model):
+    user_id = models.CharField(max_length=100)
     api_code = models.CharField(max_length=100)
     season = models.CharField(max_length=10)
     episode = models.CharField(max_length=10)
@@ -99,10 +117,17 @@ class EpisodeReview(models.Model):
 
     @classmethod
     def create_review(self, data):
+        try:
+            EpisodeReview.objects.get(user_id=data['user_id'])
+            return None
+        except:
+            pass
+
         epi = movie_services.get_episode(data['id'], data['season'], data['episode'])
         season = movie_services.get_season(data['id'], data['season'])
-        print "*********************************"
+
         epi_review = EpisodeReview.objects.create(
+            user_id = data['user_id'],
             api_code = data['id'],
             season = data['season'],
             episode = data['episode'],
@@ -112,7 +137,7 @@ class EpisodeReview(models.Model):
             poster_path = season['poster_path'],
             content = data['content'],
             score = data['score'],
-            
+
 
         )
         return epi_review
