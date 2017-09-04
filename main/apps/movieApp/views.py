@@ -7,13 +7,13 @@ from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
 # from ..homeApp import services
 
 # custom defintions here =======================
-def authenticate(request):
+def authenticate(request): #<----- this is to tell whether the user is logged in or not
     if 'user' in request.session:
         return "in"
     else:
         return "out"
 
-def in_watchlist(user_id, id):
+def in_watchlist(user_id, id): #<----- if media is in the user watchlist returns boolean
     user = User.objects.get(id=user_id)
     try:
         Watchlist.objects.get(user__id=user.id, api_code=id)
