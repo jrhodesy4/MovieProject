@@ -41,10 +41,7 @@ def get_show(id):
     return tv_data
 
 def get_season(id, season):
-    season = season
-    print season
     season_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
-    print season_url
     season_data = requests.get(season_url).json()
     return season_data
 

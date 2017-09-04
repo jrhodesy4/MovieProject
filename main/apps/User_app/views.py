@@ -158,8 +158,10 @@ def user_page(request, id):
         profile = Profile.objects.get(user_id=id)
     except:
         profile = "This user has not created a profile yet"
-
-    profile_picture = profile.picture
+    try:
+        profile_picture = profile.picture
+    except:
+        profile_picture = 'none'
 
     return render(request, 'User_app/user.html', { 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
 
