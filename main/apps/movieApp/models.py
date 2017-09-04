@@ -5,13 +5,15 @@ from . import movie_services
 
 
 class Watchlist(models.Model): #creates a watchlist
-    api_Movie_code = models.CharField(max_length=100)
+    api_code = models.CharField(max_length=100)
     movie_title = models.CharField(max_length=50)
     poster_path = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # objects = WatchlistManager()
+    _type = models.CharField(max_length=100)
+
+
 
     @classmethod
     def add_movie(self, data):
@@ -19,17 +21,26 @@ class Watchlist(models.Model): #creates a watchlist
         user = User.objects.get(id=data['user_id'])
         movie = data['movie']
         my_watchlist = Watchlist.objects.filter(user=user)
-
-
-        Watchlist.objects.create( #<-- add the movie to the watchlist
-            api_Movie_code = movie['id'],
-            movie_title = movie['title'],
-            poster_path = movie['poster_path'],
-            user = user
-        )
-        print "added"
-        return
-
+        if data['type'] == "movie":
+            Watchlist.objects.create( #<-- add the movie to the watchlist
+                api_code = movie['id'],
+                movie_title = movie['title'],
+                poster_path = movie['poster_path'],
+                user = user,
+                _type = data['type']
+            )
+            print "added"
+            return
+        else:
+            Watchlist.objects.create( #<-- add the movie to the watchlist
+                api_code = movie['id'],
+                movie_title = movie['name'],
+                poster_path = movie['poster_path'],
+                user = user,
+                _type = data['type']
+            )
+            print "added"
+            return
     @classmethod
     def remove(self, data):
         return
@@ -68,6 +79,12 @@ class MovieReview(models.Model):
             poster_path = movie["poster_path"],
             backdrop_path = movie['backdrop_path']
         )
+        try:
+            w = Watchlist.objects.get(user_id=data['user_id'], api_code=data['id'])
+            w.delete()
+            pass
+        except:
+            pass
         return movie_review
 
 
@@ -99,6 +116,12 @@ class TVReview(models.Model):
             poster_path = tv["poster_path"],
             backdrop_path = tv['backdrop_path']
         )
+        try:
+            w = Watchlist.objects.get(user_id=data['user_id'], api_code=data['id'])
+            w.delete()
+            pass
+        except:
+            pass
         return tv_review
 
 class EpisodeReview(models.Model):
@@ -171,32 +194,7 @@ class UserReview(models.Model):
             ur.episode_review.add(review)
             ur.save()
         return
-# class Review(models.Model):
-#     user_id = models.ForeignKey(User, related_name='users')
-#     api_Movie_code = models.CharField(max_length=100)
-#     movie_title = models.CharField(max_length=50)
-#     poster_path = models.CharField(max_length=100)
-#     backdrop_path = models.CharField(max_length=100)
-#     content = models.CharField(max_length=140)
-#     score = models.PositiveIntegerField(null=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#
-#
-#     @classmethod
-#     def add_review(self, data):
-#         movie = services.get_movie(data['id'])['movie_info']
-#         review = Review.objects.create(
-#             user_id = User.objects.get(id = data['user_id']),
-#             content = data['content'],
-#             score = data['score'],
-#             api_Movie_code = data['id'],
-#             poster_path = movie["poster_path"],
-#             movie_title = movie['title'],
-#             backdrop_path = movie['backdrop_path']
-#         )
-#         return review
-#
+
 
 
 

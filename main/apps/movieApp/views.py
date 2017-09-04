@@ -6,45 +6,90 @@ from ..User_app.models import User
 from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
 # from ..homeApp import services
 
+# custom defintions here =======================
+def authenticate(request):
+    if 'user' in request.session:
+        return "in"
+    else:
+        return "out"
+
+def in_watchlist(user_id, id):
+    user = User.objects.get(id=user_id)
+    try:
+        Watchlist.objects.get(user__id=user.id, api_code=id)
+        return True
+    except:
+        return False
+
+def review_completed(user_id, id, _type):
+    if _type == "movie":
+        try:
+            MovieReview.objects.get(api_code=id, user_id=user_id)
+            print "user has already written a review"
+            return True
+        except:
+            return False
+    if _type == "tv":
+        try:
+            TVReview.objects.get(api_code=id, user_id=user_id)
+            print "user has already written a review"
+            return True
+        except:
+            return False
+    if _type == "episode":
+        try:
+            EpisodeReview.objects.get(api_code=id, user_id=user_id)
+            print "user has already written a review"
+            return True
+        except:
+            return False
+
+# Create your views here.=======================
+# =====================================================================
+# =====================================================================
 
 
-# Create your views here.
 def movie_page(request, id): # this renders the selected individual movie page
     in_list = False
-    if 'user' in request.session:
-        user = User.objects.get(id=request.session['user'])
-        watchlist = Watchlist.objects.filter(user__id=user.id)
-        for movie in watchlist: #<-- this is to check if movie is already in watchlist
-            if movie.api_Movie_code == id:
-                in_list = True
-    review_completed = False
-    user_id = request.session['user']
-    try:
-        MovieReview.objects.get(api_code=id, user_id=user_id)
-        print "user has already written a review"
-        review_completed = True
-    except:
-        pass
+    status = authenticate(request)
+    review_c = False
+    if status == "in":
+        user_id = request.session['user']
+        in_list = in_watchlist(user_id, id)
+        review_c = review_completed(user_id, id, "movie")
 
+    user_id = request.session['user']
     movie = movie_services.get_movie(id)
     reviews = review_services.all_movie_reviews(id)
     print reviews
+
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
         'reviews' : reviews,
         'in_list': in_list,
-        'completed': review_completed
+        'completed': review_c
     }
     return render(request, 'movieApp/movie_page.html', context)
 
 def show_page(request, id):
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)
+    in_list = False
+    review_c = False
+    status = authenticate(request)
+    if status == "in":
+        user_id = request.session['user']
+        in_list = in_watchlist(user_id, id)
+        review_c = review_completed(user_id, id, "tv")
+
     context = {
         "show": show,
         "id": id,
         "reviews": reviews,
+        "in_list": in_list,
+        'completed': review_c
+
     }
     return render(request, 'movieApp/tv_page.html', context)
 
@@ -70,11 +115,18 @@ def show_season(request, id, season):
 
 def show_episode(request, id, season, episode):
     tv_episode = movie_services.get_episode(id, season, episode)
+    status = authenticate(request)
+    review_c = False
+    if status == "in":
+        user_id = request.session['user']
+        review_c = review_completed(user_id, id, "episode")
+
     context = {
         'tv_episode': tv_episode,
         "id": id,
         "season": season,
-        "episode": episode
+        "episode": episode,
+        'completed': review_c
     }
     return render(request, 'movieApp/episode_page.html', context)
 
@@ -96,14 +148,27 @@ def cast_page(request, id): # this render the info page for the individual actor
 
 def add_to_watchlist(request, id): # the post route adds a movie to the Users watchlist
     if request.method == 'POST':
-        movie = services.get_movie(id)
-        data = {
-            "movie": movie['movie_info'], # this is the data for the current movie being displayed
-            "user_id": request.session['user'] # the logged in user id from session
-        }
-        Watchlist.add_movie(data) # add movie to Watchlist
-        return redirect('/movie/' + id)
+        _type = request.POST['type']
 
+        if _type == "movie":
+            movie = movie_services.get_movie(id)
+            data = {
+                "movie": movie['movie_info'], # this is the data for the current movie being displayed
+                "user_id": request.session['user'], # the logged in user id from session
+                "type": "movie" # whether it is a movie or tv show
+            }
+            Watchlist.add_movie(data) # add movie to Watchlist
+            return redirect('/movie/' + id)
+
+        if _type == "tv":
+            show = movie_services.get_show(id)
+            data = {
+                "movie": show, # this is the data for the current movie being displayed
+                "user_id": request.session['user'], # the logged in user id from session
+                "type": "tv" # whether it is a movie or tv show
+            }
+            Watchlist.add_movie(data) # add movie to Watchlist
+            return redirect('/show/' + id)
 
 def delete_from_watchlist(request, id):
     delete_me = Watchlist.objects.get(id=id)

@@ -12,12 +12,24 @@
     {% endif %}
     <h1>{{ show.name }}</h1>
     <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{show.backdrop_path}}" >
+
+    {% if in_list == False %}
+    <form class="add_to_watchlist" action="/movie/add/watchlist/{{id}}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="type" value="tv">
+        <input type="submit" name="add_to_watchlist" value="Add to Watchlist">
+      </form>
+    {% else %}
+    <p>remove</p>
+    {% endif %}
+
     <ul>
       {%for season in show.seasons%}
       <li><a href="/season/{{show.id}}/{{season.season_number}}">Season {{season.season_number}}</a></li>
       {% endfor %}
     </ul>
     <div class="review">
+      {% if completed == False %}
       <h3>Write a review of this show:</h3>
       <form class="" action="/makeReview/{{id}}/0/0" method="post">
         {% csrf_token %}
@@ -26,8 +38,9 @@
         <textarea name="content" rows="8" cols="80" placeholder="Enter Your Comment Here"></textarea>
         <input type="submit" name="" value="Submit">
 
-      <!-- </form> -->
-
+      </form>
+      {% endif %}
+      
         {% for review in reviews %}
         <div class="review">
           <p>========================</p>
