@@ -12,6 +12,10 @@
     function showDiv() {
       document.getElementById('profileDiv').style.display = "block";
     }
+    function showPic() {
+      document.getElementById('picDiv').style.display = "block";
+    }
+
 
 
 
@@ -42,11 +46,31 @@
       <p>Country: {{item.country}}</p>
       {% endfor %}
       {% else %}
-      <input type="button" name="answer" value="Edit Profile" onclick="showDiv()" />
-      <div id="profileDiv" style="display:none;">
-        <form class="" action="/createProfile" enctype="multipart/form-data" method="post">
+      {% if profile_picture %}
+      <input type="button" name="answer" value="Edit Profile Picture" onclick="showPic()" />
+      <div id="picDiv" style="display:none;">
+        <form class=""  action="/editProfilePicture" enctype="multipart/form-data" method="post">
           {% csrf_token %}
           <input type="file" name="myfile">
+          <input type="submit" name="" value="Edit">
+        </form><br>
+
+      </div>
+      {% else %}
+      <input type="button" name="answer" value="New Profile Picture" onclick="showPic()" />
+      <div id="picDiv" style="display:none;">
+        <form class=""  action="/newProfilePicture" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          <input type="file" name="myfile">
+          <input type="submit" name="" value="Add">
+        </form><br>
+
+      </div>
+      {% endif %}
+
+      <input type="button" name="answer" value="Edit Profile" onclick="showDiv()" />
+      <div id="profileDiv" style="display:none;">
+        <form class="" action="/createProfile" method="post">
           <!-- <button type="submit">Upload</button> -->
           Birthday:
           <input type="date" name="birthday" value="">

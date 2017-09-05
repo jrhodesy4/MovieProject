@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Profile, Friend, Notification
+from .models import User, Profile, Friend, Notification, ProPicture
 from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, EpisodeReview
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -23,32 +23,43 @@ def login_page(request): #renders the login page template
 def register_page(request): #renders the register page template
     return render(request, 'User_app/register_page.html')
 
+
 def createProfile(request):
+    if request.method == 'POST':
+        profile = Profile.objects.create(
+        birthday = request.POST['birthday'],
+        hometown = request.POST['hometown'],
+        country = request.POST['country'],
+        user_id = User.objects.get(id = request.session['user'])
+        )
+        profile.save()
+        return redirect('/profile')
+
+def newProfilePicture(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
-        profile = Profile.objects.create(
-        birthday = request.POST['birthday'],
-        hometown = request.POST['hometown'],
-        country = request.POST['country'],
-        user_id = User.objects.get(id = request.session['user']),
-        picture = uploaded_file_url
+        profilePic = ProPicture.objects.create(
+        picture = uploaded_file_url,
+        user_id = User.objects.get(id = request.session['user'])
         )
-        profile.save()
+        profilePic.save()
         return redirect('/profile')
 
-# def simple_upload(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         filename = fs.save(myfile.name, myfile)
-#         uploaded_file_url = fs.url(filename)
-#         return render(request, 'User_app/profile.html', {
-#             'uploaded_file_url': uploaded_file_url
-#         })
-#     return render(request, 'User_app/profile.html')
+def editProfilePicture(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        profilePic = ProPicture.objects.create(
+        picture = uploaded_file_url,
+        user_id = User.objects.get(id = request.session['user'])
+        )
+        profilePic.save()
+        return redirect('/profile')
 
 
 def profile(request):
@@ -56,20 +67,20 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
-
-
+    try:
+        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = request.session['user']))
+    except:
+        pass
 
     reviews = user_services.get_reviews(request.session['user'])
-
-
-
 
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
     profile_picture = ""
-    for stuff in profile:
-        profile_picture = stuff.picture
+    if profilePicture:
+        for stuff in profilePicture:
+            profile_picture = stuff.picture
     context = {
         'followers' : followers,
         'following' : following,
