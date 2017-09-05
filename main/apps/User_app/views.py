@@ -23,6 +23,7 @@ def login_page(request): #renders the login page template
 def register_page(request): #renders the register page template
     return render(request, 'User_app/register_page.html')
 
+<<<<<<< HEAD
 
 def createProfile(request):
     if request.method == 'POST':
@@ -34,6 +35,8 @@ def createProfile(request):
         )
         profile.save()
         return redirect('/profile')
+=======
+>>>>>>> upstream/master
 
 def newProfilePicture(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -67,10 +70,13 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
+<<<<<<< HEAD
     try:
         profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = request.session['user']))
     except:
         pass
+=======
+>>>>>>> upstream/master
 
     reviews = user_services.get_reviews(request.session['user'])
 
@@ -116,6 +122,23 @@ def notification_page(request):
 # =================================================================
 # POST request's
 # =================================================================
+def createProfile(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        profile = Profile.objects.create(
+            birthday = request.POST['birthday'],
+            hometown = request.POST['hometown'],
+            country = request.POST['country'],
+            user_id = User.objects.get(id = request.session['user']),
+            picture = uploaded_file_url
+        )
+        profile.save()
+        return redirect('/profile')
+
+
 def register_account(request): #this function creates the account
     if request.method == 'POST':
         account_info = {

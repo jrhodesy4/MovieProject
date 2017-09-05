@@ -13,10 +13,29 @@ lebron@james.com
 TESTING
 
 
+========================================================
+============NEED TO PICK COLOR SCHEME ==============
+MY TOP PICK IS Stripe
+
+back to earth -  https://uigradients.com/#BackToEarth
+purple bliss - https://uigradients.com/#PurpleBliss
+subu - https://uigradients.com/#Subu
+scooter - https://uigradients.com/#Scooter
+roseanna -  https://uigradients.com/#Roseanna
+timber - https://uigradients.com/#Timber
+endlessriver - https://uigradients.com/#EndlessRiver
+friday - https://uigradients.com/#Friday
+reef - https://uigradients.com/#Reef
+mantle - https://uigradients.com/#Mantle
+stripe - https://uigradients.com/#Stripe
+
+========================================================
+
 =============schedule================
 sept-----
 3.
 4.
+<<<<<<< HEAD
   remove from watchlist on page --ryan
   from watchlist can create a review
   if review is created it is removed from watchlist () --ryan
@@ -24,6 +43,16 @@ sept-----
   how to order and re order watchlist
   fix the searching function --done
   editing profile --me
+=======
+  remove from watchlist on page()
+  from watchlist can create a review (wait until styling might be easier)
+  if review is created it is removed from watchlist (done)
+  if review is complete turns from Review from to that review (done)
+  how to order and re order watchlist
+  fix the searching function
+  editing profile
+  shows should show seasons and episodes in one tab
+>>>>>>> upstream/master
 
 5.
 6.

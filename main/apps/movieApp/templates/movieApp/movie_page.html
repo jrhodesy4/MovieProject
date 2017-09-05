@@ -22,6 +22,7 @@
     {% if in_list == False %}
     <form class="add_to_watchlist" action="/movie/add/watchlist/{{movie.id}}" method="post">
         {% csrf_token %}
+        <input type="hidden" name="type" value="movie">
         <input type="submit" name="add_to_watchlist" value="Add to Watchlist">
       </form>
     {% else %}
