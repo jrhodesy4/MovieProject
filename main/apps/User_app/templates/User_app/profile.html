@@ -12,6 +12,10 @@
     function showDiv() {
       document.getElementById('profileDiv').style.display = "block";
     }
+    function showPic() {
+      document.getElementById('picDiv').style.display = "block";
+    }
+
 
 
 
@@ -24,6 +28,27 @@
       <h1>My Profile</h1>
       <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
       <img src="{{profile_picture}}">
+      {% if profile_picture %}
+      <input type="button" name="answer" value="Edit Profile Picture" onclick="showPic()" /><br><br>
+      <div id="picDiv" style="display:none;">
+        <form class=""  action="/editProfilePicture" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          <input type="file" name="myfile">
+          <input type="submit" name="" value="Edit">
+        </form><br>
+
+      </div>
+      {% else %}
+      <input type="button" name="answer" value="New Profile Picture" onclick="showPic()" />
+      <div id="picDiv" style="display:none;">
+        <form class=""  action="/newProfilePicture" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          <input type="file" name="myfile">
+          <input type="submit" name="" value="Add">
+        </form><br>
+
+      </div>
+      {% endif %}
 
 
       <!-- <form method="post" enctype="multipart/form-data">
@@ -34,6 +59,21 @@
 
       {% if profile %}
       {% for item in profile %}
+      <input type="button" name="answer" value="Edit Profile" onclick="showDiv()" />
+      <div id="profileDiv" style="display:none;">
+        <form class="" action="/editProfile" method="post">
+          <!-- <button type="submit">Upload</button> -->
+          {% csrf_token %}
+          Birthday:
+          <input type="date" name="birthday" value="{{item.birthday}}">
+          Hometown:
+          <input type="text" name="hometown" value="{{item.hometown}}">
+          Country:
+          <input type="text" name="country" value="{{item.country}}">
+          <input type="submit" name="" value="Submit">
+        </form>
+
+      </div>
       <h3>Contact Information</h3>
       <p>Email:  {{ item.user_id.email}}</p>
       <h3>General Information</h3>
@@ -42,12 +82,13 @@
       <p>Country: {{item.country}}</p>
       {% endfor %}
       {% else %}
-      <input type="button" name="answer" value="Edit Profile" onclick="showDiv()" />
+
+      <input type="button" name="answer" value="Create Profile" onclick="showDiv()" />
+
       <div id="profileDiv" style="display:none;">
-        <form class="" action="/createProfile" enctype="multipart/form-data" method="post">
-          {% csrf_token %}
-          <input type="file" name="myfile">
+        <form class="" action="/createProfile" method="post">
           <!-- <button type="submit">Upload</button> -->
+          {% csrf_token %}
           Birthday:
           <input type="date" name="birthday" value="">
           Hometown:
