@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Profile, Friend, Notification
+from .models import User, Profile, Friend, Notification, ProPicture
 from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, EpisodeReview
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -24,16 +24,40 @@ def register_page(request): #renders the register page template
     return render(request, 'User_app/register_page.html')
 
 
-# def simple_upload(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         filename = fs.save(myfile.name, myfile)
-#         uploaded_file_url = fs.url(filename)
-#         return render(request, 'User_app/profile.html', {
-#             'uploaded_file_url': uploaded_file_url
-#         })
-#     return render(request, 'User_app/profile.html')
+def createProfile(request):
+    if request.method == 'POST':
+        profile = Profile.objects.create(
+        birthday = request.POST['birthday'],
+        hometown = request.POST['hometown'],
+        country = request.POST['country'],
+        user_id = User.objects.get(id = request.session['user'])
+        )
+        profile.save()
+        return redirect('/profile')
+
+def newProfilePicture(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        profilePic = ProPicture.objects.create(
+        picture = uploaded_file_url,
+        user_id = User.objects.get(id = request.session['user'])
+        )
+        profilePic.save()
+        return redirect('/profile')
+
+def editProfilePicture(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        oldProfilePic = ProPicture.objects.get(user_id = User.objects.get(id = request.session['user']))
+        oldProfilePic.picture = uploaded_file_url
+        oldProfilePic.save()
+        return redirect('/profile')
 
 
 def profile(request):
@@ -41,6 +65,10 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
+    try:
+        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = request.session['user']))
+    except:
+        pass
 
     reviews = user_services.get_reviews(request.session['user'])
 
@@ -48,8 +76,9 @@ def profile(request):
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
     profile_picture = ""
-    for stuff in profile:
-        profile_picture = stuff.picture
+    if profilePicture:
+        for stuff in profilePicture:
+            profile_picture = stuff.picture
     context = {
         'followers' : followers,
         'following' : following,
@@ -86,20 +115,28 @@ def notification_page(request):
 # POST request's
 # =================================================================
 def createProfile(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
+    if request.method == 'POST':
         profile = Profile.objects.create(
             birthday = request.POST['birthday'],
             hometown = request.POST['hometown'],
             country = request.POST['country'],
             user_id = User.objects.get(id = request.session['user']),
-            picture = uploaded_file_url
         )
         profile.save()
         return redirect('/profile')
+
+def editProfile(request):
+    if request.method == 'POST':
+        profile = Profile.objects.get(user_id = User.objects.get(id = request.session['user']))
+        birthday = request.POST['birthday']
+        hometown = request.POST['hometown']
+        country = request.POST['country']
+        profile.birthday = birthday
+        profile.hometown = hometown
+        profile.country = country
+        profile.save()
+        return redirect('/profile')
+
 
 
 def register_account(request): #this function creates the account
@@ -162,8 +199,10 @@ def user_page(request, id):
         profile = Profile.objects.get(user_id=id)
     except:
         profile = "This user has not created a profile yet"
-
-    profile_picture = profile.picture
+    try:
+        profile_picture = profile.picture
+    except:
+        profile_picture = 'none'
 
     return render(request, 'User_app/user.html', { 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
 

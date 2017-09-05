@@ -11,7 +11,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
     </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
     <script>
-    $(document).ready(function()  
+    $(document).ready(function(){
+
       $("#hoverli").hover(
         function () {
           $('#actions_menu').slideDown('fast');
@@ -30,13 +31,13 @@
         },
         minLength: 2,
       });
+    });
 
     function AutoCompleteSelectHandler(event, ui)
     {
       var selectedObj = ui.item;
       window.location = "/user/" + selectedObj.id;
     }
-  });
 
 
 
@@ -49,13 +50,13 @@
         },
         minLength: 2,
       });
+    });
 
     function AutoCompleteSelectHandler(event, ui)
     {
       var selectedObj = ui.item;
       window.location = "/movie/" + selectedObj.id;
     }
-  });
     </script>
   </head>
 
@@ -152,10 +153,11 @@
   </div>
   {% endif %}
 
-
+{% if request.session %}
   <div class="notifications">
     <a href="/user/notifications">Notifications</a>
   </div>
+  {% endif %}
   <div class="review-feed">
     <h2>Review Feed</h2>
     <a href="/reviewfeed">Click here for feed</a>

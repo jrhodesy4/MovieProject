@@ -59,10 +59,6 @@ def feed(request):
 
 
 
-
-
-
-
 def testing(request):
     return redirect('/')
 
