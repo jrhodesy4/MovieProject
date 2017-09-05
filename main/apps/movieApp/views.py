@@ -21,7 +21,7 @@ def in_watchlist(user_id, id): #<----- if media is in the user watchlist returns
     except:
         return False
 
-def review_completed(user_id, id, _type):
+def review_completed(user_id, id, _type): #<----- if media is in the user watchlist returns boolean
     if _type == "movie":
         try:
             MovieReview.objects.get(api_code=id, user_id=user_id)
