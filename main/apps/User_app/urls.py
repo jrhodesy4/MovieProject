@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^register_account$', views.register_account),
     url(r'^log_user_in$', views.log_user_in),
     url(r'^createProfile$', views.createProfile),
+    url(r'^editProfile$', views.editProfile),
     url(r'^logout$', views.logout),
     url(r'^connect/(?P<operation>.+)/(?P<id>\d+)/$', views.change_friends),
     url(r'^newProfilePicture$', views.newProfilePicture),

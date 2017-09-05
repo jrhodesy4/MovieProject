@@ -35,15 +35,6 @@ stripe - https://uigradients.com/#Stripe
 sept-----
 3.
 4.
-<<<<<<< HEAD
-  remove from watchlist on page --ryan
-  from watchlist can create a review
-  if review is created it is removed from watchlist () --ryan
-  if review is complete turns from Review from to that review
-  how to order and re order watchlist
-  fix the searching function --done
-  editing profile --me
-=======
   remove from watchlist on page()
   from watchlist can create a review (wait until styling might be easier)
   if review is created it is removed from watchlist (done)
@@ -52,7 +43,6 @@ sept-----
   fix the searching function
   editing profile
   shows should show seasons and episodes in one tab
->>>>>>> upstream/master
 
 5.
 6.
