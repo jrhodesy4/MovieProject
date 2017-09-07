@@ -58,7 +58,7 @@ def movie_page(request, id): # this renders the selected individual movie page
         in_list = in_watchlist(user_id, id)
         review_c = review_completed(user_id, id, "movie")
 
-    user_id = request.session['user']
+    # user_id = request.session['user']
     movie = movie_services.get_movie(id)
     reviews = review_services.all_movie_reviews(id)
     print reviews
