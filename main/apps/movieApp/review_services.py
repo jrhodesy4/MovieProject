@@ -9,6 +9,10 @@ def all_movie_reviews(id):
     start_reviews = MovieReview.objects.filter(api_code=id)
     for review in start_reviews:
         user_id = review.user_id
+        print "====================="
+        print user_id
+        print "====================="
+        #
         user = User.objects.get(id=user_id)
         fullname = User.Fullname_toString(user)
         data = {
