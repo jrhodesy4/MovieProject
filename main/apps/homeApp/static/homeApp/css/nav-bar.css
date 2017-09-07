@@ -13,6 +13,8 @@ timber - https://uigradients.com/#Timber
 endlessriver - https://uigradients.com/#EndlessRiver
 friday - https://uigradients.com/#Friday
 reef - https://uigradients.com/#Reef
+mantle - https://uigradients.com/#Mantle
+stripe - https://uigradients.com/#Stripe
 
 */
 
@@ -20,7 +22,7 @@ reef - https://uigradients.com/#Reef
 * {
   font-family: Helvetica;
   font-weight: lighter;
-  background-color: #F1F1F1;
+  background-color: #D3D3D3;
 
 }
 
@@ -72,9 +74,14 @@ reef - https://uigradients.com/#Reef
 
 .nav li a {
     background-color: white;
+
+    ext-shadow:
+      0 -1px 0px darken(rgba($color, 0.6),18%),
+      0 -2px 0px darken(rgba($color, 0.8),25%);
+
     display: inline;
     font-size: 1.3em;
-    color: #5B86E5;
+    color: #1fa2ff;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -83,7 +90,7 @@ reef - https://uigradients.com/#Reef
     border-bottom-color: black;
 }
 .nav li a:hover {
-  color: #36D1DC;
+  color: #a6ffcb;
   border-bottom: 13px;
 }
 
@@ -95,11 +102,9 @@ reef - https://uigradients.com/#Reef
   height: 10px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: #36D1DC;
-  background:linear-gradient(to left, #1fa2ff, #12d8fa, #a6ffcb); /* fallback for old browsers */
-  /*background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */*/
-  /*background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */*/
-
+  background: #1FA2FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 

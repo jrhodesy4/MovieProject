@@ -69,7 +69,7 @@ class MovieReview(models.Model):
         except:
             pass
         movie = movie_services.get_movie(data['id'])['movie_info']
-
+        print data['user_id']
         movie_review = MovieReview.objects.create(
             user_id = data['user_id'],
             api_code = data['id'],
@@ -107,6 +107,7 @@ class TVReview(models.Model):
         except:
             pass
         tv = movie_services.get_show(data['id'])
+
         tv_review = TVReview.objects.create(
             user_id = data['user_id'],
             api_code = data['id'],
@@ -183,7 +184,7 @@ class UserReview(models.Model):
     @classmethod
     def add_review(self, review, _type, user_id):
         user = User.objects.get(id=user_id)
-        ur = UserReview.objects.get(user=user)
+        ur = UserReview.objects.get(user=user_id)
         if _type == "movie":
             ur.movie_review.add(review)
             ur.save()
