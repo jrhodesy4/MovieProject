@@ -42,6 +42,7 @@ sept-----
 
 8.
   -add ability to edit a review
+  -review form and watchlist button only shows up if user in session --completed
 9.
 10.
 

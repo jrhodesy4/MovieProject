@@ -31,13 +31,13 @@
         },
         minLength: 2,
       });
-    });
 
     function AutoCompleteSelectHandler(event, ui)
     {
       var selectedObj = ui.item;
       window.location = "/user/" + selectedObj.id;
     }
+  });
 
 
 
@@ -50,13 +50,13 @@
         },
         minLength: 2,
       });
-    });
 
     function AutoCompleteSelectHandler(event, ui)
     {
       var selectedObj = ui.item;
       window.location = "/movie/" + selectedObj.id;
     }
+  });
     </script>
   </head>
 
@@ -106,9 +106,9 @@
       <a href="/actor_home">Actors</a>
 
       {% else%}
-      <a href="#">Movies</a>
-      <a href="#">TV</a>
-      <a href="#">Actors</a>
+      <a href="/movie_home">Movies</a>
+      <a href="/tv_home">TV</a>
+      <a href="/actor_home">Actors</a>
       <a href="/login">Login</a>
       <a href="/register">Register</a>
       {% endif %}
