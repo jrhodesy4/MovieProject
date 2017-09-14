@@ -68,7 +68,7 @@ def movie_page(request, id): # this renders the selected individual movie page
         'cast': movie['cast_info'],
         'reviews' : reviews,
         'in_list': in_list,
-        'completed': review_c
+        'completed': review_c,
     }
     return render(request, 'movieApp/movie_page.html', context)
 
@@ -188,7 +188,12 @@ def makeReview(request, id, season, episode):
                 "id": id,
                 "content": request.POST['content'],
                 "score": request.POST['score'],
-                "user_id": user_id
+                "user_id": user_id,
+                "story_rating": request.POST['story'],
+                "entertainment_rating": request.POST['entertainment'],
+                "acting_rating": request.POST['acting'],
+                "visual_rating": request.POST['visual'],
+                "sound_rating": request.POST['sound'],
             }
             mr = MovieReview.create_review(data)
             if mr == None:

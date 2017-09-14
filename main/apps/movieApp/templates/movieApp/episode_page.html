@@ -20,6 +20,18 @@
         <input type="hidden" name="type" value="episode">
         <input type="number" max="100" name="score" value="">
         <textarea name="content" rows="8" cols="80" placeholder="Enter Your Comment Here"></textarea>
+
+        <p>Story rating:</p>
+        <input name='story' type="range" min="0" max="10">
+        <p>Entertainment Rating:</p>
+        <input name='entertainment' type="range" min="0" max="10">
+        <p>Acting Rating</p>
+        <input name='acting' type="range" min="0" max="10">
+        <p>Visual Rating:</p>
+        <input name='visual' type="range" min="0" max="10">
+        <p>Sound Rating:</p>
+        <input name='sound' type="range" min="0" max="10">
+
         <input type="submit" name="" value="Submit">
       </form>
       {% endif %}
