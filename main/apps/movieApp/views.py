@@ -62,8 +62,10 @@ def movie_page(request, id): # this renders the selected individual movie page
     movie = movie_services.get_movie(id)
     reviews = review_services.all_movie_reviews(id)
     print reviews
-    watchlist = Watchlist.objects.get(api_code=id)
-    print watchlist.api_code
+    try:
+        watchlist = Watchlist.objects.get(api_code=id)
+    except: watchlist = 'nothing'
+
 
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],

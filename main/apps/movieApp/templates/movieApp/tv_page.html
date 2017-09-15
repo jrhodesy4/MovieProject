@@ -12,6 +12,7 @@
     {% endif %}
     <h1>{{ show.name }}</h1>
     <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{show.backdrop_path}}" >
+    <h2>Aired: {{show.first_air_date}} to {{show.last_air_date}}</h2>
     {% if 'user' in request.session %}
     {% if in_list == False %}
     <form class="add_to_watchlist" action="/movie/add/watchlist/{{id}}" method="post">

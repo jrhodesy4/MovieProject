@@ -10,6 +10,7 @@
     <a href="/logout">Logout</a>
     {% endif %}
     <h2>{{tv_episode.name}}</h2>
+    <h2>Air Date: {{tv_episode.air_date }}</h2>
     <img src="https://image.tmdb.org/t/p/w500{{tv_episode.still_path}}" alt="">
     <p>{{tv_episode.overview}}</p>
     {% if 'user' in request.session %}

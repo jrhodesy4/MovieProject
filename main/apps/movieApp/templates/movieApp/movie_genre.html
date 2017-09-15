@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Genres</title>
+  </head>
+  <body>
+    <div class="nav-bar">
+      <a href="/">Home</a>
+      {% if request.session.user %}
+      <a href="/logout">Logout</a>
+      {% endif %}
+    </div>
+    <h1>This is the Movie genre page</h1>
+
+  </body>
+</html>
