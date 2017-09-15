@@ -58,6 +58,12 @@ class MovieReview(models.Model):
     score = models.PositiveIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # newly added*******
+    story_rating = models.PositiveSmallIntegerField(null=True)
+    entertainment_rating = models.PositiveSmallIntegerField(null=True)
+    entertainment_rating = models.PositiveSmallIntegerField(null=True)
+    visual_rating = models.PositiveSmallIntegerField(null=True)
+    sound_rating = models.PositiveSmallIntegerField(null=True)
 
     @classmethod
     def create_review(self, data):
@@ -76,8 +82,13 @@ class MovieReview(models.Model):
             content = data['content'],
             score = data['score'],
             title = movie['title'],
-            poster_path = movie["poster_path"],
-            backdrop_path = movie['backdrop_path']
+            poster_path = movie['poster_path'],
+            backdrop_path = movie['backdrop_path'],
+            story_rating = data['story_rating'],
+            entertainment_rating = data['entertainment_rating'],
+            acting_rating = data['acting_rating'],
+            visual_rating = data['visual_rating'],
+            sound_rating = data['sound_rating'],
         )
         try:
             w = Watchlist.objects.get(user_id=data['user_id'], api_code=data['id'])
@@ -98,6 +109,12 @@ class TVReview(models.Model):
     score = models.PositiveIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # newly added*******
+    story_rating = models.PositiveSmallIntegerField(null=True)
+    entertainment_rating = models.PositiveSmallIntegerField(null=True)
+    acting_rating = models.PositiveSmallIntegerField(null=True)
+    visual_rating = models.PositiveSmallIntegerField(null=True)
+    sound_rating = models.PositiveSmallIntegerField(null=True)
 
     @classmethod
     def create_review(self, data):
@@ -115,7 +132,12 @@ class TVReview(models.Model):
             score = data['score'],
             title = tv['name'],
             poster_path = tv["poster_path"],
-            backdrop_path = tv['backdrop_path']
+            backdrop_path = tv['backdrop_path'],
+            story_rating = data['story_rating'],
+            entertainment_rating = data['entertainment_rating'],
+            acting_rating = data['acting_rating'],
+            visual_rating = data['visual_rating'],
+            sound_rating = data['sound_rating']
         )
         try:
             w = Watchlist.objects.get(user_id=data['user_id'], api_code=data['id'])
@@ -138,6 +160,13 @@ class EpisodeReview(models.Model):
     score = models.PositiveIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # newly added*******
+    story_rating = models.PositiveSmallIntegerField(null=True)
+    entertainment_rating = models.PositiveSmallIntegerField(null=True)
+    acting_rating = models.PositiveSmallIntegerField(null=True)
+    visual_rating = models.PositiveSmallIntegerField(null=True)
+    sound_rating = models.PositiveSmallIntegerField(null=True)
+
 
     @classmethod
     def create_review(self, data):
@@ -161,8 +190,11 @@ class EpisodeReview(models.Model):
             poster_path = season['poster_path'],
             content = data['content'],
             score = data['score'],
-
-
+            story_rating = data['story_rating'],
+            entertainment_rating = data['entertainment_rating'],
+            acting_rating = data['acting_rating'],
+            visual_rating = data['visual_rating'],
+            sound_rating = data['sound_rating']
         )
         return epi_review
 

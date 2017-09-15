@@ -42,9 +42,17 @@ sept-----
 
 8.
   -add ability to edit a review
+<<<<<<< HEAD
   -review form and watchlist button only shows up if user in session --completed
+=======
+  -work on Styling
+>>>>>>> upstream/master
 9.
+  -work on Styling
 10.
+  -work on Styling
+11.
+  -deploy
 
 
 
@@ -90,6 +98,8 @@ sept-----
 
 
 =============future ideas================
+AWARDS SYSTEM
+
 1. like weather app
 2. private accounts
 
