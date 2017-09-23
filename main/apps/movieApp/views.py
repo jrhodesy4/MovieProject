@@ -181,20 +181,20 @@ def makeReview(request, id, season, episode):
         return redirect('/')
     if request.method == "POST":
         user_id = request.session['user']
+        data = {
+            "id": id,
+            "content": request.POST['content'],
+            "score": request.POST['score'],
+            "user_id": user_id,
+            "story_rating": request.POST['story'],
+            "entertainment_rating": request.POST['entertainment'],
+            "acting_rating": request.POST['acting'],
+            "visual_rating": request.POST['visual'],
+            "sound_rating": request.POST['sound'],
+        }
+
 
         if request.POST['type'] == "movie":
-
-            data = {
-                "id": id,
-                "content": request.POST['content'],
-                "score": request.POST['score'],
-                "user_id": user_id,
-                "story_rating": request.POST['story'],
-                "entertainment_rating": request.POST['entertainment'],
-                "acting_rating": request.POST['acting'],
-                "visual_rating": request.POST['visual'],
-                "sound_rating": request.POST['sound'],
-            }
             mr = MovieReview.create_review(data)
             if mr == None:
                 return redirect('/movie/' + id)
@@ -203,12 +203,6 @@ def makeReview(request, id, season, episode):
                 return redirect('/movie/' + id)
 
         if request.POST['type'] == "tv":
-            data = {
-                "id": id,
-                "content": request.POST['content'],
-                "score": request.POST['score'],
-                "user_id": user_id
-            }
             tr = TVReview.create_review(data)
             if tr == None:
                 return redirect('/show/' + id)
@@ -224,7 +218,13 @@ def makeReview(request, id, season, episode):
                 "episode": episode,
                 "content": request.POST['content'],
                 "score": request.POST['score'],
-                "user_id": user_id
+                "user_id": user_id,
+                "story_rating": request.POST['story'],
+                "entertainment_rating": request.POST['entertainment'],
+                "acting_rating": request.POST['acting'],
+                "visual_rating": request.POST['visual'],
+                "sound_rating": request.POST['sound'],
+
             }
             epi = EpisodeReview.create_review(data)
             if epi == None:

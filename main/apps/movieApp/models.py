@@ -61,7 +61,7 @@ class MovieReview(models.Model):
     # newly added*******
     story_rating = models.PositiveSmallIntegerField(null=True)
     entertainment_rating = models.PositiveSmallIntegerField(null=True)
-    entertainment_rating = models.PositiveSmallIntegerField(null=True)
+    acting_rating = models.PositiveSmallIntegerField(null=True)
     visual_rating = models.PositiveSmallIntegerField(null=True)
     sound_rating = models.PositiveSmallIntegerField(null=True)
 
@@ -88,7 +88,7 @@ class MovieReview(models.Model):
             entertainment_rating = data['entertainment_rating'],
             acting_rating = data['acting_rating'],
             visual_rating = data['visual_rating'],
-            sound_rating = data['sound_rating'],
+            sound_rating = data['sound_rating']
         )
         try:
             w = Watchlist.objects.get(user_id=data['user_id'], api_code=data['id'])

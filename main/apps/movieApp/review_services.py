@@ -3,16 +3,12 @@ from .models import MovieReview, TVReview, EpisodeReview, UserReview
 from . import movie_services
 
 
-def all_movie_reviews(id):
+def all_movie_reviews(id): #<-- this functions gets all the reviews for the movie page just enter the id of the movie
     reviews = []
     movie = movie_services.get_movie(id)
     start_reviews = MovieReview.objects.filter(api_code=id)
     for review in start_reviews:
         user_id = review.user_id
-        print "====================="
-        print user_id
-        print "====================="
-        #
         user = User.objects.get(id=user_id)
         fullname = User.Fullname_toString(user)
         data = {
