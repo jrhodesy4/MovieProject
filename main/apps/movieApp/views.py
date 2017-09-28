@@ -72,12 +72,7 @@ def movie_page(request, id): # this renders the selected individual movie page
         'cast': movie['cast_info'],
         'reviews' : reviews,
         'in_list': in_list,
-<<<<<<< HEAD
-        'watchlist': watchlist,
-        'completed': review_c
-=======
         'completed': review_c,
->>>>>>> upstream/master
     }
     return render(request, 'movieApp/movie_page.html', context)
 
