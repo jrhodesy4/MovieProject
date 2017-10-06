@@ -158,3 +158,6 @@
 
   font-size: 2vw;
 }
+#search-button {
+  cursor: pointer;
+}
