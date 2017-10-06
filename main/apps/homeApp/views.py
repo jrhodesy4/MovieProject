@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from . import services
+from ..User_app import user_services
 from ..User_app.models import User, Profile, Friend
 # from ..movieApp.models import
 from ..User_app import views
@@ -38,21 +39,18 @@ def index(request):
 def feed(request):
     if "user" not in request.session:
         return redirect('/')
+    user_id = request.session['user']
+    stuff = user_services.get_feed_reviews(user_id)
+    # print stuff
+    for things in stuff:
 
-    user = User.objects.get(id=request.session['user'])
-    friends = Friend.objects.get(current_user=user)
-    feed_list = []
-    for friend in friends.users.all():
-        movie_reviews = Review.objects.filter(user_id=friend.id)
-        # print movie_reviews
-        for review in movie_reviews:
-            feed_list.append(review)
-
+        print things['title']
+        print "==================================="
 
 
     context = {
-        "friends": friends,
-        "feed": feed_list,
+        # "friends": friends,
+        # "feed": feed_list,
     }
 
     return render(request, "homeApp/newsfeed.html", context)
