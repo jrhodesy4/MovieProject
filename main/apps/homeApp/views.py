@@ -6,6 +6,7 @@ from ..User_app.models import User, Profile, Friend
 from ..User_app import views
 from django.views.generic.edit import FormView
 from django.core import serializers
+from django.http import JsonResponse
 import json
 import requests
 
@@ -19,8 +20,7 @@ api key = 286abf6056d0a1338f772d1b7202e728
 def search(request):
     search = request.GET.get('search-info')
     result = services.search_database(search)
-    final = json.dumps(result)
-    return HttpResponse(result)
+    return JsonResponse(result, safe=False)
     # return HttpResponse(serializers.serialize("json", final), content_type='application/json')
 
 

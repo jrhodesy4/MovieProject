@@ -34,32 +34,42 @@ def search_database(search):
 
 
     json_data = requests.get(multi_search).json()
-    # print json_data
-    results = json_data['results']
-    newlist = sorted(results, key=lambda k: k['popularity'], reverse=True)
-    final_list = []
-    for result in newlist:
 
-        if result['media_type'] == "movie":
-            data = {
-                'name': result['original_title'],
-                "type": result['media_type'],
-                "pop": result['popularity']
-            }
-            final_list.append(data)
-        if result['media_type'] == "tv":
-            data = {
-                'name': result['original_name'],
-                "type": result['media_type'],
-                "pop": result['popularity']
-            }
-            final_list.append(data)
-        if result['media_type'] == "person":
-            data = {
-                'name': result['name'],
-                "type": result['media_type'],
-                "pop": result['popularity']
-            }
-            final_list.append(data)
+    try:
+        errrors = json_data['errors'];
+        final_list = []
+        return final_list
+    except:
+        results = json_data['results']
 
-    return final_list
+        newlist = sorted(results, key=lambda k: k['popularity'], reverse=True)
+        final_list = []
+
+        for result in newlist:
+
+            if result['media_type'] == "movie":
+                data = {
+                    'name': result['original_title'],
+                    "type": result['media_type'],
+                    "pop": result['popularity'],
+                    "picture": result['poster_path']
+                }
+                final_list.append(data)
+            if result['media_type'] == "tv":
+                data = {
+                    'name': result['original_name'],
+                    "type": result['media_type'],
+                    "pop": result['popularity'],
+                    "picture": result['poster_path']
+                }
+                final_list.append(data)
+            if result['media_type'] == "person":
+                data = {
+                    'name': result['name'],
+                    "type": result['media_type'],
+                    "pop": result['popularity'],
+                    "picture": result['profile_path']
+                }
+                final_list.append(data)
+
+        return final_list

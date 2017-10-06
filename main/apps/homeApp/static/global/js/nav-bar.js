@@ -22,8 +22,9 @@ $(document).ready(function(){
       method: "get",
       data: $('#search-info').serialize(),
       success: function(serverResponse) {
-        console.log(serverResponse.length);
-        console.log(serverResponse);
+        jsonTaken(serverResponse);
+
+
       }
    })
   }
@@ -56,12 +57,15 @@ function closeSearch(){
 }
 
 
-
-
-
-
-
-
+function jsonTaken(json){
+  $('#search-results').html('')
+  console.log(json);
+  for (var i = 0; i < json.length; i++){
+    var img_url = "https://image.tmdb.org/t/p/w500" + json[i].picture
+    console.log(img_url);
+    $("#search-results").append('<div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div>');
+  }
+}
 
 
 
