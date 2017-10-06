@@ -100,11 +100,15 @@
   width:auto;
   color:white;
   background-color: #BD3F32;
+  cursor: pointer;
 }
 #close-search-button:hover {
-  
+
 
 }
 #close-search-button:focus {
   outline: none;
+}
+#search-button {
+  cursor: pointer;
 }
