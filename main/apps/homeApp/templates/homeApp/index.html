@@ -4,70 +4,29 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Home</title>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+
     {% load staticfiles %}
-    <!-- <link rel="stylesheet" href="{% static 'User_app/home.css' %}"> -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
-    </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
-    <script>
-    $(document).ready(function(){
-
-      $("#hoverli").hover(
-        function () {
-          $('#actions_menu').slideDown('fast');
-        },
-        function () {
-          $('#actions_menu').slideUp('fast');
-        }
-      );
-    });
-
-    $(function() {
-      $("#places").autocomplete({
-        source: "/api/get_places",
-        select: function (event, ui) { //item selected
-          AutoCompleteSelectHandler(event, ui)
-        },
-        minLength: 2,
-      });
-    });
-
-    function AutoCompleteSelectHandler(event, ui)
-    {
-      var selectedObj = ui.item;
-      window.location = "/user/" + selectedObj.id;
-    }
+    <!-- here for local css files -->
+    <link rel="stylesheet" href="{% static 'homeApp/css/home-main.css'%}"/>
+    <!-- here are the global css files -->
+    <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}"/>
 
 
-
-
-    $(function() {
-      $("#movies").autocomplete({
-        source: "/api/search_movies",
-        select: function (event, ui) { //item selected
-          AutoCompleteSelectHandler(event, ui)
-        },
-        minLength: 2,
-      });
-    });
-
-    function AutoCompleteSelectHandler(event, ui)
-    {
-      var selectedObj = ui.item;
-      window.location = "/movie/" + selectedObj.id;
-    }
-    </script>
+    <!-- here is the import for javascript  -->
+    <!-- <script type="text/javascript" src="{% static 'homeApp/js/main.js'%}"></script> -->
+    <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
   </head>
-
-
   <body>
 
-    <div class="header">
-      <h1>Two Thumbs Up</h1>
+    {% include "../global/navbar.html" %}
 
-    </div>
-    <div class="topBar">
+
+    <!-- <div class="topBar">
       <div class="ui-widget">
         <form class="" action="/search" method="post">
           {% csrf_token %}
@@ -84,107 +43,27 @@
           <input name="person" id="movies">
           <input type="submit" name="search" value="Search">
         </form>
-      </div>
+      </div> -->
 
-
-      {% if request.session.action == "logged in" or request.session.action == "registered" %}
-      <div id="divMenuWrapper1" class="divMenuWrapper1">
-        <div id="hoverli">
-          <a class='lbtn' href="/profile">Profile</a>
-          <div id="actions_menu" class="file_menu">
-            <div><a href="/profile">View</a></div>
-            <!-- <div><a href="/">Edit</a></div>
-            <div><a href="/">Following</a></div> -->
-            <div><a href="/logout">Logout</a></div>
-
-          </div>
-        </div>
-      </div>
-      <a href="/">Home</a>
-      <a href="/movie_home">Movies</a>
-      <a href="/tv_home">TV</a>
-      <a href="/actor_home">Actors</a>
-
-      {% else%}
-      <a href="#">Movies</a>
-      <a href="#">TV</a>
-      <a href="#">Actors</a>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-      {% endif %}
-
-
-    </div>
-    <!-- <div class="users">
-      {% if request.session.action == "logged in" or request.session.action == "registered" %}
-      <h3>People You May Know</h3>
-      {% else %}
-      <h2>Current Users</h2>
-      {% endif %}
-
-      {% for user in users %}
-      <div class="user">
-      <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-      <a href="/user/{{ user.id }}"><h3>{{user.first_name}}</h3></a>
+    <div class="content-wrapper">
       {% if status == 'You are logged in' %}
-      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Add Friend</button></a><br>
+      <div class="friends">
+
+        <h2>Following</h2>
+        {% for friend in friends %}
+
+        <div class="friend">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
+          <a href="/connect/remove/{{friend.id}}"><button type="button" name="button">Remove</button></a>
+        </div>
+        {% endfor %}
+      </div>
       {% endif %}
     </div>
-      {% endfor %}
 
 
-    </div> -->
-    <!-- <div class="filmStrip">
-      <img src="{% static "User_app/simple-film-strip-clipart.png" %}" height="200" width="1000"/>
-    </div> -->
-
-    {% if status == 'You are logged in' %}
-    <div class="friends">
-
-    <h2>Following</h2>
-    {% for friend in friends %}
-    <div class="friend">
-      <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-      <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
-      <a href="/connect/remove/{{friend.id}}"><button type="button" name="button">Remove</button></a>
-
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-{% if request.session %}
-  <div class="notifications">
-    <a href="/user/notifications">Notifications</a>
-  </div>
-  {% endif %}
-  <div class="review-feed">
-    <h2>Review Feed</h2>
-    <a href="/reviewfeed">Click here for feed</a>
-  </div>
 
 
-  <div class="movies">
-
-
-    <h1>Discover Movies</h1>
-    <!-- <form class="testing" action="/testing" method="post">
-      {% csrf_token %}
-      <input type="submit">
-    </form> -->
-    {% for movie in result %}
-    <div class="movie">
-      <a href="/movie/{{ movie.id }}">
-        <img style="width:100px"src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" >
-      </a>
-      <p>{{ movie.title }}</p>
-
-    </div>
-    {% endfor %}
-  </div>
-  <div class="timeline">
-
-
-  </div>
   </body>
 </html>

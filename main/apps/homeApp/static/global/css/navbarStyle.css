@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+/*
+#00c9ff
+
+#92fe9d*/
+
+.center {
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.top-nav-bar {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  height: 15px;;
+  display: block;
+  position: relative;
+
+  margin-bottom: 50px;
+}
+.top-nav-bar .logo-hr {
+
+  height: 60px;
+  width: 100px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+}
+.top-nav-bar img {
+  position: relative;
+  width: auto;
+  height: 8vh;
+  top: calc(50% - 8vh/2);
+  vertical-align: bottom;
+}
+
+.top-nav-bar ul {
+  list-style-type: none;
+  float: right;
+  position: relative;
+  top: calc(50% - 3vh/2);
+}
+
+.top-nav-bar li {
+  position: relative;
+  display: inline-block;
+  margin-right: 1.5vmin;
+  vertical-align: top;
+}
+.top-nav-bar a {
+
+  color: #222222;
+  text-decoration: none;
+  font-size: 3vh;
+  font-weight: 300;
+  border-bottom: 1px solid #222222;
+}
+
+
+.top-nav-bar li:hover a {
+  color: #00c9ff;
+  border-bottom: 1px solid #00c9ff;
+  font-weight: 800;
+  top: 10px;
+}
+
+.search-bar {
+
+  text-align: right;
+  width: 70%;
+  height: auto;
+  display: none;
+  list-style-type: none;
+  float: right;
+  position: relative;
+
+
+}
+.search-bar input{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  padding: 10px;
+  width: 80%;
+  height: 30px;
+}
+.search-bar input:focus {
+  outline: none;
+}
+#close-search-button {
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid #BD3F32;
+  position: relative;
+  top: -5.5px;
+  left: -26px;
+  font-weight:800;
+  height:52.5px;
+  width:auto;
+  color:white;
+  background-color: #BD3F32;
+}
+#close-search-button:hover {
+  
+
+}
+#close-search-button:focus {
+  outline: none;
+}

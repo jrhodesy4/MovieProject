@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  padding: 20px;
+
+}
+
+.content-wrapper {
+  width: 100%;
+  min-height:500px;
+  border: 2px solid red;
+
+}
