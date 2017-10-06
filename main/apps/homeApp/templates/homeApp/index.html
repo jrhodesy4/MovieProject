@@ -47,28 +47,15 @@
       </div> -->
 
     <div class="content-wrapper">
-      {% if status == 'You are logged in' %}
-      <div class="friends">
-
-        <!-- <h2>Following</h2>
-        {% for friend in friends %}
-
-        <div class="friend">
-          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-          <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
-          <a href="/connect/remove/{{friend.id}}"><button type="button" name="button">Remove</button></a>
-        </div>
-        {% endfor %}
+      <div class="notifications-wrapper">
+        <h1>notifications</h1>
       </div>
-      {% endif %} -->
-
-
-      <h1>This will be the home page</h1>
-
-      <h1>here are some words</h1>
-      <h1>here are some more words </h1>
-      <h1>here are the last words</h1>
-
+      <div class="review-feed-wrapper">
+        <h1>recent reviews</h1>
+      </div>
+      <div class="extra-content-wrapper">
+        <h1>more content will go here</h1>
+      </div>
 
 
     </div>

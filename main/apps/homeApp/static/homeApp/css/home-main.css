@@ -12,3 +12,30 @@ body {
   width: 100%;
   min-height:500px;
 }
+.content-wrapper h1 {
+  font-size: 1.5em;
+}
+.notifications-wrapper {
+  /*border: 1px solid green;*/
+  display: inline-block;
+  text-align: center;
+  width: 45%;
+  height: auto;
+  margin-bottom: 50px;
+}
+.review-feed-wrapper {
+  /*border: 1px solid blue;*/
+  display: inline-block;
+  text-align: center;
+  float: right;
+  width: 45%;
+  height: 60%;
+}
+.extra-content-wrapper {
+  /*border: 1px solid red;*/
+  display: inline-block;
+  text-align: center;
+  width: 45%;
+  height: auto;
+
+}
