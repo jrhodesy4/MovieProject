@@ -10,8 +10,16 @@
     <li><a id="search-button">Search</a></li>
   </ul>
   <div class="search-bar">
-    <input type="text" name="Search" placeholder="Search">
-    <button class="center" id="close-search-button" onclick="closeSearch()" type="button" name="button">X</button>
+    <form class="search-form" action="/search/" method="POST">
+      {% csrf_token %}
+      <input type="text" name="search-info" id="search-info" placeholder="Search">
+      <button class="center" id="close-search-button" onclick="closeSearch()" type="button" name="button">X</button>
+    </form>
+  </div>
+</div>
+
+<div class="search-block">
+  <div class="content-hide">
   </div>
 </div>
 

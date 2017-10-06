@@ -102,9 +102,26 @@
   background-color: #BD3F32;
 }
 #close-search-button:hover {
-  
+
 
 }
 #close-search-button:focus {
   outline: none;
+}
+
+.search-block {
+  display: none;
+}
+.content-hide {
+  position: fixed;
+  display: inline-block;
+  width:100%;
+  height:100%;
+  left: 0px;
+  background: #00c9ff;
+  background: -webkit-linear-gradient(to right, #00c9ff, #92fe9d);
+  background: linear-gradient(to right, #00c9ff, #92fe9d);
+
+
+
 }
