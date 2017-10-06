@@ -1,14 +1,5 @@
 
   $(document).ready(function(){
-    $("#hoverli").hover(
-      function () {
-        $('#actions_menu').slideDown('fast');
-      },
-      function () {
-        $('#actions_menu').slideUp('fast');
-      }
-    );
-  });
 
   $(function() {
     $("#places").autocomplete({

@@ -5,6 +5,8 @@ from ..User_app.models import User, Profile, Friend
 # from ..movieApp.models import
 from ..User_app import views
 from django.views.generic.edit import FormView
+from django.core import serializers
+from django.http import JsonResponse
 import json
 import requests
 
@@ -15,6 +17,13 @@ import requests
 
 api key = 286abf6056d0a1338f772d1b7202e728
 """
+def search(request):
+    search = request.GET.get('search-info')
+    result = services.search_database(search)
+    return JsonResponse(result, safe=False)
+    # return HttpResponse(serializers.serialize("json", final), content_type='application/json')
+
+
 def index(request):
     result = services.get_discover()
     if "user" in request.session :
@@ -76,14 +85,11 @@ def search_movies(request):
             # print movie['id']
             movie_json = {}
             movie_json['id'] = movie['id']
-
             movie_json['label'] = movie['title']
-
             if "title" in movie:
                 movie_json['label'] = movie['title']
             else:
                 movie_json['label'] = movie['name']
-
             movie_json['value'] = movie['title']
             movArray.append(movie_json)
         data = json.dumps(movArray)
@@ -113,7 +119,7 @@ def get_places(request):
     print data
     return HttpResponse(data, mimetype)
 
-def search(request):
+def searchUsers(request):
     if request.method == 'POST':
         count = User.objects.filter(first_name__icontains=request.POST['person']).count()
         users = User.objects.filter(first_name__icontains=request.POST['person'])
@@ -156,9 +162,3 @@ def search(request):
 #             data = json.dumps(results)
 #             mimetype = 'application/json'
 #             return HttpResponse(data, mimetype)
-
-
-
-
-def mockup(request):
-    return render(request, 'homeApp/main-mockup.html')
