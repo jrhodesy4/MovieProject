@@ -103,9 +103,20 @@ function jsonTaken(json){
   for (var i = 0; i < json.length; i++){
     var img_url = "https://image.tmdb.org/t/p/w500" + json[i].picture
     var id = json[i].id
+    var type = json[i].type
     console.log(id);
     console.log(img_url);
-    $("#search-results").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
+    if (type == 'movie'){
+      $("#search-results").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
+    }
+    if (type == 'tv') {
+      $("#search-results").append('<a href="/show/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
+
+    }
+    else {
+      $("#search-results").append('<a href="/people/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
+    }
+
   }
 }
 }
