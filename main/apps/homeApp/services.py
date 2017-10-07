@@ -53,7 +53,8 @@ def search_database(search):
                     "type": result['media_type'],
                     "pop": result['popularity'],
                     "picture": result['poster_path'],
-                    "id": result['id']
+                    "id": result['id'],
+                    "type": result['media_type']
                 }
                 final_list.append(data)
             if result['media_type'] == "tv":
@@ -62,7 +63,8 @@ def search_database(search):
                     "type": result['media_type'],
                     "pop": result['popularity'],
                     "picture": result['poster_path'],
-                    "id": result['id']
+                    "id": result['id'],
+                    "type": result['media_type']
                 }
                 final_list.append(data)
             if result['media_type'] == "person":
@@ -71,7 +73,8 @@ def search_database(search):
                     "type": result['media_type'],
                     "pop": result['popularity'],
                     "picture": result['profile_path'],
-                    "id": result['id']
+                    "id": result['id'],
+                    "type": result['media_type']
                 }
                 final_list.append(data)
 
