@@ -223,6 +223,14 @@ def change_friends(request, operation, id):
     return redirect('/')
 
 
+def searchUsers(request):
+    if request.method == 'POST':
+        count = User.objects.filter(first_name__icontains=request.POST['person']).count()
+        users = User.objects.filter(first_name__icontains=request.POST['person'])
+        print users
+        return render(request, 'homeApp/search.html', {'users' : users, 'count' : count})
+
+
 
 
 
