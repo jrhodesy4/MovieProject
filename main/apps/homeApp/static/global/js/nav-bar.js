@@ -1,7 +1,12 @@
+
+var menuStatus = "closed";
+
 $(document).ready(function(){
   var typingTimer;                //timer identifier
   var doneTypingInterval = 1000;  //time in ms, 5 second for example
   var $input = $('#search-info');
+
+
 
   //on keyup, start the countdown
   $input.on('keyup', function () {
@@ -36,9 +41,14 @@ $(document).ready(function(){
        e.preventDefault()
      })
 
+
+  $(".menu-button-main").click(function(){
+    menuController();
+  })
+
 });//end of document listen
 
-
+// functions for top nav open/close =============
 function openSearch() {
   $("#navbar-menu").fadeOut("slow", function() {
     $('.search-bar').fadeIn("slow", function() {
@@ -55,8 +65,10 @@ function closeSearch(){
   $(".search-block").fadeOut("slow", function() {
   });
 }
+//=================================
 
 
+//live search functions
 function jsonTaken(json){
   $('#search-results').html('')
   console.log(json);
@@ -69,6 +81,39 @@ function jsonTaken(json){
 
 
 
+// here are the functions for stack-menu ===============
+function menuController(){
+  if (menuStatus == "closed" ){
+    console.log(menuStatus);
+    openStackMenu();
+    menuStatus = "open";
+  }
+  else {
+    closeStackMenu();
+    console.log(menuStatus);
+    menuStatus = "closed";
+  }
+}
+function openStackMenu(){
+  console.log('runing');
+  $("#profile-menu-item").animate({opacity: '1', duration: '10'});
+  $("#discover-menu-item").animate({opacity: '1', duration: '10'});
+  $("#search-menu-item").animate({opacity: '1', duration: '10'});
+
+  $("#profile-menu-item").animate({left: '-75px'});
+  $("#discover-menu-item").animate({left: '75px'});
+  $("#search-menu-item").animate({top: '-75px'});
+}
+function closeStackMenu(){
+
+  $("#profile-menu-item").animate({left: '0px'});
+  $("#discover-menu-item").animate({left: '0px'});
+  $("#search-menu-item").animate({top: '0px'});
+
+  $("#profile-menu-item").animate({opacity: '0', duration: '1'});
+  $("#discover-menu-item").animate({opacity: '0', duration: '1'});
+  $("#search-menu-item").animate({opacity: '0', duration: '1'});
+}
 
 
 
