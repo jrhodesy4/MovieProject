@@ -10,13 +10,6 @@
       <div class="logo-hr">
         <img class="center"src="https://i0.wp.com/hourofpower.org/wp-content/uploads/2015/10/logo_placeholder1-360x200.png" alt="logo">
       </div>
-      <ul id="navbar-menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/profile">Profile</a></li>
-        <li><a href="/movie_home">Discover</a></li>
-        <li><a id="search-button">Search</a></li>
-      </ul>
-    </div>
     <div class="search-wrapper">
       <div class="search-bar">
         <form class="search-form" action="/search/" method="POST">
@@ -34,7 +27,6 @@
       </div>
     </div>
 
-
       <div class="menu-holder ">
         <div id="drag-me" class="menu-stack">
           <div class="menu-button-main">
@@ -50,7 +42,7 @@
             </svg>
           </div>
 
-          <div id="menu-item-1" class="menu-item">
+          <a id="search-button"><div id="menu-item-1" class="menu-item">
             <svg class="icon icon-magnifying-glass">
               <use xlink:href="#icon-magnifying-glass"></use>
               <symbol id="icon-magnifying-glass" viewBox="0 0 32 32">
@@ -59,8 +51,8 @@
               </symbol>
             </svg>
             <p>Search</p>
-          </div>
-          <div id="menu-item-2" class="menu-item">
+          </div></a>
+          <a href="/movie_home"><div id="menu-item-2" class="menu-item">
             <svg class="icon icon-video-camera">
               <use xlink:href="#icon-video-camera"></use>
               <symbol id="icon-video-camera" viewBox="0 0 32 32">
@@ -69,8 +61,8 @@
               </symbol>
             </svg>
             <p>Discover</p>
-          </div>
-          <div id="menu-item-3" class="menu-item">
+          </div></a>
+          <a href="/profile"><div id="menu-item-3" class="menu-item">
             <svg class="icon icon-avatar">
               <use xlink:href="#icon-avatar"></use>
               <symbol id="icon-avatar" viewBox="0 0 32 32">
@@ -80,7 +72,7 @@
               </symbol>
             </svg>
             <p>Profile</p>
-          </div>
+          </div></a>
           <!-- <div id="menu-item-3" class="menu-item"></div> -->
           <div class="logout-button">
             <svg class="icon logout-button-icon">

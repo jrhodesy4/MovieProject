@@ -21,15 +21,16 @@
   height: 15px;;
   display: block;
   position: relative;
-
-  margin-bottom: 50px;
 }
 .top-nav-bar .logo-hr {
-
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
   height: 60px;
   width: 100px;
   text-align: center;
-  position: relative;
+  position: absolute;
   display: inline-block;
 }
 .top-nav-bar img {
@@ -40,36 +41,7 @@
   vertical-align: bottom;
 }
 
-.top-nav-bar ul {
-  list-style-type: none;
-  float: right;
-  position: relative;
-  top: calc(50% - 3vh/2);
-}
-
-.top-nav-bar li {
-  position: relative;
-  display: inline-block;
-  margin-right: 1.5vmin;
-  vertical-align: top;
-}
-.top-nav-bar a {
-
-  color: #222222;
-  text-decoration: none;
-  font-size: 3vh;
-  font-weight: 300;
-  border-bottom: 1px solid #222222;
-}
-
-
-.top-nav-bar li:hover a {
-  color: #00c9ff;
-  border-bottom: 1px solid #00c9ff;
-  font-weight: 800;
-  top: 10px;
-}
-
+/*here is the section for the search bar ====================*/
 .search-info {
   text-align: right;
   width: 70%;
@@ -130,6 +102,7 @@
 #close-search-button:focus {
   outline: none;
 }
+/*===============================================*/
 
 .search-block {
   /*display: none;*/
@@ -201,7 +174,7 @@
 /*end ========================================================== */
 
 
-/*menu ---button version */
+/*menu ---button version ========================== */
 .menu-holder {
   position: fixed;
   text-align: center;
@@ -319,6 +292,7 @@
 .logout-button-icon {
   width: 1em;
   height: 1em;
+  cursor: pointer;
 }
 .logout-button p {
   opacity: 0;
@@ -332,14 +306,11 @@
 .logout-button:hover p {
   opacity: 1;
 }
+/*=====================================================================================*/
 
 
 
 
-
-
-  /*end*/
-=======
 #search-button {
   cursor: pointer;
 }
@@ -350,4 +321,3 @@
   z-index: 200;
   position: fixed;
 }
->>>>>>> e66572c8c4e9bad3ae04c656197e32a0860aba07
