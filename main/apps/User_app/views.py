@@ -186,15 +186,21 @@ def log_user_in(request): # this is to the log the user in
 
 def user_page(request, id):
     users = User.objects.filter(id = id)
+    print request.session['user']
     try:
-        followers = Friend.users.filter(users=request.session['user'])
+        myFollow = Friend.objects.get(users=User.objects.get(id=id), current_user=User.objects.get(id = request.session['user']))
+    except:
+        myFollow = "you don't follow"
+    try:
+        followers = Friend.objects.filter(users=User.objects.get(id = id))
     except:
         followers = 'No followers'
-    print followers
-    try:
-        following = Friend.objects.filter(current_user=User.objects.get(id = request.session['user']))
-    except:
-        following = "not a friend"
+    friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = id))
+    following = friend.users.all()
+    # try:
+    #     following = Friend.objects.filter(current_user=User.objects.get(id = id))
+    # except:
+    #     following = "no following"
     try:
         profile = Profile.objects.get(user_id=id)
     except:
@@ -204,7 +210,7 @@ def user_page(request, id):
     except:
         profile_picture = 'none'
 
-    return render(request, 'User_app/user.html', { 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
+    return render(request, 'User_app/user.html', { 'myFollow': myFollow, 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
 
 def logout(request):
     request.session.clear()
@@ -220,7 +226,7 @@ def change_friends(request, operation, id):
     elif operation == 'remove':
         Friend.lose_friend(User.objects.get(id=request.session['user']), new_friend)
 
-    return redirect('/')
+    return redirect('/profile')
 
 
 def searchUsers(request):

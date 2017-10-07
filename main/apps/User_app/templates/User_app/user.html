@@ -14,14 +14,60 @@
       {% for user in users %}
       <img src="{{profile_picture}}" alt="" width="150">
       <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
-      <h1>{{ user.first_name}}'s Profile</h1>
+      <h1>{{ user.first_name}} {{user.last_name}}</h1>
+      <p>Followers: {{followers.count}}</p>
+      <p>Following: {{following.count}}</p>
+
 
 
       {% if request.session %}
-      {% if following == "not a friend" %}
-      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Add Friend</button></a><br>
+      {% if myFollow == "you don't follow" %}
+      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Follow</button></a><br>
+      {% else %}
+      <p>You follow {{user.first_name}}</p>
+      <a href="/connect/remove/{{user.id}}"><button type="button" name="button">Unfollow</button></a><br>
       {% endif %}
       {% endif %}
+      <div class="followers">
+        <h2>Following</h2>
+        {% for follow in following %}
+        {% if follow.id == request.session.user %}
+        <div class="">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/profile">{{follow.first_name}} {{follow.last_name}}</a>
+          <p>(You)</p>
+        </div>
+        {% else %}
+        <div class="">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/user/{{ follow.id }}">{{follow.first_name}}</a>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <h2>Followers</h2>
+        {% for follower in followers %}
+        {% if follower.current_user.id == request.session.user %}
+        <div class="">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+            <a href="/profile">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+            <p>(You)</p>
+
+        </div>
+
+        {% else %}
+
+        <div class="">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/user/{{ follower.current_user.id }}">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+      </div>
       {% endfor %}
 
     </div>
