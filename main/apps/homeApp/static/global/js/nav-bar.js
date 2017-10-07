@@ -95,24 +95,23 @@ function menuController(){
   }
 }
 function openStackMenu(){
-  console.log('runing');
-  $("#profile-menu-item").animate({opacity: '1', duration: '10'});
-  $("#discover-menu-item").animate({opacity: '1', duration: '10'});
-  $("#search-menu-item").animate({opacity: '1', duration: '10'});
+  $("#menu-item-1").animate({opacity: '1'});
+  $("#menu-item-2").animate({opacity: '1'});
+  $("#menu-item-3").animate({opacity: '1'});
 
-  $("#profile-menu-item").animate({left: '-75px'});
-  $("#discover-menu-item").animate({left: '75px'});
-  $("#search-menu-item").animate({top: '-75px'});
+  $("#menu-item-1").animate({left: '-75px'});
+  $("#menu-item-2").animate({left: '75px'});
+  $("#menu-item-3").animate({top: '-75px'});
 }
 function closeStackMenu(){
 
-  $("#profile-menu-item").animate({left: '0px'});
-  $("#discover-menu-item").animate({left: '0px'});
-  $("#search-menu-item").animate({top: '0px'});
+  $("#menu-item-1").animate({left: '0px'});
+  $("#menu-item-2").animate({left: '0px'});
+  $("#menu-item-3").animate({top: '0px'});
 
-  $("#profile-menu-item").animate({opacity: '0', duration: '1'});
-  $("#discover-menu-item").animate({opacity: '0', duration: '1'});
-  $("#search-menu-item").animate({opacity: '0', duration: '1'});
+  $("#menu-item-1").animate({opacity: '0', duration: '1'});
+  $("#menu-item-2").animate({opacity: '0', duration: '1'});
+  $("#menu-item-3").animate({opacity: '0', duration: '1'});
 }
 
 
