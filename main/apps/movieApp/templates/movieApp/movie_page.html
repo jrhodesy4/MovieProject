@@ -19,6 +19,7 @@
     <h1>{{ movie.title }}</h1>
     <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" >
 
+    {% if 'user' in request.session %}
     {% if in_list == False %}
     <form class="add_to_watchlist" action="/movie/add/watchlist/{{movie.id}}" method="post">
         {% csrf_token %}
@@ -26,7 +27,9 @@
         <input type="submit" name="add_to_watchlist" value="Add to Watchlist">
       </form>
     {% else %}
-    <p>remove</p>
+    {{watchlist.api_code}}
+    <a href="/movie/delete/watchlist/{{watchlist.id}}">Remove From Watchlist</a>
+
     {% endif %}
 
     <div class="review">
@@ -52,6 +55,7 @@
 
       </form>
       {%endif%}
+      {% endif %}
 
         {% for review in reviews %}
         <div class="review">
@@ -78,6 +82,7 @@
           <img style="width:100px" src="https://image.tmdb.org/t/p/w500{{person.profile_path}}">
         </a>
         <p>{{person.name}}</p>
+        <p>({{person.character}})</p>
       </div>
       {% endfor %}
 

@@ -58,10 +58,14 @@ def movie_page(request, id): # this renders the selected individual movie page
         in_list = in_watchlist(user_id, id)
         review_c = review_completed(user_id, id, "movie")
 
-    user_id = request.session['user']
+    # user_id = request.session['user']
     movie = movie_services.get_movie(id)
     reviews = review_services.all_movie_reviews(id)
     print reviews
+    try:
+        watchlist = Watchlist.objects.get(api_code=id)
+    except: watchlist = 'nothing'
+
 
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
@@ -88,6 +92,7 @@ def show_page(request, id):
         "id": id,
         "reviews": reviews,
         "in_list": in_list,
+        'watchlist': Watchlist.objects.filter(user=request.session["user"]),
         'completed': review_c
 
     }

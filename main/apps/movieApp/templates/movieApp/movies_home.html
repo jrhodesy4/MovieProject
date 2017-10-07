@@ -3,13 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script>
+    $(document).ready(function(){
+
+      $("#hoverli").hover(
+        function () {
+          $('#actions_menu').slideDown('fast');
+        },
+        function () {
+          $('#actions_menu').slideUp('fast');
+        }
+      );
+    });
+
+    </script>
   </head>
   <body>
     <a href="/">Home</a>
     {% if request.session.user %}
     <a href="/logout">Logout</a>
     {% endif %}
-    <h2>This is the Movie Home page</h2>
+    <h2>Movie Home</h2>
+    <div id="divMenuWrapper1" class="divMenuWrapper1">
+      <div id="hoverli">
+        <a class='lbtn' href="/profile">Profile</a>
+        <div id="actions_menu" class="file_menu">
+          <div><a href="/profile">View</a></div>
+          <!-- <div><a href="/">Edit</a></div>
+          <div><a href="/">Following</a></div> -->
+          <div><a href="/logout">Logout</a></div>
+
+        </div>
+      </div>
+    </div>
     <h1>Discover Movies</h1>
     <!-- <form class="testing" action="/testing" method="post">
       {% csrf_token %}

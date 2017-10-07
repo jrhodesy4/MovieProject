@@ -12,7 +12,8 @@
     {% endif %}
     <h1>{{ show.name }}</h1>
     <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{show.backdrop_path}}" >
-
+    <h2>Aired: {{show.first_air_date}} to {{show.last_air_date}}</h2>
+    {% if 'user' in request.session %}
     {% if in_list == False %}
     <form class="add_to_watchlist" action="/movie/add/watchlist/{{id}}" method="post">
         {% csrf_token %}
@@ -22,6 +23,7 @@
     {% else %}
     <p>remove</p>
     {% endif %}
+    {% endif %}
 
     <ul>
       {%for season in show.seasons%}
@@ -29,6 +31,7 @@
       {% endfor %}
     </ul>
     <div class="review">
+      {% if 'user' in request.session %}
       {% if completed == False %}
       <h3>Write a review of this show:</h3>
       <form class="" action="/makeReview/{{id}}/0/0" method="post">
@@ -51,6 +54,10 @@
 
       </form>
       {% endif %}
+<<<<<<< HEAD
+      {% endif %}
+=======
+>>>>>>> upstream/master
 
         {% for review in reviews %}
         <div class="review">
