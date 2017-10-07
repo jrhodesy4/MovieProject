@@ -22,7 +22,7 @@
     </form>
     </div>
     <div class="general">
-      <h1>My Profile</h1>
+      <h1>{{user.first_name}} {{user.last_name}}</h1>
       <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
       <img src="{{profile_picture}}">
       {% if profile_picture %}

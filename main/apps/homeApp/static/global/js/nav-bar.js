@@ -39,6 +39,9 @@ $(document).ready(function(){
 
    $('#search-button').click(function(){
      openSearch();
+     closeStackMenu();
+     console.log(menuStatus);
+     menuStatus = "closed";
   });
 
   $(".menu-button-main").click(function(){
@@ -50,37 +53,13 @@ $(document).ready(function(){
 
 // functions for top nav open/close =============
 function openSearch() {
-  $("#navbar-menu").fadeOut("slow", function() {
-    // $('.search-bar').fadeIn("slow", function() {
-    // });
-    // $('.search-block').fadeIn("slow", function() {
-    // });
+  searchAppear();
 
-  });
-  // searchAppear();
-
-  // if ($('.search-bar').is(':hidden')) {
-  //
-  //   $('.search-bar').show('slide',{direction:'left'},1000);
-  //   $('.search-block').show('slide',{direction:'left'},1000);
-  // } else {
-  //   $('.search-bar').hide('slide',{direction:'right'},1000);
-  //   $('.search-block').hide('slide',{direction:'right'},1000);
-  //
-  // };
 };
 
 function closeSearch(){
-  $("#navbar-menu").fadeIn("slow", function() {
-  });
   searchAppear();
 
-  // $(".search-bar").fadeOut("slow", function() {
-  //   $("#navbar-menu").fadeIn("slow", function() {
-  //   });
-  // });
-  // $(".search-block").fadeOut("slow", function() {
-  // });
 };
 
 function searchAppear() {
@@ -112,11 +91,11 @@ function jsonTaken(json){
     if (type == 'movie'){
       $("#search-results").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
     }
-    if (type == 'tv') {
+    else if (type == 'tv') {
       $("#search-results").append('<a href="/show/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
 
     }
-    else {
+    else if (type =='person') {
       $("#search-results").append('<a href="/people/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
     }
 
