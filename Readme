@@ -19,6 +19,12 @@ TESTING
 ========================================================
 
 =============schedule================
+profile page --accordion style dropdown for watchlist reviews
+has number of reviews, followers, and following
+
+
+
+
 sept-----
 3.
 4.
@@ -42,7 +48,7 @@ sept-----
 
 8.
   -add ability to edit a review
-  -work on Styling
+  -review form and watchlist button only shows up if user in session --completed
 9.
   -work on Styling
 10.

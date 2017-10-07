@@ -15,6 +15,7 @@ class Watchlist(models.Model): #creates a watchlist
 
 
 
+
     @classmethod
     def add_movie(self, data):
 
