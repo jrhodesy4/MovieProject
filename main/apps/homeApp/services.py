@@ -60,7 +60,7 @@ def search_database(search):
                     'name': result['original_name'],
                     "type": result['media_type'],
                     "pop": result['popularity'],
-                    "picture": result['poster_path']
+                    "picture": result['poster_path'],
                 }
                 final_list.append(data)
             if result['media_type'] == "person":

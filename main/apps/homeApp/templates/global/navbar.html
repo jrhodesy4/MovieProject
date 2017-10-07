@@ -9,21 +9,26 @@
     <li><a href="/movie_home">Discover</a></li>
     <li><a id="search-button">Search</a></li>
   </ul>
-  <div class="search-bar">
-    <form class="search-form" action="/search/" method="POST">
-      {% csrf_token %}
-      <input type="search" name="search-info" id="search-info" placeholder="Search">
-      <button class="center" id="close-search-button" onclick="closeSearch()" type="button" name="button">X</button>
-    </form>
-  </div>
 </div>
+  <div class="search-wrapper">
+    <div class="search-bar">
+      <form class="search-form" action="/search/" method="POST">
+        {% csrf_token %}
+        <input type="search" name="search-info" id="search-info" placeholder="Search">
+        <button class="center" id="close-search-button" onclick="closeSearch()" type="button" name="button">X</button>
+      </form>
+    </div>
+    <div class="search-block">
 
-<div class="search-block">
-  <div class="content-hide">
-    <h1>results</h1> 
-    <div id="search-results"></div>
+      <div class="content-hide">
+        <h1>results </h1>
+        <div id="search-results"><!--everything added from search goes in here--></div>
+      </div>
+    </div>
   </div>
-</div>
+
+
+
 <!--
 
 <div id="divMenuWrapper1" class="divMenuWrapper1">
