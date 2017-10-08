@@ -74,7 +74,8 @@
             <p>Profile</p>
           </div></a>
           <!-- <div id="menu-item-3" class="menu-item"></div> -->
-          <div class="logout-button">
+          {% if request.session.user %}
+          <a href="/logout"><div class="logout-button">
             <svg class="icon logout-button-icon">
               <use xlink:href="#icon-exit-to-app-button"></use>
               <symbol id="icon-exit-to-app-button" viewBox="0 0 32 32">
@@ -83,7 +84,8 @@
               </symbol>
             </svg>
             <p>Logout</p>
-          </div>
+          </div></a>
+          {% endif %}
         </div>
       </div>
 

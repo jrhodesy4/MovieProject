@@ -63,7 +63,7 @@ def editProfilePicture(request):
 def profile(request):
     if 'user' not in request.session:
         return redirect('/login')
-    username = request.session['name']
+    user = User.objects.get(id=request.session['user'])
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
     try:
         profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = request.session['user']))
@@ -79,11 +79,12 @@ def profile(request):
     if profilePicture:
         for stuff in profilePicture:
             profile_picture = stuff.picture
+    print profilePicture
     context = {
         'followers' : followers,
         'following' : following,
         'profile' : profile,
-        'username' : username,
+        'user' : user,
         'watchlist': Watchlist.objects.filter(user=request.session["user"]),
         'reviews' : reviews,
         'profile_picture': profile_picture,
