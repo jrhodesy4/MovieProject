@@ -79,6 +79,7 @@ def profile(request):
     if profilePicture:
         for stuff in profilePicture:
             profile_picture = stuff.picture
+    print profilePicture
     context = {
         'followers' : followers,
         'following' : following,

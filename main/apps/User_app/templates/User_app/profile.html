@@ -9,6 +9,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'User_app/profile.css' %}">
     <script type="text/javascript" src="{% static 'User_app/profile.js'%}"></script>
+
   </head>
   <body>
     <a href="/">Home</a>
@@ -24,9 +25,11 @@
     <div class="general">
       <h1>{{user.first_name}} {{user.last_name}}</h1>
       <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
-      <img src="{{profile_picture}}">
+      <div class="userPicture">
+        <img src="{{profile_picture}}">
+      </div>
       {% if profile_picture %}
-      <input type="button" name="answer" value="Edit Profile Picture" onclick="showPic()" /><br><br>
+      <input id="editProf" type="button" name="answer" value="Edit Profile Picture"/><br><br>
       <div id="picDiv" style="display:none;">
         <form class=""  action="/editProfilePicture" enctype="multipart/form-data" method="post">
           {% csrf_token %}
@@ -36,7 +39,7 @@
 
       </div>
       {% else %}
-      <input type="button" name="answer" value="New Profile Picture" onclick="showPic()" />
+      <input id="newProf" type="button" name="answer" value="New Profile Picture" />
       <div id="picDiv" style="display:none;">
         <form class=""  action="/newProfilePicture" enctype="multipart/form-data" method="post">
           {% csrf_token %}
@@ -145,6 +148,7 @@
 
 
     </div>
+    
 
 
 

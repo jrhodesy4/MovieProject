@@ -44,10 +44,25 @@ $(document).ready(function(){
      menuStatus = "closed";
   });
 
-  $(".menu-button-main").click(function(){
-    menuController();
+  // $(".menu-button-main").click(function(){
+  //   menuController();
+  //
+  // })
+  var isDragging = false;
+  $(".menu-button-main")
+  .mousedown(function() {
+    isDragging = false;
   })
-
+  .mousemove(function() {
+    isDragging = true;
+  })
+  .mouseup(function() {
+    var wasDragging = isDragging;
+    isDragging = false;
+    if (!wasDragging) {
+      menuController();
+    }
+  });
 });//end of document listen
 
 
@@ -102,6 +117,7 @@ function jsonTaken(json){
   }
 }
 }
+
 
 
 
