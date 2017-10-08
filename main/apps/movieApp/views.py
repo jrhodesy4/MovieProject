@@ -74,7 +74,7 @@ def movie_page(request, id): # this renders the selected individual movie page
         'in_list': in_list,
         'completed': review_c,
     }
-    return render(request, 'movieApp/movie_page.html', context)
+    return render(request, 'movieApp/movie_view_page.html', context)
 
 def show_page(request, id):
     show = movie_services.get_show(id)

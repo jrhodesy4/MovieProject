@@ -32,6 +32,7 @@ def get_movie(id): #this gets the popular movies at from the TMDB api
         "movie_info": movie_data,
         "cast_info": cast_data
     }
+    
     return movie
 
 def get_show(id): # <---- this is function to to the the entire TV
