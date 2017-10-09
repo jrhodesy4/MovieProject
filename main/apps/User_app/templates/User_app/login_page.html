@@ -3,21 +3,45 @@
   <head>
     <meta charset="utf-8">
     <title>working</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'User_app/login.css'%}">
   </head>
   <body>
-    <h1>Please Login</h1>
-
-    <!-- login form  -->
-    <form class="login" action="/log_user_in" method="post">
-      {% csrf_token %}
-      <p>Email:</p><input type="email" name="email">
-      <p>Password:</p><input type="password" name="password">
-      <br> <!--remove this when css ing  -->
-      <input type="submit" name="submit">
-    </form>
+    <div class="wrapper">
+      <div id="login">
+        <h1>Member Login</h1>
 
 
-    <a href="/register">Register here</a>
+        <!-- login form  -->
+        <form class="login" action="/log_user_in" method="post">
+          {% csrf_token %}
+          <p>Email:</p><input type="email" name="email">
+          <p>Password:</p><input type="password" name="password">
+          <br> <!--remove this when css ing  -->
+          <input type="submit" name="submit">
+        </form>
+
+      </div>
+
+
+      <div id="register">
+        <h1>Register</h1>
+
+        <!-- User registration form  -->
+        <form class="register-form" action="/register_account" method="POST">
+          {% csrf_token %}
+          <p>First Name:</p><input type="text" name="first_name">
+          <p>Last Name:</p><input type="text" name="last_name">
+          <p>Email:</p><input type="email" name="email">
+          <p>Password:</p><input type="password" name="password">
+          <input type="submit" name="sumbit">
+
+
+        </form>
+
+      </div>
+
+    </div>
 
   </body>
 </html>
