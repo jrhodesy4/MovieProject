@@ -1,0 +1,32 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  background: #00C9FF;
+  background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
+  background: linear-gradient(to right, #92FE9D, #00C9FF);
+
+
+}
+
+#login {
+  height: 500px;
+  width: 300px;
+  opacity: 0.5;
+  outline: 2px solid black;
+  display: inline-block;
+
+
+}
+.wrapper {
+  display: inline-block;
+}
+
+#register {
+  height: 500px;
+  width: 300px;
+  opacity: 0.5;
+  outline: 2px solid black;
+  display: inline-block;
+}

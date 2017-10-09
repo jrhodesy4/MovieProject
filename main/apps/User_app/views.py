@@ -184,9 +184,12 @@ def log_user_in(request): # this is to the log the user in
 
 
 
+
 # renders the specific user page, other than the current user
 
 def user_page(request, id):
+    if 'user' not in request.session:
+        return redirect('/login')
     users = User.objects.filter(id = id)
     reviews = user_services.get_reviews(id)
     length = len(reviews)

@@ -78,7 +78,7 @@
           </div>
           <h3>Your Review:</h3>
           <form class="" action="/makeReview/{{movie.id}}/0/0" method="post">
-            <!-- {% csrf_token %} -->
+            {% csrf_token %}
 
             <input type="hidden" name="type" value="movie">
 
