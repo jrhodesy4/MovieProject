@@ -60,16 +60,29 @@ def get_episode(id, season, episode): # <---- this is function to return the ind
     episode_data = requests.get(episode_url).json()
     return episode_data
 
-def get_person(id): # <---- this is function to to the actor
+def get_person(id): # <---- this is function to return the actor
 
     person_url = 'https://api.themoviedb.org/3/person/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     person_data = requests.get(person_url).json()
 
     credit_url = 'https://api.themoviedb.org/3/person/' + id +'/movie_credits?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
-    credit_date = requests.get(credit_url).json()
+    credits = requests.get(credit_url).json()
 
+    sorted_credits = sorted(credits['cast'], key=lambda k: k['popularity'], reverse=True)
+    print sorted_credits 
     person = {
         "details": person_data,
-        "credits": credit_date
+        "credits": sorted_credits
     }
     return person
+
+
+
+
+
+
+
+
+
+
+# end

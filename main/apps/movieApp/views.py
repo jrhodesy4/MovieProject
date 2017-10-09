@@ -144,7 +144,8 @@ def cast_page(request, id): # this render the info page for the individual actor
         'details': person_info['details'],
         'credits': person_info['credits']
     }
-    return render(request, 'movieApp/cast_page.html', person )
+    
+    return render(request, 'movieApp/actor_view_page.html', person )
 
 
 
