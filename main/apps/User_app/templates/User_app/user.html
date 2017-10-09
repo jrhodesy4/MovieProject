@@ -17,10 +17,27 @@
     {% endif %}
     <div class="userPage">
       {% for user in users %}
-      <img src="{{profile_picture}}" alt="" width="150">
+      <div class="profPic">
+        <img src="{{profile_picture}}">
+
+      </div>
       <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
       <h1>{{ user.first_name}} {{user.last_name}}</h1>
+      <div class="list-buttons">
 
+        <div class="list" id="list-1">
+          <h3>Followers</h3>
+          <p>{{followers.count}}</p>
+        </div>
+        <div class="list" id="list-2">
+          <h3>Following</h3>
+          <p>{{following.count}}</p>
+        </div>
+        <div class="list" id="list-3">
+          <h3>Reviews</h3>
+          <p>{{length}}</p>
+        </div>
+      </div>
 
 
 
@@ -28,7 +45,6 @@
       {% if myFollow == "you don't follow" %}
       <a href="/connect/add/{{user.id}}"><button type="button" name="button">Follow</button></a><br>
       {% else %}
-      <p>You follow {{user.first_name}}</p>
       <a href="/connect/remove/{{user.id}}"><button type="button" name="button">Unfollow</button></a><br>
       {% endif %}
       {% endif %}
@@ -63,53 +79,69 @@
       <h2>Movie List</h2>
 
     </div>
-    <button class="accordion">Followers ({{followers.count}})</button>
-    <div class="panel">
-      {% for follower in followers %}
-      {% if follower.current_user.id == request.session.user %}
-      <div class="">
-        <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-          <a href="/profile">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+    <div class="pageFeed">
+      {% for user in users %}
+      <div class="reviewFeed">
+        <h3>{{user.first_name}}'s Reviews</h3>
+
+          {% for review in reviews %}
+          <div class="reviewDiv">
+            <img src="https://image.tmdb.org/t/p/w500/{{review.poster_path}}" >
+            <h3>{{review.score}}</h3>
+            <h3>{{review.title}}</h3>
+            <p>{{review.content}}</p>
+
+          </div>
+          {% endfor %}
+
+
+
+      </div>
+      <div class="followerFeed" style="display:none">
+        <h3>{{user.first_name}}'s Followers</h3>
+        {% for follower in followers %}
+        {% if follower.current_user.id == request.session.user %}
+        <div class="followerDiv">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+            <a href="/profile">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+            <p>(You)</p>
+
+        </div>
+
+        {% else %}
+
+        <div class="followerDiv">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/user/{{ follower.current_user.id }}">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+
+      </div>
+      <div class="followingFeed" style="display:none">
+        <h3>{{user.first_name}}'s Following</h3>
+        {% for follow in following %}
+        {% if follow.id == request.session.user %}
+        <div class="followingDiv">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/profile">{{follow.first_name}} {{follow.last_name}}</a>
           <p>(You)</p>
+        </div>
+        {% else %}
+        <div class="followingDiv">
+          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+          <a href="/user/{{ follow.id }}">{{follow.first_name}}</a>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
 
       </div>
-
-      {% else %}
-
-      <div class="">
-        <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-        <a href="/user/{{ follower.current_user.id }}">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
-
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
-
-    <button class="accordion">Following ({{following.count}})</button>
-    <div class="panel">
-      {% for follow in following %}
-      {% if follow.id == request.session.user %}
-      <div class="">
-        <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-        <a href="/profile">{{follow.first_name}} {{follow.last_name}}</a>
-        <p>(You)</p>
-      </div>
-      {% else %}
-      <div class="">
-        <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-        <a href="/user/{{ follow.id }}">{{follow.first_name}}</a>
-
-      </div>
-      {% endif %}
-      {% endfor %}
 
     </div>
-
-    <button class="accordion">Reviews</button>
-    <div class="panel">
-      <p>Lorem ipsum...</p>
-    </div>
-
 
   </body>
 </html>
