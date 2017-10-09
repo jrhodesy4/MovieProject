@@ -71,7 +71,7 @@ def profile(request):
         pass
 
     reviews = user_services.get_reviews(request.session['user'])
-
+    length = len(reviews)
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
@@ -81,6 +81,7 @@ def profile(request):
             profile_picture = stuff.picture
     print profilePicture
     context = {
+        'length' : length,
         'followers' : followers,
         'following' : following,
         'profile' : profile,
@@ -187,6 +188,8 @@ def log_user_in(request): # this is to the log the user in
 
 def user_page(request, id):
     users = User.objects.filter(id = id)
+    reviews = user_services.get_reviews(id)
+    length = len(reviews)
     print request.session['user']
     try:
         myFollow = Friend.objects.get(users=User.objects.get(id=id), current_user=User.objects.get(id = request.session['user']))
@@ -207,11 +210,15 @@ def user_page(request, id):
     except:
         profile = "This user has not created a profile yet"
     try:
-        profile_picture = profile.picture
+        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = id))
     except:
-        profile_picture = 'none'
+        pass
+    profile_picture = ""
+    if profilePicture:
+        for stuff in profilePicture:
+            profile_picture = stuff.picture
 
-    return render(request, 'User_app/user.html', { 'myFollow': myFollow, 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
+    return render(request, 'User_app/user.html', { 'length': length, 'reviews': reviews, 'myFollow': myFollow, 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
 
 def logout(request):
     request.session.clear()
