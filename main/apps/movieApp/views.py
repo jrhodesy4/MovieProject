@@ -81,22 +81,23 @@ def show_page(request, id):
     reviews = TVReview.objects.filter(api_code=id)
     in_list = False
     review_c = False
-    status = authenticate(request)
-    if status == "in":
-        user_id = request.session['user']
-        in_list = in_watchlist(user_id, id)
-        review_c = review_completed(user_id, id, "tv")
+    # status = authenticate(request)
+    # if status == "in":
+    #     user_id = request.session['user']
+    #     in_list = in_watchlist(user_id, id)
+    #     review_c = review_completed(user_id, id, "tv")
 
     context = {
-        "show": show,
+        "show": show['show_info'],
+        'cast': show['cast_info'],
         "id": id,
         "reviews": reviews,
-        "in_list": in_list,
-        'watchlist': Watchlist.objects.filter(user=request.session["user"]),
-        'completed': review_c
+        # "in_list": in_list,
+        # 'watchlist': Watchlist.objects.filter(user=request.session["user"]),
+        # 'completed': review_c,
 
     }
-    return render(request, 'movieApp/tv_page.html', context)
+    return render(request, 'movieApp/tv_view_page.html', context)
 
 def movie_home(request):
     result = services.get_discover()

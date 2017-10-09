@@ -32,14 +32,21 @@ def get_movie(id): #this gets the popular movies at from the TMDB api
         "movie_info": movie_data,
         "cast_info": cast_data
     }
-    
+
     return movie
 
 def get_show(id): # <---- this is function to to the the entire TV
 
     tv_url = 'https://api.themoviedb.org/3/tv/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     tv_data = requests.get(tv_url).json()
-    return tv_data
+
+    cast_url = 'https://api.themoviedb.org/3/tv/' + id + '/credits?api_key=286abf6056d0a1338f772d1b7202e728'
+    cast_data = requests.get(cast_url).json()
+    show = {
+        "show_info": tv_data,
+        "cast_info": cast_data
+    }
+    return show
 
 def get_season(id, season): # <---- this is function to to the the entire TV season
     season = season

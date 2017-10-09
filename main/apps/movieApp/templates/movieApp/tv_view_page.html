@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>{{ movie.title}}</title>
+
+    <title>{{show.name}}</title>
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
     <link rel="stylesheet" href="{% static 'movieApp/css/view_page.css' %}">
@@ -18,14 +18,14 @@
     {% include "../global/navbar.html" %}
     <div class="sectional-content-wrapper">
       <div class="background-banner">
-        <img class="banner-img" src="https://image.tmdb.org/t/p/w1000/{{movie.poster_path}}">
+        <img class="banner-img" src="https://image.tmdb.org/t/p/w1000/{{show.poster_path}}">
       </div>
       <div class="info-section-top">
-          <img class= "content-poster" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+          <img class= "content-poster" src="https://image.tmdb.org/t/p/w500/{{show.poster_path}}">
           <div class="quick-info">
-            <p class="content-title">{{ movie.title }}</p>
+            <p class="content-title">{{ show.name }}</p>
             <div class="under-title">
-              <p class="runtime">{{movie.runtime}} min</p>
+              <p class="runtime">Aired: {{show.first_air_date}} to {{show.last_air_date}}</p>
               <p class="avg-rating green">89/100</p>
             </div>
             <div class="quicklink-section">
@@ -80,7 +80,7 @@
           <form class="" action="/makeReview/{{movie.id}}/0/0" method="post">
             <!-- {% csrf_token %} -->
 
-            <input type="hidden" name="type" value="movie">
+            <input type="hidden" name="type" value="tv">
 
             <div class="slider-review-form sectional">
 
@@ -114,7 +114,7 @@
       <div class="info-section-bottom">
         <div class="extra-info">
           <h1>Summary</h1>
-            <p>{{movie.overview}}</p>
+            <p>{{show.overview}}</p>
           <div class="cast-section">
             <h1>Cast</h1>
             <div class="cast-list">
@@ -140,4 +140,4 @@
       </div>
     </div>
   </body>
-</html>
+  </html>
