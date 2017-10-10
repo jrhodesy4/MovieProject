@@ -107,7 +107,7 @@ function jsonTaken(json){
       $("#search-results").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
     }
     else if (type == 'tv') {
-      $("#search-results").append('<a href="/show/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
+      $("#search-results").append('<a href="/show/' + id + '/1"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
 
     }
     else if (type =='person') {

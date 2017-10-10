@@ -76,7 +76,11 @@ def movie_page(request, id): # this renders the selected individual movie page
     }
     return render(request, 'movieApp/movie_view_page.html', context)
 
-def show_page(request, id):
+def show_page(request, id, season):
+    tv_season = movie_services.get_season(id, season)
+    print tv_season
+    id = id
+    season = season
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)
     in_list = False
@@ -91,6 +95,8 @@ def show_page(request, id):
         "show": show['show_info'],
         'cast': show['cast_info'],
         "id": id,
+        "season": season,
+        "tv_season": tv_season,
         "reviews": reviews,
         # "in_list": in_list,
         # 'watchlist': Watchlist.objects.filter(user=request.session["user"]),
@@ -106,6 +112,7 @@ def movie_home(request):
 def tv_home(request):
     shows = movie_services.popular_tv()
     return render(request, 'movieApp/tv_home.html', {'shows': shows})
+
 
 def actor_home(request):
     actors = movie_services.popular_actors()
@@ -144,7 +151,7 @@ def cast_page(request, id): # this render the info page for the individual actor
         'details': person_info['details'],
         'credits': person_info['credits']
     }
-    
+
     return render(request, 'movieApp/actor_view_page.html', person )
 
 
