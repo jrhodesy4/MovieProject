@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^actor_home$', views.actor_home),
     url(r'^season/(?P<id>\d+)/(?P<season>\d+)/$', views.show_season),
     url(r'^episode/(?P<id>\d+)/(?P<season>\d+)/(?P<episode>\d+)$', views.show_episode),
+    url(r'^seasonData/$', views.seasonData),
     url(r'^discover$', views.discover),
     url(r'^discover/(?P<id>\d+)$', views.discover_more),
 
