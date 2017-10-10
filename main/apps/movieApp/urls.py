@@ -7,7 +7,7 @@ urlpatterns = [
     # get routes ===============
     url(r'^movie/(?P<id>\d+)$', views.movie_page),
     url(r'^people/(?P<id>\d+)', views.cast_page),
-    url(r'^show/(?P<id>\d+)', views.show_page),
+    url(r'^show/(?P<id>\d+)/(?P<season>\d+)', views.show_page),
     url(r'^movie_home$', views.movie_home),
     url(r'^tv_home$', views.tv_home),
     url(r'^actor_home$', views.actor_home),

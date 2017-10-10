@@ -60,6 +60,7 @@ def get_show(id): # <---- this is function to to the the entire TV
     }
     return show
 
+
 def get_season(id, season): # <---- this is function to to the the entire TV season
     season = season
     print season

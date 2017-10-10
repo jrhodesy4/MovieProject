@@ -130,6 +130,41 @@
               {% endfor %}
             </div>
           </div>
+          <div class="seasons-section">
+            <h1>Seasons</h1>
+            <div class="seasons-list">
+                {% for season in show.seasons %}
+                {% if season.season_number > 0 %}
+                <a href="/show/{{show.id}}/{{season.season_number}}">
+                  <div class="season-plate">
+                    <p>Season {{season.season_number}}</p>
+
+                  </div>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="episode-list">
+              <h2>{{tv_season.name}}</h2>
+              <img src="https://image.tmdb.org/t/p/w500{{tv_season.poster_path}}" alt="">
+              <p>Synopsis: {{tv_season.overview}}</p>
+              <div class="episodes">
+                {%for episode in tv_season.episodes %}
+                <a href="/episode/{{id}}/{{season}}/{{episode.episode_number}}">
+                  <div class="episode">
+                    <h3>{{episode.episode_number}}. {{episode.name}}</h3>
+                  </div>
+                </a>
+
+                {% endfor %}
+
+              </div>
+
+
+
+            </div>
+
+          </div>
         </div>
       </div>
       <div class="completed-review-section">

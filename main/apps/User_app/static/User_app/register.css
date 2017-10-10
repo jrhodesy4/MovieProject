@@ -14,11 +14,13 @@ body {
 #login p, #register p{
   text-align: left;
   padding: 0px 25px;
+  font-size: 1.15em;
 }
 #login input, #register input{
   width: 90%;
   padding: 12px 20px;
-  margin: 8px 5px;
+  margin: 10px 5px;
+  font-size: 1.15em;
   box-sizing: border-box;
 
   border-radius: 5px;
@@ -32,7 +34,6 @@ form {
 }
 
 input[type=submit] {
-  font-size: 1.2em;
   background-color: #00C9FF;
   color:white;
   text-shadow:none !important;
@@ -74,7 +75,7 @@ input[type=submit] {
 }
 
 #register {
-  height: 65%;
+  height: 75%;
   width: 500px;
   background: rgba(0,0,0,0.3);
   display: inline-block;

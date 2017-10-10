@@ -18,13 +18,14 @@ body {
 #login p, #register p{
   text-align: left;
   padding: 0px 25px;
+  font-size: 1.15em;
 }
 #login input, #register input{
   width: 90%;
   padding: 12px 20px;
-  margin: 8px 5px;
+  margin: 10px 5px;
   box-sizing: border-box;
-
+  font-size: 1.15em;
   border-radius: 5px;
 
 }
@@ -36,7 +37,6 @@ form {
 }
 
 input[type=submit] {
-  font-size: 1.2em;
   background-color: #00C9FF;
   color:white;
   text-shadow:none !important;

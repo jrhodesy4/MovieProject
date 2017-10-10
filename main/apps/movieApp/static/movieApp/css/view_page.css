@@ -24,6 +24,7 @@ body {
 
 }
 
+
 .banner-img{
 
   width: 115%;
@@ -360,9 +361,11 @@ body {
   font-weight: 300;
 }
 .cast-list {
-  height: 750px;
+  height: 370px;
   text-align: center;
-  overflow: scroll;
+  overflow: auto;
+  white-space: nowrap;
+
 
 }
 .actor-card {
@@ -390,6 +393,79 @@ body {
 .name-plate:active {
   color: #222222;
 }
+.season-section {
+}
+
+.season-plate {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 10%;
+  color: #222222;
+  text-align: center;
+}
+.season-plate:active {
+  color: #222222;
+}
+.episode-list {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  height: 450px;
+
+  width: 82%;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  right: 3%;
+  margin-top: -300px;
+  position: absolute;
+
+}
+.episode-list img{
+  height: 160px;
+  position: absolute;
+  margin-top: -50px;
+  margin-left: 20px;
+}
+.episode-list p {
+  width: 80%;
+  padding-left: 20%;
+}
+
+.episode-list h2 {
+  text-align: center;
+}
+.episodes {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  margin-top: 30px;
+  width: 100%;
+  height: 50%;
+  overflow-y: auto;
+
+}
+
+.episode {
+  display: inline-grid;
+  position: relative;
+  font-size: 0.9em;
+  width: 32.5%;
+  height: 25%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  color: #222222;
+  text-align: center;
+}
+.episode:active {
+  color: #222222;
+}
+.episode a {
+  color: #222222;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+.episode a:visited {
+  color: #222222;
+
+}
 
 /*footer img =====================*/
 
@@ -397,7 +473,7 @@ body {
   display: inline-block;
   position: relative;
   width:100%;
-  height:50px;
+  height:300px;
 }
 
 
