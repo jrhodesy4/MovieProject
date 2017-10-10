@@ -48,6 +48,7 @@ def get_show(id): # <---- this is function to to the the entire TV
     }
     return show
 
+
 def get_season(id, season): # <---- this is function to to the the entire TV season
     season = season
     print season
@@ -69,7 +70,7 @@ def get_person(id): # <---- this is function to return the actor
     credits = requests.get(credit_url).json()
 
     sorted_credits = sorted(credits['cast'], key=lambda k: k['popularity'], reverse=True)
-    print sorted_credits 
+    print sorted_credits
     person = {
         "details": person_data,
         "credits": sorted_credits
