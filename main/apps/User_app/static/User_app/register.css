@@ -10,11 +10,7 @@ body {
   background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
   background: linear-gradient(to right, #92FE9D, #00C9FF);
   font-family: 'Roboto', sans-serif;
-
-
 }
-
-
 #login p, #register p{
   text-align: left;
   padding: 0px 25px;
@@ -28,11 +24,11 @@ body {
   border-radius: 5px;
 
 }
+form {
+  margin-bottom: 10px;
+}
  #login input:focus, #register input:focus {
   outline: none;
-}
-form {
-  margin-bottom: 40px;
 }
 
 input[type=submit] {
@@ -47,14 +43,6 @@ input[type=submit] {
 #login h1, #register h1 {
   padding-bottom: 20px;
 
-}
-#login a {
-  text-decoration: none;
-  margin-top: 30px;
-
-}
-#login a:visited {
-  color: white;
 }
 
 
@@ -76,6 +64,14 @@ input[type=submit] {
 .wrapper {
   display: inline-block;
 }
+#register a {
+  text-decoration: none;
+  margin-top: 30px;
+
+}
+#register a:visited {
+  color: white;
+}
 
 #register {
   height: 65%;
@@ -86,8 +82,7 @@ input[type=submit] {
   border-radius: 5px;
   color: white;
   position: fixed;
-  right: 0;
-  right: 10%;
+  left: 33%;
   top: 15%;
   padding-top: 20px;
 }
