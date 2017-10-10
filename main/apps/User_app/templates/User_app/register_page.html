@@ -3,21 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'User_app/register.css'%}">
   </head>
   <body>
-    <h1>register here</h1>
+    <div class="wrapper">
+      <div id="register">
+        <h1>Register</h1>
 
-    <!-- User registration form  -->
-    <form class="register-form" action="/register_account" method="POST">
-      {% csrf_token %}
-      <p>First Name:</p><input type="text" name="first_name">
-      <p>Last Name:</p><input type="text" name="last_name">
-      <p>Email:</p><input type="email" name="email">
-      <p>Password:</p><input type="password" name="password">
-      <input type="submit" name="sumbit">
+        <!-- User registration form  -->
+        <form class="register-form" action="/register_account" method="POST">
+          {% csrf_token %}
+          <p>First Name:</p><input type="text" name="first_name">
+          <p>Last Name:</p><input type="text" name="last_name">
+          <p>Email:</p><input type="email" name="email">
+          <p>Password:</p><input type="password" name="password"><br>
+          <input type="submit" name="sumbit">
 
-      <a href="/login">Login Here</a>
 
-    </form>
+        </form>
+        <a href="/login">Login Here</a>
+
+      </div>
+
+    </div>
   </body>
 </html>
