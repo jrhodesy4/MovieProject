@@ -4,9 +4,21 @@ import requests
 YOU MIGHT HAVE TO PIP INSTALL REQUESTS IF YOU DO NOT ALREADY HAVE IT
 ****************************************************
 
-api key = 286abf6056d0a1338f772d1b7202e728
+api key =
+286abf6056d0a1338f772d1b7202e728
+facdbd08fccf330c5cf404d4658087ae
 """
 # requests =======================================
+def get_discover(): #this gets the popular movies at from the TMDB api
+    url = 'https://api.themoviedb.org/3/discover/movie?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
+    json_data = requests.get(url).json()
+    return json_data['results']
+
+def popular_movies():
+    url = 'https://api.themoviedb.org/3/movie/popular?api_key=facdbd08fccf330c5cf404d4658087ae&language=en-US'
+    json_data = requests.get(url).json()
+    return json_data['results']
+
 def popular_actors(): #this gets the popular actors at from the TMDB api
     url = 'https://api.themoviedb.org/3/person/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
     json_data = requests.get(url).json()
@@ -69,7 +81,7 @@ def get_person(id): # <---- this is function to return the actor
     credits = requests.get(credit_url).json()
 
     sorted_credits = sorted(credits['cast'], key=lambda k: k['popularity'], reverse=True)
-    print sorted_credits 
+    print sorted_credits
     person = {
         "details": person_data,
         "credits": sorted_credits
@@ -78,7 +90,14 @@ def get_person(id): # <---- this is function to return the actor
 
 
 
+def get_full_nowplaying():
+    page = 1
+    api_key1 = "286abf6056d0a1338f772d1b7202e728"
+    api_key2 = 'facdbd08fccf330c5cf404d4658087ae'
 
+    
+
+    return
 
 
 

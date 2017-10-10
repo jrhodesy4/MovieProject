@@ -149,7 +149,43 @@ def cast_page(request, id): # this render the info page for the individual actor
 
 
 def discover(request):
-    return render(request, 'movieApp/discover.html')
+    discover = movie_services.get_discover()
+    movies = movie_services.popular_movies()
+    tv = movie_services.popular_tv()
+    actor = movie_services.popular_actors()
+
+    data = {
+        "discover": discover,
+        "movies": movies,
+        "tvs": tv,
+        "actors": actor
+    }
+
+    return render(request, 'movieApp/discover.html', data)
+
+
+def discover_more(request, id):
+    if id == "1":
+        pagetitle = "Now playing"
+    if id == '2':
+        pagetitle = "Top Movies"
+    if id == '3':
+        pagetitle = "Upcoming"
+    if id == '4':
+        pagetitle = "On Air"
+    if id == '5':
+        pagetitle = "Top Rated"
+    if id == '6':
+        pagetitle = "Popular"
+
+    data = {
+        "pagetitle": pagetitle
+    }
+    return render(request, "movieApp/discover_more.html", data)
+
+
+
+
 # ===========================
 #Post Routes
 # ===========================

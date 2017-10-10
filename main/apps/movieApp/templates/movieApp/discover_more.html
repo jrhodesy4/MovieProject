@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{pagetitle}}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}"/>
+  </head>
+  <body>
+    <div class="top-banner-more">
+      <a href="/discover">
+      <div class="icon-holder">
+        <svg class="icon icon-keyboard-left-arrow-button">
+          <use xlink:href="#icon-keyboard-left-arrow-button"></use>
+            <symbol id="icon-keyboard-left-arrow-button" viewBox="0 0 32 32">
+            <title>keyboard-left-arrow-button</title>
+            <path d="M25.867 3.733l-3.733-3.733-16 16 16 16 3.733-3.733-12.267-12.267z"></path>
+            </symbol>
+        </svg>
+      </div>
+      </a>
+      <h1 class="discover-label">{{pagetitle}}</h1>
+    </div>
+  </body>
+</html>

@@ -4,7 +4,7 @@
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
 
-     <title>Disicover</title>
+     <title>Discover</title>
      {% load staticfiles %}
      <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}"/>
    </head>
@@ -17,12 +17,16 @@
         <div class="bumper"></div>
         <p class="header-info">Find something new to enjoy and watch</p>
       </div>
+      {% for media in discover|slice:":1" %}
+      <a href="/movie/{{ media.id }}">
       <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg" >
+        <img src="https://image.tmdb.org/t/p/original/{{media.backdrop_path}}" >
         <div class="info-plate">
-          <p>Blade Runner 2049</p>
+          <p>{{media.original_title}}</p>
         </div>
       </div>
+    </a>
+      {% endfor %}
     </div>
 
     <div class="spacer"></div>
@@ -32,23 +36,32 @@
         <h1>Movies</h1>
         <div class="bumper"></div>
         <div class="menu-spacer"></div>
-        <div class="tab-button">
-          <p>Now Playing</p>
-        </div>
-        <div class="tab-button">
-        <p>Top Movies</p>
-        </div>
-        <div class="tab-button">
-          <p>Upcoming</p>
-        </div>
+        <a href="/discover/1">
+          <div class="tab-button">
+            <p>Now Playing</p>
+          </div>
+        </a>
+        <a href="/discover/2">
+          <div class="tab-button">
+            <p>Top Movies</p>
+          </div>
+        </a>
+        <a href="/discover/3">
+          <div class="tab-button">
+            <p>Upcoming</p>
+          </div>
+        </a>
       </div>
+      {% for movie in movies|slice:"5:6" %}
+      <a href="/movie/{{ movie.id }}">
       <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/original/uExPmkOHJySrbJyJDJylHDqaT58.jpg" >
+        <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
         <div class="info-plate">
-          <p>Kingsman: The Golden Circle</p>
+          <p>{{movie.original_title}}</p>
         </div>
       </div>
-
+      </a>
+      {%endfor%}
     </div>
 
     <div class="spacer"></div>
@@ -58,20 +71,27 @@
         <h1>TV</h1>
         <div class="bumper"></div>
         <div class="menu-spacer"></div>
-        <div class="tab-button">
-          <p>On Air</p>
-        </div>
-        <div class="tab-button">
-          <p>Top Rated</p>
-        </div>
+        <a href="/discover/4">
+          <div class="tab-button">
+            <p>On Air</p>
+          </div>
+        </a>
+        <a href="/discover/5">
+          <div class="tab-button">
+            <p>Top Rated</p>
+          </div>
+        </a>
       </div>
+      {% for tv in tvs|slice:":1" %}
+      <a href="/show/{{ tv.id }}">
       <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/original/nGsNruW3W27V6r4gkyc3iiEGsKR.jpg" >
+        <img src="https://image.tmdb.org/t/p/original/{{tv.backdrop_path}}" >
         <div class="info-plate">
-          <p>The Big Bang Theory</p>
+          <p>{{tv.name}}</p>
         </div>
       </div>
-
+    </a>
+      {%endfor%}
     </div>
 
     <div class="spacer"></div>
@@ -81,16 +101,24 @@
         <h1>Actors</h1>
         <div class="bumper"></div>
         <div class="menu-spacer"></div>
-        <div class="tab-button">
-          <p>Popular</p>
-        </div>
-      </div>
-        <div class="actor-card">
-          <img src="https://image.tmdb.org/t/p/w1280/4X1wJo5xHm3YICPWZqVCPgLBEJ7.jpg" >
-          <div class="info-plate">
-            <p>Ryan Gosling</p>
+        <a href="/discover/6">
+          <div class="tab-button">
+            <p>Popular</p>
           </div>
-        </div>
+        </a>
+      </div>
+      <div class="container-inner">
+        {% for actor in actors|slice:":1" %}
+        <a href="/people/{{actor.id}}">
+          <div class="actor-card">
+            <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" >
+            <div class="info-plate">
+              <p>{{actor.name}}</p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
     </div>
 
 
