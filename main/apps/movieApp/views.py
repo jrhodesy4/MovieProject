@@ -77,17 +77,19 @@ def movie_page(request, id): # this renders the selected individual movie page
     return render(request, 'movieApp/movie_view_page.html', context)
 
 def seasonData(request):
-    # search = request.GET.get('search-info')
+    seasonId = request.GET.get('id')
+    seasonNum = request.GET.get('season')
     print request
-    result = movie_services.get_season(request)
+    print "here"
+    result = movie_services.get_season(seasonId, seasonNum)
     return JsonResponse(result, safe=False)
 
 
-def show_page(request, id, season):
-    tv_season = movie_services.get_season(id, season)
-    print tv_season
-    id = id
-    season = "1"
+def show_page(request, id):
+    # tv_season = movie_services.get_season(id, season)
+    # print tv_season
+    # id = id
+    # season = season
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)
     in_list = False
@@ -101,9 +103,9 @@ def show_page(request, id, season):
     context = {
         "show": show['show_info'],
         'cast': show['cast_info'],
-        "id": id,
-        "season": season,
-        "tv_season": tv_season,
+        # "id": id,
+        # "season": season,
+        # "tv_season": tv_season,
         "reviews": reviews,
         # "in_list": in_list,
         # 'watchlist': Watchlist.objects.filter(user=request.session["user"]),

@@ -11,12 +11,12 @@ function reviewFormController(){
   }
 }
 function getSeasonData(id, season){
-  console.log("send");
   Data = {'id': id, 'season': season}
+  console.log(Data);
   $.ajax({
     url: "/seasonData",
     method: "get",
-    data: Data.serialize(),
+    data: Data,
     success: function(serverResponse) {
       seasonJson(serverResponse);
     }
