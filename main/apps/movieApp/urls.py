@@ -7,13 +7,18 @@ urlpatterns = [
     # get routes ===============
     url(r'^movie/(?P<id>\d+)$', views.movie_page),
     url(r'^people/(?P<id>\d+)', views.cast_page),
-    url(r'^show/(?P<id>\d+)/(?P<season>\d+)', views.show_page),
+    url(r'^show/(?P<id>\d+)', views.show_page),
     url(r'^movie_home$', views.movie_home),
     url(r'^tv_home$', views.tv_home),
     url(r'^actor_home$', views.actor_home),
     url(r'^season/(?P<id>\d+)/(?P<season>\d+)/$', views.show_season),
     url(r'^episode/(?P<id>\d+)/(?P<season>\d+)/(?P<episode>\d+)$', views.show_episode),
+<<<<<<< HEAD
     url(r'^seasonData$', views.seasonData),
+=======
+    url(r'^discover$', views.discover),
+    url(r'^discover/(?P<id>\d+)$', views.discover_more),
+>>>>>>> upstream/master
 
     # postroutes ===============
     url(r'^movie/add/watchlist/(?P<id>\d+)$', views.add_to_watchlist),

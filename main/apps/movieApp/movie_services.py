@@ -4,9 +4,21 @@ import requests
 YOU MIGHT HAVE TO PIP INSTALL REQUESTS IF YOU DO NOT ALREADY HAVE IT
 ****************************************************
 
-api key = 286abf6056d0a1338f772d1b7202e728
+api key =
+286abf6056d0a1338f772d1b7202e728
+facdbd08fccf330c5cf404d4658087ae
 """
 # requests =======================================
+def get_discover(): #this gets the popular movies at from the TMDB api
+    url = 'https://api.themoviedb.org/3/discover/movie?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
+    json_data = requests.get(url).json()
+    return json_data['results']
+
+def popular_movies():
+    url = 'https://api.themoviedb.org/3/movie/popular?api_key=facdbd08fccf330c5cf404d4658087ae&language=en-US'
+    json_data = requests.get(url).json()
+    return json_data['results']
+
 def popular_actors(): #this gets the popular actors at from the TMDB api
     url = 'https://api.themoviedb.org/3/person/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
     json_data = requests.get(url).json()
@@ -80,7 +92,44 @@ def get_person(id): # <---- this is function to return the actor
 
 
 
+def get_full_nowplaying(info):
+    page = 1
+    api_key = "?api_key=286abf6056d0a1338f772d1b7202e728"
+    api_key2 = '?api_key=facdbd08fccf330c5cf404d4658087ae'
 
+
+
+    print info
+    if info == "now_playing":
+        urlfront = "https://api.themoviedb.org/3/movie/now_playing"
+    if info == "top-movies":
+        urlfront ="https://api.themoviedb.org/3/movie/top_rated"
+    if info == "popularM":
+        urlfront ="https://api.themoviedb.org/3/movie/popular"
+    if info == "onair":
+        urlfront = "https://api.themoviedb.org/3/tv/on_the_air"
+
+    if info == 'top-tv':
+        urlfront = 'https://api.themoviedb.org/3/tv/top_rated'
+    if info == "actors":
+        urlfront = "https://api.themoviedb.org/3/person/popular"
+
+
+
+    full_movies = []
+    for movie in range(0, 4):
+
+        url = urlfront + api_key + "&language=en-US&page=" + str(page) + "&region=Us"
+        if page % 2 == 0:
+            api_key = api_key2
+
+        info = requests.get(url).json()
+
+        for i in info['results']:
+            full_movies.append(i)
+        page = page + 1
+
+    return full_movies
 
 
 

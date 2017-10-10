@@ -76,6 +76,7 @@ def movie_page(request, id): # this renders the selected individual movie page
     }
     return render(request, 'movieApp/movie_view_page.html', context)
 
+<<<<<<< HEAD
 def seasonData(request):
     # search = request.GET.get('search-info')
     print request
@@ -85,9 +86,13 @@ def seasonData(request):
 
 def show_page(request, id, season):
     tv_season = movie_services.get_season(id, season)
+=======
+def show_page(request, id):
+    tv_season = movie_services.get_season(id, "1")
+>>>>>>> upstream/master
     print tv_season
     id = id
-    season = season
+    season = "1"
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)
     in_list = False
@@ -160,6 +165,65 @@ def cast_page(request, id): # this render the info page for the individual actor
     }
 
     return render(request, 'movieApp/actor_view_page.html', person )
+
+
+def discover(request):
+    discover = movie_services.get_discover()
+    movies = movie_services.popular_movies()
+    tv = movie_services.popular_tv()
+    actor = movie_services.popular_actors()
+
+    data = {
+        "discover": discover,
+        "movies": movies,
+        "tvs": tv,
+        "actors": actor
+    }
+
+    return render(request, 'movieApp/discover.html', data)
+
+
+def discover_more(request, id):
+
+
+    # this needs tp be more efficent
+
+    if id == "1":
+        pagetitle = "Now playing"
+        movies = movie_services.get_full_nowplaying("now_playing")
+        pagetype = "movie"
+    if id == '2':
+        pagetitle = "Top Movies"
+        movies = movie_services.get_full_nowplaying("top-movies")
+        pagetype = "movie"
+    if id == '3':
+        pagetitle = "Popular"
+        movies = movie_services.get_full_nowplaying("popularM")
+        pagetype = "movie"
+    if id == '4':
+        pagetitle = "On Air"
+        movies = movie_services.get_full_nowplaying("onair")
+        pagetype = "movie"
+    if id == '5':
+        pagetitle = "Top Rated"
+        movies = movie_services.get_full_nowplaying("top-tv")
+        pagetype = "movie"
+    if id == '6':
+        pagetitle = "Popular"
+        movies = movie_services.get_full_nowplaying("actors")
+        pagetype = "actors"
+    # else :
+    #     pagetitle = "Popular"
+    #     movies = movie_services.get_full_nowplaying("popularM")
+    #     pagetype = "actor"
+
+    data = {
+        "pagetype": pagetype,
+        "pagetitle": pagetitle,
+        "movies": movies
+    }
+    return render(request, "movieApp/discover_more.html", data)
+
 
 
 
