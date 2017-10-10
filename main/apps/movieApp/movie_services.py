@@ -92,12 +92,25 @@ def get_person(id): # <---- this is function to return the actor
 
 def get_full_nowplaying():
     page = 1
-    api_key1 = "286abf6056d0a1338f772d1b7202e728"
+    api_key = "286abf6056d0a1338f772d1b7202e728"
     api_key2 = 'facdbd08fccf330c5cf404d4658087ae'
 
-    
+    url = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + api_key + "&language=en-US&page=" + str(page) + "&region=Us"
 
-    return
+
+    full_movies = []
+    for movie in range(0, 5):
+
+        if page % 2 == 0:
+            api_key = api_key2
+
+        info = requests.get(url).json()
+    
+        for i in info['results']:
+            full_movies.append(i)
+        page = page + 1
+
+    return full_movies
 
 
 

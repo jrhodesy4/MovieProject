@@ -167,6 +167,7 @@ def discover(request):
 def discover_more(request, id):
     if id == "1":
         pagetitle = "Now playing"
+        movies = movie_services.get_full_nowplaying()
     if id == '2':
         pagetitle = "Top Movies"
     if id == '3':
@@ -177,9 +178,10 @@ def discover_more(request, id):
         pagetitle = "Top Rated"
     if id == '6':
         pagetitle = "Popular"
-
+    print movies
     data = {
-        "pagetitle": pagetitle
+        "pagetitle": pagetitle,
+        "movies": movies
     }
     return render(request, "movieApp/discover_more.html", data)
 

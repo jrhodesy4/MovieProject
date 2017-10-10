@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
+
     <title>{{pagetitle}}</title>
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}"/>
@@ -21,5 +23,19 @@
       </a>
       <h1 class="discover-label">{{pagetitle}}</h1>
     </div>
+    <div class="content-container">
+      {% for movie in movies %}
+      <a href="/movie/{{ movie.id }}">
+        <div class="movie-card-ext">
+          <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
+          <div class="info-plate-ext">
+            <p>{{movie.original_title}}</p>
+          </div>
+        </div>
+      </a>
+      {%endfor%}
+    </div>
+
+
   </body>
 </html>
