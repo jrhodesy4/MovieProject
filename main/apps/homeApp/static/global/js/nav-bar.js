@@ -1,5 +1,7 @@
 
 var menuStatus = "closed";
+
+
 $(function() {
     $(".menu-holder").draggable();
 });
@@ -21,7 +23,7 @@ $(document).ready(function(){
     });
   });
   //user is "finished typing," do something
-  function doneTyping () {
+  function doneTyping() {
     console.log("send");
     $.ajax({
       url: "/search",
@@ -38,10 +40,9 @@ $(document).ready(function(){
   })
 
    $('#search-button').click(function(){
+     menuStatus = "search"
      openSearch();
      closeStackMenu();
-     console.log(menuStatus);
-     menuStatus = "closed";
   });
 
   // $(".menu-button-main").click(function(){
@@ -74,7 +75,10 @@ function openSearch() {
 
 function closeSearch(){
   searchAppear();
-
+  $('.hamburger').animate({opacity: '1'});
+  $('.icon-cancel').css({'fill': '#222222'});
+  $('.icon-cancel').css({display: 'none'});
+  $('.menu-button-main').animate({"background-color": "white"});
 };
 
 function searchAppear() {
@@ -92,11 +96,8 @@ function jsonTaken(json){
   console.log(json);
   if (json.length == 0) {
     $("#search-results").append('<h2>No Results Found</h2>');
-
-
   }
   else {
-
   for (var i = 0; i < json.length; i++){
     var img_url = "https://image.tmdb.org/t/p/w500" + json[i].picture
     var id = json[i].id
@@ -123,17 +124,22 @@ function jsonTaken(json){
 
 // here are the functions for stack-menu ===============
 function menuController(){
+  console.log(menuStatus)
   if (menuStatus == "closed" ){
-    console.log(menuStatus);
     openStackMenu();
     menuStatus = "open";
   }
-  else {
-    closeStackMenu();
-    console.log(menuStatus);
+  else if (menuStatus == "search"){
+    closeSearch();
     menuStatus = "closed";
   }
+  else {
+    closeStackMenu();
+    menuStatus = "closed";
+  }
+
 }
+
 function openStackMenu(){
   $("#menu-item-1").animate({opacity: '.9'});
   $("#menu-item-2").animate({opacity: '.9'});
@@ -162,6 +168,14 @@ function closeStackMenu(){
   $('.hamburger').animate({opacity: '1'});
   $('.icon-cancel').css({display: 'none'});
   $('.logout-button').animate({opacity: '0'});
+
+  if (menuStatus == "search"){
+    $('.hamburger').animate({opacity: '0'}, 100);
+
+    $('.icon-cancel').css({'fill': 'white'});
+    $('.icon-cancel').css({display: 'initial'});
+    $('.menu-button-main').animate({"background-color": "#FC466B"});
+  }
 }
 
 

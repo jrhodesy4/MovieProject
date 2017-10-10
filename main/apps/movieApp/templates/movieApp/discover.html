@@ -3,11 +3,19 @@
    <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
+     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 
      <title>Discover</title>
      {% load staticfiles %}
+
      <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}"/>
+     <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}"/>
+     <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
    </head>
+   <body>
+    {% include "../global/navbar.html" %}
     <div class="top-banner">
       <h1>Discover</h1>
     </div>
@@ -48,7 +56,7 @@
         </a>
         <a href="/discover/3">
           <div class="tab-button">
-            <p>Upcoming</p>
+            <p>Popular</p>
           </div>
         </a>
       </div>
@@ -120,10 +128,6 @@
         {% endfor %}
       </div>
     </div>
-
-
-
-
 
 
 

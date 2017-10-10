@@ -199,6 +199,7 @@
 }
 .menu-item:hover p {
   opacity: 1;
+  color: white;
 }
 .menu-item:hover .icon {
   opacity: 0;
@@ -216,11 +217,13 @@
   display: inline-block;
   width: 1.8em;
   height: 1.8em;
-  fill: #222222;
+  fill: white;
   margin-top: 15px;
 }
 .icon-cancel {
   display: none;
+  fill: #222222;
+
   margin-top: -13px;
 }
 
