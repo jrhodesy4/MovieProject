@@ -76,6 +76,13 @@ def movie_page(request, id): # this renders the selected individual movie page
     }
     return render(request, 'movieApp/movie_view_page.html', context)
 
+def seasonData(request):
+    # search = request.GET.get('search-info')
+    print request
+    result = movie_services.get_season(request)
+    return JsonResponse(result, safe=False)
+
+
 def show_page(request, id, season):
     tv_season = movie_services.get_season(id, season)
     print tv_season
