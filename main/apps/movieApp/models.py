@@ -21,6 +21,7 @@ class Watchlist(models.Model): #creates a watchlist
 
         user = User.objects.get(id=data['user_id'])
         movie = data['movie']
+
         my_watchlist = Watchlist.objects.filter(user=user)
         if data['type'] == "movie":
             Watchlist.objects.create( #<-- add the movie to the watchlist
@@ -124,8 +125,8 @@ class TVReview(models.Model):
             return None
         except:
             pass
-        tv = movie_services.get_show(data['id'])
-
+        holder = movie_services.get_show(data['id'])
+        tv = holder['show_info']
         tv_review = TVReview.objects.create(
             user_id = data['user_id'],
             api_code = data['id'],

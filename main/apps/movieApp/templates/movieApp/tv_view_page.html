@@ -29,16 +29,23 @@
               <p class="avg-rating green">89/100</p>
             </div>
             <div class="quicklink-section">
-              <div class="link-icon">
-                <svg class="icon-content icon-watchlist">
-                  <use xlink:href="#icon-watchlist"></use>
-                  <symbol id="icon-watchlist" viewBox="0 0 32 32">
-                  <title>watchlist</title>
-                  <path d="M16 6.463c-6.114 0-11.658 3.345-15.75 8.778-0.334 0.445-0.334 1.067 0 1.512 4.091 5.44 9.636 8.785 15.75 8.785s11.658-3.345 15.75-8.778c0.334-0.445 0.334-1.067 0-1.512-4.091-5.44-9.636-8.785-15.75-8.785zM16.439 22.716c-4.059 0.255-7.41-3.090-7.155-7.155 0.209-3.352 2.926-6.068 6.278-6.278 4.058-0.255 7.41 3.090 7.155 7.155-0.216 3.345-2.933 6.062-6.278 6.278zM16.236 19.613c-2.186 0.137-3.993-1.663-3.849-3.849 0.111-1.807 1.578-3.266 3.384-3.384 2.186-0.137 3.993 1.663 3.849 3.849-0.118 1.813-1.584 3.273-3.384 3.384z"></path>
-                  </symbol>
-                </svg>
-              </div>
-              <div onclick="reviewFormController()" class="link-icon">
+              <div class="quicklink-section">
+                {% if in_list == False %}
+                <div  id="watchlist-button" onclick="addtowatchlist({{show.id}}, 'tv')"class="link-icon">
+                {%else%}
+                <div id="watchlist-button" onclick="addtowatchlist()"class="link-icon in-watchlist">
+                {% endif%}
+                  <svg class="icon-content icon-watchlist">
+                    <use xlink:href="#icon-watchlist"></use>
+                    <symbol id="icon-watchlist" viewBox="0 0 32 32">
+                    <title>watchlist</title>
+                    <path d="M16 6.463c-6.114 0-11.658 3.345-15.75 8.778-0.334 0.445-0.334 1.067 0 1.512 4.091 5.44 9.636 8.785 15.75 8.785s11.658-3.345 15.75-8.778c0.334-0.445 0.334-1.067 0-1.512-4.091-5.44-9.636-8.785-15.75-8.785zM16.439 22.716c-4.059 0.255-7.41-3.090-7.155-7.155 0.209-3.352 2.926-6.068 6.278-6.278 4.058-0.255 7.41 3.090 7.155 7.155-0.216 3.345-2.933 6.062-6.278 6.278zM16.236 19.613c-2.186 0.137-3.993-1.663-3.849-3.849 0.111-1.807 1.578-3.266 3.384-3.384 2.186-0.137 3.993 1.663 3.849 3.849-0.118 1.813-1.584 3.273-3.384 3.384z"></path>
+                    </symbol>
+                  </svg>
+                </div>
+
+              {% if score == "no score"%}
+              <div onclick="reviewFormController()" class="link-icon review-icon">
                 <svg class="icon-content icon-review">
                   <use xlink:href="#icon-review"></use>
                   <symbol id="icon-review" viewBox="0 0 32 32">
@@ -47,6 +54,12 @@
                   </symbol>
                 </svg>
               </div>
+              {% else %}
+              <div class="link-icon review-icon {{score_color}} completed-review">
+                <p class="review-score-number">{{score}}</p>
+              </div>
+              {% endif%}
+
               <div class="link-icon">
                 <svg class="icon-content icon-trailer">
                   <use xlink:href="#icon-trailer"></use>
@@ -74,11 +87,11 @@
 
       <div class="info-section-middle">
         <div class="write-review-section w3-animate-top">
-          <div onclick="reviewFormController()"class="close-button-form">
+          <div onclick="reviewFormController()"class="close-button-form" >
           </div>
           <h3>Your Review:</h3>
-          <form class="" action="/makeReview/{{movie.id}}/0/0" method="post">
-            <!-- {% csrf_token %} -->
+          <form class="" action="/makeReview/{{show.id}}/0/0" method="post" id="review-form">
+            {% csrf_token %}
 
             <input type="hidden" name="type" value="tv">
 

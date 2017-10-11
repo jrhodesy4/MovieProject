@@ -32,14 +32,18 @@
     {%if pagetype != "actors" %}
     <div class="content-container">
       {% for movie in movies %}
+      {% if pagetype == "movie" %}
       <a href="/movie/{{ movie.id }}">
+      {% else %}
+      <a href="/show/{{ movie.id }}">
+      {% endif%}
         <div class="movie-card-ext">
           <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
           <div class="info-plate-ext">
             {% if pagetype == "movie"%}
             <p>{{movie.original_title}}</p>
             {%else%}
-            <p>{{movie.original_name}}</p>
+            <p>{{movie.name}}</p>
             {%endif%}
           </div>
         </div>

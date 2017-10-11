@@ -98,30 +98,29 @@ def seasonData(request):
 
 
 def show_page(request, id):
-    # tv_season = movie_services.get_season(id, season)
-    # print tv_season
-    # id = id
-    # season = season
+    in_list = False
+    status = authenticate(request)
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)
     in_list = False
     review_c = False
-    # status = authenticate(request)
-    # if status == "in":
-    #     user_id = request.session['user']
-    #     in_list = in_watchlist(user_id, id)
-    #     review_c = review_completed(user_id, id, "tv")
+    if status == "in":
+        user_id = request.session['user']
+        in_list = in_watchlist(user_id, id)
+        score = review_completed(user_id, id, "tv")
 
+    color = "red"
+    if score > 60:
+        color = "yellow"
+    if score > 80:
+        color = 'green'
     context = {
         "show": show['show_info'],
         'cast': show['cast_info'],
-        # "id": id,
-        # "season": season,
-        # "tv_season": tv_season,
         "reviews": reviews,
-        # "in_list": in_list,
-        # 'watchlist': Watchlist.objects.filter(user=request.session["user"]),
-        # 'completed': review_c,
+        "in_list": in_list,
+        'score': score,
+        'score_color': color
 
     }
     return render(request, 'movieApp/tv_view_page.html', context)
@@ -212,11 +211,11 @@ def discover_more(request, id):
     if id == '4':
         pagetitle = "On Air"
         movies = movie_services.get_full_nowplaying("onair")
-        pagetype = "movie"
+        pagetype = "tv"
     if id == '5':
         pagetitle = "Top Rated"
         movies = movie_services.get_full_nowplaying("top-tv")
-        pagetype = "movie"
+        pagetype = "tv"
     if id == '6':
         pagetitle = "Popular"
         movies = movie_services.get_full_nowplaying("actors")
@@ -225,7 +224,7 @@ def discover_more(request, id):
     #     pagetitle = "Popular"
     #     movies = movie_services.get_full_nowplaying("popularM")
     #     pagetype = "actor"
-
+    print movies
     data = {
         "pagetype": pagetype,
         "pagetitle": pagetitle,
@@ -257,7 +256,7 @@ def add_to_watchlist(request): # the post route adds a movie to the Users watchl
     if _type == "tv":
         show = movie_services.get_show(_id)
         data = {
-            "movie": show, # this is the data for the current movie being displayed
+            "movie": show['show_info'], # this is the data for the current movie being displayed
             "user_id": request.session['user'], # the logged in user id from session
             "type": "tv" # whether it is a movie or tv show
         }
