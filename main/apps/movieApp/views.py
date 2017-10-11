@@ -4,16 +4,12 @@ from ..homeApp import services
 from .models import Watchlist
 from ..User_app.models import User
 from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
-<<<<<<< HEAD
+
 from django.core import serializers
 from django.http import JsonResponse
 import json
 import requests
 
-=======
-from django.http import JsonResponse
-import json
->>>>>>> 57b159aad6e874ba492e00c8ba1d65319a8960c6
 # from ..homeApp import services
 
 # custom defintions here =======================
@@ -34,25 +30,25 @@ def in_watchlist(user_id, id): #<----- if media is in the user watchlist returns
 def review_completed(user_id, id, _type): #<----- if the user has completed a review for item returns boolean
     if _type == "movie":
         try:
-            MovieReview.objects.get(api_code=id, user_id=user_id)
+            review = MovieReview.objects.get(api_code=id, user_id=user_id)
             print "user has already written a review"
-            return True
+            return review.score
         except:
-            return False
+            return "no score"
     if _type == "tv":
         try:
-            TVReview.objects.get(api_code=id, user_id=user_id)
+            review = TVReview.objects.get(api_code=id, user_id=user_id)
             print "user has already written a review"
-            return True
+            return review.score
         except:
-            return False
+            return "no score"
     if _type == "episode":
         try:
-            EpisodeReview.objects.get(api_code=id, user_id=user_id)
+            review = EpisodeReview.objects.get(api_code=id, user_id=user_id)
             print "user has already written a review"
-            return True
+            return review.score
         except:
-            return False
+            return "no score"
 
 # Create your views here.=======================
 # =====================================================================
@@ -66,9 +62,8 @@ def movie_page(request, id): # this renders the selected individual movie page
     if status == "in":
         user_id = request.session['user']
         in_list = in_watchlist(user_id, id)
-        review_c = review_completed(user_id, id, "movie")
+        score = review_completed(user_id, id, "movie")
 
-    # user_id = request.session['user']
     movie = movie_services.get_movie(id)
     reviews = review_services.all_movie_reviews(id)
     print reviews
@@ -76,13 +71,20 @@ def movie_page(request, id): # this renders the selected individual movie page
         watchlist = Watchlist.objects.get(api_code=id)
     except: watchlist = 'nothing'
 
+    color = "red"
+    if score > 60:
+        color = "yellow"
+    if score > 80:
+        color = 'green'
 
+    print score;
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
         'reviews' : reviews,
         'in_list': in_list,
-        'completed': review_c,
+        'score': score,
+        'score_color': color
     }
     return render(request, 'movieApp/movie_view_page.html', context)
 
@@ -293,7 +295,7 @@ def makeReview(request, id, season, episode):
     if request.POST['type'] == "movie":
         mr = MovieReview.create_review(data)
         if mr == None:
-            data = {"score": "N/A"}
+            data = {"score": request.POST['score']}
             return JsonResponse(data, safe=False)
         else:
             UserReview.add_review(mr, "movie", user_id)
@@ -303,7 +305,7 @@ def makeReview(request, id, season, episode):
     if request.POST['type'] == "tv":
         tr = TVReview.create_review(data)
         if tr == None:
-            data = {"score": "N/A"}
+            data = {"score": request.POST['score']}
             return JsonResponse(data, safe=False)
         else:
             UserReview.add_review(tr, "tv", user_id)
@@ -328,7 +330,7 @@ def makeReview(request, id, season, episode):
         }
         epi = EpisodeReview.create_review(data)
         if epi == None:
-            data = {"score": "N/A"}
+            data = {"score": request.POST['score']}
             return JsonResponse(data, safe=False)
         else:
             UserReview.add_review(epi, "episode", user_id)

@@ -78,7 +78,21 @@ function addedtoWatchlist(){
 }
 
 
+function ReviewAddedSuccess(data){
+  var score =  data['score']
+  var color = "red"
+  if(score > 60 ){
+    color = "yellow";
+  }
+  if (score > 80) {
+    color = "green";
+  }
 
+
+  $('.review-icon').html('<p class="review-score-number">' + score + "</p>");
+  $('.review-icon').addClass(color);
+  reviewFormController();
+}
 
 
 $(document).ready(function(){
@@ -92,7 +106,7 @@ $(document).ready(function(){
       type: 'POST',
       data: $(this).serialize(),
       success: function(serverResponse) {
-        console.log(serverResponse);
+        ReviewAddedSuccess(serverResponse);
       }
     })//end ajax
 

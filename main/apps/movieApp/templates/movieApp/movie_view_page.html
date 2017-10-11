@@ -42,7 +42,9 @@
                   </symbol>
                 </svg>
               </div>
-              <div onclick="reviewFormController()" class="link-icon">
+
+              {% if score == "no score"%}
+              <div onclick="reviewFormController()" class="link-icon review-icon">
                 <svg class="icon-content icon-review">
                   <use xlink:href="#icon-review"></use>
                   <symbol id="icon-review" viewBox="0 0 32 32">
@@ -51,6 +53,16 @@
                   </symbol>
                 </svg>
               </div>
+              {% else %}
+              <div class="link-icon review-icon {{score_color}} completed-review">
+                <p class="review-score-number">{{score}}</p>
+              </div>
+
+
+
+
+
+              {% endif%}
               <div class="link-icon">
                 <svg class="icon-content icon-trailer">
                   <use xlink:href="#icon-trailer"></use>

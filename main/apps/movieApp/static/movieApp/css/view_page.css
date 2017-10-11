@@ -532,8 +532,39 @@ body {
   background-color: #FC466B !important;
 }
 
+.green {
+  background-color: #74E599;
+  text-align: center;
+}
+.yellow {
+  background-color: #FCE071;
+  text-align: center;
+}
+.red {
+  background-color: #FD9FA1;
+  text-align: center;
+}
+.green:hover {
+  background-color: #74E599;
+}
+.yellow:hover {
+  background-color: #FCE071;
+}
+.red:hover {
+  background-color: #FCE071;
+}
 
+.review-score-number {
+  color: white;
 
+  font-weight: 800;
+  position: absolute;
+  top: -55%;
+  left: 16%;
+
+  font-size: 2em;
+
+}
 
 
 
