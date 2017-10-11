@@ -3,11 +3,25 @@ var is_review_open = "closed"
 
 function reviewFormController(){
   if (is_review_open == "closed"){
-    $(".info-section-middle").css({display: 'inline-block'});
+    // $(".info-section-middle").css({display: 'inline-block'});
+    $(".info-section-middle").fadeIn(1000);
     is_review_open = "open"
   }else {
     $(".info-section-middle").css({display: 'none'});
     is_review_open = "closed"
+  }
+}
+
+var is_trailer_open = "closed"
+
+function trailerController(){
+  if (is_trailer_open == "closed"){
+    // $(".info-section-middle").css({display: 'inline-block'});
+    $(".trailer-section").fadeIn(1000);
+    is_trailer_open = "open"
+  }else {
+    $(".trailer-section").css({display: 'none'});
+    is_trailer_open = "closed"
   }
 }
 function getSeasonData(id, season){

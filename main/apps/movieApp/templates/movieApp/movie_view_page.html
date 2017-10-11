@@ -58,7 +58,7 @@
                 <p class="review-score-number">{{score}}</p>
               </div>
               {% endif%}
-              <div class="link-icon">
+              <div onclick="trailerController()" class="link-icon">
                 <svg class="icon-content icon-trailer">
                   <use xlink:href="#icon-trailer"></use>
                   <symbol id="icon-trailer" viewBox="0 0 32 32">
@@ -122,6 +122,20 @@
 
         </div>
       </div>
+      <div class="trailer-section">
+        <div onclick="trailerController()"class="close-button-form">
+        </div>
+        {% for trailer in trailers|slice:":1" %}
+        {% if trailer.type == 'Trailer'%}
+        <div class="trailer">
+          <iframe src="http://www.youtube.com/embed/{{trailer.key}}"
+          width="760" height="450" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+      </div>
 
 
       <div class="info-section-bottom">
@@ -149,6 +163,7 @@
 
       </div>
       <div class="footer">
+
         <!-- <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg"> -->
       </div>
     </div>

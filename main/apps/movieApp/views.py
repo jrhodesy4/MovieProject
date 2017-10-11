@@ -58,6 +58,7 @@ def review_completed(user_id, id, _type): #<----- if the user has completed a re
 def movie_page(request, id): # this renders the selected individual movie page
     in_list = False
     status = authenticate(request)
+    trailers = movie_services.get_videos(id, 'movie')
     review_c = False
     if status == "in":
         user_id = request.session['user']
@@ -80,6 +81,7 @@ def movie_page(request, id): # this renders the selected individual movie page
     print score;
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
+        'trailers': trailers,
         'cast': movie['cast_info'],
         'reviews' : reviews,
         'in_list': in_list,
@@ -99,6 +101,7 @@ def seasonData(request):
 
 def show_page(request, id):
     in_list = False
+    trailers = movie_services.get_videos(id, 'tv')
     status = authenticate(request)
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)
@@ -117,6 +120,7 @@ def show_page(request, id):
     context = {
         "show": show['show_info'],
         'cast': show['cast_info'],
+        'trailers': trailers,
         "reviews": reviews,
         "in_list": in_list,
         'score': score,
