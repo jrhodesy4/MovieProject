@@ -49,7 +49,7 @@ function seasonJson(json){
     console.log(episodes);
     console.log(episodeName);
     // $(".episode-list").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
-    $(".episode-list").append('<h2>' + name + '</h2><img src="https://image.tmdb.org/t/p/w500' + poster + '" <div class="season-overview"> <p>Synopsis:' + overview + '</p></div><div class="episodes">');
+    $(".episode-list").append('<h2>' + name + '</h2><img src="https://image.tmdb.org/t/p/w500' + poster + '"> <div class="season-overview"> <p>Synopsis:' + overview + '</p></div><div class="episodes">');
     // for (var i = 0; i < json.episodes.length; i++){
       for (episode in episodeName) {
         $(".episode-list").append('<a href="/episode/' + show + '/' + season + '/' + episodeId[episode] + '"><div class"episode"><h3>' + episodeId[episode] + '. ' + episodeName[episode] + '</h3></div></a>' );
