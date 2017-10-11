@@ -4,6 +4,8 @@ from ..homeApp import services
 from .models import Watchlist
 from ..User_app.models import User
 from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
+from django.http import JsonResponse
+import json
 # from ..homeApp import services
 
 # custom defintions here =======================

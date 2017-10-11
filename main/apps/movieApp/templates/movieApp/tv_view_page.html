@@ -135,7 +135,7 @@
             <div class="seasons-list">
                 {% for season in show.seasons %}
                 {% if season.season_number > 0 %}
-                <a href="#" onclick="getSeasonData({{show.id}}, {{season.season_number}})">
+                <a class="season-link" href="#" onclick="getSeasonData({{show.id}}, {{season.season_number}}); return false">
                   <div class="season-card">
                     <img src="https://image.tmdb.org/t/p/w500{{season.poster_path}}" alt="">
                     <div class="name-plate">

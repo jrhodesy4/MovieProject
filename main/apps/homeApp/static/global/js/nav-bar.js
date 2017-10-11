@@ -37,9 +37,10 @@ $(document).ready(function(){
 
   $('.search-form').submit(function(e){
        e.preventDefault();
+       return false;
   })
 
-   $('#search-button').click(function(){
+   $('.search-button').click(function(){
      menuStatus = "search"
      openSearch();
      closeStackMenu();
