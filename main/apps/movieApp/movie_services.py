@@ -63,11 +63,34 @@ def get_show(id): # <---- this is function to to the the entire TV
 
 
 def get_season(id, season): # <---- this is function to to the the entire TV season
+    id = id
     season = season
     print season
     season_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     season_data = requests.get(season_url).json()
-    return season_data
+    results = [season_data, id]
+# final_list = []
+#
+# for episode in season_data['episodes']:
+#     data = {
+#     'episode_number': episode['episode_number'],
+#     "episode_name": episode['name']
+#     }
+#     final_list.append(data)
+#
+#
+#
+# return final_list
+
+
+
+
+
+
+
+
+
+    return results
 
 def get_episode(id, season, episode): # <---- this is function to return the indivdual episode
     episode_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '/episode/' + episode + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'

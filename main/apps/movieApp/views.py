@@ -4,11 +4,16 @@ from ..homeApp import services
 from .models import Watchlist
 from ..User_app.models import User
 from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
+<<<<<<< HEAD
 from django.core import serializers
 from django.http import JsonResponse
 import json
 import requests
 
+=======
+from django.http import JsonResponse
+import json
+>>>>>>> 57b159aad6e874ba492e00c8ba1d65319a8960c6
 # from ..homeApp import services
 
 # custom defintions here =======================
