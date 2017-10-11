@@ -141,6 +141,16 @@ body {
 .name-plate {
   color: #222222;
   text-align: center;
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0 !important;
+  position: relative;
+}
+
+.name-plate p{
+  margin: 0;
+  vertical-align: bottom;
+
 }
 .name-plate:active {
   color: #222222;

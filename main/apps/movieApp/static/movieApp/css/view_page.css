@@ -419,8 +419,11 @@ body {
   width: 100%;
 }
 .name-plate {
+  position: relative;
   color: #222222;
   text-align: center;
+  vertical-align: middle;
+  margin: 0 !important;
 }
 .name-plate:active {
   color: #222222;
@@ -525,9 +528,43 @@ body {
   height:300px;
 }
 
+.in-watchlist {
+  background-color: #FC466B !important;
+}
 
+.green {
+  background-color: #74E599;
+  text-align: center;
+}
+.yellow {
+  background-color: #FCE071;
+  text-align: center;
+}
+.red {
+  background-color: #FD9FA1;
+  text-align: center;
+}
+.green:hover {
+  background-color: #74E599;
+}
+.yellow:hover {
+  background-color: #FCE071;
+}
+.red:hover {
+  background-color: #FD9FA1;
+}
 
+.review-score-number {
+  color: white;
 
+  font-weight: 800;
+  position: absolute;
+  top: -55%;
+  left: 16%;
+
+  font-size: 2em;
+
+}
 
 
 
