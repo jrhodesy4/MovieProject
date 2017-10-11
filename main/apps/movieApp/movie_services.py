@@ -102,7 +102,7 @@ def get_person(id): # <---- this is function to return the actor
     person_url = 'https://api.themoviedb.org/3/person/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     person_data = requests.get(person_url).json()
 
-    credit_url = 'https://api.themoviedb.org/3/person/' + id +'/movie_credits?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
+    credit_url = 'https://api.themoviedb.org/3/person/' + id +'/combined_credits?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
     credits = requests.get(credit_url).json()
 
     sorted_credits = sorted(credits['cast'], key=lambda k: k['popularity'], reverse=True)
@@ -154,8 +154,18 @@ def get_full_nowplaying(info):
 
     return full_movies
 
-
-
+def get_videos(id, type):
+    if (type == 'movie'):
+        movie_videos = "https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US"
+        movie_data = requests.get(movie_videos).json()
+        results = movie_data['results']
+        return results
+    else:
+        tv_videos = "https://api.themoviedb.org/3/tv/" + id + "/videos?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US"
+        tv_data = requests.get(tv_videos).json()
+        results = tv_data['results']
+        print results
+        return results
 
 
 
