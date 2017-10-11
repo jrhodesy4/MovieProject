@@ -124,8 +124,11 @@ body {
 }
 .credits-section {
   width: 100%;
-  height: auto;
-  text-align: center
+  text-align: center;
+  height: 370px;
+  text-align: center;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .movie-card {
@@ -147,19 +150,18 @@ body {
   width: 100%;
 }
 .name-plate {
+  position: relative;
   color: #222222;
   text-align: center;
-  display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   margin: 0 !important;
-  position: relative;
 }
 
-.name-plate p{
+/*.name-plate p{
   margin: 0;
   vertical-align: bottom;
 
-}
+}*/
 .name-plate:active {
   color: #222222;
 }

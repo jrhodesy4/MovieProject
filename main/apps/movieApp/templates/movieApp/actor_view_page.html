@@ -34,9 +34,10 @@
       {{credits.cast}}
       <div class="middle-info-section">
       <p class="section-title">Biography</p>
-      <p class="section-title">Most popular films</p>
+      <p class="section-title">Most popular roles</p>
       <div class="credits-section">
         {% for role in credits %}
+        {% if role.title %}
         <a href="/movie/{{ role.id }}">
         <div class="movie-card">
           <img src="https://image.tmdb.org/t/p/w500/{{ role.poster_path }}">
@@ -45,6 +46,17 @@
           </div>
         </div>
         </a>
+        {% endif %}
+        {% if role.name %}
+        <a href="/movie/{{ role.id }}">
+        <div class="movie-card">
+          <img src="https://image.tmdb.org/t/p/w500/{{ role.poster_path }}">
+          <div class="name-plate">
+            <p>{{role.name}}</p>
+          </div>
+        </div>
+        </a>
+        {% endif %}
         {% endfor %}
       </div>
     </div>
