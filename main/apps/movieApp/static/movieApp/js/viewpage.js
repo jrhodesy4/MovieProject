@@ -21,8 +21,8 @@ function getSeasonData(id, season){
       seasonJson(serverResponse);
     }
  })
-
 }
+
 function seasonJson(json){
   $('.episode-list').html('')
   console.log(json);
@@ -46,12 +46,42 @@ function seasonJson(json){
 }
 
 
+function addtowatchlist(id, type) {
+  data = {'id': id, 'type': type};
+  $.ajax({
+    url: "/add/watchlist/",
+    method: "get",
+    data: data,
+    success: function(serverResponse) {
+      addedtoWatchlist();
+    }
+ })
+}
+
+function addedtoWatchlist(){
+  $("#watchlist-button").css({"background-color": '#FC466B'});
+}
+
+
 
 
 
 $(document).ready(function(){
 
+  $('#review-form').submit(function(e){ //this is the function for submiting a review
+    e.preventDefault()
+    var info = $(this).serialize()
+    console.log(info)
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      data: $(this).serialize(),
+      success: function(serverResponse) {
+        console.log(serverResponse);
+      }
+    })//end ajax
 
 
+  })//end of submit
 
 });

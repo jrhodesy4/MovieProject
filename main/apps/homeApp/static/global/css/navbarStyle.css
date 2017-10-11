@@ -5,7 +5,9 @@
 #00c9ff
 
 #92fe9d*/
-
+*{
+  font-family: 'Roboto', sans-serif;
+}
 .center {
   margin: auto;
   left: 0;
@@ -275,6 +277,7 @@
   width: 1em;
   height: 1em;
   cursor: pointer;
+  fill: #222222 !important;
 }
 .logout-button p {
   opacity: 0;

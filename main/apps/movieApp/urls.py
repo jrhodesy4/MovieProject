@@ -16,9 +16,9 @@ urlpatterns = [
     url(r'^seasonData/$', views.seasonData),
     url(r'^discover$', views.discover),
     url(r'^discover/(?P<id>\d+)$', views.discover_more),
+    url(r'^add/watchlist/$', views.add_to_watchlist),
 
     # postroutes ===============
-    url(r'^movie/add/watchlist/(?P<id>\d+)$', views.add_to_watchlist),
     url(r'^makeReview/(?P<id>\d+)/(?P<season>\d+)/(?P<episode>\d+)$', views.makeReview),
     url(r'^movie/delete/watchlist/(?P<id>\d+)$', views.delete_from_watchlist),
 ]

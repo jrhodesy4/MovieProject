@@ -29,7 +29,11 @@
               <p class="avg-rating green">89/100</p>
             </div>
             <div class="quicklink-section">
-              <div class="link-icon">
+              {% if in_list == False %}
+              <div  id="watchlist-button" onclick="addtowatchlist({{movie.id}}, 'movie')"class="link-icon">
+              {%else%}
+              <div id="watchlist-button" onclick="addtowatchlist()"class="link-icon in-watchlist">
+              {% endif%}
                 <svg class="icon-content icon-watchlist">
                   <use xlink:href="#icon-watchlist"></use>
                   <symbol id="icon-watchlist" viewBox="0 0 32 32">
@@ -78,10 +82,11 @@
           </div>
           <h3>Your Review:</h3>
           <div class="undertext"></div>
-          <form class="" action="/makeReview/{{movie.id}}/0/0" method="post">
+          <form class="" action="/makeReview/{{movie.id}}/0/0" method="post" id="review-form">
             {% csrf_token %}
 
             <input type="hidden" name="type" value="movie">
+
 
             <div class="slider-review-form sectional">
 

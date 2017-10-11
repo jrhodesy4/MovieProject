@@ -419,8 +419,11 @@ body {
   width: 100%;
 }
 .name-plate {
+  position: relative;
   color: #222222;
   text-align: center;
+  vertical-align: middle;
+  margin: 0 !important;
 }
 .name-plate:active {
   color: #222222;
@@ -525,6 +528,9 @@ body {
   height:300px;
 }
 
+.in-watchlist {
+  background-color: #FC466B !important;
+}
 
 
 
