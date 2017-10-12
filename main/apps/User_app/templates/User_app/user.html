@@ -7,141 +7,150 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'User_app/user.css' %}">
-    <script type="text/javascript" src="{% static 'User_app/user.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'User_app/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/review_card.css' %}">
+    <script type="text/javascript" src="{% static 'User_app/js/user.js' %}"></script>
   </head>
   <body>
     <a href="/">Home</a>
-    {% if request.session.user %}
-    <a href="/logout">Logout</a>
-    {% endif %}
-    <div class="userPage">
-      {% for user in users %}
-      <div class="profPic">
-        <img src="{{profile_picture}}">
+    <div class="space-for-top"></div>
+    <div class="content-wrapper">
+
+
+
+
+      <div class="userPage">
+        {% for user in users %}
+        <div class="profPic">
+          <img src="{{profile_picture}}">
+
+        </div>
+        <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
+        <h1>{{ user.first_name}} {{user.last_name}}</h1>
+        <div class="list-buttons">
+
+          <div class="list" id="list-1">
+            <h3>Followers</h3>
+            <p>{{followers.count}}</p>
+          </div>
+          <div class="list" id="list-2">
+            <h3>Following</h3>
+            <p>{{following.count}}</p>
+          </div>
+          <div class="list" id="list-3">
+            <h3>Reviews</h3>
+            <p>{{length}}</p>
+          </div>
+        </div>
+
+
+
+        {% if request.session %}
+        {% if myFollow == "you don't follow" %}
+        <a href="/connect/add/{{user.id}}"><button type="button" name="button">Follow</button></a><br>
+        {% else %}
+        <a href="/connect/remove/{{user.id}}"><button type="button" name="button">Unfollow</button></a><br>
+        {% endif %}
+        {% endif %}
+        <div class="followers">
+
+
+        </div>
+        {% endfor %}
 
       </div>
-      <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
-      <h1>{{ user.first_name}} {{user.last_name}}</h1>
-      <div class="list-buttons">
-
-        <div class="list" id="list-1">
-          <h3>Followers</h3>
-          <p>{{followers.count}}</p>
-        </div>
-        <div class="list" id="list-2">
-          <h3>Following</h3>
-          <p>{{following.count}}</p>
-        </div>
-        <div class="list" id="list-3">
-          <h3>Reviews</h3>
-          <p>{{length}}</p>
-        </div>
-      </div>
 
 
-
-      {% if request.session %}
-      {% if myFollow == "you don't follow" %}
-      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Follow</button></a><br>
-      {% else %}
-      <a href="/connect/remove/{{user.id}}"><button type="button" name="button">Unfollow</button></a><br>
-      {% endif %}
-      {% endif %}
-      <div class="followers">
-
-
-      </div>
-      {% endfor %}
-
-    </div>
-    <div class="profileInfo">
-      <h2>Profile Info</h2>
-      {% if profile != "This user has not created a profile yet" %}
-      {% for user in users %}
-      <h3>Contact Information</h3>
-      <p>Email:  {{ user.email }}</p>
-      <h3>General Information</h3>
-
-      <!-- dont know why this isn't showing up ----------------------------------->
-      <p>Birthday: {{ profile.birthday }}</p>
-      <p>Hometown: {{ profile.hometown }}</p>
-      <p>Country: {{ profile.country }}</p>
-
-      {% endfor %}
-      {% else %}
-      <h3>Sorry, {{ profile }}</h3>
-      {% endif %}
-
-
-    </div>
-    <div class="movieList">
-      <h2>Movie List</h2>
-
-    </div>
-    <div class="pageFeed">
-      {% for user in users %}
-      <div class="reviewFeed">
-        <h3>{{user.first_name}}'s Reviews</h3>
-
+      <div class="pageFeed">
+        {% for user in users %}
+        <div class="reviewFeed">
+          <h3 class="names-review">{{user.first_name}}'s Reviews</h3>
+          <div class="name-bumper"></div>
           {% for review in reviews %}
-          <div class="reviewDiv">
-            <img src="https://image.tmdb.org/t/p/w500/{{review.poster_path}}" >
-            <h3>{{review.score}}</h3>
-            <h3>{{review.title}}</h3>
-            <p>{{review.content}}</p>
+          <div class="review-total-holder">
+            <div class="review-card-min {{review.overall_color}}">
+              <img src="https://image.tmdb.org/t/p/w1280/{{review.poster_path}}" alt="">
+              <div class="info-score">
+                <p class="score-overall {{review.overall_color}}">{{review.overall_score}}</p>
+              </div>
+            </div>
+            <div class="review-card-full">
+              <div class="overall-score-full">
+                <p>Overall Score</p>
+                <div class="bumper-reviewcard"></div>
+                <div class="break"></div>
+                <p class="score-overall-full {{review.overall_color}}">{{review.overall_score}}</p>
+              </div>
+              <div class="subscores">
+                <p>Story</p>
+                <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
+                <p>Entertainment</p>
+                <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
+                <p>Acting</p>
+                <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
+                <p>Visual</p>
+                <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
+                <p>Sound</p>
+                <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
+              </div>
+            </div>
 
           </div>
+          {% endfor%}
+
+
+
+        </div>
+        <div class="followerFeed" style="display:none">
+          <h3 class="names-review">{{user.first_name}}'s Followers</h3>
+          <div class="name-bumper"></div>
+          <div class="space-for-top"></div>
+          {% for follower in followers %}
+          {% if follower.current_user.id == request.session.user %}
+          <div class="followerDiv">
+            <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+              <a href="/profile">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+              <p>(You)</p>
+
+          </div>
+
+          {% else %}
+
+          <div class="followerDiv">
+            <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+            <a href="/user/{{ follower.current_user.id }}">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
+
+          </div>
+          {% endif %}
+          {% endfor %}
+
+        </div>
+        <div class="followingFeed" style="display:none">
+          <h3 class="names-review">{{user.first_name}}'s Following</h3>
+          <div class="name-bumper"></div>
+          <div class="space-for-top"></div>
+          {% for follow in following %}
+          {% if follow.id == request.session.user %}
+          <div class="followingDiv">
+            <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+            <a href="/profile">{{follow.first_name}} {{follow.last_name}}</a>
+            <p>(You)</p>
+          </div>
+          {% else %}
+          <div class="followingDiv">
+            <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+            <a href="/user/{{ follow.id }}">{{follow.first_name}}</a>
+
+          </div>
+          {% endif %}
+          {% endfor %}
           {% endfor %}
 
 
-
-      </div>
-      <div class="followerFeed" style="display:none">
-        <h3>{{user.first_name}}'s Followers</h3>
-        {% for follower in followers %}
-        {% if follower.current_user.id == request.session.user %}
-        <div class="followerDiv">
-          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-            <a href="/profile">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
-            <p>(You)</p>
-
         </div>
-
-        {% else %}
-
-        <div class="followerDiv">
-          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-          <a href="/user/{{ follower.current_user.id }}">{{follower.current_user.first_name}} {{follower.current_user.last_name}}</a>
-
-        </div>
-        {% endif %}
-        {% endfor %}
-
-      </div>
-      <div class="followingFeed" style="display:none">
-        <h3>{{user.first_name}}'s Following</h3>
-        {% for follow in following %}
-        {% if follow.id == request.session.user %}
-        <div class="followingDiv">
-          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-          <a href="/profile">{{follow.first_name}} {{follow.last_name}}</a>
-          <p>(You)</p>
-        </div>
-        {% else %}
-        <div class="followingDiv">
-          <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-          <a href="/user/{{ follow.id }}">{{follow.first_name}}</a>
-
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-
 
       </div>
 
-    </div>
-
+  </div>
   </body>
 </html>

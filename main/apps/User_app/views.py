@@ -14,7 +14,7 @@ things that need to be added?
 
 """
 # local fucntions here ===============================================
-def ovScoreColor(score):
+def ovScoreColor(score): #gets the class we need for color == score
     color = "red"
     if score > 60:
         color = "yellow"
@@ -30,7 +30,9 @@ def subScoreColor(score):
          color = 'green'
      return color
 
-def subPercent(number):
+def subPercent(number): # this get the score and turns it to written number for class
+    if number == None:
+        return 5
     percent = ["one", "two", "three", "four",'five',' six', 'seven','eight', 'nine', 'ten']
     return percent[number - 1]
 def createReviewFormat(review):
@@ -49,7 +51,7 @@ def createReviewFormat(review):
         'sound_percent': subPercent(review['sound_rating']),
         'sound_color': subScoreColor(review['sound_rating']),
     }
-    
+
     return data
 
 # Create your views here.
@@ -138,6 +140,58 @@ def profile(request):
     }
     return render(request, "User_app/profile.html", context)
 
+def user_page(request, id):
+    if 'user' not in request.session:
+        return redirect('/login')
+    users = User.objects.filter(id = id)
+    reviews = user_services.get_reviews(id)
+    length = len(reviews)
+    print request.session['user']
+    try:
+        myFollow = Friend.objects.get(users=User.objects.get(id=id), current_user=User.objects.get(id = request.session['user']))
+    except:
+        myFollow = "you don't follow"
+    try:
+        followers = Friend.objects.filter(users=User.objects.get(id = id))
+    except:
+        followers = 'No followers'
+    friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = id))
+    following = friend.users.all()
+    # try:
+    #     following = Friend.objects.filter(current_user=User.objects.get(id = id))
+    # except:
+    #     following = "no following"
+    try:
+        profile = Profile.objects.get(user_id=id)
+    except:
+        profile = "This user has not created a profile yet"
+    try:
+        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = id))
+    except:
+        pass
+    profile_picture = ""
+    if profilePicture:
+        for stuff in profilePicture:
+            profile_picture = stuff.picture
+
+    final_form_reviews =[]
+    for review in reviews:
+        data = createReviewFormat(review);
+        final_form_reviews.append(data)
+
+
+    data = { 'length': length,
+        'reviews': final_form_reviews,
+        'myFollow': myFollow,
+        'users': users,
+        'profile': profile,
+        'following' : following,
+        'followers' : followers,
+        'profile_picture' : profile_picture
+
+    }
+
+    return render(request, 'User_app/user.html', data)
 
 
 def notification_page(request):
@@ -233,41 +287,6 @@ def log_user_in(request): # this is to the log the user in
 
 # renders the specific user page, other than the current user
 
-def user_page(request, id):
-    if 'user' not in request.session:
-        return redirect('/login')
-    users = User.objects.filter(id = id)
-    reviews = user_services.get_reviews(id)
-    length = len(reviews)
-    print request.session['user']
-    try:
-        myFollow = Friend.objects.get(users=User.objects.get(id=id), current_user=User.objects.get(id = request.session['user']))
-    except:
-        myFollow = "you don't follow"
-    try:
-        followers = Friend.objects.filter(users=User.objects.get(id = id))
-    except:
-        followers = 'No followers'
-    friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = id))
-    following = friend.users.all()
-    # try:
-    #     following = Friend.objects.filter(current_user=User.objects.get(id = id))
-    # except:
-    #     following = "no following"
-    try:
-        profile = Profile.objects.get(user_id=id)
-    except:
-        profile = "This user has not created a profile yet"
-    try:
-        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = id))
-    except:
-        pass
-    profile_picture = ""
-    if profilePicture:
-        for stuff in profilePicture:
-            profile_picture = stuff.picture
-
-    return render(request, 'User_app/user.html', { 'length': length, 'reviews': reviews, 'myFollow': myFollow, 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
 
 def logout(request):
     request.session.clear()
