@@ -54,6 +54,28 @@ def createReviewFormat(review):
 
     return data
 
+
+def profileFormat(user): # <--- this function will return profile info how we want
+    first = user.first_name
+    last = user.last_name
+    try :
+        pic = ProPicture.objects.get(user_id=user.id)
+        profile_pic = pic.picture
+        is_pic = True
+    except:
+        profile_pic = first[0] + last[0]
+        is_pic = False
+    data = {
+        'profile_id': user.id,
+        'first_name': first,
+        'last_name': last,
+        'is_profile_pic': is_pic,
+        'pic_name': profile_pic
+    }
+    return data
+
+
+
 # Create your views here.
 # =================================================================
 # template renders
@@ -65,29 +87,6 @@ def register_page(request): #renders the register page template
     return render(request, 'User_app/register_page.html')
 
 
-def createProfile(request):
-    if request.method == 'POST':
-        profile = Profile.objects.create(
-        birthday = request.POST['birthday'],
-        hometown = request.POST['hometown'],
-        country = request.POST['country'],
-        user_id = User.objects.get(id = request.session['user'])
-        )
-        profile.save()
-        return redirect('/profile')
-
-def newProfilePicture(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        profilePic = ProPicture.objects.create(
-        picture = uploaded_file_url,
-        user_id = User.objects.get(id = request.session['user'])
-        )
-        profilePic.save()
-        return redirect('/profile')
 
 def editProfilePicture(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -104,68 +103,56 @@ def editProfilePicture(request):
 def profile(request):
     if 'user' not in request.session:
         return redirect('/login')
+
+
+
     user = User.objects.get(id=request.session['user'])
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
-    try:
-        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = request.session['user']))
-    except:
-        pass
+
+    user_profile = profileFormat(user)
+
+
     reviews = user_services.get_reviews(request.session['user'])
     length = len(reviews)
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
-    followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
+    followers = Friend.objects.filter(users=user)
+
     followerPics = []
     pics = []
     user_pic = []
+
+
+    followers_final =[]
     for follower in followers:
-        followerPics.append(follower.current_user)
-    for person in followerPics:
-        pics.append(person.profilePic.all())
-    for pic in pics:
-        for stuff in pic:
-            user_pic.append(stuff.picture)
 
-    follower_dic = dict(zip(followers, user_pic))
-    fpics = []
-    f_user_pic = []
+        data = profileFormat(follower.current_user)
+        followers_final.append(data)
+
+    following_final = []
     for person in following:
-        fpics.append(person.profilePic.all())
-    for pic in pics:
-        for stuff in pic:
-            f_user_pic.append(stuff.picture)
-
-    following_dic = dict(zip(following, f_user_pic))
-
-    print following_dic
-    print following
+        data = profileFormat(person)
+        following_final.append(data)
 
 
-    profile_picture = ""
-    if profilePicture:
-        for stuff in profilePicture:
-            profile_picture = stuff.picture
 
-
-    final_form_reviews =[]
+    final_form_reviews =[] # <-- this returns the reviews and makes them formated correctly
     for review in reviews:
         data = createReviewFormat(review);
         final_form_reviews.append(data)
 
-
-
+    print following_final
     context = {
         'length' : length,
         'followers' : followers,
         'following' : following,
         'profile' : profile,
-        'user' : user,
-        'follower_dic' : follower_dic,
-        'following_dic' : following_dic,
-        'f_user_pic' : f_user_pic,
+        'follower_dic' : followers_final,
+        'following_dic' : following_final,
         'watchlist': Watchlist.objects.filter(user=request.session["user"]),
         'reviews' : final_form_reviews,
-        'profile_picture': profile_picture,
+        'user': user_profile
+
     }
     return render(request, "User_app/profile.html", context)
 
@@ -245,6 +232,21 @@ def notification_page(request):
 # =================================================================
 # POST request's
 # =================================================================
+
+
+def newProfilePicture(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        profilePic = ProPicture.objects.create(
+        picture = uploaded_file_url,
+        user_id = User.objects.get(id = request.session['user'])
+        )
+        profilePic.save()
+        return redirect('/profile')
+
 def createProfile(request):
     if request.method == 'POST':
         profile = Profile.objects.create(
