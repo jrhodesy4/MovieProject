@@ -5,22 +5,40 @@ function reviewFormController(){
   if (is_review_open == "closed"){
     // $(".info-section-middle").css({display: 'inline-block'});
     $(".info-section-middle").fadeIn(1000);
+    $('.opaque').fadeIn(500);
     is_review_open = "open"
   }else {
     $(".info-section-middle").css({display: 'none'});
+    $('.opaque').css('display', 'none');
     is_review_open = "closed"
   }
 }
 
+var is_extra_open = "closed"
+
+function extraController(){
+  if (is_extra_open == "closed"){
+    $(".extra-info-section").fadeIn(1000);
+
+    $('.opaque').fadeIn(500);
+    is_extra_open = "open"
+  }else {
+    $(".extra-info-section").css({display: 'none'});
+
+    $('.opaque').css('display', 'none');
+    is_extra_open = "closed"
+  }
+}
 var is_trailer_open = "closed"
 
 function trailerController(){
   if (is_trailer_open == "closed"){
-    // $(".info-section-middle").css({display: 'inline-block'});
     $(".trailer-section").fadeIn(1000);
+    $('.opaque').fadeIn(500);
     is_trailer_open = "open"
   }else {
     $(".trailer-section").css({display: 'none'});
+    $('.opaque').css('display', 'none');
     is_trailer_open = "closed"
   }
 }
@@ -63,7 +81,7 @@ function seasonJson(json){
     console.log(episodes);
     console.log(episodeName);
     // $(".episode-list").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
-    $(".episode-list").append('<h2>' + name + '</h2><img src="https://image.tmdb.org/t/p/w500' + poster + '"> <div class="season-overview"> <p>Synopsis:' + overview + '</p></div><div class="episodes">');
+    $(".episode-list").append('<h2>' + name + '</h2><img src="https://image.tmdb.org/t/p/w500' + poster + '"> <div class="season-overview"> <p>Synopsis: ' + overview + '</p></div><div class="episodes">');
     // for (var i = 0; i < json.episodes.length; i++){
       for (episode in episodeName) {
         $(".episode-list").append('<a href="/episode/' + show + '/' + season + '/' + episodeId[episode] + '"><div class"episode"><h3>' + episodeId[episode] + '. ' + episodeName[episode] + '</h3></div></a>' );
