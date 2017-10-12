@@ -67,7 +67,7 @@
                   </symbol>
                 </svg>
               </div>
-              <div class="link-icon">
+              <div onclick="extraController()" class="link-icon">
                 <svg class="icon-content icon-info">
                   <use xlink:href="#icon-info"></use>
                   <symbol id="icon-info" viewBox="0 0 32 32">
@@ -122,18 +122,41 @@
 
         </div>
       </div>
+      {% if trailers != 'none' %}
       <div class="trailer-section">
         <div onclick="trailerController()"class="close-button-form">
         </div>
         {% for trailer in trailers|slice:":1" %}
-        {% if trailer.type == 'Trailer'%}
         <div class="trailer">
           <iframe src="http://www.youtube.com/embed/{{trailer.key}}"
           width="760" height="450" frameborder="0" allowfullscreen></iframe>
         </div>
-        {% endif %}
         {% endfor %}
 
+
+      </div>
+      {% endif %}
+      <div class="opaque">
+
+      </div>
+      <div class="extra-info-section" style="display:none">
+        <div onclick="extraController()" class="close-button-form">
+        </div>
+        <h1>{{movie.title}}</h1>
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="">
+        <div class="extra" >
+          <h3>Budget: {{budget}}</h3>
+          <h3>Revenue: {{revenue}}</h3>
+          <h3>Released: {{release}}</h3>
+          <h3>Runtime: {{runtime.0}} hours, {{runtime.1}} minutes</h3>
+          <h3>Homepage: <a href="{{movie.homepage}}" target="_blank">{{movie.homepage}}</a></h3>
+          <h3>Genres:
+            {% for name in genre_names %}
+            <p>{{name}}</p>
+            {% endfor %}
+
+
+        </div>
 
       </div>
 
