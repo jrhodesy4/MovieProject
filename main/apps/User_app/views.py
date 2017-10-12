@@ -115,6 +115,32 @@ def profile(request):
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
+    followerPics = []
+    pics = []
+    user_pic = []
+    for follower in followers:
+        followerPics.append(follower.current_user)
+    for person in followerPics:
+        pics.append(person.profilePic.all())
+    for pic in pics:
+        for stuff in pic:
+            user_pic.append(stuff.picture)
+
+    follower_dic = dict(zip(followers, user_pic))
+    fpics = []
+    f_user_pic = []
+    for person in following:
+        fpics.append(person.profilePic.all())
+    for pic in pics:
+        for stuff in pic:
+            f_user_pic.append(stuff.picture)
+
+    following_dic = dict(zip(following, f_user_pic))
+
+    print following_dic
+    print following
+
+
     profile_picture = ""
     if profilePicture:
         for stuff in profilePicture:
@@ -134,6 +160,9 @@ def profile(request):
         'following' : following,
         'profile' : profile,
         'user' : user,
+        'follower_dic' : follower_dic,
+        'following_dic' : following_dic,
+        'f_user_pic' : f_user_pic,
         'watchlist': Watchlist.objects.filter(user=request.session["user"]),
         'reviews' : final_form_reviews,
         'profile_picture': profile_picture,
