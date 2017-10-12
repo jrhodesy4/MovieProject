@@ -94,6 +94,7 @@ class User(models.Model):
         return str(f + " " + l)
 
 
+
 # this is the model for the profile thats attached to a user =======
 class Profile(models.Model):
     hometown = models.CharField(max_length=100, default='null')
