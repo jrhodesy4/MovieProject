@@ -9,6 +9,7 @@ yellow: #FCE071;
 body {
   padding: 0px;
   margin: 0px;
+  line-height: 1.2;
 }
 /*top banner =============================*/
 .background-banner {
@@ -120,6 +121,7 @@ body {
 
 }
 .link-icon {
+  vertical-align: top;
   display: inline-block;
   position: relative;
   /*border: 2px solid #222222;*/
@@ -637,13 +639,12 @@ body {
 
 .review-score-number {
   color: white;
-
   font-weight: 800;
-  position: absolute;
-  top: -55%;
-  left: 16%;
-
+  position: relative;
   font-size: 2em;
+  margin: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .trailer {
   height: 495px;
@@ -652,8 +653,48 @@ body {
   background-color: black;
   border-radius: 5px;
 }
+@media (max-width: 450px) {
+  .content-poster {
+    width: 150px;
+    top: -100px;
+
+  }
+  .quicklink-section {
+    display: block;
+  }
+  .background-banner {
+    height: 150px;
+  }
+  .info-section-top {
+    position: relative;
+  }
+  .info-section-bottom {
+    margin-top: -30px;;
+  }
+  .content-title {
+    display: block;
+    text-align: center;
+  }
+  .quick-info {
+    position: relative;
+    text-align: center;
+    top: -75px;
+    width: 100%;
+    padding-left: 0;
+  }
+  .quicklink-section {
+    margin: none;
+    text-align: center;
+    width: 100%;
+  }
+  .under-title{
+    text-align: center;
+  }
+  .link-icon {
+    margin: 0 10px;
+  }
+}
 
 
-
-
+}
 /*//end*/

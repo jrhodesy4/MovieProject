@@ -10,7 +10,13 @@ body {
   margin: 0;
   padding: 0;
 }
-
+.header-top {
+  display: block;
+  height: 10px;
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
 button.accordion {
     background-color: #eee;
     color: #444;
@@ -148,6 +154,7 @@ div.panel {
   margin: 10px;
   overflow: scroll;
   display: inline-block;padding-top: 20px;
+  border-radius: 4px;
 
 }
 .followingFeed {
@@ -234,3 +241,54 @@ div.panel {
   border-radius: 50%;
   margin-bottom: 20px;
 }*/
+
+.menu-item p {
+  top: -40% !important;
+}
+.logout-button p {
+  top: 90% !important;
+}
+@media (max-width: 1050px) {
+
+  .pageFeed {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+}
+
+@media (max-width: 450px) {
+  .review-total-holder {
+    margin: 0px !important;
+  }
+  .name-bumper {
+    margin-bottom: 20px !important;
+  }
+
+}
+@media (max-width: 380px) {
+  .userPage {
+    margin: 0;
+    margin-bottom: 10px;
+    width: 95%;
+  }
+
+  .review-total-holder {
+    width: 98% !important;
+  }
+  .review-card-min {
+    width: 100% !important;
+  }
+  .review-card-full {
+    width: 100% !important;
+    height: 603px !important;
+  }
+  .subscores p {
+    margin: 10px 0 !important;
+  }
+  .score-bar{
+    height: 10px !important;
+  }
+
+}

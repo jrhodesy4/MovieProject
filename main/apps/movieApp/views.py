@@ -70,6 +70,8 @@ def movie_page(request, id): # this renders the selected individual movie page
         user_id = request.session['user']
         in_list = in_watchlist(user_id, id)
         score = review_completed(user_id, id, "movie")
+    else:
+        score = "not logged"
 
     movie = movie_services.get_movie(id)
     mov = movie['movie_info']
@@ -143,6 +145,8 @@ def show_page(request, id):
         user_id = request.session['user']
         in_list = in_watchlist(user_id, id)
         score = review_completed(user_id, id, "tv")
+    else:
+        score = "not logged"
 
     color = "red"
     if score > 60:

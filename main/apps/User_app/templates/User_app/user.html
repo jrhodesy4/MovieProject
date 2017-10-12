@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="{% static 'User_app/css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'global/css/review_card.css' %}">
     <script type="text/javascript" src="{% static 'User_app/js/user.js' %}"></script>
+
+    <!-- for the menu -->
+    <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}"/>
   </head>
   <body>
-    <a href="/">Home</a>
+    {% include "../global/navbar.html" %}
     <div class="space-for-top"></div>
     <div class="content-wrapper">
 

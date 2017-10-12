@@ -113,7 +113,7 @@ body {
 .score-bar {
   width: 70%;
   height: 5px;
-
+  border-radius: 9px;
   margin: 0;
   display: inline-block;
 }

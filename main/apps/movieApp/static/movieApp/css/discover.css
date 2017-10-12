@@ -263,8 +263,11 @@ a {
   text-align: center;
 }
 @media (max-width: 850px) {
-      .spacer {
-        display: block;
+    .spacer {
+      display: block;
+    }
+    .content-container{
+      text-align: center;
     }
     .discover-section {
       width:100%;
@@ -277,8 +280,10 @@ a {
       width: 60%;
     }
     .movie-card-ext {
-      width: 95%;
+      width: 100%;
       display: block;
+      margin-left: 0;
+      margin-right: 0;
     }
     .actor-card-ext {
       width: 95%;

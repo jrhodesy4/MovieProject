@@ -168,5 +168,44 @@ body {
 .middle-info-section a {
   text-decoration: none;
 }
+.picture-space {
+  display: none;
+}
+
+@media (max-width: 450px) {
+  .main-header {
+    width: 100%;
+    text-align: center;
+  }
+  .main-header img {
+    width: 150px;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    top: -150px;
+  }
+  .picture-space {
+    display: block;
+  }
+  .actor-name {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    top: -125px;
+  }
+  .actor-score {
+    top: -125px;
+  }
+  .avg-score{
+    text-align: center;
+  }
+  .middle-info-section {
+    margin-top: -150px;
+  }
+}
+
+
 
 /*end */
