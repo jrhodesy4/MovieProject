@@ -29,7 +29,12 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,
-            "poster_path": this.poster_path
+            "poster_path": this.poster_path,
+            'story_rating': this.story_rating,
+            'entertainment_rating': this.entertainment_rating,
+            'acting_rating': this.acting_rating,
+            'visual_rating': this.visual_rating,
+            'sound_rating' : this.sound_rating
         }
         reviews.append(entry)
     b = TVReview.objects.filter(tvs__user_id=user)
@@ -39,7 +44,12 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,
-            "poster_path": this.poster_path
+            "poster_path": this.poster_path,
+            'story_rating': this.story_rating,
+            'entertainment_rating': this.entertainment_rating,
+            'acting_rating': this.acting_rating,
+            'visual_rating': this.visual_rating,
+            'sound_rating' : this.sound_rating
         }
         reviews.append(entry)
     c = EpisodeReview.objects.filter(episodes__user_id=user)
@@ -49,7 +59,12 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,
-            "poster_path": this.poster_path
+            "poster_path": this.poster_path,
+            'story_rating': this.story_rating,
+            'entertainment_rating': this.entertainment_rating,
+            'acting_rating': this.acting_rating,
+            'visual_rating': this.visual_rating,
+            'sound_rating' : this.sound_rating
         }
         reviews.append(entry)
     reviews.sort(key=lambda item:item['created_at'], reverse=True)

@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+
+body {
+
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.review-total-holder {
+  width: 200px;
+  height: auto;
+  display: inline-block;
+  margin: 20px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.review-total-holder:hover .review-card-min {
+  display: none;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+}
+.review-total-holder:hover .review-card-full {
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+/*minimal review card */
+.review-card-min {
+  position: relative;
+  display: inline-block;
+  width: 200px;;
+  height: auto;
+  overflow: hidden;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.review-card-min:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
+.review-card-min img {
+  width: 100%;
+  height: auto;
+}
+.info-score {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+}
+.score-overall {
+  text-align: center;
+  color: white;
+  display: block;
+  font-size: 2em;
+  position: relative;
+  margin: 0;
+  padding: 3px 10px;
+
+}
+
+
+/*extra details review card */
+
+
+
+.review-card-full {
+  display: none;
+  position: relative;
+  width: 200px;
+  height: 344px;
+  overflow: hidden;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 300;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.bumper-reviewcard {
+  width: 70%;
+  height: 5px;
+  display: inline-block;
+  border-radius: 10px;
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
+
+
+
+.overall-score-full  p {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 100;
+  margin-top: 10px;
+}
+.score-overall-full {
+  color: white;
+  font-weight: 500 !important;
+  display: inline-block;
+  margin: 0;
+  padding: 3px 10px;
+  border-radius: 50px;
+}
+.subscores {
+  margin-top: 10px;
+}
+.subscores p {
+  margin: 3px 0;
+}
+.score-bar {
+  width: 70%;
+  height: 5px;
+
+  margin: 0;
+  display: inline-block;
+}
+
+
+.one {
+  width: 10% !important;
+}
+
+.two {
+  width: 20% !important;
+}
+.three {
+  width: 30% !important;
+}
+.four {
+  width: 40% !important;
+}
+
+.five {
+  width: 50% !important;
+}
+.six {
+  width: 60% !important;
+}
+.seven {
+  width: 70% !important;
+}
+.eight {
+  width: 80% !important;
+}
+.nine {
+  width: 90% !important;
+}
+
+
+
+
+
+
+
+
+
+/*colors for scores*/
+/*above 96*/
+.high-score {
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
+.high-score:hover {
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
+/*above 80 */
+.green {
+  background-color: #74E599;
+  text-align: center;
+}.green:hover {
+  background-color: #74E599;
+}
+
+/*between 79 50*/
+.yellow {
+  background-color: #FCE071;
+  text-align: center;
+}
+.yellow:hover {
+  background-color: #FCE071;
+}
+
+/*below 50 */
+.red {
+  background-color: #FD9FA1;
+  text-align: center;
+}
+.red:hover {
+  background-color: #FD9FA1;
+}

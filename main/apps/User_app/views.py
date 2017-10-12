@@ -13,6 +13,45 @@ things that need to be added?
 2. make sure that password is protected using Bcrpt and confirm password
 
 """
+# local fucntions here ===============================================
+def ovScoreColor(score):
+    color = "red"
+    if score > 60:
+        color = "yellow"
+    if score > 80:
+        color = 'green'
+    return color
+
+def subScoreColor(score):
+     color = "red"
+     if score > 6:
+         color = "yellow"
+     if score >= 8:
+         color = 'green'
+     return color
+
+def subPercent(number):
+    percent = ["one", "two", "three", "four",'five',' six', 'seven','eight', 'nine', 'ten']
+    return percent[number - 1]
+def createReviewFormat(review):
+    data = {
+        "poster_path": review['poster_path'],
+        "overall_score": review['score'],
+        "overall_color": ovScoreColor(review['score']),
+        'story_percent': subPercent(review['story_rating']),
+        'story_color': subScoreColor(review['story_rating']),
+        'ent-percent': subPercent(review['entertainment_rating']),
+        'ent_color': subScoreColor(review['entertainment_rating']),
+        'act_percent': subPercent(review['acting_rating']),
+        'act_color': subScoreColor(review['acting_rating']),
+        'vis_percent': subPercent(review['visual_rating']),
+        'vis_color': subScoreColor(review['visual_rating']),
+        'sound_percent': subPercent(review['sound_rating']),
+        'sound_color': subScoreColor(review['sound_rating']),
+    }
+    
+    return data
+
 # Create your views here.
 # =================================================================
 # template renders
@@ -69,7 +108,6 @@ def profile(request):
         profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = request.session['user']))
     except:
         pass
-
     reviews = user_services.get_reviews(request.session['user'])
     length = len(reviews)
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
@@ -79,7 +117,15 @@ def profile(request):
     if profilePicture:
         for stuff in profilePicture:
             profile_picture = stuff.picture
-    print profilePicture
+
+
+    final_form_reviews =[]
+    for review in reviews:
+        data = createReviewFormat(review);
+        final_form_reviews.append(data)
+
+
+
     context = {
         'length' : length,
         'followers' : followers,
@@ -87,7 +133,7 @@ def profile(request):
         'profile' : profile,
         'user' : user,
         'watchlist': Watchlist.objects.filter(user=request.session["user"]),
-        'reviews' : reviews,
+        'reviews' : final_form_reviews,
         'profile_picture': profile_picture,
     }
     return render(request, "User_app/profile.html", context)

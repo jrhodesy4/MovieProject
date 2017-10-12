@@ -69,6 +69,7 @@ div.panel {
 .list-buttons h3 {
   font-size: .80em;
   font-weight: 300;
+  color:  #222222;
 
 }
 .list {
@@ -152,7 +153,7 @@ div.panel {
 .followingFeed {
   display: inline-block;
   text-align: center;
-  outline: 2px solid black;
+
   width: 100%;
 }
 .followingDiv {
@@ -161,7 +162,7 @@ div.panel {
 .followerFeed {
   display: inline-block;
   text-align: center;
-  outline: 2px solid black;
+
   width: 100%;
 }
 .followerDiv {
@@ -170,8 +171,9 @@ div.panel {
 .reviewFeed {
   display: inline-block;
   text-align: center;
-  border: 2px solid red;
+  height: 100%;
   width: 100%;
+  overflow: scroll;
 }
 .reviewDiv {
   margin: 2%;
@@ -199,8 +201,19 @@ div.panel {
   stroke: currentColor;
   fill: currentColor;
 }
-
-
+.names-review {
+  font-size: 2em;
+  font-weight: 100;
+}
+.name-bumper {
+  width: 80%;
+  height: 5px;
+  display: inline-block;
+  border-radius: 9px;
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
 
 /*.profileInfo {
   display: none
