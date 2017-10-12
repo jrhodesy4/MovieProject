@@ -159,13 +159,20 @@ def get_videos(id, type):
         movie_videos = "https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US"
         movie_data = requests.get(movie_videos).json()
         results = movie_data['results']
-        return results
+        final_list = []
+        for result in results:
+            if result['type'] == "Trailer":
+                final_list.append(result)
+        return final_list
     else:
         tv_videos = "https://api.themoviedb.org/3/tv/" + id + "/videos?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US"
         tv_data = requests.get(tv_videos).json()
         results = tv_data['results']
-        print results
-        return results
+        final_list = []
+        for result in results:
+            if result['type'] == "Trailer":
+                final_list.append(result)
+        return final_list
 
 
 

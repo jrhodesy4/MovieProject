@@ -9,6 +9,8 @@ from django.core import serializers
 from django.http import JsonResponse
 import json
 import requests
+from datetime import datetime
+import math
 
 # from ..homeApp import services
 
@@ -58,7 +60,11 @@ def review_completed(user_id, id, _type): #<----- if the user has completed a re
 def movie_page(request, id): # this renders the selected individual movie page
     in_list = False
     status = authenticate(request)
-    trailers = movie_services.get_videos(id, 'movie')
+    try:
+        trailers = movie_services.get_videos(id, 'movie')
+    except:
+        trailers = 'none'
+    print trailers
     review_c = False
     if status == "in":
         user_id = request.session['user']
@@ -66,6 +72,23 @@ def movie_page(request, id): # this renders the selected individual movie page
         score = review_completed(user_id, id, "movie")
 
     movie = movie_services.get_movie(id)
+    mov = movie['movie_info']
+    budget = format(mov['budget'], ",d")
+    revenue = format(mov['revenue'], ",d")
+    date = datetime.strptime(mov['release_date'], '%Y-%m-%d')
+    release = date.strftime('%b %d, %Y')
+    time = mov['runtime'];
+    hours = int(math.floor(time / 60));
+    minutes = (time % 60);
+    runtime = [hours, minutes]
+    genres = mov['genres']
+    genre_names = []
+    for genre in genres:
+        genre_names.append(genre['name'])
+
+    print runtime
+    # echo hours.":".$minutes;
+
     reviews = review_services.all_movie_reviews(id)
     print reviews
     try:
@@ -81,12 +104,17 @@ def movie_page(request, id): # this renders the selected individual movie page
     print score;
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
+        "genre_names" : genre_names,
+        'budget': budget,
+        'release': release,
+        'revenue': revenue,
         'trailers': trailers,
         'cast': movie['cast_info'],
         'reviews' : reviews,
         'in_list': in_list,
         'score': score,
-        'score_color': color
+        'score_color': color,
+        'runtime' : runtime
     }
     return render(request, 'movieApp/movie_view_page.html', context)
 
@@ -101,7 +129,11 @@ def seasonData(request):
 
 def show_page(request, id):
     in_list = False
-    trailers = movie_services.get_videos(id, 'tv')
+    try:
+        trailers = movie_services.get_videos(id, 'tv')
+    except:
+        trailers = 'none'
+    print trailers
     status = authenticate(request)
     show = movie_services.get_show(id)
     reviews = TVReview.objects.filter(api_code=id)

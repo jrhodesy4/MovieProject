@@ -122,18 +122,20 @@
 
         </div>
       </div>
+      {% if trailers != 'none' %}
       <div class="trailer-section">
         <div onclick="trailerController()"class="close-button-form">
         </div>
         {% for trailer in trailers|slice:":1" %}
-        {% if trailer.type == 'Trailer'%}
         <div class="trailer">
           <iframe src="http://www.youtube.com/embed/{{trailer.key}}"
           width="760" height="450" frameborder="0" allowfullscreen></iframe>
         </div>
-        {% endif %}
         {% endfor %}
+      </div>
+      {% endif %}
 
+      <div class="opaque">
 
       </div>
 
