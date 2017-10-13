@@ -1,47 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
     <meta charset="utf-8">
-    <title>working</title>
+    <title>Login</title>
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'User_app/css/login.css'%}">
   </head>
   <body>
     <div class="wrapper">
-      <div id="login">
-        <h1>Member Login</h1>
-
+      <div class="center" id="login">
+        <h1>Login</h1>
 
         <!-- login form  -->
-        <form class="login" action="/log_user_in" method="post">
+        <form class="login-form" action="/log_user_in" method="post">
           {% csrf_token %}
-          <p>Email:</p><input type="email" name="email">
-          <p>Password:</p><input type="password" name="password">
-          <br> <!--remove this when css ing  -->
-          <input type="submit" name="submit">
+          <p>Email:</p>
+          <input class="input-field" type="email" name="email">
+          <p>Password:</p>
+          <input class="input-field" type="password" name="password">
+          <div class="button-holder">
+            <a class="register-link" href="/register">REGISTER</a>
+            <input class="login-button" type="submit" name="Login" value="LOGIN">
+          </div>
+
         </form>
-        <a href="/register">Register Here</a>
 
       </div>
 
-
-      <!-- <div id="register">
-        <h1>Register</h1>
-
-        <form class="register-form" action="/register_account" method="POST">
-          {% csrf_token %}
-          <p>First Name:</p><input type="text" name="first_name">
-          <p>Last Name:</p><input type="text" name="last_name">
-          <p>Email:</p><input type="email" name="email">
-          <p>Password:</p><input type="password" name="password"><br>
-          <input type="submit" name="sumbit">
-
-
-        </form>
-
-      </div> -->
-
     </div>
+
 
   </body>
 </html>

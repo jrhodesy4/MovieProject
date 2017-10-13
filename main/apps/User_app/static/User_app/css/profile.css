@@ -119,6 +119,7 @@ div.panel {
   height: 100%;
   background-color: #FC466B;
 }
+
 .userPage {
   background-color: #FFFFFF;
   width: 300px;
@@ -162,15 +163,38 @@ div.panel {
   border-radius: 4px;
 
 }
+.pageFeed a {
+  text-decoration: none;
+}
+.profile-pic-holder-small {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+  text-align: center;
+  background-color: #FC466B;
+}
+.profile-pic-holder-small img {
+  height:100%;
+  width: auto;
+}
+/*follow section*/
+/*user is following */
 .followingFeed {
   display: inline-block;
   text-align: center;
-
   width: 100%;
 }
 .followingDiv {
   display: inline-block;
+  border: 1px solid red;
+  margin: 10px;
 }
+
+
+/*following user*/
 .followerFeed {
   display: inline-block;
   text-align: center;
@@ -179,7 +203,15 @@ div.panel {
 }
 .followerDiv {
   display: inline-block;
+  border: 1px solid red;
 }
+
+
+
+
+
+
+/*review */
 .reviewFeed {
   display: inline-block;
   text-align: center;
