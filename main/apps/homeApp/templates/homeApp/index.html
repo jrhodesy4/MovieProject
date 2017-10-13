@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'homeApp/css/home-main.css'%}"/>
     <!-- here are the global css files -->
 
-    <link rel="stylesheet" href="{% static 'global/css/review_card.css'%}"/>
+    <link rel="stylesheet" href="{% static 'homeApp/css/review_card_home.css'%}"/>
     <!-- here is the import for javascript  -->
     <!-- <script type="text/javascript" src="{% static 'homeApp/js/main.js'%}"></script> -->
 
@@ -51,12 +51,10 @@
       <div class="review-feed-wrapper">
         <h1>recent reviews</h1>
         {% for review in reviews %}
+
         <div class="review-total-holder">
-          <div class="review-card-min {{review.overall_color}}">
+          <div class="review-card-min">
             <img src="https://image.tmdb.org/t/p/w1280/{{review.poster_path}}" alt="">
-            <div class="info-score">
-              <p class="score-overall {{review.overall_color}}">{{review.score}}</p>
-            </div>
           </div>
           <div class="review-card-full">
             <div class="overall-score-full">
@@ -77,6 +75,15 @@
               <p>Sound</p>
               <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
             </div>
+          </div>
+          
+          <div class="p-img-holder">
+            {% if review.is_pic == True %}
+            <img src="{{review.profile_pic}}"/>
+            {%endif%}
+            {% if review.is_pic == False %}
+            <p>{{review.profile_pic}}</p>
+            {%endif%}
           </div>
 
         </div>

@@ -1,4 +1,4 @@
-from .models import User, Profile, Friend, Notification
+from .models import User, Profile, Friend, Notification, ProPicture
 from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, EpisodeReview
 
 def ovScoreColor(score): #gets the class we need for color == score
@@ -54,7 +54,6 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
         is_pic = False
 
     reviews = []
-
     a = MovieReview.objects.filter(movies__user_id=user)
     for this in a:
         entry = { #<--- this should be added too when more info is needed for template
@@ -82,7 +81,6 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             'vis_color': subScoreColor(this.visual_rating),
             'sound_percent': subPercent(this.sound_rating),
             'sound_color': subScoreColor(this.sound_rating),
-
         }
         reviews.append(entry)
     b = TVReview.objects.filter(tvs__user_id=user)
@@ -92,7 +90,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,
-            "poster_path": this.posterw_path,
+            "poster_path": this.poster_path,
             'story_rating': this.story_rating,
             'entertainment_rating': this.entertainment_rating,
             'acting_rating': this.acting_rating,
