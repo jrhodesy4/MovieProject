@@ -49,9 +49,9 @@
         </div>
         {% if request.session %}
         {% if myFollow == "you don't follow" %}
-        <a href="/connect/add/{{user.id}}"><button class="follow-button" type="button" name="button">Follow Me</button></a><br>
+        <a href="/connect/add/{{user.profile_id}}"><button class="follow-button" type="button" name="button">Follow Me</button></a><br>
         {% else %}
-        <a href="/connect/remove/{{user.id}}"><button class = 'unfollow-button' type="button" name="button">Unfollow</button></a><br>
+        <a href="/connect/remove/{{user.profile_id}}"><button class = 'unfollow-button' type="button" name="button">Unfollow</button></a><br>
         {% endif %}
         {% endif %}
       </div>
@@ -92,8 +92,6 @@
 
           </div>
           {% endfor%}
-
-
 
         </div>
 

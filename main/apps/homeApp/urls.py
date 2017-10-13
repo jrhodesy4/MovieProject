@@ -4,10 +4,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^testing$', views.testing),
     url(r'^api/get_places', views.get_places, name='get_places'),
     url(r'^search/users', views.searchUsers),
-    url(r'^reviewfeed', views.feed),
     url(r'^search/$', views.search),
     # url(r'^autocomplete/$', AutoCompleteView.as_view(), name='autocomplete'),
 
