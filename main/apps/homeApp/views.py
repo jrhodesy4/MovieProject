@@ -35,6 +35,8 @@ def index(request):
     except:
         reviews = "none";
 
+
+    
     data = {
         "reviews": reviews
     }
