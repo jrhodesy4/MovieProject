@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+/*
+background: #FC466B;
+background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+background: linear-gradient(to right, #3F5EFB, #FC466B);
+*/
+
+
 
 
 * {
@@ -6,9 +13,6 @@
   margin: 0px;
 }
 body {
-  background: #00C9FF;
-  background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
-  background: linear-gradient(to right, #92FE9D, #00C9FF);
   font-family: 'Roboto', sans-serif;
 
 
@@ -17,77 +21,141 @@ body {
 
 #login p, #register p{
   text-align: left;
+  position: relative;
   padding: 0px 25px;
   font-size: 1.15em;
+  font-weight: 100;
+  z-index: 0;
 }
-#login input, #register input{
+.input-field {
   width: 90%;
-  padding: 12px 20px;
+  position: relative;
+  padding: 5px 5px;
   margin: 10px 5px;
   box-sizing: border-box;
   font-size: 1.15em;
-  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid #e2e2e2;
+  font-weight: 300;
+  z-index: 10;
+
+  margin-bottom: 40px;
+  color:  #e2e2e2;
 
 }
- #login input:focus, #register input:focus {
+.input-field:active {
+  border-bottom: 1px solid #FC466B;
+}
+.input-field:focus {
+  border-bottom: 1px solid #FC466B;
+  color: #222222;
   outline: none;
 }
-form {
-  margin-bottom: 40px;
-}
-
-input[type=submit] {
-  background-color: #00C9FF;
-  color:white;
-  text-shadow:none !important;
-  border:none !important;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
-}
-
 #login h1, #register h1 {
   padding-bottom: 20px;
+  font-weight: 100;
+}
+
+.button-holder {
+  width: 100%;
+  display: inline-block;
+  height:90px;
+  margin: -5px;
+  position: relative;
 
 }
-#login a {
-  text-decoration: none;
-  margin-top: 30px;
-
-}
-#login a:visited {
+.login-button{
+  width: 50%;
+  vertical-align: bottom;
+  display: inline-block;
+  border: none;
+  background-color: #FC466B;
+  height: 100%;
+  float: right;
   color: white;
+  font-weight: 300;
+  font-size: 1em;
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+
+}
+.register-link{
+   width: 50%;
+   display: inline-block;
+   background-color: #3F5EFB;
+   height: 100%;
+   float: left;
+   color: white;
+   font-weight: 300;
+   font-size: 1em;
+   text-decoration: none;
+   vertical-align: middle;
+   line-height: 90px;
+   text-transform: uppercase;
+}
+.register-link:active {
+  outline: none;
+}
+.login-button:active {
+  outline: none;
+}
+
+.register-link:hover {
+  font-size: 1.2em;
+}
+.login-button:hover {
+  font-size: 1.2em;
 }
 
 
 #login {
-  height: 65%;
+  height:350px;
   width: 500px;
-  background: rgba(0,0,0,0.3);
   display: inline-block;
   text-align: center;
-  border-radius: 5px;
-  color: white;
+  border-radius: 4px;
+  color: #222222;
   position: fixed;
-  left: 33%;
-  top: 15%;
   padding-top: 20px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
+  background: white;
+}
 
+.center {
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 
 }
 .wrapper {
-  display: inline-block;
-}
-
-#register {
-  height: 65%;
-  width: 500px;
-  background: rgba(0,0,0,0.3);
+  position: relative;
   display: inline-block;
   text-align: center;
-  border-radius: 5px;
-  color: white;
+}
+.register {
+  height: 558px !important;
+  width: 500px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 4px;
+  color: #222222;
   position: fixed;
-  right: 0;
-  right: 10%;
-  top: 15%;
   padding-top: 20px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
+  background: white;
+}
+
+
+@media (max-width: 450px) {
+  #login {
+    width:100%
+  }
+  .register {
+    width: 100%
+  }
 }

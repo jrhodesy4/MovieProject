@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
     <meta charset="utf-8">
     <title></title>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'User_app/css/register.css'%}">
+    <link rel="stylesheet" href="{% static 'User_app/css/login.css'%}">
   </head>
   <body>
     <div class="wrapper">
-      <div id="register">
+      <div class="center register" id="register">
         <h1>Register</h1>
 
         <!-- User registration form  -->
         <form class="register-form" action="/register_account" method="POST">
           {% csrf_token %}
-          <p>First Name:</p><input type="text" name="first_name">
-          <p>Last Name:</p><input type="text" name="last_name">
-          <p>Email:</p><input type="email" name="email">
-          <p>Password:</p><input type="password" name="password"><br>
-          <input type="submit" name="sumbit">
+          <p>First Name:</p>
+          <input class="input-field" type="text" name="first_name">
+          <p>Last Name:</p>
+          <input class="input-field" type="text" name="last_name">
+          <p>Email:</p>
+          <input class="input-field" type="email" name="email">
+          <p>Password:</p>
+          <input class="input-field" type="password" name="password"><br>
+          <div class="button-holder">
+
+            <a class="register-link" href="/login">Login</a>
+            <input class="login-button" type="submit" name="submit" value="register">
+          </div>
 
 
         </form>
-        <a href="/login">Login Here</a>
 
       </div>
 
