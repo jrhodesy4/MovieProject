@@ -114,6 +114,8 @@ div.panel {
   color: white;
   z-index: -1;
   cursor: pointer;
+  margin-left: 37px;
+  margin-top: -30px;
 }
 .profile-pic-placeholder {
   width: 100%;
@@ -298,6 +300,10 @@ div.panel {
   background: #FC466B;
   background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
   background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
+.timestamp {
+  color: #e2e2e2;
+  font-size: 0.7em;
 }
 
 .menu-item p {
