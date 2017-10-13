@@ -25,7 +25,9 @@
           {% if user.is_profile_pic == True %}
           <img id="proImg" src="{{user.pic_name}}">
           {% else %}
-          <div class="profile-pic-placeholder"></div>
+          <div class="profile-pic-placeholder">
+            <p>{{user.pic_name}}</p>
+          </div>
           {% endif %}
         </div>
         <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->

@@ -41,7 +41,9 @@
           <img id="proImg" src="{{user.pic_name}}">
           <p id="editProf">Edit</p>
           {% else %}
-          <div class="profile-pic-placeholder"></div>
+          <div class="profile-pic-placeholder">
+            <p>{{user.pic_name}}</p>
+          </div>
           {% endif %}
 
 
