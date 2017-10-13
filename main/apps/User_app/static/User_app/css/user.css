@@ -148,3 +148,6 @@ div.panel {
 .reviewFeed img {
   height: 50px;
 }
+.user-name {
+  text-transform: capitalize;
+}
