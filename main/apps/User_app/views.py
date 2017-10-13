@@ -178,7 +178,6 @@ def profile(request):
 
     followers_final =[]
     for follower in followers:
-
         data = profileFormat(follower.current_user)
         followers_final.append(data)
 
@@ -213,52 +212,59 @@ def profile(request):
 def user_page(request, id):
     if 'user' not in request.session:
         return redirect('/login')
-    users = User.objects.filter(id = id)
+
+    try: #this is so if user does not exist it will not crash
+        user = User.objects.get(id = id)
+    except:
+        return redirect('/')
+
+    person_profile = profileFormat(user) #here is the persons profile info formated
+
+    #gets the reviews and length of them
     reviews = user_services.get_reviews(id)
     length = len(reviews)
-    print request.session['user']
+
     try:
         myFollow = Friend.objects.get(users=User.objects.get(id=id), current_user=User.objects.get(id = request.session['user']))
     except:
         myFollow = "you don't follow"
-    try:
-        followers = Friend.objects.filter(users=User.objects.get(id = id))
-    except:
-        followers = 'No followers'
+
+
+    followers = Friend.objects.filter(users=User.objects.get(id = id))
+
+
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = id))
     following = friend.users.all()
-    # try:
-    #     following = Friend.objects.filter(current_user=User.objects.get(id = id))
-    # except:
-    #     following = "no following"
-    try:
-        profile = Profile.objects.get(user_id=id)
-    except:
-        profile = "This user has not created a profile yet"
-    try:
-        profilePicture = ProPicture.objects.filter(user_id = User.objects.get(id = id))
-    except:
-        pass
-    profile_picture = ""
-    if profilePicture:
-        for stuff in profilePicture:
-            profile_picture = stuff.picture
+
+    followers_final =[]
+    for follower in followers:
+        data = profileFormat(follower.current_user)
+        followers_final.append(data)
+
+    following_final = []
+    for person in following:
+        data = profileFormat(person)
+        following_final.append(data)
+
 
     final_form_reviews =[]
     for review in reviews:
         data = createReviewFormat(review);
         final_form_reviews.append(data)
+    print "******following********"
+    print following_final
+    print "******followers********"
+    print followers_final
 
-
-    data = { 'length': length,
+    data = {
+        'length': length,
         'reviews': final_form_reviews,
         'myFollow': myFollow,
-        'users': users,
-        'profile': profile,
-        'following' : following,
-        'followers' : followers,
-        'profile_picture' : profile_picture
-
+        'user': person_profile,
+        'following': following.count,
+        'followers': followers.count,
+        'following_dic' : following_final,
+        'followers_dic' : followers_final,
     }
 
     return render(request, 'User_app/user.html', data)
@@ -375,7 +381,7 @@ def log_user_in(request): # this is to the log the user in
 
 def logout(request):
     request.session.clear()
-    return redirect('/')
+    return redirect('/login')
 
 
 # function that calls on the Friend Methods to add or remove a friend

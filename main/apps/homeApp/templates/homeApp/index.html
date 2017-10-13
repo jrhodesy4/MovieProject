@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'homeApp/css/home-main.css'%}"/>
     <!-- here are the global css files -->
 
-
+    <link rel="stylesheet" href="{% static 'homeApp/css/review_card_home.css'%}"/>
     <!-- here is the import for javascript  -->
     <!-- <script type="text/javascript" src="{% static 'homeApp/js/main.js'%}"></script> -->
 
@@ -48,14 +48,52 @@
       </div> -->
 
     <div class="content-wrapper">
-      <div class="notifications-wrapper">
-        <h1>notifications</h1>
-      </div>
       <div class="review-feed-wrapper">
         <h1>recent reviews</h1>
+        {% for review in reviews %}
+
+        <div class="review-total-holder">
+          <div class="review-card-min">
+            <img src="https://image.tmdb.org/t/p/w1280/{{review.poster_path}}" alt="">
+          </div>
+          <div class="review-card-full">
+            <div class="overall-score-full">
+              <p>Overall Score</p>
+              <div class="bumper-reviewcard"></div>
+              <div class="break"></div>
+              <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
+            </div>
+            <div class="subscores">
+              <p>Story</p>
+              <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
+              <p>Entertainment</p>
+              <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
+              <p>Acting</p>
+              <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
+              <p>Visual</p>
+              <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
+              <p>Sound</p>
+              <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
+            </div>
+          </div>
+          
+          <div class="p-img-holder">
+            {% if review.is_pic == True %}
+            <img src="{{review.profile_pic}}"/>
+            {%endif%}
+            {% if review.is_pic == False %}
+            <p>{{review.profile_pic}}</p>
+            {%endif%}
+          </div>
+
+        </div>
+        {% endfor%}
+      </div>
+      <div class="recomend-wrapper">
+        <h1>recommended for you</h1>
       </div>
       <div class="extra-content-wrapper">
-        <h1>more content will go here</h1>
+        <h1>watch list</h1>
       </div>
 
 

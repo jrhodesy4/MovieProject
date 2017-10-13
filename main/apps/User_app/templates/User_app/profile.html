@@ -41,7 +41,9 @@
           <img id="proImg" src="{{user.pic_name}}">
           <p id="editProf">Edit</p>
           {% else %}
-          <div class="profile-pic-placeholder"></div>
+          <div class="profile-pic-placeholder">
+            <p>{{user.pic_name}}</p>
+          </div>
           {% endif %}
 
 
@@ -67,7 +69,7 @@
         </div>
         {% endif %}
         <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
-        <h1>{{ user.first_name}} {{user.last_name}}</h1>
+        <h1 class="user-name">{{ user.first_name}} {{user.last_name}}</h1>
         <div class="list-buttons">
 
           <div class="list" id="list-1">
@@ -84,8 +86,6 @@
           </div>
         </div>
         <div class="followers">
-
-
         </div>
 
       </div>
@@ -157,6 +157,8 @@
 
 
         </div>
+
+
         <div class="followerFeed" style="display:none">
           <h3 class='names-review'>My Followers</h3>
           <div class="name-bumper"></div>
@@ -171,7 +173,8 @@
               </div>
               {% else %}
               <div class="profile-pic-holder-small">
-              <div>
+                <p>{{follower.pic_name}}</p>
+              </div>
               {% endif %}
               <p>(You)</p>
             </div>
@@ -184,9 +187,10 @@
                 </div>
                 {% else %}
                 <div class="profile-pic-holder-small">
-                <div>
+                  <p>{{follower.pic_name}}</p>
+                </div>
                 {% endif %}
-                <p>{{follower.first_name}} {{follower.last_name}}</p>
+                <p class="user-name">{{follower.first_name}} {{follower.last_name}}</p>
             </div>
             </a>
             {% endif %}
@@ -203,16 +207,17 @@
           <div class="space-for-top"></div>
           {% for follow in following_dic %}
           <a href="/user/{{ follow.profile_id }}">
-          <div class="followingDiv">
+          <div class="followerDiv">
             {% if follow.is_profile_pic == True %}
             <div class="profile-pic-holder-small">
               <img src="{{follow.pic_name}}"/>
             </div>
             {% else %}
             <div class="profile-pic-holder-small">
-            <div>
+              <p>{{follow.pic_name}}</p>
+            </div>
             {% endif %}
-            <p>{{follow.first_name}} {{follow.last_name}}</p>
+            <p class="user-name" >{{follow.first_name}} {{follow.last_name}}</p>
           </div>
           </a>
 
