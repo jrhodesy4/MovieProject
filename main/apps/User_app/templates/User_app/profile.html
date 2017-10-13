@@ -93,6 +93,15 @@
 
         <div class="reviewFeed">
           <h3 class="names-review">My Reviews</h3>
+          <!-- {% for review in reviewTimes %}
+          {% if review.day_difference < 1 and review.hour_difference < 1 %}
+          <h2>{{review.minute_difference}} minutes ago</h2>
+          {% elif review.day_difference < 1 and review.hour_difference >= 1  %}
+          <h2>{{review.hour_difference}} hours ago</h2>
+          {% else %}
+          <h2>{{review.day_difference}} days ago</h2>
+          {% endif %}
+          {% endfor %} -->
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
           {% for review in reviews %}
@@ -123,6 +132,23 @@
                 <p>Sound</p>
                 <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
               </div>
+            </div>
+            <div class="timestamp">
+              {% if review.day_difference < 1 and review.hour_difference < 1 %}
+              {% if review.minute_difference == 0 %}
+              <h2>Just now</h2>
+              {% elif review.minute_difference == 1 %}
+              <h2>{{review.minute_difference}} minute ago</h2>
+              {% endif %}
+              {% elif review.day_difference < 1 and review.hour_difference >= 1  %}
+              {% if review.hour_difference == 1 %}
+              <h2>{{review.hour_difference}} hour ago</h2>
+              {% else %}
+              <h2>{{review.hour_difference}} hours ago</h2>
+              {% endif %}
+              {% else %}
+              <h2>{{review.day_difference}} days ago</h2>
+              {% endif %}
             </div>
 
           </div>

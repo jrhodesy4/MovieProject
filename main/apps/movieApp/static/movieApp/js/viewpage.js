@@ -69,12 +69,19 @@ function seasonJson(json){
     var show = json[1]
     var name = json[0].name
     var poster = json[0].poster_path
-    var overview = json[0].overview
+    var overview = ''
     var episodes = json[0].episodes
     // var episodeId = episodes.episode_number
     var episodeId = episodes.map(function(a) {return a.episode_number;});
     var season = json[0].season_number
     var episodeName = episodes.map(function(a) {return a.name;});
+    if (json[0].overview) {
+      overview = json[0].overview
+
+    }
+    else {
+      overview = "No synopsis available."
+    }
     console.log(show);
     console.log(id);
     console.log(name);
