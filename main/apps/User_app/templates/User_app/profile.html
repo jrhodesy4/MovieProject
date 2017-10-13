@@ -174,11 +174,12 @@
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
           {% for follow in following_dic %}
+          <a href="/user/{{ follow.profile_id }}">
           <div class="followingDiv">
             {% if follow.is_profile_pic == True %}
             <img width="50" height="50" src="{{follow.pic_name}}"/>
             {% else %}
-            <div class="profile-pic-placeholder"></div>
+            <div class="profile-pic-placeholder">{{pic_name}}</div>
             {% endif %}
             <p>{{follow.first_name}} {{follow.last_name}}</p>
           </a>
