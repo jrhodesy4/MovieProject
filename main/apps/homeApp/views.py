@@ -30,7 +30,10 @@ def index(request):
     if "user" in request.session :
         status = 'You are logged in'
     user = request.session['user']
-    reviews = user_services.get_feed_reviews(user)
+    try:
+        reviews = user_services.get_feed_reviews(user)
+    except:
+        reviews = "none";
 
     data = {
         "reviews": reviews
