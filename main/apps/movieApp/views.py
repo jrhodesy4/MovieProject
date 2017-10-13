@@ -64,7 +64,6 @@ def movie_page(request, id): # this renders the selected individual movie page
         trailers = movie_services.get_videos(id, 'movie')
     except:
         trailers = 'none'
-    print trailers
     review_c = False
     if status == "in":
         user_id = request.session['user']
@@ -72,7 +71,12 @@ def movie_page(request, id): # this renders the selected individual movie page
         score = review_completed(user_id, id, "movie")
     else:
         score = "not logged"
+    user = request.session['user']
 
+    review_data = review_services.sort_reviews_media(user, id, "movie")
+
+
+    #below is info for each movie
     movie = movie_services.get_movie(id)
     mov = movie['movie_info']
     budget = format(mov['budget'], ",d")
@@ -88,11 +92,6 @@ def movie_page(request, id): # this renders the selected individual movie page
     for genre in genres:
         genre_names.append(genre['name'])
 
-    print runtime
-    # echo hours.":".$minutes;
-
-    reviews = review_services.all_movie_reviews(id)
-    print reviews
     try:
         watchlist = Watchlist.objects.get(api_code=id)
     except: watchlist = 'nothing'
@@ -103,7 +102,7 @@ def movie_page(request, id): # this renders the selected individual movie page
     if score > 80:
         color = 'green'
 
-    print score;
+
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         "genre_names" : genre_names,
@@ -112,13 +111,20 @@ def movie_page(request, id): # this renders the selected individual movie page
         'revenue': revenue,
         'trailers': trailers,
         'cast': movie['cast_info'],
-        'reviews' : reviews,
         'in_list': in_list,
         'score': score,
         'score_color': color,
-        'runtime' : runtime
+        'runtime' : runtime,
+        'reviews': review_data['reviews'],
+        'friend_reviews': review_data['friend_reviews'],
+        'avg_score': review_data['avg_score'],
+        'avg_score_color': review_data['avg_color'],
     }
+    print context['friend_reviews']
     return render(request, 'movieApp/movie_view_page.html', context)
+
+
+
 
 def seasonData(request):
     seasonId = request.GET.get('id')
@@ -138,7 +144,7 @@ def show_page(request, id):
     print trailers
     status = authenticate(request)
     show = movie_services.get_show(id)
-    reviews = TVReview.objects.filter(api_code=id)
+
     in_list = False
     review_c = False
     if status == "in":
@@ -147,23 +153,34 @@ def show_page(request, id):
         score = review_completed(user_id, id, "tv")
     else:
         score = "not logged"
-
+    user = request.session['user']
     color = "red"
     if score > 60:
         color = "yellow"
     if score > 80:
         color = 'green'
+
+
+    review_data = review_services.sort_reviews_media(user, id, "tv")
     context = {
         "show": show['show_info'],
         'cast': show['cast_info'],
         'trailers': trailers,
-        "reviews": reviews,
         "in_list": in_list,
         'score': score,
-        'score_color': color
+        'score_color': color,
+        'reviews': review_data['reviews'],
+        'friend_reviews': review_data['friend_reviews'],
+        'avg_score': review_data['avg_score'],
+        'avg_score_color': review_data['avg_color'],
 
     }
     return render(request, 'movieApp/tv_view_page.html', context)
+
+
+
+
+
 
 def movie_home(request):
     result = services.get_discover()

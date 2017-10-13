@@ -29,7 +29,6 @@ def get_feed_reviews(user_id): #<--- this gets reviews for all friends in list a
     friends = Friend.objects.get(current_user=user)
     feed_list = []
     for friend in friends.users.all():
-
         f_reviews = get_reviews(friend.id)
         for rev in f_reviews:
             feed_list.append(rev)
@@ -58,6 +57,8 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
     for this in a:
         entry = { #<--- this should be added too when more info is needed for template
             "title": this.title,
+            "type": "movie",
+            "media_code": this.api_code,
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,
@@ -87,6 +88,8 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
     for this in b:
         entry = {
             "title": this.title,
+            "type": "tv",
+            "media_code": this.api_code,
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,
@@ -117,6 +120,8 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
     for this in c:
         entry = {
             "title": this.episode_title,
+            "type": "tv",
+            "media_code": this.api_code,
             "score": this.score,
             "content": this.content,
             "created_at": this.created_at,

@@ -11,6 +11,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
     <link rel="stylesheet" href="{% static 'movieApp/css/view_page.css' %}">
+    <link rel="stylesheet" href="{% static 'movieApp/css/review_card_media.css' %}">
     <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
     <script type="text/javascript" src="{% static 'movieApp/js/viewpage.js'%}"></script>
 
@@ -27,7 +28,7 @@
             <p class="content-title">{{ movie.title }}</p>
             <div class="under-title">
               <p class="runtime">{{movie.runtime}} min</p>
-              <p class="avg-rating green">89/100</p>
+              <p class="avg-rating {{avg_score_color}}">{{avg_score}}/100</p>
             </div>
             <div class="quicklink-section">
               {% if in_list == False %}
@@ -198,9 +199,102 @@
           </div>
         </div>
       </div>
-      <div class="completed-review-section">
 
+
+      <div class="completed-review-section">
+        <h1>Reviews</h1>
+        {% if friend_reviews|length > 0%}
+        <h1>Here is what your friends are saying</h1>
+        {%endif%}
+        <div class="reviews-friend-holder">
+
+          {% for review in friend_reviews %}
+
+          <div class="review-total-holder">
+            <div class="review-card-full">
+              <div class="overall-score-full">
+                <p>Overall Score</p>
+                <div class="bumper-reviewcard"></div>
+                <div class="break"></div>
+                <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
+              </div>
+              <div class="subscores">
+                <p>Story</p>
+                <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
+                <p>Entertainment</p>
+                <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
+                <p>Acting</p>
+                <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
+                <p>Visual</p>
+                <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
+                <p>Sound</p>
+                <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
+              </div>
+            </div>
+            <a href="/user/{{ review.reviewer_id }}">
+            <div class="p-img-holder">
+              {% if review.is_pic == True %}
+              <img src="{{review.profile_pic}}"/>
+              {%endif%}
+              {% if review.is_pic == False %}
+              <p>{{review.profile_pic}}</p>
+              {%endif%}
+            </div>
+            </a>
+
+          </div>
+          {% endfor%}
+
+        </div>
       </div>
+      <div class="completed-review-section">
+          <h1>Recent Reviews</h1>
+          {% if reviews|length == 0 and friend_reviews|length == 0%}
+          <p>There are currently no reviews</p>
+          {%endif%}
+          <div class="reviews-friend-holder">
+
+
+
+            {% for review in reviews %}
+
+            <div class="review-total-holder">
+              <div class="review-card-full">
+                <div class="overall-score-full">
+                  <p>Overall Score</p>
+                  <div class="bumper-reviewcard"></div>
+                  <div class="break"></div>
+                  <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
+                </div>
+                <div class="subscores">
+                  <p>Story</p>
+                  <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
+                  <p>Entertainment</p>
+                  <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
+                  <p>Acting</p>
+                  <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
+                  <p>Visual</p>
+                  <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
+                  <p>Sound</p>
+                  <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
+                </div>
+              </div>
+              <a href="/user/{{ review.reviewer_id }}">
+              <div class="p-img-holder">
+                {% if review.is_pic == True %}
+                <img src="{{review.profile_pic}}"/>
+                {%endif%}
+                {% if review.is_pic == False %}
+                <p>{{review.profile_pic}}</p>
+                {%endif%}
+              </div>
+              </a>
+
+            </div>
+            {% endfor%}
+
+          </div>
+        </div>
       <div class="footer">
 
         <!-- <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg"> -->
