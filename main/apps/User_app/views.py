@@ -91,36 +91,6 @@ def profileFormat(user): # <--- this function will return profile info how we wa
     return data
 
 
-
-
-def timeFormat(timestamp):
-    now = datetime.now()
-    new_timestamp = timestamp.replace(tzinfo=None)
-    difference = now - new_timestamp
-    minute_difference = int(difference.total_seconds() / 60)
-    hour_difference = int(difference.total_seconds() / 3600)
-    day_difference = int(difference.days)
-    month_difference = int(difference.days / 30)
-    year_difference = int(month_difference / 12)
-    data = {
-    'minute_difference': minute_difference,
-    'hour_difference': hour_difference,
-    'day_difference': day_difference,
-    'month_difference' : month_difference,
-    'year_difference': year_difference
-    }
-    return data
-
-    # if day_difference == 0:
-    #     return day_difference
-    #
-    # elif hour_difference < 1:
-    #     return minute_difference
-    #
-    # elif day_difference >= 1:
-    #     return day_difference
-
-
 # Create your views here.
 # =================================================================
 # template renders
@@ -162,14 +132,6 @@ def profile(request):
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users=user)
-    reviewTimes = []
-
-    for review in reviews:
-        print review
-
-
-        # data = timeFormat(review['created_at'])
-        # reviewTimes.append(data)
 
     followerPics = []
     pics = []
@@ -203,7 +165,6 @@ def profile(request):
         'following_dic' : following_final,
         'watchlist': Watchlist.objects.filter(user=request.session["user"]),
         'reviews' : final_form_reviews,
-        # 'reviewTimes': reviewTimes,
         'user': user_profile
 
     }
