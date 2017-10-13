@@ -139,6 +139,8 @@
               <h2>Just now</h2>
               {% elif review.minute_difference == 1 %}
               <h2>{{review.minute_difference}} minute ago</h2>
+              {% else %}
+              <h2>{{review.minute_difference}} minutes ago</h2>
               {% endif %}
               {% elif review.day_difference < 1 and review.hour_difference >= 1  %}
               {% if review.hour_difference == 1 %}
