@@ -133,6 +133,20 @@ div.panel {
   font-size: 2em;
   z-index: 20;
 }
+#newProf {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: none;
+  color: #ccc;
+  background: none;
+  margin-top: 10px;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+
+
 
 .userPage {
   background-color: #FFFFFF;
