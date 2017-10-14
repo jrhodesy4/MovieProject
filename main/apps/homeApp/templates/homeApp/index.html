@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<!-- image path https://image.tmdb.org/t/p/w500/ -->
-
 <html>
   <head>
     <meta charset="utf-8">
@@ -16,6 +14,7 @@
     <!-- here are the global css files -->
 
     <link rel="stylesheet" href="{% static 'homeApp/css/review_card_home.css'%}"/>
+    <link rel="stylesheet" href="{% static 'global/css/watchlist_tile.css'%}"/>
     <!-- here is the import for javascript  -->
     <!-- <script type="text/javascript" src="{% static 'homeApp/js/main.js'%}"></script> -->
 
@@ -26,26 +25,6 @@
   <body>
 
     {% include "../global/navbar.html" %}
-
-
-    <!-- <div class="topBar">
-      <div class="ui-widget">
-        <form class="" action="/search" method="post">
-          {% csrf_token %}
-        <label for="places">Search People: </label>
-        <input name="person" id="places">
-        <input type="submit" name="search" value="Search">
-      </form>
-      </div>
-
-      <div class="ui-widget">
-        <form class="" action="/search" method="post">
-          {% csrf_token %}
-          <label for="places">Search Movies, TV Shows: </label>
-          <input name="person" id="movies">
-          <input type="submit" name="search" value="Search">
-        </form>
-      </div> -->
 
     <div class="content-wrapper">
       <div class="review-feed-wrapper">
@@ -109,6 +88,24 @@
       </div>
       <div class="extra-content-wrapper">
         <h1>watch list</h1>
+
+        <div class="watchlist-holder">
+          {% for media in watchlist%}
+          <div class="movie-tile">
+            <img class = "poster-tile" src="https://image.tmdb.org/t/p/w500/{{media.poster_path}}">
+            <div class="watchlist-overlay">
+              <p class="add-review-watchlist">Add Review</p>
+
+              <a href="movie/delete/watchlist/{{media.id}}">
+              <p class="remove-watchlist">Remove</p>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div> <!-- end of holder -->
+
+
       </div>
 
 

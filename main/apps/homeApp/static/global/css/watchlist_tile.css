@@ -1,0 +1,79 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.movie-tile {
+  width: 200px;
+  height:auto;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+.movie-tile img {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.watchlist-overlay {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+}
+
+.add-review-watchlist {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 20px;
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  background-color:#3F5EFB;
+  font-weight: 300;
+  border-radius: 8px;
+  font-size: .8em;
+  cursor: pointer;
+}
+.add-review-watchlist:hover {
+  top:15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+a {
+  text-decoration: none;
+  color:white;
+}
+.remove-watchlist {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  background-color: #FC466B;
+  font-weight: 300;
+  border-radius: 8px;
+  font-size: .8em;
+  cursor: pointer;
+}
+.remove-watchlist:hover {
+  bottom:25px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+
+.movie-tile:hover .watchlist-overlay{
+  display: inline-block;
+}
