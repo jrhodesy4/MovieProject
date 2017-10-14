@@ -65,10 +65,12 @@ $(document).ready(function(){
   $("#newProf").click(function(){
     if (hidden == true) {
       $('#picDiv').css('display', 'block')
+      $("#newProf").html("<h4>Cancel</h4>")
       hidden = false
     }
     else if (hidden == false) {
       $('#picDiv').css('display', 'none')
+      $("#newProf").html("<h4>Add</h4>")
       hidden = true
     }
   })
@@ -118,6 +120,18 @@ $(document).ready(function(){
     $('#proImg').css({
       'opacity' : 'inherit'
     });
+  });
+
+  $('.profile-pic-placeholder').hover(function() {
+    $('#newProf').css({
+      'z-index' : '101'
+    });
+
+  }, function(){
+    $('#newProf').css({
+      'z-index' : '19'
+    });
+
   });
 
 

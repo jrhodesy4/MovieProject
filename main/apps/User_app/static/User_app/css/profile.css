@@ -29,6 +29,13 @@ button.accordion {
     font-size: 15px;
     transition: 0.4s;
 }
+.header {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  vertical-align: top;
+
+}
 
 button.accordion.active, button.accordion:hover {
     background-color: #ccc;
@@ -109,10 +116,16 @@ div.panel {
   display: inline-block;
   text-align: center;
 }
-.profPic p {
+/*.profPic p {
   position: relative;
   color: white;
   z-index: -1;
+  cursor: pointer;
+}*/
+#newProf, #editProf {
+  z-index: 21;
+  color: black;
+  position: relative;
   cursor: pointer;
 }
 .profile-pic-placeholder {
@@ -153,7 +166,7 @@ div.panel {
   width: 300px;
   text-align: center;
   position: relative;
-  display: inline-block;
+  display: block;
   margin: 10px;
   vertical-align: top;
   padding: 10px;
@@ -175,9 +188,7 @@ div.panel {
   background-color: #FFFFFF;
   width: 300px;
   text-align: center;
-  position: absolute;
-  top: 25%;
-  left: 4.8%;
+  position: relative;
   display: block;
   margin: 10px;
   vertical-align: top;
@@ -187,7 +198,8 @@ div.panel {
 }
 .watchlist-info {
   margin-top: 20px;
-  display: none
+  display: inline-block;
+
 }
 .watchlist-info img {
   height: 100px;
@@ -228,6 +240,32 @@ div.panel {
   cursor: pointer;
 
 }
+#watchlist-button:focus {
+  outline: 0;
+}
+.watch-movie {
+  width: 100%;
+  height: 150px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #E6ECF0;
+  border-radius: 4px;
+
+}
+.watch-movie img {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.watchlist-info a {
+  color: black;
+  text-decoration: none;
+
+}
+.watchlist-info a:visited {
+  color: black;
+}
 
 
 
@@ -241,7 +279,8 @@ div.panel {
   height: auto;
   margin: 10px;
   overflow: scroll;
-  display: inline-block;padding-top: 20px;
+  display: inline-block;
+  padding-top: 20px;
   border-radius: 4px;
 
 }
