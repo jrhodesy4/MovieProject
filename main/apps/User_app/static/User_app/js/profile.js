@@ -25,6 +25,20 @@ $(document).ready(function(){
     $('.followingFeed').css('display', 'none')
 
   })
+  var watchlist_showing = false
+  $("#watchlist-button").click(function(){
+    if (watchlist_showing == false) {
+      $('.watchlist-info').slideDown("slow", function() {
+      });
+      watchlist_showing = true
+
+    }
+    else {
+      $('.watchlist-info').slideUp("slow", function() {
+      });
+      watchlist_showing = false
+    }
+  })
 
 
   console.log('working');

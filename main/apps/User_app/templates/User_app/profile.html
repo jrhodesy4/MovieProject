@@ -89,6 +89,7 @@
         </div>
 
       </div>
+
       <div class="pageFeed">
 
         <div class="reviewFeed">
@@ -226,6 +227,23 @@
           {% endfor %}
 
         </div>
+      </div>
+      <div class="movieList">
+        <button id="watchlist-button" type="button" name="button">Watchlist</button>
+        <div class="watchlist-info">
+          <h2>Watchlist info</h2>
+          {% for movie in watchlist %}
+          <div class="watch-movie">
+            <a href="/movie/{{movie.api_code}}">
+            <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
+            </a>
+            <p>{{movie.movie_title}}</p>
+
+          </div>
+          {% endfor %}
+
+        </div>
+
       </div>
   </div>
 
