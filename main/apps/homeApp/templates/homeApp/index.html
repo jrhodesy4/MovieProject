@@ -94,8 +94,13 @@
           <div class="movie-tile">
             <img class = "poster-tile" src="https://image.tmdb.org/t/p/w500/{{media.poster_path}}">
             <div class="watchlist-overlay">
+              {% if media.media_type == "tv"%}
+              <a href="/show/{{media.api_code}}">
+              {% else %}
+              <a href="/movie/{{media.api_code}}">
+              {% endif %}
               <p class="add-review-watchlist">Add Review</p>
-
+              </a>
               <a href="movie/delete/watchlist/{{media.id}}">
               <p class="remove-watchlist">Remove</p>
               </a>
