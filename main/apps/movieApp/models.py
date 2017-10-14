@@ -11,7 +11,7 @@ class Watchlist(models.Model): #creates a watchlist
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    _type = models.CharField(max_length=100)
+    media_type = models.CharField(max_length=100)
 
 
 
@@ -29,7 +29,7 @@ class Watchlist(models.Model): #creates a watchlist
                 movie_title = movie['title'],
                 poster_path = movie['poster_path'],
                 user = user,
-                _type = data['type']
+                media_type = data['type']
             )
             print "added"
             return
@@ -39,7 +39,7 @@ class Watchlist(models.Model): #creates a watchlist
                 movie_title = movie['name'],
                 poster_path = movie['poster_path'],
                 user = user,
-                _type = data['type']
+                media_type = data['type']
             )
             print "added"
             return

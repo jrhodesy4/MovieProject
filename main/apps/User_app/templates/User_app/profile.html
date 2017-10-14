@@ -35,57 +35,86 @@
     </div>
 
     <div class="content-wrapper">
-      <div class="userPage">
-        <div class="profPic">
+      <div class="header">
+        <div class="userPage">
+          <div class="profPic">
+            {% if user.is_profile_pic == True %}
+            <img id="proImg" src="{{user.pic_name}}">
+            <p id="editProf">Edit</p>
+            {% else %}
+            <div class="profile-pic-placeholder">
+              <p>{{user.pic_name}}</p>
+
+            </div>
+            {% endif %}
+
+
+          </div>
           {% if user.is_profile_pic == True %}
-          <img id="proImg" src="{{user.pic_name}}">
-          <p id="editProf">Edit</p>
+          <div id="picDiv" style="display:none;">
+            <form class=""  action="/editProfilePicture" enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+              <input type="file" name="myfile">
+              <input type="submit" name="" value="Edit">
+            </form><br>
+
+          </div>
           {% else %}
-          <div class="profile-pic-placeholder">
-            <p>{{user.pic_name}}</p>
+          <!-- <input id="newProf" type="button" name="answer" value="New Profile Picture" /> -->
+            <h4 id="newProf">Add</h4>
+          <div id="picDiv" style="display:none;">
+            <form class=""  action="/newProfilePicture" enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+              <input type="file" name="myfile">
+              <input type="submit" name="" value="Add">
+            </form><br>
+
           </div>
           {% endif %}
+          <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
+          <h1 class="user-name">{{ user.first_name}} {{user.last_name}}</h1>
+          <div class="list-buttons">
 
-
-        </div>
-        {% if user.is_profile_pic == True %}
-        <div id="picDiv" style="display:none;">
-          <form class=""  action="/editProfilePicture" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            <input type="file" name="myfile">
-            <input type="submit" name="" value="Edit">
-          </form><br>
-
-        </div>
-        {% else %}
-        <input id="newProf" type="button" name="answer" value="New Profile Picture" />
-        <div id="picDiv" style="display:none;">
-          <form class=""  action="/newProfilePicture" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            <input type="file" name="myfile">
-            <input type="submit" name="" value="Add">
-          </form><br>
-
-        </div>
-        {% endif %}
-        <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
-        <h1 class="user-name">{{ user.first_name}} {{user.last_name}}</h1>
-        <div class="list-buttons">
-
-          <div class="list" id="list-1">
-            <h3>Followers</h3>
-            <p>{{followers.count}}</p>
+            <div class="list" id="list-1">
+              <h3>Followers</h3>
+              <p>{{followers.count}}</p>
+            </div>
+            <div class="list" id="list-2">
+              <h3>Following</h3>
+              <p>{{following.count}}</p>
+            </div>
+            <div class="list" id="list-3">
+              <h3>Reviews</h3>
+              <p>{{length}}</p>
+            </div>
           </div>
-          <div class="list" id="list-2">
-            <h3>Following</h3>
-            <p>{{following.count}}</p>
+          <div class="followers">
           </div>
-          <div class="list" id="list-3">
-            <h3>Reviews</h3>
-            <p>{{length}}</p>
-          </div>
+
         </div>
-        <div class="followers">
+        <div class="movieList">
+          <button id="watchlist-button" type="button" name="button">Watchlist</button>
+          <div class="watchlist-info" style="display:none">
+            {% for movie in watchlist %}
+            {% if movie.media_type == 'movie' %}
+            <a href="/movie/{{movie.api_code}}">
+              <div class="watch-movie">
+              <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
+              <p>{{movie.movie_title}}</p>
+            </div>
+            </a>
+            {% elif movie.media_type == 'tv' %}
+            <a href="/show/{{movie.api_code}}">
+              <div class="watch-movie">
+              <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
+              <p>{{movie.movie_title}}</p>
+            </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+
+          </div>
+
         </div>
 
       </div>
@@ -94,15 +123,10 @@
 
         <div class="reviewFeed">
           <h3 class="names-review">My Reviews</h3>
-          <!-- {% for review in reviewTimes %}
-          {% if review.day_difference < 1 and review.hour_difference < 1 %}
-          <h2>{{review.minute_difference}} minutes ago</h2>
-          {% elif review.day_difference < 1 and review.hour_difference >= 1  %}
-          <h2>{{review.hour_difference}} hours ago</h2>
-          {% else %}
-          <h2>{{review.day_difference}} days ago</h2>
+          {% if length == 0 %}
+          <h4>No reviews yet</h4>
           {% endif %}
-          {% endfor %} -->
+
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
           {% for review in reviews %}
@@ -164,8 +188,12 @@
 
         <div class="followerFeed" style="display:none">
           <h3 class='names-review'>My Followers</h3>
+
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
+          {% if followers.count == 0 %}
+          <h4>No followers yet</h4>
+          {% endif %}
           {% for follower in follower_dic %}
 
             {% if follower.profile_id == request.session.user %}
@@ -206,8 +234,12 @@
 
         <div class="followingFeed" style="display:none">
           <h3 class='names-review'>Who I'm Following</h3>
+
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
+          {% if following.count == 0 %}
+          <h4>You don't follow anyone yet</h4>
+          {% endif %}
           {% for follow in following_dic %}
           <a href="/user/{{ follow.profile_id }}">
           <div class="followerDiv">
@@ -228,22 +260,7 @@
 
         </div>
       </div>
-      <div class="movieList">
-        <button id="watchlist-button" type="button" name="button">Watchlist</button>
-        <div class="watchlist-info">
-          {% for movie in watchlist %}
-          <div class="watch-movie">
-            <a href="/movie/{{movie.api_code}}">
-            <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
-            </a>
-            <p>{{movie.movie_title}}</p>
 
-          </div>
-          {% endfor %}
-
-        </div>
-
-      </div>
   </div>
 
   </body>
