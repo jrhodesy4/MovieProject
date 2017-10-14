@@ -89,6 +89,7 @@
         </div>
 
       </div>
+
       <div class="pageFeed">
 
         <div class="reviewFeed">
@@ -139,6 +140,8 @@
               <h2>Just now</h2>
               {% elif review.minute_difference == 1 %}
               <h2>{{review.minute_difference}} minute ago</h2>
+              {% else %}
+              <h2>{{review.minute_difference}} minutes ago</h2>
               {% endif %}
               {% elif review.day_difference < 1 and review.hour_difference >= 1  %}
               {% if review.hour_difference == 1 %}
@@ -224,6 +227,22 @@
           {% endfor %}
 
         </div>
+      </div>
+      <div class="movieList">
+        <button id="watchlist-button" type="button" name="button">Watchlist</button>
+        <div class="watchlist-info">
+          {% for movie in watchlist %}
+          <div class="watch-movie">
+            <a href="/movie/{{movie.api_code}}">
+            <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
+            </a>
+            <p>{{movie.movie_title}}</p>
+
+          </div>
+          {% endfor %}
+
+        </div>
+
       </div>
   </div>
 
