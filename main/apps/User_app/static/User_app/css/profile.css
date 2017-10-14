@@ -123,7 +123,7 @@ div.panel {
   cursor: pointer;
 }*/
 #newProf, #editProf {
-  z-index: 100;
+  z-index: 21;
   color: black;
   position: relative;
   cursor: pointer;
