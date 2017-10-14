@@ -12,10 +12,45 @@ import json
 import requests
 
 
+
 # Create your views here.
 """
 api key = 286abf6056d0a1338f772d1b7202e728
 """
+def createReviewFormat(review):
+    now = datetime.now()
+    new_timestamp = review['created_at'].replace(tzinfo=None)
+    difference = now - new_timestamp
+    minute_difference = int(difference.total_seconds() / 60)
+    hour_difference = int(difference.total_seconds() / 3600)
+    day_difference = int(difference.days)
+    month_difference = int(difference.days / 30)
+    year_difference = int(month_difference / 12)
+    data = {
+        "poster_path": review['poster_path'],
+        "overall_score": review['score'],
+        "overall_color": ovScoreColor(review['score']),
+        'story_percent': subPercent(review['story_rating']),
+        'story_color': subScoreColor(review['story_rating']),
+        'ent-percent': subPercent(review['entertainment_rating']),
+        'ent_color': subScoreColor(review['entertainment_rating']),
+        'act_percent': subPercent(review['acting_rating']),
+        'act_color': subScoreColor(review['acting_rating']),
+        'vis_percent': subPercent(review['visual_rating']),
+        'vis_color': subScoreColor(review['visual_rating']),
+        'sound_percent': subPercent(review['sound_rating']),
+        'sound_color': subScoreColor(review['sound_rating']),
+        'minute_difference': minute_difference,
+        'hour_difference': hour_difference,
+        'day_difference': day_difference,
+        'month_difference' : month_difference,
+        'year_difference': year_difference
+    }
+
+    return data
+
+
+
 def search(request):
     search = request.GET.get('search-info')
     result = services.search_database(search)

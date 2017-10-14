@@ -123,12 +123,12 @@
 
         <div class="reviewFeed">
           <h3 class="names-review">My Reviews</h3>
-          {% if length == 0 %}
-          <h4>No reviews yet</h4>
-          {% endif %}
 
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
+          {% if length == 0 %}
+          <h4>No reviews yet</h4>
+          {% endif %}
           {% for review in reviews %}
           <div class="review-total-holder">
             <div class="review-card-min {{review.overall_color}}">
