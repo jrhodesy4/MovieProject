@@ -39,3 +39,14 @@ body {
   height: auto;
 
 }
+
+
+
+@media (max-width: 450px) {
+  .content {
+    width: 100%;
+  }
+
+
+
+}
