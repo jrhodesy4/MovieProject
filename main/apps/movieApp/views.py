@@ -326,7 +326,7 @@ def add_to_watchlist(request): # the post route adds a movie to the Users watchl
 def delete_from_watchlist(request, id):
     delete_me = Watchlist.objects.get(id=id)
     delete_me.delete()
-    return redirect("/profile")
+    return redirect("/")
 
 
 def makeReview(request, id, season, episode):

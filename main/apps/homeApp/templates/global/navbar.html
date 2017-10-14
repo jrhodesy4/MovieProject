@@ -7,23 +7,18 @@
 
 
 
-
-    <div class="search-wrapper">
-      <div class="search-bar">
-        <form class="search-form" action="/search/" method="POST">
-          {% csrf_token %}
-          <input type="search" name="search-info" id="search-info" placeholder="Search">
-          <button class="center" id="close-search-button" onclick="closeSearch()" type="button" name="button"></button>
-        </form>
+      <div class="search-div">
+          <form class="search-form" action="/search/" method="POST">
+              {% csrf_token %}
+              <input type="input" name="search-info" id="search-info" placeholder="Search">
+          </form>
+          <div class="search-result-block">
+              <div class="content-hide">
+                  <h1 class ="result-title">Results</h1>
+                  <div id="search-results"></div>
+              </div>
+          </div>
       </div>
-      <div class="search-block">
-
-        <div class="content-hide">
-          <h1>results</h1>
-          <div id="search-results"><!--everything added from search goes in here--></div>
-        </div>
-      </div>
-    </div>
 
       <div class="menu-holder ">
         <div id="drag-me" class="menu-stack">

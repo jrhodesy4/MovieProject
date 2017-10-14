@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from . import services
 from ..User_app import user_services
 from ..User_app.models import User, Profile, Friend
+from ..movieApp.models import Watchlist
 # from ..movieApp.models import
 from ..User_app import views
 from django.views.generic.edit import FormView
@@ -23,22 +24,21 @@ def search(request):
 
 
 def index(request):
-    result = services.get_discover()
-
     if "user" not in request.session:
         return redirect('/login')
     if "user" in request.session :
         status = 'You are logged in'
-    user = request.session['user']
+    user_id = request.session['user']
     try:
-        reviews = user_services.get_feed_reviews(user)
+        reviews = user_services.get_feed_reviews(user_id)
     except:
         reviews = "none";
 
-
-    
+    user = User.objects.get(id=user_id)
+    my_watchlist = Watchlist.objects.filter(user=user)
     data = {
-        "reviews": reviews
+        "reviews": reviews,
+        "watchlist": my_watchlist,
     }
 
     return render(request, 'homeApp/index.html', data)
