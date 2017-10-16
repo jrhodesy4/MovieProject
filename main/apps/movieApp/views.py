@@ -29,22 +29,22 @@ def in_watchlist(user_id, id): #<----- if media is in the user watchlist returns
     except:
         return False
 
-def review_completed(user_id, id, _type): #<----- if the user has completed a review for item returns boolean
-    if _type == "movie":
+def review_completed(user_id, id, media_type): #<----- if the user has completed a review for item returns boolean
+    if media_type == "movie":
         try:
             review = MovieReview.objects.get(api_code=id, user_id=user_id)
             print "user has already written a review"
             return review.score
         except:
             return "no score"
-    if _type == "tv":
+    if media_type == "tv":
         try:
             review = TVReview.objects.get(api_code=id, user_id=user_id)
             print "user has already written a review"
             return review.score
         except:
             return "no score"
-    if _type == "episode":
+    if media_type == "episode":
         try:
             review = EpisodeReview.objects.get(api_code=id, user_id=user_id)
             print "user has already written a review"
@@ -298,10 +298,10 @@ def discover_more(request, id):
 
 def add_to_watchlist(request): # the post route adds a movie to the Users watchlist
 
-    _type = request.GET.get('type')
+    media_type = request.GET.get('type')
     _id = request.GET.get('id')
 
-    if _type == "movie":
+    if media_type == "movie":
         movie = movie_services.get_movie(_id)
         data = {
             "movie": movie['movie_info'], # this is the data for the current movie being displayed
@@ -310,7 +310,7 @@ def add_to_watchlist(request): # the post route adds a movie to the Users watchl
         }
         Watchlist.add_movie(data) # add movie to Watchlist
 
-    if _type == "tv":
+    if media_type == "tv":
         show = movie_services.get_show(_id)
         data = {
             "movie": show['show_info'], # this is the data for the current movie being displayed
