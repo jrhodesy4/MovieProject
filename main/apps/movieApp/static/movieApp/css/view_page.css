@@ -43,6 +43,7 @@ body {
 
 /*============================================================*/
 
+
 .info-section-top {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
@@ -683,6 +684,49 @@ body {
   }
   .info-section-bottom {
     margin-top: -30px;;
+  }
+  .trailer-section iframe {
+    width: 300px;
+    height: 150px;
+    outline: 2px solid white;
+  }
+  .trailer-section{
+    width: 400px;
+    height: 180px;
+    top: 40%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .trailer {
+    width: 400px;
+    height: 180px;
+    top: 40%;
+    right: -10%;
+    bottom: 0;
+    left: 0;
+  }
+  .extra-info-section {
+    width: 400px;
+    height: 250px;
+    left: 0;
+
+  }
+  .extra-info-section img {
+    height: 150px;
+
+  }
+  .extra-info-section h1 {
+    font-size: 1.0em;
+
+  }
+  .extra {
+    padding-left: 0px;
+    right: 10%;
+  }
+
+  .extra h3, p {
+    font-size: 1.0em;
   }
   .content-title {
     display: block;

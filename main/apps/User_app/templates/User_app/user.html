@@ -20,41 +20,43 @@
     {% include "../global/navbar.html" %}
     <div class="space-for-top"></div>
     <div class="content-wrapper">
-
-      <div class="userPage">
-        <div class="profPic">
-          {% if user.is_profile_pic == True %}
-          <img id="proImg" src="{{user.pic_name}}">
-          {% else %}
-          <div class="profile-pic-placeholder">
-            <p>{{user.pic_name}}</p>
+      <div class="header">
+        <div class="userPage">
+          <div class="profPic">
+            {% if user.is_profile_pic == True %}
+            <img id="proImg" src="{{user.pic_name}}">
+            {% else %}
+            <div class="profile-pic-placeholder">
+              <p>{{user.pic_name}}</p>
+            </div>
+            {% endif %}
           </div>
+          <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
+          <h1 class="user-name">{{ user.first_name}} {{user.last_name}}</h1>
+          <div class="list-buttons">
+
+            <div class="list" id="list-1">
+              <h3>Followers</h3>
+              <p>{{followers}}</p>
+            </div>
+            <div class="list" id="list-2">
+              <h3>Following</h3>
+              <p>{{following}}</p>
+            </div>
+            <div class="list" id="list-3">
+              <h3>Reviews</h3>
+              <p>{{length}}</p>
+            </div>
+          </div>
+          {% if request.session %}
+          {% if myFollow == "you don't follow" %}
+          <a href="/connect/add/{{user.profile_id}}"><button class="follow-button" type="button" name="button">Follow Me</button></a><br>
+          {% else %}
+          <a href="/connect/remove/{{user.profile_id}}"><button class = 'unfollow-button' type="button" name="button">Unfollow</button></a><br>
+          {% endif %}
           {% endif %}
         </div>
-        <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
-        <h1 class="user-name">{{ user.first_name}} {{user.last_name}}</h1>
-        <div class="list-buttons">
 
-          <div class="list" id="list-1">
-            <h3>Followers</h3>
-            <p>{{followers}}</p>
-          </div>
-          <div class="list" id="list-2">
-            <h3>Following</h3>
-            <p>{{following}}</p>
-          </div>
-          <div class="list" id="list-3">
-            <h3>Reviews</h3>
-            <p>{{length}}</p>
-          </div>
-        </div>
-        {% if request.session %}
-        {% if myFollow == "you don't follow" %}
-        <a href="/connect/add/{{user.profile_id}}"><button class="follow-button" type="button" name="button">Follow Me</button></a><br>
-        {% else %}
-        <a href="/connect/remove/{{user.profile_id}}"><button class = 'unfollow-button' type="button" name="button">Unfollow</button></a><br>
-        {% endif %}
-        {% endif %}
       </div>
 
 
@@ -63,6 +65,9 @@
         <div class="reviewFeed">
           <h3 class="names-review">{{user.first_name}}'s Reviews</h3>
           <div class="name-bumper"></div>
+          {% if length == 0 %}
+          <h4>No reviews yet</h4>
+          {% endif %}
           {% for review in reviews %}
           <div class="review-total-holder">
             <div class="review-card-min {{review.overall_color}}">
@@ -122,6 +127,9 @@
           <h3 class="names-review">{{user.first_name}}'s Followers</h3>
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
+          {% if followers == 0 %}
+          <h4>{{user.first_name}} has no followers yet</h4>
+          {% endif %}
           {% for follower in followers_dic %}
             {% if follower.profile_id == request.session.user %}
             <div class="followerDiv">
@@ -160,7 +168,9 @@
           <h3 class="names-review">{{user.first_name}}'s Following</h3>
           <div class="name-bumper"></div>
           <div class="space-for-top"></div>
-
+          {% if following == 0 %}
+          <h4>{{user.first_name}} doesn't follow anyone yet</h4>
+          {% endif %}
           {% for follow in following_dic %}
           <a href="/user/{{ follow.profile_id }}">
           <div class="followerDiv">

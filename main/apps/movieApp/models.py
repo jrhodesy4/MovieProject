@@ -29,7 +29,8 @@ class Watchlist(models.Model): #creates a watchlist
                 movie_title = movie['title'],
                 poster_path = movie['poster_path'],
                 user = user,
-                media_type = data['type']
+                media_type = data['type'],
+
             )
             print "added"
             return
@@ -39,7 +40,8 @@ class Watchlist(models.Model): #creates a watchlist
                 movie_title = movie['name'],
                 poster_path = movie['poster_path'],
                 user = user,
-                media_type = data['type']
+                media_type = data['type'],
+
             )
             print "added"
             return
@@ -216,16 +218,16 @@ class UserReview(models.Model):
         )
         return
     @classmethod
-    def add_review(self, review, _type, user_id):
+    def add_review(self, review, media_type, user_id):
         user = User.objects.get(id=user_id)
         ur = UserReview.objects.get(user=user_id)
-        if _type == "movie":
+        if media_type == "movie":
             ur.movie_review.add(review)
             ur.save()
-        if _type == "tv":
+        if media_type == "tv":
             ur.tv_review.add(review)
             ur.save()
-        if _type == "episode":
+        if media_type == "episode":
             ur.episode_review.add(review)
             ur.save()
         return
