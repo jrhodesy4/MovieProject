@@ -96,14 +96,14 @@ function jsonTaken(json){
     console.log(id);
     console.log(img_url);
     if (type == 'movie'){
-      $("#search-results").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + json[i].name + '</h3></div> <h3 class="movie-type type">Movie</h3> </div></a>');
+      $("#search-results").append('<a class="search-tag" href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + json[i].name + '</h3> </div> <h3 class="movie-type type">Movie</h3> </div> </a>');
     }
     else if (type == 'tv') {
-      $("#search-results").append('<a href="/show/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + json[i].name + '</h3></div><h3 class="tv-type type">Television</h3> </div></a>');
+      $("#search-results").append('<a class="search-tag" href="/show/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + json[i].name + '</h3> </div> <h3 class="tv-type type">Television</h3> </div> </a>');
 
     }
     else if (type =='person') {
-      $("#search-results").append('<a href="/people/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + json[i].name + '</h3></div><h3 class="person-type type">Person</h3></div></a>');
+      $("#search-results").append('<a class="search-tag" href="/people/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + json[i].name + '</h3> </div> <h3 class="person-type type">Person</h3> </div> </a>');
     }
 
   }

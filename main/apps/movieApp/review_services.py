@@ -128,22 +128,36 @@ def all_media_reviews(id, _type): #<-- this functions gets all the reviews for t
             reviews.append(data)
         reviews.sort(key=lambda item:item['created_at'], reverse=True)
         return reviews
+
+
+
+
 def sort_reviews_media(user_id, id, _type):
     user = User.objects.get(id=user_id)
+
     friends = Friend.objects.get(current_user=user)
+
+
     full_reviews = all_media_reviews(id, _type)
     friend_reviews = []
     other_reviews = []
     total_score = 0
     total_reviews = len(full_reviews)
-    for review in full_reviews:
-        total_score = total_score + int(review['score'])
 
-        try:
-            Friend.objects.get(users__id=review['reviewer_id'])
-            friend_reviews.append(review)
-        except:
-            other_reviews.append(review)
+    if friends == '[]':
+
+        other_reviews = full_reviews
+    else:
+        for review in full_reviews:
+            total_score = total_score + int(review['score'])
+
+            try:
+                this = Friend.objects.filter(users__id=review['reviewer_id'])
+                print "succed to get friend"
+                friend_reviews.append(review)
+            except:
+                other_reviews.append(review)
+                print "failed to get friend"
 
 
     if total_reviews == 0:
