@@ -102,7 +102,12 @@ def movie_page(request, id): # this renders the selected individual movie page
     if score > 80:
         color = 'green'
 
-
+    # if review_data['friend_reviews']:
+    friend_reviews = review_data['friend_reviews']
+    print friend_reviews
+    print "something random"
+    # else:
+    #     friend_reviews = 'no friends'
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         "genre_names" : genre_names,
@@ -116,7 +121,7 @@ def movie_page(request, id): # this renders the selected individual movie page
         'score_color': color,
         'runtime' : runtime,
         'reviews': review_data['reviews'],
-        'friend_reviews': review_data['friend_reviews'],
+        'friend_reviews': friend_reviews,
         'avg_score': review_data['avg_score'],
         'avg_score_color': review_data['avg_color'],
     }
@@ -208,16 +213,33 @@ def show_episode(request, id, season, episode):
     tv_episode = movie_services.get_episode(id, season, episode)
     status = authenticate(request)
     review_c = False
+    in_list = False
     if status == "in":
         user_id = request.session['user']
         review_c = review_completed(user_id, id, "episode")
+        in_list = in_watchlist(user_id, id)
+    else:
+        review_c = "not logged"
+
+    color = "red"
+    if review_c > 60:
+        color = "yellow"
+    if review_c > 80:
+        color = 'green'
+
+    user = request.session['user']
+    review_data = review_services.sort_reviews_media(user, id, "tv")
 
     context = {
         'tv_episode': tv_episode,
         "id": id,
+        'in_list': in_list,
+        "color" : color,
         "season": season,
         "episode": episode,
-        'completed': review_c
+        'completed': review_c,
+        'reviews': review_data['reviews'],
+        'friend_reviews': review_data['friend_reviews'],
     }
     return render(request, 'movieApp/episode_page.html', context)
 

@@ -8,6 +8,23 @@ body {
   background-color: #E6ECF0;
   font-family: 'Roboto', sans-serif;
 }
+.header-top {
+  display: block;
+  height: 10px;
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+}
+.search-bar {
+  display: inline-block;
+  margin: 10px;
+  display: block;
+  margin-bottom: 20px;
+}
+.ui-widget {
+  display: inline-block;
+  margin-left: 10px;
+}
 
 button.accordion {
     background-color: #eee;

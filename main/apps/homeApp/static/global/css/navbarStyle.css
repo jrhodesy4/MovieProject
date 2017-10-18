@@ -17,6 +17,7 @@
 }
 
 
+
 /*search bar ====================*/
 .search-div{
   display:none;
@@ -71,14 +72,13 @@ textarea:focus, input:focus{
 
 #search-results {
   display: inline-block;
-  position: relative;
   width: auto;
   height: 70%;
   vertical-align: top;
   padding:5px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: auto;
   white-space: nowrap;
+
 
 
 }

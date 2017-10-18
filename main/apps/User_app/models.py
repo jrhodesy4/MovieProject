@@ -97,9 +97,8 @@ class User(models.Model):
 
 # this is the model for the profile thats attached to a user =======
 class Profile(models.Model):
-    hometown = models.CharField(max_length=100, default='null')
-    birthday = models.DateField()
-    country = models.CharField(max_length=100)
+    bio = models.TextField(blank=True)
+    fav_movie = models.CharField(max_length=100)
     user_id = models.ForeignKey(User, related_name='profile')
 
 class ProPicture(models.Model):
