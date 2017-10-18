@@ -25,6 +25,19 @@ $(document).ready(function(){
     $('.followingFeed').css('display', 'none')
 
   })
+  $(function () {
+                    if ($('#watchlist-button').val() == 'Watchlist (0)') {
+                        //Check to see if there is any text entered
+                        // If there is no text within the input ten disable the button
+                        $('.enableOnInput').prop('disabled', true);
+                    } else {
+                        //If there is text in the input, then enable the button
+                        $('.enableOnInput').prop('disabled', false);
+                    }
+
+            });
+
+
   var watchlist_showing = false
   $("#watchlist-button").click(function(){
     if (watchlist_showing == false) {

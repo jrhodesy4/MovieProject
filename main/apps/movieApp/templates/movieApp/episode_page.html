@@ -1,52 +1,292 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
     <meta charset="utf-8">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
     <title>Episode Page</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'movieApp/css/view_page.css' %}">
+    <link rel="stylesheet" href="{% static 'movieApp/css/review_card_media.css' %}">
+    <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
+    <script type="text/javascript" src="{% static 'movieApp/js/viewpage.js'%}"></script>
   </head>
   <body>
-    <a href="/">Home</a>
-    {% if request.session.user %}
-    <a href="/logout">Logout</a>
-    {% endif %}
-    <h2>{{tv_episode.name}}</h2>
-    <h2>Air Date: {{tv_episode.air_date }}</h2>
-    <img src="https://image.tmdb.org/t/p/w500{{tv_episode.still_path}}" alt="">
-    <p>{{tv_episode.overview}}</p>
-    {% if 'user' in request.session %}
-    <div class="review">
-      {% if completed == False %}
-      <h3>Write a review of this episode:</h3>
-      <form class="" action="/makeReview/{{id}}/{{season}}/{{episode}}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="type" value="episode">
-        <input type="number" max="100" name="score" value="">
-        <textarea name="content" rows="8" cols="80" placeholder="Enter Your Comment Here"></textarea>
 
-        <p>Story rating:</p>
-        <input name='story' type="range" min="0" max="10">
-        <p>Entertainment Rating:</p>
-        <input name='entertainment' type="range" min="0" max="10">
-        <p>Acting Rating</p>
-        <input name='acting' type="range" min="0" max="10">
-        <p>Visual Rating:</p>
-        <input name='visual' type="range" min="0" max="10">
-        <p>Sound Rating:</p>
-        <input name='sound' type="range" min="0" max="10">
+    {% include "../global/navbar.html" %}
+    <div class="sectional-content-wrapper">
+      <div class="background-banner">
+        <img class="banner-img" src="https://image.tmdb.org/t/p/w1000/{{tv_episode.still_path}}">
+      </div>
+        <div class="info-section-top">
+          <img class= "episode-poster" src="https://image.tmdb.org/t/p/w500/{{tv_episode.still_path}}">
+          <div class="quick-info">
+            <p class="content-title">{{ tv_episode.name }}</p>
+            <div class="under-title">
+              <p class="runtime">Aired: {{tv_episode.air_date}}</p>
+              <p class="avg-rating green">89/100</p>
+            </div>
+            <div class="quicklink-section">
+              <div class="quicklink-section">
+                {% if in_list == False %}
+                <div  id="watchlist-button" onclick="addtowatchlist({{show.id}}, 'tv')"class="link-icon">
+                  {%else%}
+                  <div id="watchlist-button" onclick="addtowatchlist()"class="link-icon in-watchlist">
+                    {% endif%}
+                    <svg class="icon-content icon-watchlist">
+                      <use xlink:href="#icon-watchlist"></use>
+                      <symbol id="icon-watchlist" viewBox="0 0 32 32">
+                        <title>watchlist</title>
+                        <path d="M16 6.463c-6.114 0-11.658 3.345-15.75 8.778-0.334 0.445-0.334 1.067 0 1.512 4.091 5.44 9.636 8.785 15.75 8.785s11.658-3.345 15.75-8.778c0.334-0.445 0.334-1.067 0-1.512-4.091-5.44-9.636-8.785-15.75-8.785zM16.439 22.716c-4.059 0.255-7.41-3.090-7.155-7.155 0.209-3.352 2.926-6.068 6.278-6.278 4.058-0.255 7.41 3.090 7.155 7.155-0.216 3.345-2.933 6.062-6.278 6.278zM16.236 19.613c-2.186 0.137-3.993-1.663-3.849-3.849 0.111-1.807 1.578-3.266 3.384-3.384 2.186-0.137 3.993 1.663 3.849 3.849-0.118 1.813-1.584 3.273-3.384 3.384z"></path>
+                      </symbol>
+                    </svg>
+                  </div>
 
-        <input type="submit" name="" value="Submit">
-      </form>
-      {% endif %}
-      {% endif %}
-        <!-- {% for review in reviews %}
-        <div class="review">
-          <p>========================</p>
-          <h1>{{review.score}}</h1>
-          <h2>{{review.user_id.first_name}} says:</h2>
-          <p>{{review.content}}</p>
-          <p>========================</p>
+                  {% if completed == "no score"%}
+                  <div onclick="reviewFormController()" class="link-icon review-icon">
+                    <svg class="icon-content icon-review">
+                      <use xlink:href="#icon-review"></use>
+                      <symbol id="icon-review" viewBox="0 0 32 32">
+                        <title>review</title>
+                        <path d="M16.756 1.245l4.070 9.634 10.421 0.895c0.723 0.062 1.017 0.964 0.468 1.439l-7.904 6.848 2.369 10.188c0.164 0.708-0.603 1.265-1.224 0.889l-8.956-5.401-8.956 5.401c-0.623 0.375-1.388-0.182-1.224-0.889l2.369-10.188-7.906-6.85c-0.549-0.475-0.256-1.377 0.468-1.439l10.421-0.895 4.070-9.632c0.283-0.67 1.23-0.67 1.513 0z"></path>
+                      </symbol>
+                    </svg>
+                  </div>
+                  {% else %}
+                  <div class="link-icon review-icon {{color}} completed-review">
+                    <p class="review-score-number">{{score}}</p>
+                  </div>
+                  {% endif%}
+
+                  <div onclick="trailerController()" class="link-icon">
+                    <svg class="icon-content icon-trailer">
+                      <use xlink:href="#icon-trailer"></use>
+                      <symbol id="icon-trailer" viewBox="0 0 32 32">
+                        <title>trailer</title>
+                        <path d="M16 0c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16zM24.3 16.441l-11.733 8c-0.090 0.061-0.195 0.093-0.3 0.093-0.085 0-0.171-0.020-0.249-0.062-0.175-0.092-0.284-0.274-0.284-0.471v-16c0-0.198 0.109-0.379 0.284-0.471s0.386-0.080 0.55 0.031l11.733 8c0.145 0.099 0.233 0.264 0.233 0.441s-0.087 0.341-0.233 0.441z"></path>
+                      </symbol>
+                    </svg>
+                  </div>
+                  <div class="link-icon">
+                    <svg class="icon-content icon-info">
+                      <use xlink:href="#icon-info"></use>
+                      <symbol id="icon-info" viewBox="0 0 32 32">
+                        <title>info</title>
+                        <path d="M16 0c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16c0-8.822-7.178-16-16-16zM16 29.091c-7.218 0-13.091-5.872-13.091-13.091s5.872-13.091 13.091-13.091 13.091 5.873 13.091 13.091c0 7.218-5.873 13.091-13.091 13.091z"></path>
+                        <path d="M16 6.788c-1.069 0-1.939 0.87-1.939 1.94s0.87 1.939 1.939 1.939 1.939-0.87 1.939-1.939c0-1.070-0.87-1.94-1.939-1.94z"></path>
+                        <path d="M16 13.576c-0.803 0-1.455 0.651-1.455 1.455v8.727c0 0.803 0.651 1.455 1.455 1.455s1.455-0.651 1.455-1.455v-8.727c0-0.803-0.651-1.455-1.455-1.455z"></path>
+                      </symbol>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="info-section-middle">
+              <div class="write-review-section w3-animate-top">
+                <div onclick="reviewFormController()"class="close-button-form" >
+                </div>
+                <h3>Your Review:</h3>
+                <form class="" action="/makeReview/{{id}}/{{season}}/{{episode}}" method="post" id="review-form">
+                  {% csrf_token %}
+
+                  <input type="hidden" name="type" value="episode">
+
+                  <div class="slider-review-form sectional">
+
+                    <p>Story:</p>
+                    <input class="review-slider" name='story' type="range" min="0" max="10">
+                    <p>Entertainment:</p>
+                    <input class="review-slider" name='entertainment' type="range" min="0" max="10">
+                    <p>Acting:</p>
+                    <input class="review-slider" name='acting' type="range" min="0" max="10">
+                    <p>Visual:</p>
+                    <input class="review-slider" name='visual' type="range" min="0" max="10">
+                    <p>Sound:</p>
+                    <input class="review-slider" name='sound' type="range" min="0" max="10">
+                  </div>
+                  <div class="overall-score-section sectional">
+                    <p>Overall Score</p>
+                    <input class="review-slider" id="overall-score-slider" name='score' type="range" min="0" max="100">
+                    <p>Comments</p>
+                    <textarea name="content" rows="8" cols="40" placeholder="Enter Your Comment Here"></textarea>
+                    <input class="submit-button"type="submit" name="" value="Submit">
+                  </div>
+
+
+                </form>
+                <!-- <div class="background-review-form"></div> -->
+
+              </div>
+            </div>
+            {% if trailers != 'none' %}
+            <div class="trailer-section">
+              <div onclick="trailerController()"class="close-button-form">
+              </div>
+              {% for trailer in trailers|slice:":1" %}
+              <div class="trailer">
+                <iframe src="http://www.youtube.com/embed/{{trailer.key}}"
+                width="760" height="450" frameborder="0" allowfullscreen></iframe>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="opaque">
+
+            </div>
+            <div class="info-section-bottom">
+              <div class="extra-info">
+                <h1>Summary</h1>
+                <p>{{tv_episode.overview}}</p>
+              </div>
+            </div>
+
+            <div class="completed-review-section">
+              <h1>Reviews</h1>
+              {% if friend_reviews|length > 0%}
+              <h1>Here is what your friends are saying</h1>
+              {%endif%}
+              <div class="reviews-friend-holder">
+
+                {% for review in friend_reviews %}
+
+                <div class="review-total-holder">
+                  <div class="review-card-full">
+                    <div class="overall-score-full">
+                      <p>Overall Score</p>
+                      <div class="bumper-reviewcard"></div>
+                      <div class="break"></div>
+                      <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
+                    </div>
+                    <div class="subscores">
+                      <p>Story</p>
+                      <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
+                      <p>Entertainment</p>
+                      <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
+                      <p>Acting</p>
+                      <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
+                      <p>Visual</p>
+                      <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
+                      <p>Sound</p>
+                      <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
+                    </div>
+                  </div>
+                  <a href="/user/{{ review.reviewer_id }}">
+                  <div class="p-img-holder">
+                    {% if review.is_pic == True %}
+                    <img src="{{review.profile_pic}}"/>
+                    {%endif%}
+                    {% if review.is_pic == False %}
+                    <p>{{review.profile_pic}}</p>
+                    {%endif%}
+                  </div>
+                  </a>
+
+                </div>
+                {% endfor%}
+
+              </div>
+            </div>
+
+            <div class="completed-review-section">
+                <h1>Recent Reviews</h1>
+                {% if reviews|length == 0 and friend_reviews|length == 0%}
+                <p>There are currently no reviews</p>
+                {%endif%}
+                <div class="reviews-friend-holder">
+
+
+
+                  {% for review in reviews %}
+
+                  <div class="review-total-holder">
+                    <div class="review-card-full">
+                      <div class="overall-score-full">
+                        <p>Overall Score</p>
+                        <div class="bumper-reviewcard"></div>
+                        <div class="break"></div>
+                        <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
+                      </div>
+                      <div class="subscores">
+                        <p>Story</p>
+                        <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
+                        <p>Entertainment</p>
+                        <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
+                        <p>Acting</p>
+                        <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
+                        <p>Visual</p>
+                        <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
+                        <p>Sound</p>
+                        <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
+                      </div>
+                    </div>
+                    <a href="/user/{{ review.reviewer_id }}">
+                    <div class="p-img-holder">
+                      {% if review.is_pic == True %}
+                      <img src="{{review.profile_pic}}"/>
+                      {%endif%}
+                      {% if review.is_pic == False %}
+                      <p>{{review.profile_pic}}</p>
+                      {%endif%}
+                    </div>
+                    </a>
+
+                  </div>
+                  {% endfor%}
+
+                </div>
+              </div>
+              <div class="footer">
+
+                <!-- <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg"> -->
+              </div>
+
+
+
+            <!-- <p>{{tv_episode.overview}}</p>
+            {% if 'user' in request.session %}
+            <div class="review">
+              {% if completed == False %}
+              <h3>Write a review of this episode:</h3>
+              <form class="" action="/makeReview/{{id}}/{{season}}/{{episode}}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="type" value="episode">
+                <input type="number" max="100" name="score" value="">
+                <textarea name="content" rows="8" cols="80" placeholder="Enter Your Comment Here"></textarea>
+
+                <p>Story rating:</p>
+                <input name='story' type="range" min="0" max="10">
+                <p>Entertainment Rating:</p>
+                <input name='entertainment' type="range" min="0" max="10">
+                <p>Acting Rating</p>
+                <input name='acting' type="range" min="0" max="10">
+                <p>Visual Rating:</p>
+                <input name='visual' type="range" min="0" max="10">
+                <p>Sound Rating:</p>
+                <input name='sound' type="range" min="0" max="10">
+
+                <input type="submit" name="" value="Submit">
+              </form>
+              {% endif %}
+              {% endif %} -->
+              <!-- {% for review in reviews %}
+              <div class="review">
+              <p>========================</p>
+              <h1>{{review.score}}</h1>
+              <h2>{{review.user_id.first_name}} says:</h2>
+              <p>{{review.content}}</p>
+              <p>========================</p>
+            </div>
+            {% endfor %} -->
+
+          </div>
+
+          </div>
+
         </div>
-        {% endfor %} -->
 
     </div>
 

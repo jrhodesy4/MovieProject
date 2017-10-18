@@ -19,6 +19,20 @@
   <body>
     {% include "../global/navbar.html" %}
     <div class="space-for-top"></div>
+    <div class="search-bar">
+      <div class="ui-widget">
+        <form class="" action="/searchUsers" method="post">
+          {% csrf_token %}
+          <label for="places">Search People: </label>
+          <input name="person" id="places">
+
+        </form>
+      </div>
+    </div>
+
+    <div class="header-top">
+
+    </div>
     <div class="content-wrapper">
       <div class="header">
         <div class="userPage">

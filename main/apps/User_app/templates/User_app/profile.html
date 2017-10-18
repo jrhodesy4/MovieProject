@@ -35,6 +35,7 @@
     </div>
 
 
+
     <div class="content-wrapper">
       <div class="header">
         <div class="userPage">
@@ -94,7 +95,7 @@
 
         </div>
         <div class="movieList">
-          <button id="watchlist-button" type="button" name="button">Watchlist</button>
+          <button class='enableOnInput' id="watchlist-button" type="button" value="Watchlist ({{watchlist.count}})" name="button" disabled="true">Watchlist ({{watchlist.count}})</button>
           <div class="watchlist-info" style="display:none">
             {% for movie in watchlist %}
             {% if movie.media_type == 'movie' %}

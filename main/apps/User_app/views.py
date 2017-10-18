@@ -38,6 +38,7 @@ def subPercent(number): # this get the score and turns it to written number for 
         return 5
     percent = ["one", "two", "three", "four",'five',' six', 'seven','eight', 'nine', 'ten']
     return percent[number - 1]
+    
 def createReviewFormat(review):
     now = datetime.now()
     new_timestamp = review['created_at'].replace(tzinfo=None)
@@ -349,12 +350,13 @@ def logout(request):
 
 def change_friends(request, operation, id):
     new_friend = User.objects.get(id=id)
+    id = id
     if operation == 'add':
         Friend.add_friend(User.objects.get(id=request.session['user']), new_friend)
     elif operation == 'remove':
         Friend.lose_friend(User.objects.get(id=request.session['user']), new_friend)
 
-    return redirect('/profile')
+    return redirect('/user/' + id)
 
 
 def searchUsers(request):
