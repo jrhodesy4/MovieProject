@@ -203,6 +203,7 @@
 
       <div class="completed-review-section">
         <h1>Reviews</h1>
+        {% if friend_reviews != 'no friends' %}
         {% if friend_reviews|length > 0%}
         <h1>Here is what your friends are saying</h1>
         {%endif%}
@@ -244,6 +245,7 @@
 
           </div>
           {% endfor%}
+          {% endif %}
 
         </div>
       </div>
