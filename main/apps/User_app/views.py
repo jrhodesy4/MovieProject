@@ -38,7 +38,7 @@ def subPercent(number): # this get the score and turns it to written number for 
         return 5
     percent = ["one", "two", "three", "four",'five',' six', 'seven','eight', 'nine', 'ten']
     return percent[number - 1]
-    
+
 def createReviewFormat(review):
     now = datetime.now()
     new_timestamp = review['created_at'].replace(tzinfo=None)
@@ -272,9 +272,8 @@ def newProfilePicture(request):
 def createProfile(request):
     if request.method == 'POST':
         profile = Profile.objects.create(
-            birthday = request.POST['birthday'],
-            hometown = request.POST['hometown'],
-            country = request.POST['country'],
+            bio = request.POST['bio'],
+            fav_movie = request.POST['fav_movie'],
             user_id = User.objects.get(id = request.session['user']),
         )
         profile.save()
@@ -283,12 +282,10 @@ def createProfile(request):
 def editProfile(request):
     if request.method == 'POST':
         profile = Profile.objects.get(user_id = User.objects.get(id = request.session['user']))
-        birthday = request.POST['birthday']
-        hometown = request.POST['hometown']
-        country = request.POST['country']
-        profile.birthday = birthday
-        profile.hometown = hometown
-        profile.country = country
+        bio = request.POST['bio']
+        fav_movie = request.POST['fav_movie']
+        profile.bio = bio
+        profile.fav_movie = fav_movie
         profile.save()
         return redirect('/profile')
 

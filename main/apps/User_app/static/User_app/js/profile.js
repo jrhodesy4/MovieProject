@@ -70,6 +70,9 @@ $(document).ready(function(){
     var selectedObj = ui.item;
     window.location = "/user/" + selectedObj.id;
   }
+  $('ul.ui-autocomplete').css({
+    color: 'red'
+  });
 
   // function showPic() {
   //   document.getElementById('picDiv').style.display = "block";
@@ -100,21 +103,88 @@ $(document).ready(function(){
 
   $("#newPro").click(function(){
     if (hidden == true) {
-      $('#profileDiv').css('display', 'block')
+      $('.profileDiv').slideDown("slow", function() {
+      });
+      $("#newPro").val('Cancel')
+      $("#newPro").css({
+        'width' : '40%',
+        'border-radius' : '20px',
+        'border': '2px solid #3F5EFB',
+        'background-color' : 'white',
+        'color': '#3F5EFB',
+        'margin-left': '-130px',
+        'display' : 'inline-block',
+        'position' : 'relative',
+        'margin-bottom': '10px',
+        'bottom' : '0'
+
+      })
       hidden = false
     }
     else if (hidden == false) {
-      $('#profileDiv').css('display', 'none')
+      $('.profileDiv').slideUp("slow", function() {
+      });
+      $("#newPro").val('Create Profile')
+        $("#newPro").css({
+          'width': '100%',
+          'background-color': '#3F5EFB',
+          'border-radius': '0px',
+          'color': 'white',
+          'height': '25px',
+          'margin-top': '10px',
+          'position': 'inherit',
+          'margin-left': '0%',
+        })
       hidden = true
     }
   })
   $("#editPro").click(function(){
     if (hidden == true) {
-      $('#profileDiv').css('display', 'block')
+      $('.profileDiv').slideDown("slow", function() {
+      });
+      $("#editPro").val('Cancel')
+      $("#editPro").css({
+        'width' : '40%',
+        'border-radius' : '20px',
+        'border': '2px solid #3F5EFB',
+        'background-color' : 'white',
+        'color': '#3F5EFB',
+        'margin-left': '-130px',
+        'display' : 'inline-block',
+        'position' : 'relative',
+        'margin-bottom': '10px',
+        'bottom' : '0'
+
+      })
+      $('.contact-info').css({
+        'display' : 'none'
+      })
+      $('#edit').css({
+        'display' : 'inline-block'
+      })
       hidden = false
     }
     else if (hidden == false) {
-      $('#profileDiv').css('display', 'none')
+      $('.profileDiv').slideUp("slow", function() {
+      });
+      $("#editPro").val('Edit Profile')
+      $("#editPro").css({
+        'width': '100%',
+        'background-color': '#3F5EFB',
+        'border-radius': '0px',
+        'color': 'white',
+        'height': '25px',
+        'margin-top': '10px',
+        'position': 'inherit',
+        'margin-left': '0%',
+      })
+      $('#edit').css({
+        'display' : 'none'
+      })
+      $('.contact-info').fadeIn('slow', function(){
+
+      })
+
       hidden = true
     }
   })
@@ -152,7 +222,7 @@ $(document).ready(function(){
 
 
 
-  function showDiv() {
-    document.getElementById('profileDiv').style.display = "block";
-  }
+  // function showDiv() {
+  //   document.getElementById('profileDiv').style.display = "block";
+  // }
 });

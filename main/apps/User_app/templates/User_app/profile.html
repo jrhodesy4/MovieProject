@@ -23,8 +23,9 @@
       <div class="ui-widget">
         <form class="" action="/searchUsers" method="post">
           {% csrf_token %}
-          <label for="places">Search People: </label>
-          <input name="person" id="places">
+
+          <input name="person" id="places" placeholder="Find Friends">
+
 
         </form>
       </div>
@@ -92,6 +93,50 @@
           </div>
           <div class="followers">
           </div>
+
+        </div>
+        <div class="profileInfo">
+          {% if profile %}
+          {% for item in profile %}
+          <div class="profileDiv" style="display:none;">
+            <form class="profile-form" action="/editProfile" method="post">
+
+              {% csrf_token %}
+              <input type="text" name="" value="{{item.bio}}">
+              <input type="text" name="fav_movie" value="{{item.fav_movie}}">
+              <input id="edit" type="submit" name="" value="Save Changes">
+
+            </form>
+
+          </div>
+          <input id="editPro" type="button" name="answer" value="Edit Profile" />
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <p>Email:  {{ item.user_id.email}}</p>
+            <h3>General Information</h3>
+            <p>Bio: {{item.bio}}</p>
+            <p>Favorite Movie: {{item.fav_movie}}</p>
+
+          </div>
+          {% endfor %}
+          {% else %}
+
+          <div class="profileDiv" style="display:none;">
+            <form class="profile-form" action="/createProfile" method="post">
+
+              {% csrf_token %}
+              <input type="text" name="bio" value="" placeholder="Bio">
+              <input type="text" name="fav_movie" value="" placeholder="Favorite Movie">
+              <input id="create" type="submit" name="" value="Create">
+            </form>
+
+          </div>
+          <input id="newPro" type="button" name="answer" value="Create Profile"/>
+
+          {% endif %}
+          {% if uploaded_file_url %}
+            <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+          {% endif %}
 
         </div>
         <div class="movieList">
