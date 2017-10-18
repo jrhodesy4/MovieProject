@@ -73,12 +73,13 @@ textarea:focus, input:focus{
   display: inline-block;
   position: relative;
   width: auto;
-  height: 70%;
+  height: auto;
   vertical-align: top;
   padding:5px;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  background-color: white;
 
 
 }

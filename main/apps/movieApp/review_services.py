@@ -145,14 +145,15 @@ def sort_reviews_media(user_id, id, _type):
     total_reviews = len(full_reviews)
 
     if friends == '[]':
-
         other_reviews = full_reviews
     else:
         for review in full_reviews:
             total_score = total_score + int(review['score'])
 
             try:
-                this = Friend.objects.filter(users__id=review['reviewer_id'])
+                this = Friend.objects.get(current_user=user, users__id=review['reviewer_id'])
+
+
                 print "succed to get friend"
                 friend_reviews.append(review)
             except:

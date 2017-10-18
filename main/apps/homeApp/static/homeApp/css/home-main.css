@@ -25,18 +25,27 @@ body {
 }
 .review-feed-wrapper {
   /*border: 1px solid blue;*/
-  display: inline-block;
-  text-align: center;
-  float: right;
-  width: 50%;
-  height: 60%;
-}
-.extra-content-wrapper {
-  border: 1px solid red;
-  display: inline-block;
-  text-align: center;
-  width: 45%;
+  display: block;
+  text-align: left;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: auto;
   height: auto;
+}
+
+
+
+.extra-content-wrapper {
+  /*border: 1px solid red;*/
+  display: inline-block;
+  text-align: left;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: auto;
+  height: auto;
+
 
 }
 
