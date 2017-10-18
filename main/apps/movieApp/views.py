@@ -125,7 +125,8 @@ def movie_page(request, id): # this renders the selected individual movie page
         'avg_score': review_data['avg_score'],
         'avg_score_color': review_data['avg_color'],
     }
-    print context['friend_reviews']
+
+
     return render(request, 'movieApp/movie_view_page.html', context)
 
 
