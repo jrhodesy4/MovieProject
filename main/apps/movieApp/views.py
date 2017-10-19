@@ -103,14 +103,22 @@ def movie_page(request, id): # this renders the selected individual movie page
         color = 'green'
 
     # if review_data['friend_reviews']:
+    screenwriters = []
+    directors = []
     friend_reviews = review_data['friend_reviews']
-    print friend_reviews
-    print "something random"
+    for crew in movie['cast_info']['crew']:
+        if crew['job'] == 'Screenplay':
+            screenwriters.append(crew)
+        if crew['job'] == 'Director':
+            directors.append(crew)
+
     # else:
     #     friend_reviews = 'no friends'
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         "genre_names" : genre_names,
+        "directors": directors,
+        "screenwriters": screenwriters,
         'budget': budget,
         'release': release,
         'revenue': revenue,
@@ -166,11 +174,20 @@ def show_page(request, id):
     if score > 80:
         color = 'green'
 
+    eproducers = []
+    producer = []
+    for crew in show['cast_info']['crew']:
+        if crew['job'] == 'Executive Producer':
+            eproducers.append(crew)
+        if crew['job'] == 'Producer':
+            producer.append(crew)
 
     review_data = review_services.sort_reviews_media(user, id, "tv")
     context = {
         "show": show['show_info'],
         'cast': show['cast_info'],
+        'eproducers': eproducers,
+        'producer': producer,
         'trailers': trailers,
         "in_list": in_list,
         'score': score,
