@@ -77,6 +77,7 @@ $(document).ready(function(){
   // function showPic() {
   //   document.getElementById('picDiv').style.display = "block";
   // }
+
   var hidden = true
   $("#newProf").click(function(){
     if (hidden == true) {
@@ -93,10 +94,12 @@ $(document).ready(function(){
   $("#editProf").click(function(){
     if (hidden == true) {
       $('#picDiv').css('display', 'block')
+      $("#editProf").html("<h4>Undo</h4>")
       hidden = false
     }
     else if (hidden == false) {
       $('#picDiv').css('display', 'none')
+      $("#editProf").html("<h4>Edit</h4>")
       hidden = true
     }
   })
@@ -187,9 +190,11 @@ $(document).ready(function(){
     }
   })
 
+
+
   $('.profPic').hover(function() {
     $('#editProf').css({
-      'z-index' : '0'
+      'z-index' : '21'
     });
     $('#proImg').css({
       'opacity' : '0.5'

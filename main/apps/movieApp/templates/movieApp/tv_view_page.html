@@ -150,13 +150,23 @@
             <li>{{creator.name}}</li>
             {% endfor %}
           </h3>
-          {% for epro in eproducers %}
-          <h3>Executive Producer(s): <li>{{epro.name}}</li></h3>
-          {% endfor %}
+          <h3>Executive Producer(s):
+            {% if execlist == 0 %}
+            <li>None listed</li>
+            {% else %}
+            {% for epro in eproducers %}
+             <li>{{epro.name}}</li>
+             {% endfor %}
+             {% endif %}
+           </h3>
           <h3>Producer(s):
+            {% if prodlist == 0 %}
+            <li>None Listed</li>
+            {% else %}
             {% for screen in producer %}
             <li>{{screen.name}} </li>
             {% endfor %}
+            {% endif %}
           </h3>
           <h3>Network(s):
             {% for network in show.networks %}
