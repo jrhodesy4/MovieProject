@@ -44,7 +44,7 @@ def createReviewFormat(review):
         'hour_difference': hour_difference,
         'day_difference': day_difference,
         'month_difference' : month_difference,
-        'year_difference': year_difference
+        'year_difference': year_difference,
     }
 
     return data
