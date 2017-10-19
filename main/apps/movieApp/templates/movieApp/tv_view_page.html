@@ -71,7 +71,7 @@
                   </symbol>
                 </svg>
               </div>
-              <div class="link-icon">
+              <div onclick="extraController()" class="link-icon">
                 <svg class="icon-content icon-info">
                   <use xlink:href="#icon-info"></use>
                   <symbol id="icon-info" viewBox="0 0 32 32">
@@ -138,6 +138,43 @@
       {% endif %}
 
       <div class="opaque">
+
+      </div>
+      <div class="extra-info-section" style="display:none">
+        <div onclick="extraController()" class="close-button-form">
+        </div>
+        <h1>{{show.name}}</h1>
+        <div class="extra" >
+          <h3>Creator(s):
+            {% for creator in show.created_by %}
+            <li>{{creator.name}}</li>
+            {% endfor %}
+          </h3>
+          {% for epro in eproducers %}
+          <h3>Executive Producer(s): <li>{{epro.name}}</li></h3>
+          {% endfor %}
+          <h3>Producer(s):
+            {% for screen in producer %}
+            <li>{{screen.name}} </li>
+            {% endfor %}
+          </h3>
+          <h3>Network(s):
+            {% for network in show.networks %}
+            <li>{{network.name}}</li>
+            {% endfor %}
+          </h3>
+          {% if movie.homepage == "" %}
+          <h3>Homepage: <li>Homepage not available</li></h3>
+          {% else%}
+          <h3>Homepage: <li><a href="{{movie.homepage}}" target="_blank">{{show.homepage}}</a></li></h3>
+          {% endif %}
+          <h3>Genres:
+            {% for name in show.genres %}
+            <li>{{name.name}} </li>
+            {% endfor %}
+
+
+        </div>
 
       </div>
 

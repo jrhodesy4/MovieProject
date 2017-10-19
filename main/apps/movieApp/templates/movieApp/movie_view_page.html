@@ -160,16 +160,29 @@
         <div onclick="extraController()" class="close-button-form">
         </div>
         <h1>{{movie.title}}</h1>
-        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="">
         <div class="extra" >
-          <h3>Budget: {{budget}}</h3>
-          <h3>Revenue: {{revenue}}</h3>
-          <h3>Released: {{release}}</h3>
-          <h3>Runtime: {{runtime.0}} hours, {{runtime.1}} minutes</h3>
-          <h3>Homepage: <a href="{{movie.homepage}}" target="_blank">{{movie.homepage}}</a></h3>
+          {% for director in directors%}
+          <h3>Director(s): <li>{{director.name}}</li></h3>
+          {% endfor %}
+          <h3>Screenwriter(s):
+            {% for screen in screenwriters %}
+            <li>{{screen.name}} </li>
+            {% endfor %}
+          </h3>
+
+
+          <h3>Budget: <li>{{budget}}</li></h3>
+          <h3>Revenue: <li>{{revenue}}</li></h3>
+          <h3>Released: <li>{{release}}</li></h3>
+          <h3>Runtime: <li>{{runtime.0}} hours, {{runtime.1}} minutes</li></h3>
+          {% if movie.homepage == "" %}
+          <h3>Homepage: <li>Homepage not available</li></h3>
+          {% else%}
+          <h3>Homepage: <li><a href="{{movie.homepage}}" target="_blank">{{movie.homepage}}</a></li></h3>
+          {% endif %}
           <h3>Genres:
             {% for name in genre_names %}
-            <p>{{name}}</p>
+            <li>{{name}} </li>
             {% endfor %}
 
 

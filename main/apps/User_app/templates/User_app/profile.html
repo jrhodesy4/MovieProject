@@ -102,7 +102,7 @@
             <form class="profile-form" action="/editProfile" method="post">
 
               {% csrf_token %}
-              <input type="text" name="" value="{{item.bio}}">
+              <input type="text" name="bio" value="{{item.bio}}">
               <input type="text" name="fav_movie" value="{{item.fav_movie}}">
               <input id="edit" type="submit" name="" value="Save Changes">
 
@@ -111,9 +111,7 @@
           </div>
           <input id="editPro" type="button" name="answer" value="Edit Profile" />
           <div class="contact-info">
-            <h3>Contact Information</h3>
-            <p>Email:  {{ item.user_id.email}}</p>
-            <h3>General Information</h3>
+          
             <p>Bio: {{item.bio}}</p>
             <p>Favorite Movie: {{item.fav_movie}}</p>
 

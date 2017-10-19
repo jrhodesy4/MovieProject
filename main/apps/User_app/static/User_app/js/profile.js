@@ -109,9 +109,8 @@ $(document).ready(function(){
       $("#newPro").css({
         'width' : '40%',
         'border-radius' : '20px',
-        'border': '2px solid #3F5EFB',
-        'background-color' : 'white',
-        'color': '#3F5EFB',
+        'background-color' : '#FC466B',
+        'color': 'white',
         'margin-left': '-130px',
         'display' : 'inline-block',
         'position' : 'relative',
@@ -146,9 +145,8 @@ $(document).ready(function(){
       $("#editPro").css({
         'width' : '40%',
         'border-radius' : '20px',
-        'border': '2px solid #3F5EFB',
-        'background-color' : 'white',
-        'color': '#3F5EFB',
+        'background-color' : '#FC466B',
+        'color': 'white',
         'margin-left': '-130px',
         'display' : 'inline-block',
         'position' : 'relative',
