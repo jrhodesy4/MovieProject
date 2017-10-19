@@ -28,9 +28,10 @@
             <p class="content-title">{{ tv_episode.name }}</p>
             <div class="under-title">
               <p class="runtime">Aired: {{tv_episode.air_date}}</p>
-              <p class="avg-rating green">89/100</p>
+              <!-- <p class="avg-rating green">89/100</p> -->
             </div>
-            <div class="quicklink-section">
+          </div>
+            <!-- <div class="quicklink-section">
               <div class="quicklink-section">
                 {% if in_list == False %}
                 <div  id="watchlist-button" onclick="addtowatchlist({{show.id}}, 'tv')"class="link-icon">
@@ -83,9 +84,9 @@
                     </svg>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
-            <div class="info-section-middle">
+            <!-- <div class="info-section-middle">
               <div class="write-review-section w3-animate-top">
                 <div onclick="reviewFormController()"class="close-button-form" >
                 </div>
@@ -117,12 +118,12 @@
                   </div>
 
 
-                </form>
+                </form> -->
                 <!-- <div class="background-review-form"></div> -->
-
+<!--
               </div>
-            </div>
-            {% if trailers != 'none' %}
+            </div> -->
+            <!-- {% if trailers != 'none' %}
             <div class="trailer-section">
               <div onclick="trailerController()"class="close-button-form">
               </div>
@@ -136,7 +137,7 @@
             {% endif %}
             <div class="opaque">
 
-            </div>
+            </div> -->
             <div class="info-section-bottom">
               <div class="extra-info">
                 <h1>Summary</h1>
@@ -144,7 +145,7 @@
               </div>
             </div>
 
-            <div class="completed-review-section">
+            <!-- <div class="completed-review-section">
               <h1>Reviews</h1>
               {% if friend_reviews|length > 0%}
               <h1>Here is what your friends are saying</h1>
@@ -238,7 +239,7 @@
                   {% endfor%}
 
                 </div>
-              </div>
+              </div> -->
               <div class="footer">
 
                 <!-- <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg"> -->

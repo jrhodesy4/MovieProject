@@ -410,19 +410,24 @@ body {
   }
   .extra {
     display: inline-block;
-    position: absolute;
-    padding-left: 230px;
+    position: relative;
+    padding-left: 30px;
     right: 0;
     padding-right: 10px;
     font-size: .6em;
 
   }
-.extra p{
-  display: inline-block;
+.extra li{
+  display: inline;
+  padding: 0px;
+  font-weight: 100!important;
 }
 .extra h3 {
   font-size: 2.4em;
 
+}
+.extra a:visited{
+  color: black;
 }
 
 
