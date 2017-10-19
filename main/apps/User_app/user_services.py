@@ -43,6 +43,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
 
     f_name = user.first_name
     l_name = user.last_name
+    fullname = str(f_name) + str(l_name)
     user_id = user.id
     try :
         pic = ProPicture.objects.get(user_id=user.id)
@@ -63,6 +64,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "content": this.content,
             "created_at": this.created_at,
             "poster_path": this.poster_path,
+            'backdrop_path': this.backdrop_path,
             'story_rating': this.story_rating,
             'entertainment_rating': this.entertainment_rating,
             'acting_rating': this.acting_rating,
@@ -71,6 +73,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             'reviewer_id': user_id,
             "profile_pic": profile_pic,
             "is_pic": is_pic,
+            "reviewer_fullname": fullname,
             "overall_color": ovScoreColor(this.score),
             'story_percent': subPercent(this.story_rating),
             'story_color': subScoreColor(this.story_rating),
@@ -94,6 +97,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "content": this.content,
             "created_at": this.created_at,
             "poster_path": this.poster_path,
+            'backdrop_path': this.backdrop_path,
             'story_rating': this.story_rating,
             'entertainment_rating': this.entertainment_rating,
             'acting_rating': this.acting_rating,
@@ -102,6 +106,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             'reviewer_id': user_id,
             "profile_pic": profile_pic,
             "is_pic": is_pic,
+            "reviewer_fullname": fullname,
             "overall_color": ovScoreColor(this.score),
             'story_percent': subPercent(this.story_rating),
             'story_color': subScoreColor(this.story_rating),
@@ -126,6 +131,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             "content": this.content,
             "created_at": this.created_at,
             "poster_path": this.poster_path,
+            'backdrop_path': this.backdrop_path,
             'story_rating': this.story_rating,
             'entertainment_rating': this.entertainment_rating,
             'acting_rating': this.acting_rating,
@@ -134,6 +140,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
             'reviewer_id': user_id,
             "profile_pic": profile_pic,
             "is_pic": is_pic,
+            "reviewer_fullname": fullname,
             "overall_color": ovScoreColor(this.score),
             'story_percent': subPercent(this.story_rating),
             'story_color': subScoreColor(this.story_rating),

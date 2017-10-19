@@ -73,11 +73,12 @@ textarea:focus, input:focus{
 #search-results {
   display: inline-block;
   width: auto;
-  height: 70%;
+  height: auto;
   vertical-align: top;
   padding:5px;
   overflow: auto;
   white-space: nowrap;
+  background-color: white;
 
 
 
