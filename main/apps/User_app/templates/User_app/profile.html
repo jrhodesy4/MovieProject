@@ -19,7 +19,7 @@
   </head>
   <body>
     {% include "../global/navbar.html" %}
-    <div class="search-bar">
+    <!-- <div class="search-bar">
       <div class="ui-widget">
         <form class="" action="/searchUsers" method="post">
           {% csrf_token %}
@@ -29,11 +29,25 @@
 
         </form>
       </div>
+    </div> -->
+    <div class="search-bar">
+      <div class="ui-widget">
+        <form class="search-user-form" action="/searchUsers" method="GET">
+          {% csrf_token %}
+          <input type="input" name="person" id="places" placeholder="Find Friends">
+        </form>
+      </div>
+      <div class="search-result-sections">
+        <div id="searching-results"> </div>
+      </div>
+
     </div>
 
     <div class="header-top">
 
     </div>
+    <!-- <img src="/media/IMG_0605.JPG" alt=""> -->
+
 
 
 
@@ -43,7 +57,7 @@
           <div class="profPic">
             {% if user.is_profile_pic == True %}
             <img id="proImg" src="{{user.pic_name}}">
-            <p id="editProf">Edit</p>
+            <h4 id="editProf">Edit</h4>
             {% else %}
             <div class="profile-pic-placeholder">
               <p>{{user.pic_name}}</p>
@@ -111,9 +125,9 @@
           </div>
           <input id="editPro" type="button" name="answer" value="Edit Profile" />
           <div class="contact-info">
-          
-            <p>Bio: {{item.bio}}</p>
-            <p>Favorite Movie: {{item.fav_movie}}</p>
+
+            <h3>Bio:<p> {{item.bio}}</p></h3>
+            <h3>Favorite Movie: <p>{{item.fav_movie}}</p></h3>
 
           </div>
           {% endfor %}

@@ -1,4 +1,71 @@
 $(document).ready(function(){
+  var typingTimer;                //timer identifier
+  var doneTypingInterval = 1000;  //time in ms, 5 second for example
+  var $input = $('#places');
+
+  //on keyup, start the countdown
+  $input.on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  });
+  //on keydown, clear the countdown
+  $input.on('keydown', function () {
+    clearTimeout(typingTimer);
+
+  });
+  //user is "finished typing," do something
+  function doneTyping() {
+    console.log("doneTyping");
+    $.ajax({
+      url: "/searchusers",
+      method: "get",
+      data: $('#places').serialize(),
+      success: function(serverResponse) {
+        jsonRetrieved(serverResponse);
+      }
+   })
+  }
+
+
+  $('.search-user-form').submit(function(e){
+       e.preventDefault();
+  })
+  function jsonRetrieved(json){
+    $('#searching-results').html('')
+    console.log("jsonretrieved");
+    console.log(json);
+    if (json.length == 0) {
+      $("#searching-results").append('<h2 class = "no-results-found" >No Results Found</h2>');
+    }
+    else {
+      for (var i = 0; i < json.length; i++){
+        // var img_url = "https://image.tmdb.org/t/p/w500" + json[i].picture
+        var id = json[i].profile_id
+        var user_name = (json[i].first_name + ' ' + json[i].last_name)
+        var proPic = json[i].pic_name
+        // var current_user = $.session.get('user');
+        // console.log(current_user);
+        console.log(id);
+        // if (id == current_user) {
+        //   $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+        // }
+        // else {
+          if (proPic.length == 2){
+            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+
+
+          }
+          else {
+            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+
+          }
+
+        // }
+
+      }
+    }
+  }
+
   $("#list-1").click(function(){
     console.log('list-1');
     $('.reviewFeed').css('display', 'none')
@@ -26,16 +93,16 @@ $(document).ready(function(){
 
   })
   $(function () {
-                    if ($('#watchlist-button').val() == 'Watchlist (0)') {
-                        //Check to see if there is any text entered
-                        // If there is no text within the input ten disable the button
-                        $('.enableOnInput').prop('disabled', true);
-                    } else {
-                        //If there is text in the input, then enable the button
-                        $('.enableOnInput').prop('disabled', false);
-                    }
+    if ($('#watchlist-button').val() == 'Watchlist (0)') {
+      //Check to see if there is any text entered
+      // If there is no text within the input ten disable the button
+      $('.enableOnInput').prop('disabled', true);
+    } else {
+      //If there is text in the input, then enable the button
+      $('.enableOnInput').prop('disabled', false);
+    }
 
-            });
+  });
 
 
   var watchlist_showing = false
@@ -53,30 +120,25 @@ $(document).ready(function(){
     }
   })
 
-
-  console.log('working');
-  $(function() {
-    $("#places").autocomplete({
-      source: "/api/get_places",
-      select: function (event, ui) { //item selected
-        AutoCompleteSelectHandler(event, ui)
-        console.log("suck me");
-      },
-      minLength: 2,
-    });
-  });
-
-  function AutoCompleteSelectHandler(event, ui){
-    var selectedObj = ui.item;
-    window.location = "/user/" + selectedObj.id;
-  }
-  $('ul.ui-autocomplete').css({
-    color: 'red'
-  });
+  // $(function() {
+  //   $("#places").autocomplete({
+  //     source: "/api/get_places",
+  //     select: function (event, ui) { //item selected
+  //       AutoCompleteSelectHandler(event, ui)
+  //     },
+  //     minLength: 2,
+  //   });
+  // });
+  //
+  // function AutoCompleteSelectHandler(event, ui){
+  //   var selectedObj = ui.item;
+  //   window.location = "/user/" + selectedObj.id;
+  // }
 
   // function showPic() {
   //   document.getElementById('picDiv').style.display = "block";
   // }
+
   var hidden = true
   $("#newProf").click(function(){
     if (hidden == true) {
@@ -93,10 +155,12 @@ $(document).ready(function(){
   $("#editProf").click(function(){
     if (hidden == true) {
       $('#picDiv').css('display', 'block')
+      $("#editProf").html("<h4>Undo</h4>")
       hidden = false
     }
     else if (hidden == false) {
       $('#picDiv').css('display', 'none')
+      $("#editProf").html("<h4>Edit</h4>")
       hidden = true
     }
   })
@@ -187,9 +251,11 @@ $(document).ready(function(){
     }
   })
 
+
+
   $('.profPic').hover(function() {
     $('#editProf').css({
-      'z-index' : '0'
+      'z-index' : '21'
     });
     $('#proImg').css({
       'opacity' : '0.5'

@@ -6,6 +6,9 @@ from django.core.files.storage import FileSystemStorage
 from . import user_services
 from datetime import datetime, timedelta
 import math
+from django.http import JsonResponse
+import json
+import requests
 
 
 
@@ -91,6 +94,41 @@ def profileFormat(user): # <--- this function will return profile info how we wa
     }
     return data
 
+def searchFormat(user):
+    user = user
+    name = (user.first_name + " " + user.last_name)
+    first = user.first_name
+    last = user.last_name
+    kind = ''
+    # followers = Friend.objects.filter(users=user)
+    # friend, created = Friend.objects.get_or_create(current_user=user)
+    # following = friend.users.all()
+    # for follower in followers:
+    #     if follower.current_user == User.objects.get(user_id=request.session['user']):
+    #         kind = "following"
+    #
+    # for follow in following:
+    #     if follow == User.objects.get(user_id=request.session['user']):
+    #         kind = 'follower'
+    try :
+        pic = ProPicture.objects.get(user_id=user.id)
+        profile_pic = pic.picture
+        a = json.dumps(str(profile_pic))
+        newpic = a.replace('"', '')
+
+        is_pic = True
+    except:
+        newpic = first[0] + last[0]
+        is_pic = False
+    data = {
+        'kind': kind,
+        'profile_id': user.id,
+        'first_name': first,
+        'last_name': last,
+        'is_profile_pic': is_pic,
+        'pic_name': newpic
+    }
+    return data
 
 # Create your views here.
 # =================================================================
@@ -126,6 +164,7 @@ def profile(request):
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
 
     user_profile = profileFormat(user)
+    print user_profile
 
 
     reviews = user_services.get_reviews(request.session['user'])
@@ -359,11 +398,20 @@ def change_friends(request, operation, id):
 def searchUsers(request):
     if request.method == 'POST':
         count = User.objects.filter(first_name__icontains=request.POST['person']).count()
-        users = User.objects.filter(first_name__icontains=request.POST['person'])
+        users = User.objects.filter(first_name__icontains=request.POST['person']) | User.objects.filter(last_name__icontains=request.POST['person'])
         print users
         return render(request, 'homeApp/search.html', {'users' : users, 'count' : count})
 
-
+def searchUserDB(request):
+    search = request.GET.get('person')
+    print search
+    users = User.objects.filter(first_name__icontains=search) | User.objects.filter(last_name__icontains=search)
+    results = []
+    for user in users:
+        data = searchFormat(user)
+        results.append(data)
+    print results
+    return JsonResponse(results, safe=False)
 
 
 

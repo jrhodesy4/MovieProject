@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^profile$', views.profile),
     url(r'^user/(?P<id>\d+)$', views.user_page),
     url(r'^user/notifications$', views.notification_page),
+    url(r'^searchusers$', views.searchUserDB),
 
     #POSTS
     url(r'^register_account$', views.register_account),

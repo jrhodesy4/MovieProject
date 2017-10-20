@@ -181,13 +181,16 @@ def show_page(request, id):
             eproducers.append(crew)
         if crew['job'] == 'Producer':
             producer.append(crew)
-
+    execlist = len(eproducers)
+    prodlist = len(producer)
     review_data = review_services.sort_reviews_media(user, id, "tv")
     context = {
         "show": show['show_info'],
         'cast': show['cast_info'],
         'eproducers': eproducers,
         'producer': producer,
+        'execlist': execlist,
+        'prodlist': prodlist,
         'trailers': trailers,
         "in_list": in_list,
         'score': score,

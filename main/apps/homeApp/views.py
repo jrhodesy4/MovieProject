@@ -80,10 +80,11 @@ def index(request):
 
 
 
+
 def get_places(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
-        users = User.objects.filter(first_name__icontains = q )|User.objects.filter(last_name__icontains = q)| User.objects.filter(email__icontains = q)
+        users = User.objects.filter(first_name__icontains = q )|User.objects.filter(last_name__icontains = q)
         users = users[:20]
         results = []
         for user in users:
@@ -97,6 +98,7 @@ def get_places(request):
         data = 'fail'
     mimetype = 'application/json'
     print data
+    print "here"
     return HttpResponse(data, mimetype)
 
 def searchUsers(request):
