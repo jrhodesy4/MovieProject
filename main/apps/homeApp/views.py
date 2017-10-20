@@ -32,7 +32,7 @@ def createReviewFormat(review):
         "overall_color": ovScoreColor(review['score']),
         'story_percent': subPercent(review['story_rating']),
         'story_color': subScoreColor(review['story_rating']),
-        'ent-percent': subPercent(review['entertainment_rating']),
+        'ent_percent': subPercent(review['entertainment_rating']),
         'ent_color': subScoreColor(review['entertainment_rating']),
         'act_percent': subPercent(review['acting_rating']),
         'act_color': subScoreColor(review['acting_rating']),

@@ -1,6 +1,6 @@
 from ..User_app.models import User, Friend, ProPicture
 from .models import MovieReview, TVReview, EpisodeReview, UserReview
-
+import requests
 from . import movie_services
 
 def ovScoreColor(score): #gets the class we need for color == score
@@ -143,6 +143,8 @@ def sort_reviews_media(user_id, id, _type):
     other_reviews = []
     total_score = 0
     total_reviews = len(full_reviews)
+    full_backdrops = getAllMediaBacks(id, _type, 10)
+
 
     if friends == '[]':
         other_reviews = full_reviews
@@ -167,6 +169,8 @@ def sort_reviews_media(user_id, id, _type):
     else:
         avg = total_score/total_reviews
         avg_color = ovScoreColor(avg)
+
+
     data = {
         "friend_reviews": friend_reviews,
         "reviews": other_reviews,
@@ -175,3 +179,41 @@ def sort_reviews_media(user_id, id, _type):
     }
 
     return data
+
+
+
+
+
+
+
+def getAllMediaBacks(id, media_type, number):
+    if media_type == "movie":
+        url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=facdbd08fccf330c5cf404d4658087ae&language=en-US"
+    else:
+        url = 'https://api.themoviedb.org/3/tv/' + id + '/images?api_key=facdbd08fccf330c5cf404d4658087ae&language=en-US'
+
+    print url 
+    json_data = requests.get(url).json()
+
+    for this in json_data['backdrops']:
+        print this.file_path
+
+    return json_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# end
