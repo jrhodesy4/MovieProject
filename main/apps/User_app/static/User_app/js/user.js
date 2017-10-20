@@ -1,4 +1,63 @@
 $(document).ready(function(){
+  var typingTimer;                //timer identifier
+  var doneTypingInterval = 1000;  //time in ms, 5 second for example
+  var $input = $('#places');
+
+  //on keyup, start the countdown
+  $input.on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  });
+  //on keydown, clear the countdown
+  $input.on('keydown', function () {
+    clearTimeout(typingTimer);
+
+  });
+  //user is "finished typing," do something
+  function doneTyping() {
+    console.log("doneTyping");
+    $.ajax({
+      url: "/searchusers",
+      method: "get",
+      data: $('#places').serialize(),
+      success: function(serverResponse) {
+        jsonRetrieved(serverResponse);
+      }
+   })
+  }
+
+
+  $('.search-user-form').submit(function(e){
+       e.preventDefault();
+  })
+  function jsonRetrieved(json){
+    $('#searching-results').html('')
+    console.log("jsonretrieved");
+    console.log(json);
+    if (json.length == 0) {
+      $("#searching-results").append('<h2 class = "no-results-found" >No Results Found</h2>');
+    }
+    else {
+      for (var i = 0; i < json.length; i++){
+        // var img_url = "https://image.tmdb.org/t/p/w500" + json[i].picture
+        var id = json[i].profile_id
+        var user_name = (json[i].first_name + ' ' + json[i].last_name)
+        var proPic = json[i].pic_name
+        if (proPic.length == 2){
+          $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+
+
+
+        }
+        else {
+          $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+
+        }
+      }
+    }
+  }
+
+
   var review = $('.reviewFeed')
   var follower = document.getElementById('#followerFeed')
   var following = document.getElementById('#followingFeed')
@@ -18,6 +77,7 @@ $(document).ready(function(){
     });
 
 
+
   })
   $("#list-3").click(function(){
     console.log('list-3');
@@ -29,21 +89,21 @@ $(document).ready(function(){
 
   })
 
-  $(function() {
-    $("#places").autocomplete({
-      source: "/api/get_places",
-      select: function (event, ui) { //item selected
-        AutoCompleteSelectHandler(event, ui)
-        console.log("suck me");
-      },
-      minLength: 2,
-    });
-  });
-
-  function AutoCompleteSelectHandler(event, ui){
-    var selectedObj = ui.item;
-    window.location = "/user/" + selectedObj.id;
-  }
+  // $(function() {
+  //   $("#places").autocomplete({
+  //     source: "/api/get_places",
+  //     select: function (event, ui) { //item selected
+  //       AutoCompleteSelectHandler(event, ui)
+  //       console.log("suck me");
+  //     },
+  //     minLength: 2,
+  //   });
+  // });
+  //
+  // function AutoCompleteSelectHandler(event, ui){
+  //   var selectedObj = ui.item;
+  //   window.location = "/user/" + selectedObj.id;
+  // }
 
 
 
