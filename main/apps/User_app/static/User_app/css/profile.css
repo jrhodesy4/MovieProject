@@ -11,9 +11,12 @@ body {
   padding: 0;
 }
 
+/*search bar css*/
+
+
 .ui-widget{
   display:inline-block;
-  position: fixed;
+  position: relative;
   height: auto;
   width: 100vw;
   top: 0;
@@ -21,10 +24,7 @@ body {
   margin: 0;
   padding: 0;
   z-index: 90;
-
-
 }
-
 
 #places {
   display: inline-block;
@@ -37,15 +37,110 @@ body {
   padding: 10px;
   font-weight: 100!important;
 }
-.ui-autocomplete {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  max-height: 200px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin-left: 20px;
-  font-size: 2.0em;
+.searching-tag {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  height: 0px;
+  /*display: inline-block;*/
+  /*vertical-align: top;*/
 }
+
+
+.result-searching {
+  vertical-align: top;
+  width: 100%;
+  display: inline-block;
+  height: 80px;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: white;
+  margin: 15px;
+}
+.result-searching:hover {
+  background-color: #E8F5FD;
+}
+
+/*.result-searching img {
+  width: 20%;
+  height: 50px;
+  position: relative;
+
+}*/
+.imgDiv {
+  position: relative;
+  overflow: hidden;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  display: inline-block;
+  text-align: center;
+  margin-left: 5%;
+  margin-top: 2%;
+}
+.imgDiv img {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  object-fit: cover;
+
+}
+.imgDiv-holder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: inline-block;
+  background-color: #FC466B;
+}
+.imgDiv-holder p {
+  text-transform: uppercase;
+  position: relative;
+  color: white;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 1em;
+}
+.centaur {
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.title-card:hover {
+  color: #1DA1F2;
+}
+.search-result-title{
+  font-size: 1em;
+  font-weight: 300;
+  margin: 0;
+  height: 20px;
+  vertical-align: top;
+}
+.title-card {
+  position: relative;
+  /*float: right;*/
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: 80%;
+  color: #222222;
+  margin-left: 2%;
+  margin-top: 5%;
+}
+
+
+.search-result-sections {
+  position: fixed;
+  background-color: white;
+  height: auto;
+  width: 50vw;
+  z-index: 50;
+}
+
 
 
 
@@ -143,7 +238,7 @@ div.panel {
   height: 100%;
   display: inline-block;
   object-fit: cover;
-  z-index: 2;
+  z-index: 20;
 
 
 }
@@ -156,18 +251,15 @@ div.panel {
   display: inline-block;
   text-align: center;
 }
-/*.profPic p {
-  position: relative;
-  color: white;
+#editProf {
   z-index: -1;
-  cursor: pointer;
-}*/
-#newProf, #editProf {
-  z-index: 21;
-  color: black;
-  position: relative;
+  color: white;
+  position: fixed;
+  margin-top: -30px;
+  margin-left: 33px;
   cursor: pointer;
 }
+
 .profile-pic-placeholder {
   width: 100%;
   height: 100%;
@@ -187,6 +279,8 @@ div.panel {
   z-index: 20;
 }
 #newProf {
+  z-index: 21;
+  position: relative;
   display: block;
   width: 100%;
   text-align: center;
@@ -276,15 +370,17 @@ div.panel {
   text-align: left;
 }
 .contact-info h3 {
-  text-align: center;
+  text-align: left;
   font-weight: 300!important;
-  padding-bottom: 10px;
-}
-.contact-info p {
-  font-weight: 100!important;
   padding-bottom: 10px;
   padding-left: 25px;
   padding-right: 25px;
+}
+.contact-info p {
+  font-weight: 100!important;
+  display: inline;
+  padding-bottom: 10px;
+
 }
 
 #newPro {
@@ -427,7 +523,7 @@ div.panel {
 }
 .profile-pic-holder-small img {
   height:100%;
-  width: auto;
+  width: 100%;
 }
 /*follow section*/
 /*user is following */
@@ -477,6 +573,7 @@ div.panel {
 .reviewFeed img {
   height: 50px;
 }
+
 /*.search-bar {
   display: inline-block;
   margin: 10px;

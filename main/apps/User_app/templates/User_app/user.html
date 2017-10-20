@@ -21,7 +21,7 @@
   <body>
     {% include "../global/navbar.html" %}
     <div class="space-for-top"></div>
-    <div class="search-bar">
+    <!-- <div class="search-bar">
       <div class="ui-widget">
         <form class="" action="/searchUsers" method="post">
           {% csrf_token %}
@@ -30,6 +30,18 @@
 
         </form>
       </div>
+    </div> -->
+    <div class="search-bar">
+      <div class="ui-widget">
+        <form class="search-user-form" action="/searchUsers" method="GET">
+          {% csrf_token %}
+          <input type="input" name="person" id="places" placeholder="Find Friends">
+        </form>
+      </div>
+      <div class="search-result-sections">
+        <div id="searching-results"> </div>
+      </div>
+
     </div>
 
     <div class="header-top">
