@@ -8,7 +8,7 @@ body {
   display: inline-block;
   position: relative;
   overflow: hidden;
-
+  width: 305px;
   text-align: left;
   z-index: 100 !important;
 }
@@ -20,7 +20,7 @@ body {
   left: 0px;
 
   height: 305px;
-  width: 305px;
+  width: auto;
   vertical-align: top;
   z-index: 100 !important;
 

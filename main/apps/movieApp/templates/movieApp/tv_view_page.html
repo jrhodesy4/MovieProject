@@ -33,9 +33,9 @@
             <div class="quicklink-section">
               <div class="quicklink-section">
                 {% if in_list == False %}
-                <div  id="watchlist-button" onclick="addtowatchlist({{show.id}}, 'tv')"class="link-icon">
+                <div  id="watchlist-button" onclick="watchlist_controller({{show.id}}, 'tv')"class="link-icon">
                 {%else%}
-                <div id="watchlist-button" onclick="addtowatchlist()"class="link-icon in-watchlist">
+                <div id="watchlist-button" class="link-icon in-watchlist">
                 {% endif%}
                   <svg class="icon-content icon-watchlist">
                     <use xlink:href="#icon-watchlist"></use>

@@ -100,7 +100,17 @@ function seasonJson(json){
 }
 
 
+var watchlist_status = false
+function watchlist_controller(id, type){
+  if (watchlist_status == false) {
+    watchlist_status = true;
+    addtowatchlist(id, type);
+  }else {
+  }
+}
+
 function addtowatchlist(id, type) {
+
   data = {'id': id, 'type': type};
   $.ajax({
     url: "/add/watchlist/",
@@ -108,8 +118,10 @@ function addtowatchlist(id, type) {
     data: data,
     success: function(serverResponse) {
       addedtoWatchlist();
+
     }
- })
+  })
+
 }
 
 function addedtoWatchlist(){
