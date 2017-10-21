@@ -94,22 +94,27 @@ def profileFormat(user): # <--- this function will return profile info how we wa
     }
     return data
 
-def searchFormat(user):
+def searchFormat(user, logged_user):
     user = user
+    logged_user = logged_user
     name = (user.first_name + " " + user.last_name)
     first = user.first_name
     last = user.last_name
     kind = ''
-    # followers = Friend.objects.filter(users=user)
-    # friend, created = Friend.objects.get_or_create(current_user=user)
-    # following = friend.users.all()
-    # for follower in followers:
-    #     if follower.current_user == User.objects.get(user_id=request.session['user']):
-    #         kind = "following"
-    #
-    # for follow in following:
-    #     if follow == User.objects.get(user_id=request.session['user']):
-    #         kind = 'follower'
+    followers = Friend.objects.filter(users=user)
+    friend, created = Friend.objects.get_or_create(current_user=user)
+    following = friend.users.all()
+    for follower in followers:
+        if follower.current_user == User.objects.get(id=logged_user):
+            kind = "Following"
+
+    for follow in following:
+        if follow == User.objects.get(id=logged_user):
+            if kind == 'Following':
+                kind = "Mutual Follow"
+            else:
+                kind = 'Follower'
+
     try :
         pic = ProPicture.objects.get(user_id=user.id)
         profile_pic = pic.picture
@@ -121,6 +126,7 @@ def searchFormat(user):
         newpic = first[0] + last[0]
         is_pic = False
     data = {
+        'logged_user': logged_user,
         'kind': kind,
         'profile_id': user.id,
         'first_name': first,
@@ -220,7 +226,7 @@ def user_page(request, id):
         return redirect('/')
 
     person_profile = profileFormat(user) #here is the persons profile info formated
-
+    profile = Profile.objects.filter(user_id = User.objects.get(id = id))
     #gets the reviews and length of them
     reviews = user_services.get_reviews(id)
     length = len(reviews)
@@ -259,6 +265,7 @@ def user_page(request, id):
 
     data = {
         'length': length,
+        'profile' : profile,
         'reviews': final_form_reviews,
         'myFollow': myFollow,
         'user': person_profile,
@@ -408,7 +415,7 @@ def searchUserDB(request):
     users = User.objects.filter(first_name__icontains=search) | User.objects.filter(last_name__icontains=search)
     results = []
     for user in users:
-        data = searchFormat(user)
+        data = searchFormat(user, request.session['user'])
         results.append(data)
     print results
     return JsonResponse(results, safe=False)
