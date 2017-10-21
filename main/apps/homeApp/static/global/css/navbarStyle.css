@@ -72,6 +72,7 @@ textarea:focus, input:focus{
 
 #search-results {
   display: inline-block;
+  position: relative;
   width: auto;
   height: auto;
   vertical-align: top;
@@ -79,6 +80,7 @@ textarea:focus, input:focus{
   overflow: auto;
   white-space: nowrap;
   background-color: white;
+  z-index: 500 !important;
 
 
 
@@ -206,10 +208,13 @@ textarea:focus, input:focus{
   opacity: 0;
 }
 .menu-item p{
+  margin: 0;
   opacity: 0;
   position: relative;
   left: 0;
   right: 0;
+  line-height: 45px;
+  vertical-align: middle;
   font-size: .9em;
   top: -38px;
   font-weight: 300;
