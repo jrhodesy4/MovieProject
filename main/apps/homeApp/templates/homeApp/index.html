@@ -30,9 +30,37 @@
     {% include "../global/navbar.html" %}
 
     <div class="content-wrapper">
-      <h1>Recent Reviews</h1>
+        <div class="header">
+            <p class="the-name">Two Thumbs Up</p>
+            <img class="top-banner-backdrop"src="https://image.tmdb.org/t/p/original/mVr0UiqyltcfqxbAUcLl9zWL8ah.jpg" alt="">
+            <div class="banner-info-holder">
+                <p class="movie-title-banner">Blade Runner 2049</p>
+                <p class="movie-view-button">View Movie</p>
+            </div>
+            <div class="right-arrow-holder ">
+                <svg class="side-icon icon-right-arrow">
+                  <use xlink:href="#icon-right-arrow"></use>
+                  <symbol id="icon-right-arrow" viewBox="0 0 32 32">
+                      <title>right-arrow</title>
+                      <path d="M10.022 30.090c-0.198 0.198-0.447 0.298-0.719 0.298s-0.521-0.099-0.719-0.298c-0.397-0.397-0.397-1.042 0-1.439l12.651-12.651-12.651-12.651c-0.397-0.397-0.397-1.042 0-1.439s1.042-0.397 1.439 0l13.371 13.371c0.397 0.397 0.397 1.042 0 1.439l-13.371 13.371z"></path>
+                  </symbol>
+                </svg>
+            </div>
+            <div class="left-arrow-holder ">
+                <svg class="side-icon icon-left-arrow">
+                  <use xlink:href="#icon-left-arrow"></use>
+                  <symbol id="icon-left-arrow" viewBox="0 0 32 32">
+                      <title>left-arrow</title>
+                      <path d="M21.978 30.090c0.198 0.198 0.447 0.298 0.719 0.298s0.521-0.099 0.719-0.298c0.397-0.397 0.397-1.042 0-1.439l-12.651-12.651 12.651-12.651c0.397-0.397 0.397-1.042 0-1.439s-1.042-0.397-1.439 0l-13.395 13.371c-0.397 0.397-0.397 1.042 0 1.439l13.395 13.371z"></path>
+                  </symbol>
+                </svg>
+            </div>
+        </div>
 
 
+
+
+      <h1 class = "reviews-header">Recent Reviews</h1>
       <div class="review-feed-wrapper content">
         {% if reviews == "none" %}
           <h1>There are no reviews currently</h1>
@@ -130,8 +158,10 @@
                           </div>
                       </div>
                       <div class="bottom-section-review-extra">
+                          <a href="/user/{{ this.review.reviewer_id }}">
                           <p><span>Reviewed by:</span></p>
-                          <p>{{review.reviewer_fullname}}</p>
+                          <p class="reviewer-name">{{review.reviewer_fullname}}</p>
+                          </a>
                       </div>
                   </div>
 
@@ -141,13 +171,11 @@
           {%endfor%}
 
           {%endif%}
-
-
       </div>
 
 
-      <!-- <div class="extra-content-wrapper content">
-        <h1>watch list</h1>
+      <h1 class="watchlist-header">watch list</h1>
+      <div class="extra-content-wrapper content">
 
         <div class="watchlist-holder">
           {% for media in watchlist%}

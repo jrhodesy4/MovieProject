@@ -71,9 +71,19 @@ def index(request):
 
     user = User.objects.get(id=user_id)
     my_watchlist = Watchlist.objects.filter(user=user)
+
+
+    url = "https://api.themoviedb.org/3/discover/movie?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"
+    json_data = requests.get(url).json()
+
+
+
+
+
     data = {
         "reviews": reviews,
         "watchlist": my_watchlist,
+        "hot_movies": json_data
     }
 
     return render(request, 'homeApp/index.html', data)

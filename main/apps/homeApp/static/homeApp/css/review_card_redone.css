@@ -224,7 +224,9 @@ font-weight: 100;
   font-weight: 300 !important;
 }
 
-
+.reviewer-name {
+  text-transform: capitalize;
+}
 
 
 
@@ -254,6 +256,11 @@ font-weight: 100;
   /*background-color: #74E599;*/
   border-radius: 50px;
   z-index: 50;
+}
+
+.bottom-section-review-extra a {
+  text-decoration: none;
+  color: black;
 }
 
 /*score colors*/

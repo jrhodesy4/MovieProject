@@ -167,12 +167,9 @@ def profile(request):
     user = User.objects.get(id=request.session['user'])
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
     user_profile = profileFormat(user)
-<<<<<<< HEAD
-=======
     print user_profile
 
 
->>>>>>> 3104cf21d73a175a0bedea36e36cd0e7929f6950
     reviews = user_services.get_reviews(request.session['user'])
     length = len(reviews)
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
@@ -407,6 +404,8 @@ def searchUsers(request):
         users = User.objects.filter(first_name__icontains=request.POST['person']) | User.objects.filter(last_name__icontains=request.POST['person'])
         print users
         return render(request, 'homeApp/search.html', {'users' : users, 'count' : count})
+
+
 
 def searchUserDB(request):
     search = request.GET.get('person')

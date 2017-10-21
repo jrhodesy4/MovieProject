@@ -4,16 +4,122 @@
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0px;
 
+}
+.border {
+  border: 1px solid red;
 }
 
 .content-wrapper {
   width: 100%;
   min-height:500px;
+  margin: 0;
+  padding: 0;
 }
 .content-wrapper h1 {
   font-size: 1.5em;
+}
+.header {
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: auto;
+
+}
+.top-banner-backdrop {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  z-index: -10 !important;
+  left: 0;
+  top: 0;
+}
+.right-arrow-holder {
+  display: inline-block;
+  position: absolute;
+  opacity: .3;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.left-arrow-holder {
+  display: inline-block;
+  position: absolute;
+  opacity: .3;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.side-icon {
+  display: inline-block;
+  width: 2em;
+  height:2em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: whitesmoke;
+}
+
+
+
+.the-name {
+  text-align: center;
+  position: absolute;
+  font-size: 1.4em;
+  top:0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-right: 0 auto;
+  margin-left: 0 auto;
+  color: white;
+  font-weight: 800;
+
+}
+.banner-info-holder {
+  position: absolute;
+  display: block;
+  text-align: right;
+  margin: 5px;
+  left: 50%;
+  top: 50%;
+}
+.movie-view-button {
+  display: inline-block;
+  color: white;
+  font-size: .8em;
+  font-weight: 800;
+  background-color: #3F5EFB;
+  padding: 10px 25px;
+  border-radius:50px;
+}
+
+.movie-title-banner {
+
+  display: block;
+
+  color: white;
+  font-weight: 800;
+  font-size: 3em;
+
+
+}
+.site-name-header {
+  font-weight: 800;
+  text-align: center;
+  font-size: 3em;
+  display: inline-block;
+  position: relative;
+  background: #FC466B;
+  background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
+  background: linear-gradient(to right, #3F5EFB, #FC466B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .recomend-wrapper {
   border: 1px solid green;
@@ -32,8 +138,19 @@ body {
   white-space: nowrap;
   width: auto;
   height: auto;
+  padding: 20px;
 }
+.reviews-header {
+  text-transform: capitalize;
 
+  font-weight: 800;
+  padding: 10px;
+  color: black;
+  text-align: center;
+  background-color: white;
+
+
+}
 
 
 .extra-content-wrapper {
@@ -45,10 +162,16 @@ body {
   white-space: nowrap;
   width: auto;
   height: auto;
-
+  padding: 20px;
 
 }
 
+.watchlist-header {
+  text-transform: capitalize;
+  font-weight: 300;
+  padding: 10px;
+  color: #FC466C;
+}
 
 
 @media (max-width: 450px) {

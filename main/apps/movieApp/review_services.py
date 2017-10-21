@@ -66,7 +66,7 @@ def all_media_reviews(id, _type): #<-- this functions gets all the reviews for t
                 "overall_color": ovScoreColor(review.score),
                 'story_percent': subPercent(review.story_rating),
                 'story_color': subScoreColor(review.story_rating),
-                'ent-percent': subPercent(review.entertainment_rating),
+                'ent_percent': subPercent(review.entertainment_rating),
                 'ent_color': subScoreColor(review.entertainment_rating),
                 'act_percent': subPercent(review.acting_rating),
                 'act_color': subScoreColor(review.acting_rating),
@@ -116,7 +116,7 @@ def all_media_reviews(id, _type): #<-- this functions gets all the reviews for t
                 "overall_color": ovScoreColor(review.score),
                 'story_percent': subPercent(review.story_rating),
                 'story_color': subScoreColor(review.story_rating),
-                'ent-percent': subPercent(review.entertainment_rating),
+                'ent_percent': subPercent(review.entertainment_rating),
                 'ent_color': subScoreColor(review.entertainment_rating),
                 'act_percent': subPercent(review.acting_rating),
                 'act_color': subScoreColor(review.acting_rating),
@@ -143,7 +143,8 @@ def sort_reviews_media(user_id, id, _type):
     other_reviews = []
     total_score = 0
     total_reviews = len(full_reviews)
-    full_backdrops = getAllMediaBacks(id, _type, 10)
+    full_backdrops = getAllMediaBacks(id, _type, total_reviews)
+    count = 0
 
 
     if friends == '[]':
@@ -155,12 +156,24 @@ def sort_reviews_media(user_id, id, _type):
             try:
                 this = Friend.objects.get(current_user=user, users__id=review['reviewer_id'])
 
-
-                print "succed to get friend"
-                friend_reviews.append(review)
+                data = {
+                    "review" : review,
+                    "backdrop_path": full_backdrops[count]
+                }
+                count += 1
+                friend_reviews.append(data)
             except:
-                other_reviews.append(review)
-                print "failed to get friend"
+                data = {
+                    "review" : review,
+                    "backdrop_path": full_backdrops[count]
+                }
+
+                count += 1
+                other_reviews.append(data)
+
+
+
+
 
 
     if total_reviews == 0:
@@ -188,17 +201,29 @@ def sort_reviews_media(user_id, id, _type):
 
 def getAllMediaBacks(id, media_type, number):
     if media_type == "movie":
-        url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=facdbd08fccf330c5cf404d4658087ae&language=en-US"
+        url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=facdbd08fccf330c5cf404d4658087ae"
     else:
-        url = 'https://api.themoviedb.org/3/tv/' + id + '/images?api_key=facdbd08fccf330c5cf404d4658087ae&language=en-US'
+        url = 'https://api.themoviedb.org/3/tv/' + id + '/images?api_key=facdbd08fccf330c5cf404d4658087ae'
 
-    print url 
+
     json_data = requests.get(url).json()
+    total_backdrops = len(json_data['backdrops'])
+    backdrops = json_data['backdrops']
+    front_imageurl = 'https://image.tmdb.org/t/p/w1280'
 
-    for this in json_data['backdrops']:
-        print this.file_path
+    count = 0;
+    final_backdrop_urlList = []
 
-    return json_data
+    for x in range(0, number):
+        if count == total_backdrops:
+            count = 0;
+        final_url = front_imageurl + backdrops[x]['file_path']
+        final_backdrop_urlList.append(final_url)
+        count += 1
+
+
+
+    return final_backdrop_urlList
 
 
 
