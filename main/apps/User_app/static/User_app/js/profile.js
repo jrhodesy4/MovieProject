@@ -25,6 +25,10 @@ $(document).ready(function(){
       }
    })
   }
+  $('.content-wrapper').click(function(){
+    $('#searching-results').html('')
+    $('#places').val('')
+  })
 
 
   $('.search-user-form').submit(function(e){
@@ -39,28 +43,33 @@ $(document).ready(function(){
     }
     else {
       for (var i = 0; i < json.length; i++){
-        // var img_url = "https://image.tmdb.org/t/p/w500" + json[i].picture
         var id = json[i].profile_id
         var user_name = (json[i].first_name + ' ' + json[i].last_name)
         var proPic = json[i].pic_name
-        // var current_user = $.session.get('user');
-        // console.log(current_user);
-        console.log(id);
-        // if (id == current_user) {
-        //   $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
-        // }
-        // else {
+        var kind = json[i].kind
+        var current_user = json[i].logged_user
+
+        if (id == current_user) {
           if (proPic.length == 2){
-            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+            $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+          }
+          else {
+            $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
+
+          }
+        }
+        else {
+          if (proPic.length == 2){
+            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
 
 
           }
           else {
-            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
 
           }
 
-        // }
+        }
 
       }
     }
