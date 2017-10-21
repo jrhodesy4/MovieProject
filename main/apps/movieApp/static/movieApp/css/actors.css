@@ -150,11 +150,15 @@ body {
   width: 100%;
 }
 .name-plate {
-  position: relative;
+  position: absolute;
   color: #222222;
   text-align: center;
   vertical-align: middle;
+  bottom: 0;
   margin: 0 !important;
+  display: block;
+  width: 100%;
+  background-color: white;
 }
 
 /*.name-plate p{
