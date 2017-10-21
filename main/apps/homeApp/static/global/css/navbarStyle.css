@@ -28,7 +28,7 @@
   left: 0;
   margin: 0;
   padding: 0;
-  z-index: 100;
+  z-index: 500 !important;
 
 }
 .search-tag {
@@ -68,10 +68,12 @@ textarea:focus, input:focus{
   background-color: white;
   height: auto;
   width: auto;
+
 }
 
 #search-results {
   display: inline-block;
+  position: relative;
   width: auto;
   height: auto;
   vertical-align: top;
@@ -79,6 +81,7 @@ textarea:focus, input:focus{
   overflow: auto;
   white-space: nowrap;
   background-color: white;
+
 
 
 
@@ -96,6 +99,7 @@ textarea:focus, input:focus{
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color: white;
   margin: 15px;
+
 }
 
 .result-search img {
@@ -206,10 +210,13 @@ textarea:focus, input:focus{
   opacity: 0;
 }
 .menu-item p{
+  margin: 0;
   opacity: 0;
   position: relative;
   left: 0;
   right: 0;
+  line-height: 45px;
+  vertical-align: middle;
   font-size: .9em;
   top: -38px;
   font-weight: 300;
