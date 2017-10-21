@@ -11,7 +11,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
     <link rel="stylesheet" href="{% static 'movieApp/css/view_page.css' %}">
-    <link rel="stylesheet" href="{% static 'movieApp/css/review_card_media.css' %}">
+    <link rel="stylesheet" href="{% static 'movieApp/css/review_card_media_redone.css' %}">
     <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
     <script type="text/javascript" src="{% static 'movieApp/js/viewpage.js'%}"></script>
 
@@ -28,7 +28,7 @@
             <p class="content-title">{{ show.name }}</p>
             <div class="under-title">
               <p class="runtime">Aired: {{show.first_air_date}} to {{show.last_air_date}}</p>
-              <p class="avg-rating green">89/100</p>
+              <p class="avg-rating green">{{avg_score}}/100</p>
             </div>
             <div class="quicklink-section">
               <div class="quicklink-section">
@@ -253,42 +253,69 @@
         {%endif%}
         <div class="reviews-friend-holder">
 
-          {% for review in friend_reviews %}
+          {% for this in friend_reviews %}
 
-          <div class="review-total-holder">
-            <div class="review-card-full">
-              <div class="overall-score-full">
-                <p>Overall Score</p>
-                <div class="bumper-reviewcard"></div>
-                <div class="break"></div>
-                <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
-              </div>
-              <div class="subscores">
-                <p>Story</p>
-                <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
-                <p>Entertainment</p>
-                <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
-                <p>Acting</p>
-                <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
-                <p>Visual</p>
-                <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
-                <p>Sound</p>
-                <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
-              </div>
-            </div>
-            <a href="/user/{{ review.reviewer_id }}">
-            <div class="p-img-holder">
-              {% if review.is_pic == True %}
-              <img src="{{review.profile_pic}}"/>
-              {%endif%}
-              {% if review.is_pic == False %}
-              <p>{{review.profile_pic}}</p>
-              {%endif%}
-            </div>
-            </a>
+          <div class="full-review-card">
+              <div class="review-extra-info">
+                  <div class="top-backdrop-image">
+                      <img src="{{this.backdrop_path}}">
+                  </div>
+                  <div class="extra-info-review">
+                      <div class="subscores-full title-name">
+                          <p class= "media-title-review">{{this.review.title}}</p>
+                      </div>
+                      <div class="middle-section-review-extra">
+                          <div class="overall-section mid-section">
+                              <p class="os-title">Overall Score</p>
+                              <p class= "os-score-number {{this.review.overall_color}}">{{this.review.score}}</p>
+                          </div>
 
+
+                          <div class="extra-scores-section mid-section">
+                              <div class="info-holder-subscore">
+                                  <p>Story</p>
+                                  <div class="bar-main ">
+                                      <div class="bar-amount {{this.review.story_percent}} {{this.review.story_color}}"></div>
+                                  </div>
+                              </div>
+                              <div class="info-holder-subscore">
+                                  <p>Entertainment</p>
+                                  <div class="bar-main ">
+                                      <div class="bar-amount {{this.review.ent_percent}} {{this.review.ent_color}}"></div>
+                                  </div>
+                              </div>
+                              <div class="info-holder-subscore">
+                                  <p>Acting</p>
+                                  <div class="bar-main ">
+                                      <div class="bar-amount {{this.review.act_percent}} {{this.review.act_color}}"></div>
+                                  </div>
+                              </div>
+                              <div class="info-holder-subscore">
+                                  <p>Visual</p>
+                                  <div class="bar-main ">
+                                      <div class="bar-amount {{this.review.vis_percent}} {{this.review.vis_color}}"></div>
+                                  </div>
+                              </div>
+                              <div class="info-holder-subscore">
+                                  <p>Sound</p>
+                                  <div class="bar-main ">
+                                      <div class="bar-amount nine green {{this.review.sound_percent}} {{this.review.sound_color}}"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="bottom-section-review-extra">
+                          <a href="/user/{{ this.review.reviewer_id }}">
+                              <p><span>Reviewed by:</span></p>
+                              <p>{{this.review.user_name}}</p>
+                          </a>
+                      </div>
+                  </div>
+
+              </div>
           </div>
-          {% endfor%}
+
+          {%endfor%}
 
         </div>
       </div>
@@ -301,41 +328,67 @@
 
 
 
-            {% for review in reviews %}
+            {% for this in reviews%}
+            <div class="full-review-card">
+                <div class="review-extra-info">
+                    <div class="top-backdrop-image">
+                        <img src="{{this.backdrop_path}}">
+                    </div>
+                    <div class="extra-info-review">
+                        <div class="subscores-full title-name">
+                            <p class= "media-title-review">{{this.review.title}}</p>
+                        </div>
+                        <div class="middle-section-review-extra">
+                            <div class="overall-section mid-section">
+                                <p class="os-title">Overall Score</p>
+                                <p class= "os-score-number {{this.review.overall_color}}">{{this.review.score}}</p>
+                            </div>
 
-            <div class="review-total-holder">
-              <div class="review-card-full">
-                <div class="overall-score-full">
-                  <p>Overall Score</p>
-                  <div class="bumper-reviewcard"></div>
-                  <div class="break"></div>
-                  <p class="score-overall-full {{review.overall_color}}">{{review.score}}</p>
-                </div>
-                <div class="subscores">
-                  <p>Story</p>
-                  <div class="score-bar {{review.story_percent}} {{review.story_color}} "></div>
-                  <p>Entertainment</p>
-                  <div class="score-bar {{review.ent_percent}} {{review.ent_color}} "></div>
-                  <p>Acting</p>
-                  <div class="score-bar {{review.act_percent}} {{review.act_color}} "></div>
-                  <p>Visual</p>
-                  <div class="score-bar {{review.vis_percent}} {{review.vis_color}} "></div>
-                  <p>Sound</p>
-                  <div class="score-bar {{review.sound_percent}} {{review.sound_color}} "></div>
-                </div>
-              </div>
-              <a href="/user/{{ review.reviewer_id }}">
-              <div class="p-img-holder">
-                {% if review.is_pic == True %}
-                <img src="{{review.profile_pic}}"/>
-                {%endif%}
-                {% if review.is_pic == False %}
-                <p>{{review.profile_pic}}</p>
-                {%endif%}
-              </div>
-              </a>
 
+                            <div class="extra-scores-section mid-section">
+                                <div class="info-holder-subscore">
+                                    <p>Story</p>
+                                    <div class="bar-main ">
+                                        <div class="bar-amount {{this.review.story_percent}} {{this.review.story_color}}"></div>
+                                    </div>
+                                </div>
+                                <div class="info-holder-subscore">
+                                    <p>Entertainment</p>
+                                    <div class="bar-main ">
+                                        <div class="bar-amount {{this.review.ent_percent}} {{this.review.ent_color}}"></div>
+                                    </div>
+                                </div>
+                                <div class="info-holder-subscore">
+                                    <p>Acting</p>
+                                    <div class="bar-main ">
+                                        <div class="bar-amount {{this.review.act_percent}} {{this.review.act_color}}"></div>
+                                    </div>
+                                </div>
+                                <div class="info-holder-subscore">
+                                    <p>Visual</p>
+                                    <div class="bar-main ">
+                                        <div class="bar-amount {{this.review.vis_percent}} {{this.review.vis_color}}"></div>
+                                    </div>
+                                </div>
+                                <div class="info-holder-subscore">
+                                    <p>Sound</p>
+                                    <div class="bar-main ">
+                                        <div class="bar-amount nine green {{this.review.sound_percent}} {{this.review.sound_color}}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-section-review-extra">
+                            <a href="/user/{{ this.review.reviewer_id }}">
+                                <p><span>Reviewed by:</span></p>
+                                <p>{{this.review.user_name}}</p>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
             {% endfor%}
 
           </div>

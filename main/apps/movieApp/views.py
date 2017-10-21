@@ -155,7 +155,7 @@ def show_page(request, id):
         trailers = movie_services.get_videos(id, 'tv')
     except:
         trailers = 'none'
-    print trailers
+
     status = authenticate(request)
     show = movie_services.get_show(id)
 
@@ -201,6 +201,9 @@ def show_page(request, id):
         'avg_score_color': review_data['avg_color'],
 
     }
+
+
+    print len(context['friend_reviews'])
     return render(request, 'movieApp/tv_view_page.html', context)
 
 
