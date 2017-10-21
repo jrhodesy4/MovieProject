@@ -77,13 +77,29 @@ def index(request):
     json_data = requests.get(url).json()
 
 
+    slideshow = []
+    movies = json_data['results']
+    for x in range(0,10):
+        if x == 0:
+            current_status = "active"
+        else:
+            current_status = "non-active"
 
+        placement = "index-" + str(x)
 
-
+        current_data = {
+            "title": movies[x]['title'],
+            "backdrop_path":  movies[x]['backdrop_path'],
+            "poster_path":  movies[x]['poster_path'],
+            "id":  movies[x]['id'],
+            "status":  current_status,
+            "placement":  placement,
+        }
+        slideshow.append(current_data)
     data = {
         "reviews": reviews,
         "watchlist": my_watchlist,
-        "hot_movies": json_data
+        "slideshow": slideshow
     }
 
     return render(request, 'homeApp/index.html', data)

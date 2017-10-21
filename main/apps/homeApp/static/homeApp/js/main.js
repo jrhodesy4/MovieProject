@@ -1,36 +1,29 @@
 
-  $(document).ready(function(){
+var currentslide = 0;
+function slideshowController(n){
+  var newslide = currentslide + n;
 
-  $(function() {
-    $("#places").autocomplete({
-      source: "/api/get_places",
-      select: function (event, ui) { //item selected
-        AutoCompleteSelectHandler(event, ui)
-      },
-      minLength: 2,
-    });
-  });
-
-  function AutoCompleteSelectHandler(event, ui)
-  {
-    var selectedObj = ui.item;
-    window.location = "/user/" + selectedObj.id;
+  if (newslide > 9){
+    newslide = 0
   }
-  $(function() {
-    $("#movies").autocomplete({
-      source: "/api/search_movies",
-      select: function (event, ui) { //item selected
-        AutoCompleteSelectHandler(event, ui)
-      },
-      minLength: 2,
-    });
-  });
-
-  function AutoCompleteSelectHandler(event, ui)
-  {
-    var selectedObj = ui.item;
-    window.location = "/movie/" + selectedObj.id;
+  if (newslide < 0) {
+    newslide = 9;
   }
+  showSlide(currentslide, newslide);
+}
 
 
-}); //this is the end
+
+function showSlide(old, current){
+  targetslide = "#index-" + current;
+  oldslide = "#index-" + old;
+
+  $(oldslide).removeClass("active");
+  $(oldslide).addClass("non-active");
+
+  $(targetslide).removeClass("non-active");
+  $(targetslide).addClass("active");
+
+
+  currentslide = current;
+}

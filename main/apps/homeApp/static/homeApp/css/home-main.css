@@ -56,7 +56,9 @@ body {
   transform: translateY(-50%);
   cursor: pointer;
 }
-
+.left-arrow-holder:hover, .right-arrow-holder:hover {
+  opacity: .7;
+}
 .side-icon {
   display: inline-block;
   width: 2em;
@@ -66,7 +68,9 @@ body {
   fill: whitesmoke;
 }
 
-
+.non-active{
+  display: none;
+}
 
 .the-name {
   text-align: center;
@@ -86,8 +90,8 @@ body {
   display: block;
   text-align: right;
   margin: 5px;
-  left: 50%;
-  top: 50%;
+  right: 10%;
+  bottom: 20%;
 }
 .movie-view-button {
   display: inline-block;
@@ -106,6 +110,7 @@ body {
   color: white;
   font-weight: 800;
   font-size: 3em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
 
 }

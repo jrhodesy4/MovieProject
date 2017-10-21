@@ -17,10 +17,11 @@
 
     <link rel="stylesheet" href="{% static 'global/css/watchlist_tile.css'%}"/>
     <!-- here is the import for javascript  -->
-    <!-- <script type="text/javascript" src="{% static 'homeApp/js/main.js'%}"></script> -->
+    <script type="text/javascript" src="{% static 'homeApp/js/main.js'%}"></script>
     <!-- here is for the reviews -->
     <link rel="stylesheet" href="{% static 'homeApp/css/review_card_redone.css'%}"/>
     <script type="text/javascript" src="{% static 'homeApp/js/review_card.js'%}"></script>
+
     <!-- for the menu -->
     <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
     <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}"/>
@@ -32,12 +33,24 @@
     <div class="content-wrapper">
         <div class="header">
             <p class="the-name">Two Thumbs Up</p>
-            <img class="top-banner-backdrop"src="https://image.tmdb.org/t/p/original/mVr0UiqyltcfqxbAUcLl9zWL8ah.jpg" alt="">
-            <div class="banner-info-holder">
-                <p class="movie-title-banner">Blade Runner 2049</p>
-                <p class="movie-view-button">View Movie</p>
+
+
+            <div class="slideshow-banner">
+              {% for item in slideshow %}
+                <div id= "{{item.placement}}" class="slideshow-option {{item.status}} ">
+                    <img class="top-banner-backdrop"src="https://image.tmdb.org/t/p/original{{item.backdrop_path}}" alt="">
+                    <div class="banner-info-holder">
+                        <p class="movie-title-banner">{{item.title}}</p>
+                        <p class="movie-view-button">View Movie</p>
+                    </div>
+                </div>
+              {% endfor %}
+
             </div>
-            <div class="right-arrow-holder ">
+
+
+
+            <div onclick="slideshowController(+1)" class="right-arrow-holder">
                 <svg class="side-icon icon-right-arrow">
                   <use xlink:href="#icon-right-arrow"></use>
                   <symbol id="icon-right-arrow" viewBox="0 0 32 32">
@@ -46,7 +59,7 @@
                   </symbol>
                 </svg>
             </div>
-            <div class="left-arrow-holder ">
+            <div onclick="slideshowController(-1)" class="left-arrow-holder ">
                 <svg class="side-icon icon-left-arrow">
                   <use xlink:href="#icon-left-arrow"></use>
                   <symbol id="icon-left-arrow" viewBox="0 0 32 32">
