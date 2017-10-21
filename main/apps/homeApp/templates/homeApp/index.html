@@ -40,8 +40,10 @@
                 <div id= "{{item.placement}}" class="slideshow-option {{item.status}} ">
                     <img class="top-banner-backdrop"src="https://image.tmdb.org/t/p/original{{item.backdrop_path}}" alt="">
                     <div class="banner-info-holder">
-                        <p class="movie-title-banner">{{item.title}}</p>
-                        <p class="movie-view-button">View Movie</p>
+                        <a href="/movie/{{item.id}}">
+                            <p class="movie-title-banner">{{item.title}}</p>
+                            <p class="movie-view-button">View Movie</p>
+                        </a>
                     </div>
                 </div>
               {% endfor %}
