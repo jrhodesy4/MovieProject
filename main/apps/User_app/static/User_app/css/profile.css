@@ -146,11 +146,11 @@ body {
 
 
 .search-result-sections {
-  position: fixed;
+  position: absolute;
   background-color: white;
-  height: auto;
+  max-height: 100px;
   width: 50vw;
-  z-index: 50;
+  z-index: 400!important
 }
 
 
@@ -435,6 +435,8 @@ div.panel {
 .watchlist-info {
   margin-top: 20px;
   display: inline-block;
+  text-align: left;
+  padding-left: 5%;
 
 }
 .watchlist-info img {
@@ -482,11 +484,11 @@ div.panel {
 .watch-movie {
   display: inline-block;
   width: auto;
-  height: 150px;
+  height: 120px;
 
   /*margin-bottom: 20px;*/
   /*padding-top: 20px;*/
-  
+
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 4px;

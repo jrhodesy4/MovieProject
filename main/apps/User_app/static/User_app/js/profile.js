@@ -15,15 +15,24 @@ $(document).ready(function(){
   });
   //user is "finished typing," do something
   function doneTyping() {
-    console.log("doneTyping");
-    $.ajax({
-      url: "/searchusers",
-      method: "get",
-      data: $('#places').serialize(),
-      success: function(serverResponse) {
-        jsonRetrieved(serverResponse);
-      }
-   })
+    var input = $('#places').val();
+    if (input == ''){
+      $('#searching-results').css({
+        'display': 'none'
+      });
+    }
+    else {
+      console.log("doneTyping");
+      $.ajax({
+        url: "/searchusers",
+        method: "get",
+        data: $('#places').serialize(),
+        success: function(serverResponse) {
+          jsonRetrieved(serverResponse);
+        }
+      })
+
+    }
   }
   $('.content-wrapper').click(function(){
     $('#searching-results').html('')
