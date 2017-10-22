@@ -187,6 +187,9 @@ a:active {
   z-index: 100;
 }
 .icon-holder:hover {left: -3px; }
+.icon-holder {
+  transition: left .3s;
+}
 
 .discover-label:hover .icon-holder {left: -3px;}
 

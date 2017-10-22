@@ -125,12 +125,12 @@
         </div>
       </div>
       {% if trailers != 'none' %}
-      <div class="trailer-section">
-        <div onclick="trailerController()"class="close-button-form">
+      <div id="trailer-sec" class="trailer-section">
+        <div onclick="trailerController('hide')"class="close-button-form">
         </div>
         {% for trailer in trailers|slice:":1" %}
         <div class="trailer">
-          <iframe src="http://www.youtube.com/embed/{{trailer.key}}"
+          <iframe src="http://www.youtube.com/embed/{{trailer.key}}?enablejsapi=1"
           width="760" height="450" frameborder="0" allowfullscreen></iframe>
         </div>
         {% endfor %}
@@ -173,10 +173,10 @@
             <li>{{network.name}}</li>
             {% endfor %}
           </h3>
-          {% if movie.homepage == "" %}
+          {% if show.homepage == "" %}
           <h3>Homepage: <li>Homepage not available</li></h3>
           {% else%}
-          <h3>Homepage: <li><a href="{{movie.homepage}}" target="_blank">{{show.homepage}}</a></li></h3>
+          <h3>Homepage: <li><a href="{{show.homepage}}" target="_blank">{{show.homepage}}</a></li></h3>
           {% endif %}
           <h3>Genres:
             {% for name in show.genres %}
