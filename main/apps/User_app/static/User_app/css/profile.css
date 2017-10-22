@@ -15,10 +15,11 @@ body {
 
 
 .ui-widget{
+  font-family: 'Open Sans', sans-serif !important;
   display:inline-block;
   position: relative;
   height: auto;
-  width: 100vw;
+  width: 100%;
   top: 0;
   left: 0;
   margin: 0;
@@ -31,10 +32,11 @@ body {
   position: relative;
   top: 0 ;
   left: 0;
-  width:100%;
+  width:98.3%;
+  border: none;
   font-size: 1em;
   height: 20%!important;
-  padding: 10px;
+  padding: 10px  10px;
   font-weight: 100!important;
 }
 .searching-tag {
@@ -166,7 +168,8 @@ body {
 
 .header-top {
   display: block;
-  height: 60px;
+  height: 10px;
+  width: 100%;
   background: #FC466B;
   background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
   background: linear-gradient(to right, #3F5EFB, #FC466B);
@@ -371,6 +374,9 @@ div.panel {
   position: absolute;
   bottom: 0;
   margin-bottom: 20px;
+  line-height: 25px;
+  font-size: 1em;
+  vertical-align: middle;
 }
 #edit {
   width : 40%;
@@ -437,8 +443,10 @@ div.panel {
   border: none;
   color: white;
   height: 25px;
+  line-height: 25px;
+  vertical-align: middle;
   margin-top: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 100;
   cursor: pointer;
   transition: width 1s, border-radius 2s, margin-left 1s, background-color 2s;
@@ -565,11 +573,12 @@ div.panel {
   width: 65%;
   height: auto;
   margin: 10px;
-  overflow: scroll;
+  overflow: auto;
   display: inline-block;
   padding-top: 20px;
   border-radius: 4px;
   padding-bottom: 20px;
+  text-align: left;
 
 }
 .pageFeed a {
@@ -627,11 +636,11 @@ div.panel {
   text-align: center;
   height: 100%;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
+  outline: 2px solid green;
 }
 .reviewDiv {
   margin: 2%;
-  outline: 2px solid green;
   text-align: left;
 }
 .reviewFeed img {
@@ -663,6 +672,7 @@ div.panel {
 .name-bumper {
   width: 80%;
   height: 5px;
+  margin-bottom: 20px;
   display: inline-block;
   border-radius: 9px;
   background: #FC466B;
