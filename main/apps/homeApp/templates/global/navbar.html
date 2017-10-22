@@ -8,7 +8,7 @@
 
 
       <div class="search-div">
-          <form class="search-form" action="/search/" method="POST">
+          <form class="search-form" name="search-form"action="/search/" method="POST">
               {% csrf_token %}
               <input type="input" name="search-info" id="search-info" placeholder="Search">
           </form>

@@ -70,6 +70,7 @@ $(document).ready(function(){
 // functions for top nav open/close =============
 function openSearch() {
   $('.search-div').css({display: 'inline-block'})
+  document.forms['search-form'].elements['search-info'].focus();
 
 };
 
