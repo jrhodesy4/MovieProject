@@ -97,7 +97,7 @@ function seasonJson(json){
     $(".episode-list").append('<h2>' + name + '</h2><img src="https://image.tmdb.org/t/p/w500' + poster + '"> <div class="season-overview"> <p>Synopsis: ' + overview + '</p></div><div class="episodes">');
     // for (var i = 0; i < json.episodes.length; i++){
       for (episode in episodeName) {
-        $(".episode-list").append('<a href="/episode/' + show + '/' + season + '/' + episodeId[episode] + '"><div class"episode"><h3>' + episodeId[episode] + '. ' + episodeName[episode] + '</h3></div></a>' );
+        $(".episodes").append('<a href="/episode/' + show + '/' + season + '/' + episodeId[episode] + '"><div class"episode"><h3>' + episodeId[episode] + '. ' + episodeName[episode] + '</h3></div></a>' );
 
       }
     // }
