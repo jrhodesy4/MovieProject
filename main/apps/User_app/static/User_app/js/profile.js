@@ -17,9 +17,7 @@ $(document).ready(function(){
   function doneTyping() {
     var input = $('#places').val();
     if (input == ''){
-      $('#searching-results').css({
-        'display': 'none'
-      });
+      $('#searching-results').html('')
     }
     else {
       console.log("doneTyping");

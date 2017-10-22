@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Transpose
 
 # ****************************************************************
 # ****************************************************************
@@ -103,6 +105,10 @@ class Profile(models.Model):
 
 class ProPicture(models.Model):
     picture = models.ImageField(upload_to='documents/', blank=True)
+    picture_thumbnail = ImageSpecField(source='picture',
+                                      processors=[Transpose(), ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
     user_id = models.ForeignKey(User, related_name='profilePic')
 
 
