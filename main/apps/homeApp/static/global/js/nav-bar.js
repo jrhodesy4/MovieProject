@@ -132,6 +132,8 @@ function menuController(){
 }
 
 function openStackMenu(){
+  $('.logout-button').css({"display": "inherit"});
+  $('.menu-item').css({"display": "inherit"});
   $("#menu-item-1").animate({opacity: '.9'});
   $("#menu-item-2").animate({opacity: '.9'});
   $("#menu-item-3").animate({opacity: '.9'});
@@ -148,7 +150,9 @@ function openStackMenu(){
 }
 function closeStackMenu(){
 
-  $("#menu-item-1").animate({left: '0px'});
+  $("#menu-item-1").animate({left: '0px'}, {complete:function(){
+    $('.menu-item').css({"display": "none"});
+  }});
   $("#menu-item-2").animate({left: '0px'});
   $("#menu-item-3").animate({top: '0px'});
 
@@ -159,6 +163,8 @@ function closeStackMenu(){
   $('.hamburger').animate({opacity: '1'});
   $('.icon-cancel').css({display: 'none'});
   $('.logout-button').animate({opacity: '0'});
+  $('.logout-button').css({"display": "none"});
+
 
   if (menuStatus == "search"){
     $('.hamburger').animate({opacity: '0'}, 100);
