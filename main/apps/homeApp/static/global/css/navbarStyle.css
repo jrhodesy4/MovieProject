@@ -65,7 +65,7 @@ textarea:focus, input:focus{
 
 .search-result-block {
   position: relative;
-  background-color: white;
+  background-color: none;
   height: auto;
   width: auto;
 
