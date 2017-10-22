@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
 
 /*
 #00c9ff
 
 #92fe9d*/
 *{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 .center {
   margin: auto;
@@ -214,17 +214,18 @@ textarea:focus, input:focus{
 .menu-item:hover .icon {
   opacity: 0;
 }
+
 .menu-item p{
   margin: 0;
   opacity: 0;
   position: relative;
   left: 0;
   right: 0;
-  line-height: 45px;
+  line-height: 43px;
   vertical-align: middle;
   font-size: .9em;
   top: -38px;
-  font-weight: 300;
+  font-weight: 500;
 }
 .icon {
   display: inline-block;
