@@ -386,6 +386,22 @@ div.panel {
   vertical-align: middle;
   margin-bottom: 20px;
 }
+.u-contact-info {
+  text-align: left;
+}
+.u-contact-info h3 {
+  text-align: left;
+  font-weight: 300!important;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.u-contact-info p {
+  font-weight: 100!important;
+  display: inline;
+  padding-bottom: 10px;
+
+}
 .contact-info {
   margin-top: 5px;
   text-align: left;

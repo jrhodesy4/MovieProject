@@ -75,6 +75,7 @@
               </div>
               {%endif%}
               {% endif%}
+              {% if trailers != 'none' %}
               <div onclick="trailerController()" class="link-icon">
                 <svg class="icon-content icon-trailer">
                   <use xlink:href="#icon-trailer"></use>
@@ -84,6 +85,7 @@
                   </symbol>
                 </svg>
               </div>
+              {% endif %}
               <div onclick="extraController()" class="link-icon">
                 <svg class="icon-content icon-info">
                   <use xlink:href="#icon-info"></use>
@@ -140,12 +142,12 @@
         </div>
       </div>
       {% if trailers != 'none' %}
-      <div class="trailer-section">
-        <div onclick="trailerController()"class="close-button-form">
+      <div id="trailer-sec" class="trailer-section">
+        <div onclick="trailerController('hide')"class="close-button-form">
         </div>
         {% for trailer in trailers|slice:":1" %}
         <div class="trailer">
-          <iframe src="http://www.youtube.com/embed/{{trailer.key}}"
+          <iframe src="http://www.youtube.com/embed/{{trailer.key}}?enablejsapi=1"
           width="760" height="450" frameborder="0" allowfullscreen></iframe>
         </div>
         {% endfor %}

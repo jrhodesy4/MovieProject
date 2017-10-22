@@ -61,7 +61,7 @@
                 <p class="review-score-number">{{score}}</p>
               </div>
               {% endif%}
-
+              {% if trailers != 'none' %}
               <div onclick="trailerController()" class="link-icon">
                 <svg class="icon-content icon-trailer">
                   <use xlink:href="#icon-trailer"></use>
@@ -71,6 +71,7 @@
                   </symbol>
                 </svg>
               </div>
+              {% endif %}
               <div onclick="extraController()" class="link-icon">
                 <svg class="icon-content icon-info">
                   <use xlink:href="#icon-info"></use>

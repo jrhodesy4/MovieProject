@@ -79,18 +79,35 @@ def movie_page(request, id): # this renders the selected individual movie page
     #below is info for each movie
     movie = movie_services.get_movie(id)
     mov = movie['movie_info']
-    budget = format(mov['budget'], ",d")
-    revenue = format(mov['revenue'], ",d")
+    try:
+        budget = format(mov['budget'], ",d")
+    except:
+        budget = 'None listed'
+    try:
+        revenue = format(mov['revenue'], ",d")
+    except: revenue = "None listed"
     date = datetime.strptime(mov['release_date'], '%Y-%m-%d')
-    release = date.strftime('%b %d, %Y')
-    time = mov['runtime'];
-    hours = int(math.floor(time / 60));
-    minutes = (time % 60);
-    runtime = [hours, minutes]
-    genres = mov['genres']
-    genre_names = []
-    for genre in genres:
-        genre_names.append(genre['name'])
+    try:
+        release = date.strftime('%b %d, %Y')
+    except:
+        release = "None listed"
+    try:
+        time = mov['runtime'];
+        hours = int(math.floor(time / 60));
+        minutes = (time % 60);
+    except:
+        pass
+    try:
+        runtime = [hours, minutes]
+    except:
+        runtime = "None listed"
+    try:
+        genres = mov['genres']
+        genre_names = []
+        for genre in genres:
+            genre_names.append(genre['name'])
+    except:
+        genre_names = ["none"]
 
     try:
         watchlist = Watchlist.objects.get(api_code=id)
@@ -153,8 +170,12 @@ def show_page(request, id):
     in_list = False
     try:
         trailers = movie_services.get_videos(id, 'tv')
+        if trailers == []:
+            trailers = 'none'
     except:
         trailers = 'none'
+    print trailers
+    print "henlo"
 
     status = authenticate(request)
     show = movie_services.get_show(id)

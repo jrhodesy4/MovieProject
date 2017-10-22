@@ -270,6 +270,7 @@ def user_page(request, id):
         'length': length,
         'profile' : profile,
         'reviews': final_form_reviews,
+        'watchlist': Watchlist.objects.filter(user=id),
         'myFollow': myFollow,
         'user': person_profile,
         'following': following.count,
