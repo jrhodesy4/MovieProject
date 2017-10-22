@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
 body {
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+
 }
 .full-review-card {
   display: inline-block;
@@ -76,7 +78,7 @@ body {
 
 .score p {
   font-size: .5em;
-  font-weight: 100;
+  font-weight: 300;
   margin: 0;
   margin-bottom: 5px;
 
@@ -149,7 +151,7 @@ body {
 }
 .media-title-review {
   margin: 0;
-  font-weight: 100;
+  font-weight: 300;
   vertical-align: middle;
   line-height: 25px;
   white-space: nowrap;
@@ -157,7 +159,7 @@ body {
 
 .os-title {
 margin-top: 5px;
-font-weight: 100;
+font-weight: 300;
 }
 .os-score-number {
   font-size: 2em;
@@ -200,7 +202,7 @@ font-weight: 100;
 .info-holder-subscore p {
     margin: 0;
     font-size: .3em;
-    font-weight: 100;
+    font-weight: 300;
 }
 
 
@@ -215,13 +217,13 @@ font-weight: 100;
 
 .bottom-section-review-extra p {
   margin: 0;
-  font-weight:100;
+  font-weight:300;
   font-size: .8em;
   cursor: pointer;
 }
 .bottom-section-review-extra span {
   font-size: .5em !important;
-  font-weight: 300 !important;
+  font-weight: 500 !important;
 }
 
 .reviewer-name {

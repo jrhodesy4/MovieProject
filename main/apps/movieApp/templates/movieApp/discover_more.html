@@ -38,7 +38,11 @@
       <a href="/show/{{ movie.id }}">
       {% endif%}
         <div class="movie-card-ext">
+          {% if movie.backdrop_path == None %}
+          <div class="backdrop-img-cover"></div>
+          {% else %}
           <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
+          {% endif%}
           <div class="info-plate-ext">
             {% if pagetype == "movie"%}
             <p>{{movie.original_title}}</p>
