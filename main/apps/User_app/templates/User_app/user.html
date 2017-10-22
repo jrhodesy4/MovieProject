@@ -87,15 +87,39 @@
         <div class="profileInfo">
           {% if profile %}
           {% for item in profile %}
-          <div class="contact-info">
-            <h3>Bio:<p> {{item.bio}}</p></h3>
-            <h3>Favorite Movie: <p>{{item.fav_movie}}</p></h3>
+          <div class="u-contact-info">
+            <h4>Bio:<p> {{item.bio}}</p></h4>
+            <h4>Favorite Movie:<p> {{item.fav_movie}}</p></h4>
           </div>
           {% endfor %}
           {% else %}
           <p>No profile info yet</p>
           {% endif %}
 
+
+        </div>
+        <div class="movieList">
+          <button class='enableOnInput' id="watchlist-button" type="button" value="Watchlist ({{watchlist.count}})" name="button" disabled="true">Watchlist ({{watchlist.count}})</button>
+          <div class="watchlist-info" style="display:none">
+            {% for movie in watchlist %}
+            {% if movie.media_type == 'movie' %}
+            <a href="/movie/{{movie.api_code}}">
+              <div class="watch-movie">
+              <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
+              <!-- <p>{{movie.movie_title}}</p> -->
+            </div>
+            </a>
+            {% elif movie.media_type == 'tv' %}
+            <a href="/show/{{movie.api_code}}">
+              <div class="watch-movie">
+              <img src="https://image.tmdb.org/t/p/w1280/{{movie.poster_path}}">
+              <!-- <p>{{movie.movie_title}}</p> -->
+            </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+
+          </div>
 
         </div>
 
