@@ -125,13 +125,13 @@
             </form>
 
           </div>
-          <input id="editPro" type="button" name="answer" value="Edit Profile" />
           <div class="contact-info">
 
-            <p>Bio: {{item.bio}}</p>
-            <p>Favorite Movie: {{item.fav_movie}}</p>
+            <h4>Bio:<p> {{item.bio}}</p></h4>
+            <h4>Favorite Movie:<p> {{item.fav_movie}}</p></h4>
 
           </div>
+          <input id="editPro" type="button" name="answer" value="Edit" />
           {% endfor %}
           {% else %}
 

@@ -236,9 +236,9 @@ $(document).ready(function(){
         'bottom' : '0'
 
       })
-      $('.contact-info').css({
-        'display' : 'none'
-      })
+      // $('.contact-info').css({
+      //   'display' : 'none'
+      // })
       $('#edit').css({
         'display' : 'inline-block'
       })
@@ -247,12 +247,12 @@ $(document).ready(function(){
     else if (hidden == false) {
       $('.profileDiv').slideUp("slow", function() {
       });
-      $("#editPro").val('Edit Profile')
+      $("#editPro").val('Edit')
       $("#editPro").css({
-        'width': '100%',
-        'background-color': '#3F5EFB',
-        'border-radius': '0px',
-        'color': 'white',
+        'width': '25%',
+        'background-color' : 'white',
+        'color' : '#ccc',
+        'border-radius': '50px',
         'height': '25px',
         'margin-top': '10px',
         'position': 'inherit',
