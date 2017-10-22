@@ -77,7 +77,7 @@ body {
   display: inline-block;
   text-align: center;
   margin-left: 5%;
-  margin-top: 2%;
+  margin-top: 2.5%;
 }
 .imgDiv img {
   width: 100%;
@@ -129,7 +129,7 @@ body {
   width: 80%;
   color: #222222;
   margin-left: 2%;
-  margin-top: 4%;
+  margin-top: 5%;
 }
 .title-card p{
   font-size: .8em!important;
@@ -146,11 +146,11 @@ body {
 
 
 .search-result-sections {
-  position: fixed;
+  position: absolute;
   background-color: white;
-  height: auto;
+  max-height: 100px;
   width: 50vw;
-  z-index: 50;
+  z-index: 400!important
 }
 
 
@@ -435,6 +435,8 @@ div.panel {
 .watchlist-info {
   margin-top: 20px;
   display: inline-block;
+  text-align: left;
+  padding-left: 5%;
 
 }
 .watchlist-info img {
@@ -482,10 +484,11 @@ div.panel {
 .watch-movie {
   display: inline-block;
   width: auto;
-  height: 150px;
+  height: 120px;
 
-  margin-bottom: 20px;
-  padding-top: 20px;
+  /*margin-bottom: 20px;*/
+  /*padding-top: 20px;*/
+
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 4px;
@@ -518,6 +521,7 @@ div.panel {
   display: inline-block;
   padding-top: 20px;
   border-radius: 4px;
+  padding-bottom: 20px;
 
 }
 .pageFeed a {

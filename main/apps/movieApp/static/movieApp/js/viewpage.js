@@ -31,7 +31,13 @@ function extraController(){
 }
 var is_trailer_open = "closed"
 
-function trailerController(){
+function trailerController(state){
+  // if state == 'hide', hide. Else: show video
+   var div = document.getElementById("trailer-sec");
+   var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+   div.style.display = state == 'hide' ? 'none' : '';
+   func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+   iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
   if (is_trailer_open == "closed"){
     $(".trailer-section").fadeIn(1000);
     $('.opaque').fadeIn(500);
