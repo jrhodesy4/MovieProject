@@ -60,21 +60,21 @@ $(document).ready(function(){
 
         if (id == current_user) {
           if (proPic.length == 2){
-            $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3> </div></div></a>');
+            $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title-friend">' + user_name + '</h3> </div></div></a>');
           }
           else {
-            $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
+            $("#searching-results").append('<a class="searching-tag" href="/profile"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title-friend">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
 
           }
         }
         else {
           if (proPic.length == 2){
-            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
+            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><div class="imgDiv-holder"><p>'+ proPic +'</p></div></div> <div class="title-card"><h3 class="search-result-title-friend">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
 
 
           }
           else {
-            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
+            $("#searching-results").append('<a class="searching-tag" href="/user/' + id + '"><div class="result-searching centaur"><div class="imgDiv"><img class ="search-result-icon" src="'+ proPic +'"></div> <div class="title-card"><h3 class="search-result-title-friend">' + user_name + '</h3><p>' + kind + '</p></div></div></a>');
 
           }
 

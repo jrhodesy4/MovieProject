@@ -93,7 +93,13 @@ body {
   margin: 5px;
   right: 10%;
   bottom: 20%;
+  border: 1px solid red;
+  overflow: hidden;
+  height: auto;
+  width: auto;
 }
+
+
 .movie-view-button {
   display: inline-block;
   color: white;

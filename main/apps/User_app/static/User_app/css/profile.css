@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
 *{
   margin: 0;
   padding: 0;
 }
 body {
   background-color: #E6ECF0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   margin: 0;
   padding: 0;
 }
@@ -76,8 +76,9 @@ body {
   border-radius: 50px;
   display: inline-block;
   text-align: center;
-  margin-left: 5%;
-  margin-top: 2.5%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 10px;
 }
 .imgDiv img {
   width: 100%;
@@ -113,12 +114,16 @@ body {
 .title-card:hover {
   color: #1DA1F2;
 }
-.search-result-title{
+.search-result-title-friends {
+  position: relative;
+  display: inline-block;
   font-size: 1em;
   font-weight: 300;
   margin: 0;
-  height: 20px;
-  vertical-align: top;
+  line-height: 80px;
+  vertical-align: middle;
+  margin-left: 5px;
+
 }
 .title-card {
   position: relative;
@@ -127,20 +132,22 @@ body {
   vertical-align: top;
   height: 100%;
   width: 80%;
+
   color: #222222;
-  margin-left: 2%;
-  margin-top: 5%;
+
 }
 .title-card p{
   font-size: .8em!important;
-  padding-top: 5px;
   font-weight: 100;
-  color: #1DA1F2;
+  color: #3F5EFB;
+  float: right;
+  line-height: 80px;
+  vertical-align: middle;
 }
 .no-results-found {
   padding:5px;
   text-align: center;
-  color: #1DA1F2;
+  color: #FC466B;
   font-weight: 300;
 }
 
@@ -339,7 +346,6 @@ div.panel {
   margin-top: 20px;
 }
 .profile-form input[type=text] {
-  font-family: 'Roboto', sans-serif;
   font-weight: 100;
   width: 100%;
   height: 20px;
@@ -376,23 +382,36 @@ div.panel {
   position: absolute;
   font-size: .8em;
   bottom: 0;
+  line-height: 25px;
+  vertical-align: middle;
   margin-bottom: 20px;
 }
 .contact-info {
-  margin-top: 20px;
+  margin-top: 5px;
   text-align: left;
+
+}
+.contact-info h4 {
+  font-weight:600;
+  color: #222222;
+  display: block;
+
 }
 .contact-info h3 {
   text-align: left;
-  font-weight: 300!important;
+  font-weight: 300;
   padding-bottom: 10px;
   padding-left: 25px;
   padding-right: 25px;
+  font-weight: 300;
 }
 .contact-info p {
-  font-weight: 100!important;
+  font-weight: 100;
   display: inline;
   padding-bottom: 10px;
+  color: #222222;
+  font-size: .8em;
+  display: block;
 
 }
 
@@ -417,13 +436,15 @@ div.panel {
   color: #ccc;
   height: 25px;
   margin-top: 10px;
+  line-height: 25px;
+  vertical-align: middle;
   font-size: .8em;
   font-weight: 100;
   cursor: pointer;
   transition: width 1s, border-radius 2s, margin-left 1s, background-color 1.5s;
 }
 #editPro:hover {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  color: #222222;
 
 }
 .movieList {
@@ -456,8 +477,10 @@ div.panel {
   border: none;
   color: white;
   height: 25px;
+  line-height: 25px;
+  vertical-align: middle;
   margin-top: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 100;
   cursor: pointer;
 
@@ -478,12 +501,15 @@ div.panel {
   border: none;
   color: white;
   height: 25px;
-  margin-top: 10px;
-  font-size: 1.2em;
+
+  font-size: 1em;
+  line-height: 25px;
+  vertical-align: middle;
   font-weight: 100;
   cursor: pointer;
 
 }
+
 #watchlist-button:focus {
   outline: 0;
 }
@@ -664,7 +690,14 @@ div.panel {
   }
 
 }
-
+@media (max-width: 600px) {
+  .result-searching {
+    width: 100%;
+  }
+  .search-result-sections {
+    width: 100%;
+  }
+}
 @media (max-width: 450px) {
   .review-total-holder {
     margin: 0px !important;
