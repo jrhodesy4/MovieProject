@@ -1,7 +1,11 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+import re, bcrypt, datetime
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Transpose
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 # ****************************************************************
 # ****************************************************************
@@ -24,27 +28,35 @@ class UserManager(models.Manager):
             pass
             #first name validations
         if data['first_name'] == '':
-            errors.append('The First name cannot be blank')
-        elif data['first_name'].isdigit():
-            errors.append('The First Name can only be characters!')
+            errors.append('First name cannot be blank')
+        if not data['first_name'].isalpha():
+            errors.append('First Name can only be characters')
         #Last Name Validations
-        if data['first_name'] == '':
-            errors.append('The First name cannot be blank')
-        elif data['first_name'].isdigit():
-            errors.append('The First Name can only be characters!')
+        if data['last_name'] == '':
+            errors.append('Last name cannot be blank')
+        if not data['last_name'].isalpha():
+            errors.append('Last name can only be characters')
         #email Validations
 
         if data['email'] == '':
             errors.append('The Email Field cannot be blank')
+        try:
+            validate_email(data['email'])
+        except ValidationError:
+            errors.append('Invalid Email')
+
         # ----------------------
         # MUST ADD EMAIL REGEX INTO VALIDATIONS
         # ---------------------
         # Password validation
-        if len(data['password']) < 1 :
-            errors.append('The password cannot be blank')
+        if len(data['password']) < 8 :
+            errors.append('Password must be at least eight characters long.')
+        if data['password'] != data['confirm']:
+            errors.append("Passwords do not match")
 
 
         if len(errors) == 0: #if there are no errors in the validations
+            data['password'] = bcrypt.hashpw(data['password'].encode('utf8'), bcrypt.gensalt())
             user = User.objects.create( # create the new user
                 first_name=data['first_name'],
                 last_name=data['last_name'],
@@ -63,17 +75,25 @@ class UserManager(models.Manager):
         errors = []
         try:
             foundUser = User.objects.get(email=data['email'])
-            print "User is found"
-            if foundUser.password == data['password']:
-                return {'user': foundUser, 'errors': None}
+            if bcrypt.hashpw(data['password'].encode('utf8'), foundUser.password.encode('utf8')) == foundUser.password.encode('utf8'):
+                print 'success'
             else:
-                errors.append('Email or password is incorrect')
-                return {'user': None, 'errors': errors }
+                errors.append('Incorrect Login Credentials')
+            # print "User is found"
+            # if foundUser.password == data['password']:
+            #     return {'user': foundUser, 'errors': None}
+            # else:
+            #     errors.append('Email or password is incorrect')
+            #     return {'user': None, 'errors': errors }
 
         except:
             print "there is no user with that name"
             errors.append('Email or password is incorrect')
             return {'user': None, 'errors': errors }
+        if len(errors) == 0:
+            return {'user': foundUser, 'errors': None}
+        else:
+            return {'user': None, 'errors': errors}
 
 # =================================================================
 # Models
