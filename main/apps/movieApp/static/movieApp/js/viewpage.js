@@ -63,7 +63,6 @@ function getSeasonData(id, season){
 
 function seasonJson(json){
   $('.episode-list').html('')
-  console.log(json);
   if (json.length == 0) {
     $(".episode-list").append('<h2>No Results Found</h2>');
 
@@ -88,16 +87,11 @@ function seasonJson(json){
     else {
       overview = "No synopsis available."
     }
-    console.log(show);
-    console.log(id);
-    console.log(name);
-    console.log(episodes);
-    console.log(episodeName);
     // $(".episode-list").append('<a href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <h3 class="search-result-title">' + json[i].name + '<h3></div></a>');
-    $(".episode-list").append('<h2>' + name + '</h2><img src="https://image.tmdb.org/t/p/w500' + poster + '"> <div class="season-overview"> <p>Synopsis: ' + overview + '</p></div><div class="episodes">');
+    $(".episode-list").append('<img src="https://image.tmdb.org/t/p/w500' + poster + '"> <div class="season-overview"><h2>' + name + '</h2><p><b>Synopsis:</b> ' + overview + '</p></div><div class="episodes">');
     // for (var i = 0; i < json.episodes.length; i++){
       for (episode in episodeName) {
-        $(".episodes").append('<a href="/episode/' + show + '/' + season + '/' + episodeId[episode] + '"><div class"episode"><h3>' + episodeId[episode] + '. ' + episodeName[episode] + '</h3></div></a>' );
+        $(".episodes").append('<a href="/episode/' + show + '/' + season + '/' + episodeId[episode] + '"><div class="episode"><p class="episode-number">' + episodeId[episode] + "</p><p class='episode-name'>" + episodeName[episode] + '</p></div></a>' );
 
       }
     // }
