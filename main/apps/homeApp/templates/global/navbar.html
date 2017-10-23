@@ -10,7 +10,7 @@
       <div class="search-div">
           <form class="search-form" name="search-form"action="/search/" method="POST">
               {% csrf_token %}
-              <input type="input" name="search-info" id="search-info" placeholder="Search">
+              <input type="input" name="search-info" id="search-info" placeholder="Search" autocomplete="off">
           </form>
           <div class="search-result-block">
                   <div id="search-results"> </div>

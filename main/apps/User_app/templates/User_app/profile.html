@@ -36,7 +36,7 @@
       <div class="ui-widget">
         <form class="search-user-form" action="/searchUsers" method="GET">
           {% csrf_token %}
-          <input type="input" name="person" id="places" placeholder="Find Friends">
+          <input type="input" name="person" id="places" placeholder="Find Friends" autocomplete="off">
         </form>
       </div>
       <div class="search-result-sections">
@@ -190,108 +190,142 @@
           {% if reviews == "none" %}
             <h1>There are no reviews currently</h1>
             {%else%}
-            {% for review in reviews %}
+            <div class="review-holder">
+              {% for review in reviews %}
 
-            <div class="full-review-card">
+
+              <div class="full-review-card">
                 <div class="full-card-holder">
-                    <div class="movie-poster">
-                        <img src="https://image.tmdb.org/t/p/w1280/{{review.poster_path}}">
+                  <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w1280/{{review.poster_path}}">
+                  </div>
+                  <div class="score-holder">
+                    <div class="score">
+                      <p>Overall</p>
+                      <p class="score-number {{review.overall_color}}"> {{review.overall_score}} </p>
                     </div>
-                    <div class="score-holder">
-                        <div class="score">
-                            <p>Overall</p>
-                            <p class="score-number {{review.overall_color}}"> {{review.overall_score}} </p>
-                        </div>
 
-                        <div class="score odd-back">
-                            <p>Story</p>
-                            <p class="score-number {{review.story_color}}"> {{review.story_rating}} </p>
-                        </div>
-
-                        <div class="score">
-                            <p>Entertainment</p>
-                            <p class="score-number {{review.ent_color}}"> {{review.entertainment_rating}} </p>
-                        </div>
-
-                        <div class="score odd-back">
-                            <p>Acting</p>
-                            <p class="score-number {{review.act_color}}"> {{review.acting_rating}} </p>
-                        </div>
-
-                        <div class="score">
-                            <p>Visual</p>
-                            <p class="score-number {{review.vis_color}}"> {{review.visual_rating}}</p>
-                        </div>
-                        <div class="score odd-back">
-                            <p>Sound</p>
-                            <p class="score-number {{review.sound_color}}">{{review.sound_rating}}</p>
-                        </div>
+                    <div class="score odd-back">
+                      <p>Story</p>
+                      <p class="score-number {{review.story_color}}"> {{review.story_rating}} </p>
                     </div>
+
+                    <div class="score">
+                      <p>Entertainment</p>
+                      <p class="score-number {{review.ent_color}}"> {{review.entertainment_rating}} </p>
+                    </div>
+
+                    <div class="score odd-back">
+                      <p>Acting</p>
+                      <p class="score-number {{review.act_color}}"> {{review.acting_rating}} </p>
+                    </div>
+
+                    <div class="score">
+                      <p>Visual</p>
+                      <p class="score-number {{review.vis_color}}"> {{review.visual_rating}}</p>
+                    </div>
+                    <div class="score odd-back">
+                      <p>Sound</p>
+                      <p class="score-number {{review.sound_color}}">{{review.sound_rating}}</p>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="review-extra-info">
-                    <div class="top-backdrop-image">
-                        <img src="https://image.tmdb.org/t/p/w1280/{{review.backdrop_path}}">
+                  <div class="top-backdrop-image">
+                    <img src="https://image.tmdb.org/t/p/w1280/{{review.backdrop_path}}">
+                  </div>
+                  <div class="extra-info-review">
+                    <div class="subscores-full title-name">
+                      <p class= "media-title-review">{{review.title}}</p>
                     </div>
-                    <div class="extra-info-review">
-                        <div class="subscores-full title-name">
-                            <p class= "media-title-review">{{review.title}}</p>
+                    <div class="middle-section-review-extra">
+                      <div class="overall-section mid-section">
+                        <p class="os-title">Overall Score</p>
+                        <p class= "os-score-number {{review.overall_color}}">{{review.overall_score}}</p>
+                      </div>
+
+
+                      <div class="extra-scores-section mid-section">
+                        <div class="info-holder-subscore">
+                          <p>Story</p>
+                          <div class="bar-main ">
+                            <div class="bar-amount {{review.story_percent}} {{review.story_color}}"></div>
+                          </div>
                         </div>
-                        <div class="middle-section-review-extra">
-                            <div class="overall-section mid-section">
-                                <p class="os-title">Overall Score</p>
-                                <p class= "os-score-number {{review.overall_color}}">{{review.overall_score}}</p>
-                            </div>
-
-
-                            <div class="extra-scores-section mid-section">
-                                <div class="info-holder-subscore">
-                                    <p>Story</p>
-                                    <div class="bar-main ">
-                                        <div class="bar-amount {{review.story_percent}} {{review.story_color}}"></div>
-                                    </div>
-                                </div>
-                                <div class="info-holder-subscore">
-                                    <p>Entertainment</p>
-                                    <div class="bar-main ">
-                                        <div class="bar-amount {{review.ent_percent}} {{review.ent_color}}"></div>
-                                    </div>
-                                </div>
-                                <div class="info-holder-subscore">
-                                    <p>Acting</p>
-                                    <div class="bar-main ">
-                                        <div class="bar-amount {{review.act_percent}} {{review.act_color}}"></div>
-                                    </div>
-                                </div>
-                                <div class="info-holder-subscore">
-                                    <p>Visual</p>
-                                    <div class="bar-main ">
-                                        <div class="bar-amount {{review.vis_percent}} {{review.vis_color}}"></div>
-                                    </div>
-                                </div>
-                                <div class="info-holder-subscore">
-                                    <p>Sound</p>
-                                    <div class="bar-main ">
-                                        <div class="bar-amount nine green {{review.sound_percent}} {{review.sound_color}}"></div>
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
+                        <div class="info-holder-subscore">
+                          <p>Entertainment</p>
+                          <div class="bar-main ">
+                            <div class="bar-amount {{review.ent_percent}} {{review.ent_color}}"></div>
+                          </div>
                         </div>
-                        <div class="bottom-section-review-extra">
-                            <p><span>Reviewed by:</span></p>
-                            <p>{{ user.first_name}} {{user.last_name}}</p>
+                        <div class="info-holder-subscore">
+                          <p>Acting</p>
+                          <div class="bar-main ">
+                            <div class="bar-amount {{review.act_percent}} {{review.act_color}}"></div>
+                          </div>
                         </div>
+                        <div class="info-holder-subscore">
+                          <p>Visual</p>
+                          <div class="bar-main ">
+                            <div class="bar-amount {{review.vis_percent}} {{review.vis_color}}"></div>
+                          </div>
+                        </div>
+                        <div class="info-holder-subscore">
+                          <p>Sound</p>
+                          <div class="bar-main ">
+                            <div class="bar-amount nine green {{review.sound_percent}} {{review.sound_color}}"></div>
+                          </div>
+                        </div>
+
+
+
+
+
+                      </div>
                     </div>
+                    <div class="bottom-section-review-extra">
+                      <p><span>Reviewed by:</span></p>
+                      <p>{{ user.first_name}} {{user.last_name}}</p>
+                    </div>
+                  </div>
 
                 </div>
-            </div>
+                <div class="timestamp">
+                  {% if review.year_difference > 1 %}
+                  <p>{{review.year_difference}} years ago</p>
+                  {% elif review.year_difference == 1 %}
+                  <p>{{review.year_difference}} year ago</p>
+                  {% elif review.month_difference > 1 %}
+                  <p>{{review.month_difference}} months ago</p>
+                  {% elif review.month_difference == 1 %}
+                  <p>{{review.month_difference}} month ago</p>
+                  {% elif review.week_difference > 1 %}
+                  <p>{{review.week_difference}} weeks ago</p>
+                  {% elif review.week_difference == 1 %}
+                  <p>{{review.week_difference}} week ago</p>
+                  {% elif review.day_difference > 1 %}
+                  <p>{{review.day_difference}} days ago</p>
+                  {% elif review.day_difference == 1%}
+                  <p>{{review.day_difference}} day ago</p>
+                  {% elif review.hour_difference > 1 %}
+                  <p>{{review.hour_difference}} hours ago</p>
+                  {% elif review.hour_difference == 1 %}
+                  <p>{{review.hour_difference}} hour ago</p>
+                  {% elif review.minute_difference > 1 %}
+                  <p>{{review.minute_difference}} minutes ago</p>
+                  {% elif review.minute_difference == 1 %}
+                  <p>{{review.minute_difference}} minute ago</p>
+                  {% elif review.minute_difference <= 1 %}
+                  <p>Just Now</p>
+                  {% endif %}
 
-            {%endfor%}
+                </div>
+              </div>
+
+
+              {%endfor%}
+            </div>
 
             {%endif%}
         </div>

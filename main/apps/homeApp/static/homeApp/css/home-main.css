@@ -17,6 +17,12 @@ body {
   margin: 0;
   padding: 0;
 }
+.timestamp {
+  color: grey;
+  font-size: 0.7em;
+  font-weight: 100;
+
+}
 .content-wrapper h1 {
   font-size: 1.5em;
 }

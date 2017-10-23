@@ -44,7 +44,7 @@
 
                             <p class="movie-title-banner">{{item.title}}</p>
                             <p class="movie-view-button">View Movie</p>
-                          
+
                         </a>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                   <div class="score-holder">
                       <div class="score">
                           <p>Overall</p>
-                          <p class="score-number {{review.overall_color}}"> {{review.score}} </p>
+                          <p class="score-number {{review.overall_color}}"> {{review.overall_score}} </p>
                       </div>
 
                       <div class="score odd-back">
@@ -132,7 +132,7 @@
                       <div class="middle-section-review-extra">
                           <div class="overall-section mid-section">
                               <p class="os-title">Overall Score</p>
-                              <p class= "os-score-number {{review.overall_color}}">{{review.score}}</p>
+                              <p class= "os-score-number {{review.overall_color}}">{{review.overall_score}}</p>
                           </div>
 
 
@@ -181,6 +181,36 @@
                           </a>
                       </div>
                   </div>
+
+              </div>
+              <div class="timestamp">
+                {% if review.year_difference > 1 %}
+                <p>{{review.year_difference}} years ago</p>
+                {% elif review.year_difference == 1 %}
+                <p>{{review.year_difference}} year ago</p>
+                {% elif review.month_difference > 1 %}
+                <p>{{review.month_difference}} months ago</p>
+                {% elif review.month_difference == 1 %}
+                <p>{{review.month_difference}} month ago</p>
+                {% elif review.week_difference > 1 %}
+                <p>{{review.week_difference}} weeks ago</p>
+                {% elif review.week_difference == 1 %}
+                <p>{{review.week_difference}} week ago</p>
+                {% elif review.day_difference > 1 %}
+                <p>{{review.day_difference}} days ago</p>
+                {% elif review.day_difference == 1%}
+                <p>{{review.day_difference}} day ago</p>
+                {% elif review.hour_difference > 1 %}
+                <p>{{review.hour_difference}} hours ago</p>
+                {% elif review.hour_difference == 1 %}
+                <p>{{review.hour_difference}} hour ago</p>
+                {% elif review.minute_difference > 1 %}
+                <p>{{review.minute_difference}} minutes ago</p>
+                {% elif review.minute_difference == 1 %}
+                <p>{{review.minute_difference}} minute ago</p>
+                {% elif review.minute_difference <= 1 %}
+                <p>Just Now</p>
+                {% endif %}
 
               </div>
           </div>

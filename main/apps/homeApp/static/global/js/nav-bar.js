@@ -87,7 +87,7 @@ function jsonTaken(json){
   $('#search-results').html('')
   console.log(json);
   if (json.length == 0) {
-    $("#search-results").append('<h2 class = "no-results-found" >No Results Found</h2>');
+    $("#search-results").append('<div class="no-results"><h2 class = "no-results-found" >No Results Found</h2></div>');
   }
   else {
   for (var i = 0; i < json.length; i++){
