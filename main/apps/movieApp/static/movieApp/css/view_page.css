@@ -539,20 +539,17 @@ body {
 .episode-list {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  height: 100%;;
+  height: auto;
   vertical-align: top;
-  width: 90%;
-  box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 100%;
   display: inline-block;
   position: relative;
-  margin-left: 5%;
-  margin-top: 5%;
-  padding-bottom: 3%;
+
 
 }
 .seasons-list {
   height: 370px;
-  text-align: center;
+  text-align: left;
   overflow: auto;
   white-space: nowrap;
 
@@ -560,29 +557,26 @@ body {
 }
 .episode-list img{
   height: 220px;
-  position: absolute;
-  left: 0;
-  margin-top: -50px;
-  margin-left: 40px;
+  position: relative;
+  display: inline-block;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-.episode-list p {
-  width: 80%;
-  padding-left: 20%;
-}
 
-.episode-list h2 {
-  text-align: center;
-}
 .episodes {
   position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
   bottom: 0;
   padding: 10px;
   font-family: 'Roboto', sans-serif;
   font-weight: 100!important;
   margin-top: 30px;
   width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
   height: auto;
+  vertical-align: top;
 
 
 }
@@ -590,52 +584,54 @@ body {
   font-weight: 100!important;
 }
 .season-overview {
-  height: 150px;
-  overflow: scroll;
+  height: 220px;
+  overflow: auto;
+  margin: 10px;
+  width: 80%;
+  display: inline-block;
 }
 
 .episode {
-  display: inline-grid;
+  display: inline-block;
   position: relative;
   font-size: 0.9em;
-  width: 30%;
-  height: 30px;
+  width: 150px;
+  height: 175px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   color: #222222;
   text-align: center;
   margin:5px;
   font-weight: 100!important;
+  vertical-align: top;
+  white-space: normal !important;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.episode:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.episode-number {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-size: 4em;
+  font-weight: 700 !important;
+  margin: 10px 0;
+}
+.episode-name {
+  display: inline-block;
+  white-space: normal !important;
+
+
 }
 
-.episode h3 {
-  vertical-align: middle;
-  font-weight: 100!important;
-}
 .episode-list:active {
   color: #222222;
 }
 .episode-list a {
-  display: inline-grid;
-  position: relative;
-  font-size: 0.9em;
-  width: 23%;
-  height: 75px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  color: #222222;
-  text-align: center;
-  color: #222222;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100!important;
-  margin:5px;
-  transition: box-shadow 0.5s, background-color 1s;
-  border-radius: 10px;
-}
-.episode-list a:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  background-color: #ccc;
-
 
 }
+
 .episode-list a:visited {
   color: #222222;
 
