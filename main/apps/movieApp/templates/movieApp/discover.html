@@ -21,21 +21,23 @@
     </div>
     <div class="discover-section">
       <div class="top-info-section">
-        <h1 class="section-title">Popular</h1>
+        <h1 class="section-title">Recommended</h1>
         <div class="bumper"></div>
         <p class="header-info">Find something new to enjoy and watch</p>
       </div>
-      {% for media in discover|slice:":1" %}
-      <a href="/movie/{{ media.id }}">
-      <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/original/{{media.backdrop_path}}" >
-        <div class="info-plate">
-          <p>{{media.original_title}}</p>
+      <div class="sectional-holder">
+          {% for media in discover %}
+          <a href="/movie/{{ media.id }}">
+            <div class="movie-card">
+              <img src="https://image.tmdb.org/t/p/original/{{media.backdrop_path}}" >
+              <div class="info-plate">
+                <p>{{media.original_title}}</p>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
         </div>
       </div>
-    </a>
-      {% endfor %}
-    </div>
 
     <div class="spacer"></div>
 
@@ -60,16 +62,18 @@
           </div>
         </a>
       </div>
-      {% for movie in movies|slice:"5:6" %}
-      <a href="/movie/{{ movie.id }}">
-      <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
-        <div class="info-plate">
-          <p>{{movie.original_title}}</p>
+      <div class="sectional-holder">
+        {% for movie in movies %}
+        <a href="/movie/{{ movie.id }}">
+        <div class="movie-card">
+          <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
+          <div class="info-plate">
+            <p>{{movie.original_title}}</p>
+          </div>
         </div>
-      </div>
-      </a>
-      {%endfor%}
+        </a>
+        {%endfor%}
+    </div>
     </div>
 
     <div class="spacer"></div>
@@ -90,16 +94,19 @@
           </div>
         </a>
       </div>
-      {% for tv in tvs|slice:":1" %}
-      <a href="/show/{{ tv.id }}">
-      <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/original/{{tv.backdrop_path}}" >
-        <div class="info-plate">
-          <p>{{tv.name}}</p>
-        </div>
+      <div class="sectional-holder">
+          {% for tv in tvs %}
+          <a href="/show/{{ tv.id }}">
+            <div class="movie-card">
+              <img src="https://image.tmdb.org/t/p/original/{{tv.backdrop_path}}" >
+              <div class="info-plate">
+                <p>{{tv.name}}</p>
+              </div>
+            </div>
+          </a>
+          {%endfor%}
+
       </div>
-    </a>
-      {%endfor%}
     </div>
 
     <div class="spacer"></div>
@@ -116,16 +123,18 @@
         </a>
       </div>
       <div class="container-inner">
-        {% for actor in actors|slice:":1" %}
-        <a href="/people/{{actor.id}}">
-          <div class="actor-card">
-            <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" >
-            <div class="info-plate">
-              <p>{{actor.name}}</p>
+        <div class="sectional-holder">
+          {% for actor in actors %}
+          <a href="/people/{{actor.id}}">
+            <div class="actor-card">
+              <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" >
+              <div class="info-plate">
+                <p>{{actor.name}}</p>
+              </div>
             </div>
-          </div>
-        </a>
-        {% endfor %}
+          </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
 

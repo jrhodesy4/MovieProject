@@ -28,6 +28,14 @@ def popular_tv(): # <-- this return the popular tv shows
     url = 'https://api.themoviedb.org/3/tv/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
     json_data = requests.get(url).json()
     return json_data['results']
+def get_recommendations(id):
+    url = "https://api.themoviedb.org/3/movie/" + str(id) + "/recommendations?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1"
+
+    json_data = requests.get(url).json()
+
+
+    return json_data['results']
+
 
 def get_movie(id): #this gets the popular movies at from the TMDB api
     # https://api.themoviedb.org/3/movie/{movie_id}?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US
@@ -81,15 +89,6 @@ def get_season(id, season): # <---- this is function to to the the entire TV sea
 #
 #
 # return final_list
-
-
-
-
-
-
-
-
-
     return results
 
 def get_episode(id, season, episode): # <---- this is function to return the indivdual episode

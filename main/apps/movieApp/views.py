@@ -11,6 +11,7 @@ import json
 import requests
 from datetime import datetime
 import math
+from random import *
 
 # from ..homeApp import services
 
@@ -33,21 +34,19 @@ def review_completed(user_id, id, media_type): #<----- if the user has completed
     if media_type == "movie":
         try:
             review = MovieReview.objects.get(api_code=id, user_id=user_id)
-            print "user has already written a review"
             return review.score
         except:
             return "no score"
     if media_type == "tv":
         try:
             review = TVReview.objects.get(api_code=id, user_id=user_id)
-            print "user has already written a review"
             return review.score
         except:
             return "no score"
     if media_type == "episode":
         try:
             review = EpisodeReview.objects.get(api_code=id, user_id=user_id)
-            print "user has already written a review"
+
             return review.score
         except:
             return "no score"
@@ -74,8 +73,6 @@ def movie_page(request, id): # this renders the selected individual movie page
     user = request.session['user']
 
     review_data = review_services.sort_reviews_media(user, id, "movie")
-
-
     #below is info for each movie
     movie = movie_services.get_movie(id)
     mov = movie['movie_info']
@@ -160,8 +157,6 @@ def movie_page(request, id): # this renders the selected individual movie page
 def seasonData(request):
     seasonId = request.GET.get('id')
     seasonNum = request.GET.get('season')
-    print request
-    print "here"
     result = movie_services.get_season(seasonId, seasonNum)
     return JsonResponse(result, safe=False);
 
@@ -174,8 +169,7 @@ def show_page(request, id):
             trailers = 'none'
     except:
         trailers = 'none'
-    print trailers
-    print "henlo"
+
 
     status = authenticate(request)
     show = movie_services.get_show(id)
@@ -230,29 +224,6 @@ def show_page(request, id):
 
 
 
-
-
-def movie_home(request):
-    result = services.get_discover()
-    return render(request, 'movieApp/movies_home.html', {'result' : result})
-
-def tv_home(request):
-    shows = movie_services.popular_tv()
-    return render(request, 'movieApp/tv_home.html', {'shows': shows})
-
-
-def actor_home(request):
-    actors = movie_services.popular_actors()
-    return render(request, 'movieApp/actors_home.html', {'actors': actors})
-
-def show_season(request, id, season):
-    print 'here'
-    tv_season = movie_services.get_season(id, season)
-    print tv_season
-    id = id
-    season = season
-    return render(request, 'movieApp/season_page.html', {'tv_season': tv_season, 'id' : id, 'season': season})
-
 def show_episode(request, id, season, episode):
     tv_episode = movie_services.get_episode(id, season, episode)
     status = authenticate(request)
@@ -305,8 +276,16 @@ def discover(request):
     tv = movie_services.popular_tv()
     actor = movie_services.popular_actors()
 
+    total_number = len(movies) - 1
+
+    rand_num = randint(0, total_number)
+    rec_movie =  movies[rand_num]['id']
+    rec = movie_services.get_recommendations(rec_movie)
+
+
+
     data = {
-        "discover": discover,
+        "discover": rec,
         "movies": movies,
         "tvs": tv,
         "actors": actor
