@@ -286,20 +286,6 @@ def user_page(request, id):
     return render(request, 'User_app/user.html', data)
 
 
-def notification_page(request):
-    user_id = request.session['user']
-    user = User.objects.get(id=user_id)
-    User.Fullname_toString(user)
-    notifications = Notification.objects.filter(user=user).order_by('created_at')
-    context = {
-        "notifications": notifications,
-    }
-
-    for notification in notifications:
-        if notification.viewed == False:
-            Notification.was_viewed(notification)
-
-    return render(request, "User_app/notifications.html", context)
 
 
 

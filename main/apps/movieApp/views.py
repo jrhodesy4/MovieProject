@@ -20,7 +20,7 @@ def authenticate(request): #<----- this is to tell whether the user is logged in
     if 'user' in request.session:
         return "in"
     else:
-        return "out"
+        return redirect('/login')
 
 def in_watchlist(user_id, id): #<----- if media is in the user watchlist returns boolean
     user = User.objects.get(id=user_id)
