@@ -85,13 +85,15 @@ def createReviewFormat(review):
 def profileFormat(user): # <--- this function will return profile info how we want
     first = user.first_name
     last = user.last_name
-    try :
-        pic = ProPicture.objects.get(user_id=user.id)
-        profile_pic = pic.picture
-        is_pic = True
-    except:
-        profile_pic = first[0] + last[0]
-        is_pic = False
+    # try :
+    pic = ProPicture.objects.get(user_id=user.id)
+    profile_pic = pic.picture
+    is_pic = True
+    print profile_pic
+
+    # except:
+    #     profile_pic = first[0] + last[0]
+    #     is_pic = False
     data = {
         'profile_id': user.id,
         'first_name': first,
