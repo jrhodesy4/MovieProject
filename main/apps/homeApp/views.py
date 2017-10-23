@@ -52,6 +52,7 @@ def createReviewFormat(review):
     week_difference = int(difference.days / 7)
     month_difference = int(difference.days / 30)
     year_difference = int(month_difference / 12)
+    reviewed_by = User.objects.get(id = review['reviewer_id'])
     data = {
         "poster_path": review['poster_path'],
         "backdrop_path": review['backdrop_path'],
@@ -78,7 +79,8 @@ def createReviewFormat(review):
         'day_difference': day_difference,
         'week_difference': week_difference,
         'month_difference' : month_difference,
-        'year_difference': year_difference
+        'year_difference': year_difference,
+        'reviewed_by' : reviewed_by,
     }
 
     return data
