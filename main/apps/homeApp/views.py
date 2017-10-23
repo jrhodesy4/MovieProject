@@ -78,7 +78,7 @@ def createReviewFormat(review):
         'day_difference': day_difference,
         'week_difference': week_difference,
         'month_difference' : month_difference,
-        'year_difference': year_difference
+        'year_difference': year_difference,
     }
 
     return data
@@ -98,6 +98,8 @@ def index(request):
     if "user" in request.session :
         status = 'You are logged in'
     user_id = request.session['user']
+
+    #this is for the reviews
     try:
         reviews = user_services.get_feed_reviews(user_id)
     except:
@@ -107,6 +109,8 @@ def index(request):
     for review in reviews:
         data = createReviewFormat(review);
         final_form_reviews.append(data)
+
+    #this is for the watchlist
     user = User.objects.get(id=user_id)
     my_watchlist = Watchlist.objects.filter(user=user)
 
@@ -134,6 +138,9 @@ def index(request):
             "placement":  placement,
         }
         slideshow.append(current_data)
+
+
+
     data = {
         "reviews": final_form_reviews,
         "watchlist": my_watchlist,
