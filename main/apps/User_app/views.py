@@ -49,6 +49,7 @@ def createReviewFormat(review):
     minute_difference = int(difference.total_seconds() / 60)
     hour_difference = int(difference.total_seconds() / 3600)
     day_difference = int(difference.days)
+    week_difference = int(difference.days / 7)
     month_difference = int(difference.days / 30)
     year_difference = int(month_difference / 12)
     data = {
@@ -75,6 +76,7 @@ def createReviewFormat(review):
         'minute_difference': minute_difference,
         'hour_difference': hour_difference,
         'day_difference': day_difference,
+        'week_difference': week_difference,
         'month_difference' : month_difference,
         'year_difference': year_difference
     }
@@ -89,7 +91,7 @@ def profileFormat(user): # <--- this function will return profile info how we wa
         pic = ProPicture.objects.get(user_id=user.id)
         profile_pic = pic.picture
         is_pic = True
-        
+
     except:
         profile_pic = first[0] + last[0]
         is_pic = False

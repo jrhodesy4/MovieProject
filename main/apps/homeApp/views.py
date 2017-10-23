@@ -6,6 +6,8 @@ from ..movieApp.models import Watchlist
 # from ..movieApp.models import
 from ..User_app import views
 from django.views.generic.edit import FormView
+from datetime import datetime, timedelta
+import math
 from django.core import serializers
 from django.http import JsonResponse
 import json
@@ -17,6 +19,29 @@ import requests
 """
 api key = 286abf6056d0a1338f772d1b7202e728
 """
+# local fucntions here ===============================================
+def ovScoreColor(score): #gets the class we need for color == score
+    color = "red"
+    if score > 60:
+        color = "yellow"
+    if score > 80:
+        color = 'green'
+    return color
+
+def subScoreColor(score):
+     color = "red"
+     if score > 6:
+         color = "yellow"
+     if score >= 8:
+         color = 'green'
+     return color
+
+def subPercent(number): # this get the score and turns it to written number for class
+    if number == None:
+        return 5
+    percent = ["one", "two", "three", "four",'five',' six', 'seven','eight', 'nine', 'ten']
+    return percent[number - 1]
+
 def createReviewFormat(review):
     now = datetime.now()
     new_timestamp = review['created_at'].replace(tzinfo=None)
@@ -24,27 +49,36 @@ def createReviewFormat(review):
     minute_difference = int(difference.total_seconds() / 60)
     hour_difference = int(difference.total_seconds() / 3600)
     day_difference = int(difference.days)
+    week_difference = int(difference.days / 7)
     month_difference = int(difference.days / 30)
     year_difference = int(month_difference / 12)
     data = {
         "poster_path": review['poster_path'],
+        "backdrop_path": review['backdrop_path'],
+        "title": review['title'],
         "overall_score": review['score'],
         "overall_color": ovScoreColor(review['score']),
+        "story_rating": review['story_rating'],
         'story_percent': subPercent(review['story_rating']),
         'story_color': subScoreColor(review['story_rating']),
         'ent_percent': subPercent(review['entertainment_rating']),
         'ent_color': subScoreColor(review['entertainment_rating']),
+        "entertainment_rating": review['entertainment_rating'],
         'act_percent': subPercent(review['acting_rating']),
         'act_color': subScoreColor(review['acting_rating']),
+        "acting_rating": review['acting_rating'],
         'vis_percent': subPercent(review['visual_rating']),
         'vis_color': subScoreColor(review['visual_rating']),
+        "visual_rating": review['visual_rating'],
         'sound_percent': subPercent(review['sound_rating']),
         'sound_color': subScoreColor(review['sound_rating']),
+        "sound_rating": review['sound_rating'],
         'minute_difference': minute_difference,
         'hour_difference': hour_difference,
         'day_difference': day_difference,
+        'week_difference': week_difference,
         'month_difference' : month_difference,
-        'year_difference': year_difference,
+        'year_difference': year_difference
     }
 
     return data
@@ -69,6 +103,10 @@ def index(request):
     except:
         reviews = "none";
 
+    final_form_reviews =[] # <-- this returns the reviews and makes them formated correctly
+    for review in reviews:
+        data = createReviewFormat(review);
+        final_form_reviews.append(data)
     user = User.objects.get(id=user_id)
     my_watchlist = Watchlist.objects.filter(user=user)
 
@@ -97,7 +135,7 @@ def index(request):
         }
         slideshow.append(current_data)
     data = {
-        "reviews": reviews,
+        "reviews": final_form_reviews,
         "watchlist": my_watchlist,
         "slideshow": slideshow
     }
