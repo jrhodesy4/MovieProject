@@ -43,6 +43,7 @@
   border-radius: 8px;
   font-size: .8em;
   cursor: pointer;
+  transition: top .5s, box-shadow .5s;
 }
 .add-review-watchlist:hover {
   top:15px;
@@ -67,6 +68,7 @@ a {
   border-radius: 8px;
   font-size: .8em;
   cursor: pointer;
+  transition: bottom .5s, box-shadow .5s;
 }
 .remove-watchlist:hover {
   bottom:25px;

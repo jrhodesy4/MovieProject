@@ -109,9 +109,12 @@ def index(request):
         reviews = "none";
 
     final_form_reviews =[] # <-- this returns the reviews and makes them formated correctly
-    for review in reviews:
-        data = createReviewFormat(review);
-        final_form_reviews.append(data)
+    try:
+        for review in reviews:
+            data = createReviewFormat(review);
+            final_form_reviews.append(data)
+    except:
+        pass
 
     #this is for the watchlist
     user = User.objects.get(id=user_id)

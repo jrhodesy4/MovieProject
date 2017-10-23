@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
 from .models import User, Profile, Friend, Notification, ProPicture
 from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, EpisodeReview
 from django.conf import settings
@@ -350,19 +351,33 @@ def register_account(request): #this function creates the account
             "first_name": request.POST['first_name'],
             "last_name": request.POST['last_name'],
             "email": request.POST['email'],
-            "password": request.POST['password']
+            "password": request.POST['password'],
+            "confirm": request.POST['confirm']
         }
         result = User.objects.register(account_info)
-        user_id = result['user'].id
-        if result['errors'] == None:
+        if result['errors']:
+            for error in result['errors']:
+                messages.add_message(request, messages.ERROR, error)
+            return redirect('/register')
+        else:
+            user_id = result['user'].id
             request.session['name'] = result['user'].first_name
             request.session['user'] = user_id
             request.session['action'] = "registered"
             UserReview.create_new(user_id)
             return redirect('/')
-        else:
-            print result['errors']
-            return redirect("/register")
+        # if result['errors'] == None:
+        #     request.session['name'] = result['user'].first_name
+        #     request.session['user'] = user_id
+        #     request.session['action'] = "registered"
+        #     UserReview.create_new(user_id)
+        #     return redirect('/')
+        # else:
+        #     print result['errors']
+        #     return redirect("/register")
+
+
+
 
 
 def log_user_in(request): # this is to the log the user in
@@ -381,7 +396,9 @@ def log_user_in(request): # this is to the log the user in
             request.session['action'] = "logged in"
             return redirect('/')
         else:
-            print result['errors']
+            for error in result['errors']:
+                messages.add_message(request, messages.ERROR, error)
+                print error
             return redirect('/login')
 
 
