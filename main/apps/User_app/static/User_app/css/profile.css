@@ -486,8 +486,8 @@ div.panel {
 .watchlist-info {
   margin-top: 20px;
   display: inline-block;
-  text-align: left;
-  padding-left: 5%;
+  text-align: center ;
+
 
 }
 .watchlist-info img {
@@ -642,7 +642,7 @@ div.panel {
   height: 100%;
   width: 100%;
   overflow: auto;
-  outline: 2px solid green;
+
 }
 .reviewDiv {
   margin: 2%;

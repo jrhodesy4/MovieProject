@@ -32,7 +32,9 @@
 
     <div class="content-wrapper">
         <div class="header">
-            <p class="the-name">Two Thumbs Up</p>
+          <div class="the-name-holder">
+            <p class="the-name"><span class="bump">Two</span> <span class="thumb-word">Thu</span><span class="half-thumb">mbs</span><span class="bump up">Up</span></p>
+          </div>
 
 
             <div class="slideshow-banner">
@@ -43,7 +45,7 @@
                         <a href="/movie/{{item.id}}">
 
                             <p class="movie-title-banner">{{item.title}}</p>
-                            <p class="movie-view-button">View Movie</p>
+                            <!-- <p class="movie-view-button">View Movie</p> -->
 
                         </a>
                     </div>
@@ -75,10 +77,13 @@
         </div>
 
 
+      <div class="selection-menu">
+          <p onclick="changeContent('review')" id= "reviews-header" class="selection-menu-item active-menu-item">Reviews</p>
+          <p  onclick="changeContent('watchlist')" id="watchlist-header" class="selection-menu-item" >Watchlist</p>
+      </div>
 
 
-      <h1 class = "reviews-header">Recent Reviews</h1>
-      <div class="review-feed-wrapper content">
+      <div id="review-content" class="review-feed-wrapper content">
         {% if reviews == "none" %}
           <h1>There are no reviews currently</h1>
           {%else%}
@@ -231,9 +236,7 @@
       </div>
 
 
-      <h1 class="watchlist-header">watch list</h1>
-      <div class="extra-content-wrapper content">
-
+      <div id="watchlist-content"class="extra-content-wrapper content">
         <div class="watchlist-holder">
           {% for media in watchlist%}
           <div class="movie-tile">
@@ -254,10 +257,6 @@
           {% endfor %}
         </div> <!-- end of holder -->
       </div>
-
-
-
-
     </div>
 
 

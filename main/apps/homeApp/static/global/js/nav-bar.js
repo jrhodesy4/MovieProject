@@ -147,6 +147,8 @@ function openStackMenu(){
   $('.icon-cancel').css({display: 'initial'});
   $('.logout-button').animate({opacity: '1'});
 
+  $('.home-logo-holder').animate({top: '0px'});
+
 
 }
 function closeStackMenu(){
@@ -165,6 +167,7 @@ function closeStackMenu(){
   $('.icon-cancel').css({display: 'none'});
   $('.logout-button').animate({opacity: '0'});
   $('.logout-button').css({"display": "none"});
+    $('.home-logo-holder').animate({top: '-80px'});
 
 
   if (menuStatus == "search"){

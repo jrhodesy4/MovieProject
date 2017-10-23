@@ -1,4 +1,13 @@
 
+
+
+startSlidshow()
+
+function startSlidshow() {
+  slideshowController(1)
+  setTimeout(startSlidshow, 5000);
+}
+
 var currentslide = 0;
 function slideshowController(n){
   var newslide = currentslide + n;
@@ -26,4 +35,26 @@ function showSlide(old, current){
 
 
   currentslide = current;
+}
+
+var content_status = "review"
+function changeContent(info) {
+    if (info == content_status){
+      return
+    }
+    if (info == "watchlist") {
+      $('#reviews-header').removeClass('active-menu-item');
+      $('#watchlist-header').addClass('active-menu-item');
+
+      $('#review-content').css({"display": 'none'});
+      $('#watchlist-content').css({"display": 'inline-block'});
+      content_status = info;
+    } else {
+      $('#watchlist-header').removeClass('active-menu-item');
+      $('#reviews-header').addClass('active-menu-item');
+
+      $('#watchlist-content').css({"display": 'none'});
+      $('#review-content').css({"display": 'inline-block'});
+      content_status = info;
+    }
 }
