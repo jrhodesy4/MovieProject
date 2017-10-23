@@ -119,6 +119,16 @@
                           <p class="score-number {{review.sound_color}}">{{review.sound_rating}}</p>
                       </div>
                   </div>
+                  <div class="profile-image">
+
+                      <div class="profile-img-holder">
+                          {% if review.is_pic == True %}
+                          <img src="{{review.profile_pic}}">
+                          {%else%}
+                          <p>{{review.profile_pic}}</p>
+                          {% endif %}
+                      </div>
+                  </div>
               </div>
 
               <div class="review-extra-info">
@@ -175,9 +185,9 @@
                           </div>
                       </div>
                       <div class="bottom-section-review-extra">
-                          <a href="/user/{{ this.review.reviewer_id }}">
+                          <a href="/user/{{ review.reviewer_id }}">
                           <p><span>Reviewed by:</span></p>
-                          <p class="reviewer-name">{{review.reviewed_by.first_name}} {{review.reviewed_by.last_name}}</p>
+                          <p class="reviewer-name">{{review.reviewer_fullname}}</p>
                           </a>
                       </div>
                   </div>

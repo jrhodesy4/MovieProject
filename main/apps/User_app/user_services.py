@@ -43,7 +43,7 @@ def get_reviews(user_id): #<--- this function should get all reviews with a acco
 
     f_name = user.first_name
     l_name = user.last_name
-    fullname = str(f_name) + str(l_name)
+    fullname = str(f_name) + " " + str(l_name)
     user_id = user.id
     try :
         pic = ProPicture.objects.get(user_id=user.id)

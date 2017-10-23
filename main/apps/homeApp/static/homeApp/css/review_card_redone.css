@@ -11,7 +11,7 @@ body {
   position: relative;
   overflow: hidden;
   width: 305px;
-  text-align: left;
+  text-align: center;
   z-index: 100 !important;
 }
 
@@ -19,8 +19,8 @@ body {
 .full-card-holder {
   display: inline-block;
   position:relative;
-  left: 0px;
 
+  left: 5px;
   height: 305px;
   width: auto;
   vertical-align: top;
@@ -90,6 +90,45 @@ body {
 }
 
 
+
+
+
+
+/*here is for the image */
+.profile-image {
+  display: inline-block;
+
+  position: absolute;
+  left: -15px;
+  bottom: -15px;
+  z-index: 100!important;
+}
+.profile-img-holder {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 50px;
+  background-color:  #FC466B;
+
+
+}
+.profile-img-holder img {
+  height: 100%;
+  width: auto;
+
+}
+
+.profile-img-holder p {
+  display: inline-block;
+  margin: 0;
+  line-height: 40px;
+  vertical-align: center;
+  font-size: 1em;
+  color: white;
+}
+
+
 /*larger card */
 
 
@@ -99,7 +138,7 @@ body {
   display: inline-block;
   opacity: 0;
   position: absolute;
-  left: -200px;
+  left: -300px;
   top:0;
   width:300px;
   height:300px;
@@ -205,6 +244,7 @@ font-weight: 300;
 
 .bottom-section-review-extra {
   position: absolute;
+  text-align: left;
   left: 0;
   bottom: 0;
   width: 50%;

@@ -9,7 +9,7 @@ $(document).ready(function(){
 
   });//end click
   $(".review-extra-info").click(function(){
-      $(this).animate({left: '-200px'},{complete:function(){
+      $(this).animate({left: '-300px'},{complete:function(){
         $(this).css('opacity', '0');
       }})
       $(this).siblings('.full-card-holder').animate({left:'5px'}, {complete:function(){
