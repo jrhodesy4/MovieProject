@@ -16,3 +16,7 @@ pyparsing==2.2.0
 requests==2.18.4
 six==1.10.0
 urllib3==1.22
+virtualenv==15.1.0
+Jinja2==2.9.5
+click==6.7
+Werkzeug==0.12.1
