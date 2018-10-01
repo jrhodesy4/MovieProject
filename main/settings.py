@@ -25,7 +25,7 @@ SECRET_KEY = ')a5s%hf6wo4io+p-7&+o1w7+al#jzu8q$abvj7j-dnyxep^2#s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['2thumbsup.online']
 
 
 # Application definition
@@ -121,6 +121,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+STATIC_ROOT = './staticfiles'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'

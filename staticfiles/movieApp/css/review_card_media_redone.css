@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.full-review-card {
+  display: inline-block;
+  position: relative;
+  /*overflow: hidden;*/
+  text-align: left;
+
+}
+
+/*front side of card
+  --not shown
+larger card */
+
+
+
+.review-extra-info {
+  z-index: 10 !important;
+  display: inline-block;
+  opacity: 1;
+  position: relative;
+
+  width:300px;
+  height:300px;
+  white-space: normal;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+
+}
+.top-backdrop-image {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 49%;
+  overflow: hidden;
+  vertical-align: top;
+  margin: 0;
+  z-index: 20;
+}
+.top-backdrop-image img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 20;
+}
+.extra-info-review {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 50%;
+  width: 100%;
+  background-color: white;
+
+  margin-left: -1px;
+
+  z-index: 40;
+
+}
+.subscores-full {
+  vertical-align: top;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 25px;
+  text-align: center;
+  border-bottom: 1px solid whitesmoke;
+}
+.media-title-review {
+  margin: 0;
+  font-weight: 300;
+  vertical-align: middle;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+.os-title {
+margin-top: 5px;
+font-weight: 100;
+}
+.os-score-number {
+  font-size: 2em;
+  margin: 0;
+  font-weight: 800;
+  background-color: white !important
+}
+
+.extra-scores-section {
+  padding-top: 5px;
+}
+
+
+
+
+.middle-section-review-extra {
+  display:inline-block;
+  position: relative;
+  width: 100%;
+  height: 125px;
+  text-align: center;
+}
+.mid-section {
+  position: relative;
+  display: inline-block;
+
+  height: 80%;
+  width: 48%;
+  vertical-align: top;
+
+}
+.info-holder-subscore {
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  text-align: left;
+  height: 23px;
+}
+
+
+.info-holder-subscore p {
+    margin: 0;
+    font-size: .3em;
+    font-weight: 100;
+}
+
+
+.bottom-section-review-extra {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 30px;
+  padding: 5px;
+}
+
+.bottom-section-review-extra p {
+  margin: 0;
+  font-weight:100;
+  font-size: .8em;
+  cursor: pointer;
+}
+.bottom-section-review-extra span {
+  font-size: .5em !important;
+  font-weight: 300 !important;
+}
+
+
+
+
+
+
+
+/*here is css for bars*/
+.bar-main {
+  position: relative;
+  display: inline-block;
+  width: 95%;
+  height: 5px;
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+  border-radius: 50px;
+  overflow: hidden;
+  vertical-align: top;
+  z-index: 40;
+  /*margin-bottom: ;*/
+
+}
+
+.bar-amount {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  /*background-color: #74E599;*/
+  border-radius: 50px;
+  z-index: 50;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+/*score colors*/
+
+.green.os-score-number {
+  color: #74E599 !important;
+}
+.bar-amount.green {
+  background-color:#74E599 !important;
+}
+/*between 79 50*/
+.yellow.os-score-number {
+  color: #FCE071 !important;
+}
+.bar-amount.yellow {
+  background-color: #FCE071 !important;
+}
+
+
+/*below 50 */
+.red.os-score-number {
+  color: #FD9FA1 !important;
+}
+.bar-amount.red {
+  background-color:#FD9FA1 !important;
+}
+
+.odd-back {
+  background-color: whitesmoke;
+}
+
+
+.zero {
+  width: .01% !important;
+}
+
+.one {
+  width: 10% !important;
+}
+.two {
+  width: 20% !important;
+}
+.three {
+  width: 30% !important;
+}
+.four {
+  width: 40% !important;
+}
+.five {
+  width: 50% !important;
+}
+.six {
+  width: 60% !important;
+}
+.seven {
+  width: 70% !important;
+}
+.eight {
+  width: 80% !important;
+}
+.nine {
+  width: 90% !important;
+}
+.ten {
+  width: 100% !important;
+}
+
+
+
+
+
+
+
+
+
+
+/*end*/

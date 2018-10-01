@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 
-    <title>Episode Page</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
-    <link rel="stylesheet" href="{% static 'movieApp/css/view_page.css' %}">
-    <link rel="stylesheet" href="{% static 'movieApp/css/review_card_media.css' %}">
-    <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
-    <script type="text/javascript" src="{% static 'movieApp/js/viewpage.js'%}"></script>
-  </head>
-  <body>
+<head>
+  <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
+  <meta charset="utf-8">
+  {% load staticfiles %}
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
-    {% include "../global/navbar.html" %}
-    <div class="sectional-content-wrapper">
-      <div class="background-banner">
-        <img class="banner-img" src="https://image.tmdb.org/t/p/w1000/{{tv_episode.still_path}}">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+  <title>Episode Page</title>
+  <!-- {% load staticfiles %} -->
+  <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
+  <link rel="stylesheet" href="{% static 'movieApp/css/view_page.css' %}">
+  <link rel="stylesheet" href="{% static 'movieApp/css/review_card_media.css' %}">
+  <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
+  <script type="text/javascript" src="{% static 'movieApp/js/viewpage.js'%}"></script>
+</head>
+
+<body>
+
+  {% include "../global/navbar.html" %}
+  <div class="sectional-content-wrapper">
+    <div class="background-banner">
+      <img class="banner-img" src="https://image.tmdb.org/t/p/w1280/{{tv_episode.still_path}}">
+    </div>
+    <div class="info-section-top">
+      <img class="episode-poster" src="https://image.tmdb.org/t/p/w500/{{tv_episode.still_path}}">
+      <div class="quick-info">
+        <p class="content-title">{{ tv_episode.name }}</p>
+        <div class="under-title">
+          <p class="runtime">Aired: {{tv_episode.air_date}}</p>
+          <!-- <p class="avg-rating green">89/100</p> -->
+        </div>
       </div>
-        <div class="info-section-top">
-          <img class= "episode-poster" src="https://image.tmdb.org/t/p/w500/{{tv_episode.still_path}}">
-          <div class="quick-info">
-            <p class="content-title">{{ tv_episode.name }}</p>
-            <div class="under-title">
-              <p class="runtime">Aired: {{tv_episode.air_date}}</p>
-              <!-- <p class="avg-rating green">89/100</p> -->
-            </div>
-          </div>
-            <!-- <div class="quicklink-section">
+      <!-- <div class="quicklink-section">
               <div class="quicklink-section">
                 {% if in_list == False %}
                 <div  id="watchlist-button" onclick="addtowatchlist({{show.id}}, 'tv')"class="link-icon">
@@ -85,8 +90,8 @@
                   </div>
                 </div>
               </div> -->
-            </div>
-            <!-- <div class="info-section-middle">
+    </div>
+    <!-- <div class="info-section-middle">
               <div class="write-review-section w3-animate-top">
                 <div onclick="reviewFormController()"class="close-button-form" >
                 </div>
@@ -119,11 +124,11 @@
 
 
                 </form> -->
-                <!-- <div class="background-review-form"></div> -->
-<!--
+    <!-- <div class="background-review-form"></div> -->
+    <!--
               </div>
             </div> -->
-            <!-- {% if trailers != 'none' %}
+    <!-- {% if trailers != 'none' %}
             <div class="trailer-section">
               <div onclick="trailerController()"class="close-button-form">
               </div>
@@ -138,14 +143,14 @@
             <div class="opaque">
 
             </div> -->
-            <div class="info-section-bottom">
-              <div class="extra-info">
-                <h1>Summary</h1>
-                <p>{{tv_episode.overview}}</p>
-              </div>
-            </div>
+    <div class="info-section-bottom">
+      <div class="extra-info">
+        <h1>Summary</h1>
+        <p>{{tv_episode.overview}}</p>
+      </div>
+    </div>
 
-            <!-- <div class="completed-review-section">
+    <!-- <div class="completed-review-section">
               <h1>Reviews</h1>
               {% if friend_reviews|length > 0%}
               <h1>Here is what your friends are saying</h1>
@@ -240,14 +245,14 @@
 
                 </div>
               </div> -->
-              <div class="footer">
+    <div class="footer">
 
-                <!-- <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg"> -->
-              </div>
+      <!-- <img src="https://image.tmdb.org/t/p/original/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg"> -->
+    </div>
 
 
 
-            <!-- <p>{{tv_episode.overview}}</p>
+    <!-- <p>{{tv_episode.overview}}</p>
             {% if 'user' in request.session %}
             <div class="review">
               {% if completed == False %}
@@ -273,7 +278,7 @@
               </form>
               {% endif %}
               {% endif %} -->
-              <!-- {% for review in reviews %}
+    <!-- {% for review in reviews %}
               <div class="review">
               <p>========================</p>
               <h1>{{review.score}}</h1>
@@ -283,14 +288,15 @@
             </div>
             {% endfor %} -->
 
-          </div>
+  </div>
 
-          </div>
+  </div>
 
-        </div>
+  </div>
 
-    </div>
+  </div>
 
 
-  </body>
+</body>
+
 </html>

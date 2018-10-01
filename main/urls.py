@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 
 
@@ -25,6 +27,13 @@ urlpatterns = [
     url(r'^', include('apps.User_app.urls')),
     url(r'^', include('apps.homeApp.urls')),
     url(r'^', include('apps.movieApp.urls')),
+    url(r'^favicon.ico$',
+        RedirectView.as_view( # the redirecting function
+            url=staticfiles_storage.url('staticfiles/favicon.ico'), # converts the static directory + our favicon into a URL
+            # in my case, the result would be http://www.tumblingprogrammer.com/static/img/favicon.ico
+        ),
+        name="favicon" # name of our view
+    )
     # url(r'^friendship/', include('friendship.urls'))
 
 ]

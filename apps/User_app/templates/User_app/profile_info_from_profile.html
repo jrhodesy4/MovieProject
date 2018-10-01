@@ -2,7 +2,7 @@
   {% if profile %}
   {% for item in profile %}
   <input id="editPro" type="button" name="answer" value="Edit Profile" />
-  <div id="profileDiv" style="display:none;">
+  <div id="profileDiv" style="display:none">
     <form class="" action="/editProfile" method="post">
 
       {% csrf_token %}
@@ -17,7 +17,7 @@
 
   </div>
   <h3>Contact Information</h3>
-  <p>Email:  {{ item.user_id.email}}</p>
+  <p>Email: {{ item.user_id.email}}</p>
   <h3>General Information</h3>
   <p>Birthday: {{item.birthday}}</p>
   <p>Hometown: {{item.hometown}}</p>
@@ -27,7 +27,7 @@
 
   <input id="newPro" type="button" name="answer" value="Create Profile" onclick="showDiv()" />
 
-  <div id="profileDiv" style="display:none;">
+  <div id="profileDiv" style="display:none">
     <form class="" action="/createProfile" method="post">
 
       {% csrf_token %}
@@ -43,7 +43,7 @@
   </div>
   {% endif %}
   {% if uploaded_file_url %}
-    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
   {% endif %}
 
 </div>

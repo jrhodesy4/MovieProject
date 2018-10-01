@@ -1,144 +1,150 @@
- <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
-     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+<!DOCTYPE html>
+<html>
 
-     <title>Discover</title>
-     {% load staticfiles %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
+  {% load staticfiles %}
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
-     <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}"/>
-     <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}"/>
-     <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
-   </head>
-   <body>
-    {% include "../global/navbar.html" %}
-    <div class="top-banner">
-      <h1>Discover</h1>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+  <title>Discover</title>
+  <!-- {% load staticfiles %} -->
+
+  <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}" />
+  <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}" />
+  <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
+</head>
+
+<body>
+  {% include "../global/navbar.html" %}
+  <div class="top-banner">
+    <h1>Discover</h1>
+  </div>
+  <div class="discover-section">
+    <div class="top-info-section">
+      <h1 class="section-title">Recommended</h1>
+      <div class="bumper"></div>
+      <p class="header-info">Find something new to enjoy and watch</p>
     </div>
-    <div class="discover-section">
-      <div class="top-info-section">
-        <h1 class="section-title">Recommended</h1>
-        <div class="bumper"></div>
-        <p class="header-info">Find something new to enjoy and watch</p>
-      </div>
-      <div class="sectional-holder">
-          {% for media in discover %}
-          <a href="/movie/{{ media.id }}">
-            <div class="movie-card">
-              <img src="https://image.tmdb.org/t/p/original/{{media.backdrop_path}}" >
-              <div class="info-plate">
-                <p>{{media.original_title}}</p>
-              </div>
-            </div>
-          </a>
-          {% endfor %}
-        </div>
-      </div>
-
-    <div class="spacer"></div>
-
-    <div class="discover-section">
-      <div class="top-info-section">
-        <h1>Movies</h1>
-        <div class="bumper"></div>
-        <div class="menu-spacer"></div>
-        <a href="/discover/1">
-          <div class="tab-button">
-            <p>Now Playing</p>
-          </div>
-        </a>
-        <a href="/discover/2">
-          <div class="tab-button">
-            <p>Top Movies</p>
-          </div>
-        </a>
-        <a href="/discover/3">
-          <div class="tab-button">
-            <p>Popular</p>
-          </div>
-        </a>
-      </div>
-      <div class="sectional-holder">
-        {% for movie in movies %}
-        <a href="/movie/{{ movie.id }}">
+    <div class="sectional-holder">
+      {% for media in discover %}
+      <a href="/movie/{{ media.id }}">
         <div class="movie-card">
-          <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
+          <img src="https://image.tmdb.org/t/p/original/{{media.backdrop_path}}">
+          <div class="info-plate">
+            <p>{{media.original_title}}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="discover-section">
+    <div class="top-info-section">
+      <h1>Movies</h1>
+      <div class="bumper"></div>
+      <div class="menu-spacer"></div>
+      <a href="/discover/1">
+        <div class="tab-button">
+          <p>Now Playing</p>
+        </div>
+      </a>
+      <a href="/discover/2">
+        <div class="tab-button">
+          <p>Top Movies</p>
+        </div>
+      </a>
+      <a href="/discover/3">
+        <div class="tab-button">
+          <p>Popular</p>
+        </div>
+      </a>
+    </div>
+    <div class="sectional-holder">
+      {% for movie in movies %}
+      <a href="/movie/{{ movie.id }}">
+        <div class="movie-card">
+          <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}">
           <div class="info-plate">
             <p>{{movie.original_title}}</p>
           </div>
         </div>
-        </a>
-        {%endfor%}
+      </a>
+      {%endfor%}
     </div>
-    </div>
+  </div>
 
-    <div class="spacer"></div>
+  <div class="spacer"></div>
 
-    <div class="discover-section">
-      <div class="top-info-section">
-        <h1>TV</h1>
-        <div class="bumper"></div>
-        <div class="menu-spacer"></div>
-        <a href="/discover/4">
-          <div class="tab-button">
-            <p>On Air</p>
-          </div>
-        </a>
-        <a href="/discover/5">
-          <div class="tab-button">
-            <p>Top Rated</p>
-          </div>
-        </a>
-      </div>
-      <div class="sectional-holder">
-          {% for tv in tvs %}
-          <a href="/show/{{ tv.id }}">
-            <div class="movie-card">
-              <img src="https://image.tmdb.org/t/p/original/{{tv.backdrop_path}}" >
-              <div class="info-plate">
-                <p>{{tv.name}}</p>
-              </div>
-            </div>
-          </a>
-          {%endfor%}
-
-      </div>
-    </div>
-
-    <div class="spacer"></div>
-
-    <div class="discover-section">
-      <div class="top-info-section">
-        <h1>Actors</h1>
-        <div class="bumper"></div>
-        <div class="menu-spacer"></div>
-        <a href="/discover/6">
-          <div class="tab-button">
-            <p>Popular</p>
-          </div>
-        </a>
-      </div>
-      <div class="container-inner">
-        <div class="sectional-holder">
-          {% for actor in actors %}
-          <a href="/people/{{actor.id}}">
-            <div class="actor-card">
-              <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" >
-              <div class="info-plate">
-                <p>{{actor.name}}</p>
-              </div>
-            </div>
-          </a>
-          {% endfor %}
+  <div class="discover-section">
+    <div class="top-info-section">
+      <h1>TV</h1>
+      <div class="bumper"></div>
+      <div class="menu-spacer"></div>
+      <a href="/discover/4">
+        <div class="tab-button">
+          <p>On Air</p>
         </div>
+      </a>
+      <a href="/discover/5">
+        <div class="tab-button">
+          <p>Top Rated</p>
+        </div>
+      </a>
+    </div>
+    <div class="sectional-holder">
+      {% for tv in tvs %}
+      <a href="/show/{{ tv.id }}">
+        <div class="movie-card">
+          <img src="https://image.tmdb.org/t/p/original/{{tv.backdrop_path}}">
+          <div class="info-plate">
+            <p>{{tv.name}}</p>
+          </div>
+        </div>
+      </a>
+      {%endfor%}
+
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="discover-section">
+    <div class="top-info-section">
+      <h1>Actors</h1>
+      <div class="bumper"></div>
+      <div class="menu-spacer"></div>
+      <a href="/discover/6">
+        <div class="tab-button">
+          <p>Popular</p>
+        </div>
+      </a>
+    </div>
+    <div class="container-inner">
+      <div class="sectional-holder">
+        {% for actor in actors %}
+        <a href="/people/{{actor.id}}">
+          <div class="actor-card">
+            <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}">
+            <div class="info-plate">
+              <p>{{actor.name}}</p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
       </div>
     </div>
+  </div>
 
 
 
-   </body>
- </html>
+</body>
+
+</html>

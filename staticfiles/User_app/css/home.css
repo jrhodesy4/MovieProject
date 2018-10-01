@@ -1,0 +1,144 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.friends {
+  height: 220px;
+  width: 210px;
+  outline: 2px solid black;
+  overflow: auto;
+  display: block;
+  position: relative;
+  margin-top: 22%;
+  margin-left: 80%;
+  text-align: center;
+}
+
+.friend {
+  height: 90px;
+  width: 90px;
+  display: inline-block;
+}
+.friend a {
+  text-decoration: none;
+}
+
+.header {
+  position: absolute;
+}
+.topBar {
+  width: 100%;
+  height: 100px;
+  text-align: right;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  display: inline-block;
+  position: absolute;
+  outline: 2px solid black;
+  padding-right: 10%;
+  padding-top: 10px;
+}
+
+.topBar a {
+  text-decoration: none;
+  border-left: 1px solid black;
+  padding-left: 7px;
+  font-size: 20px;
+}
+
+.filmStrip {
+  position: absolute;
+  margin-left: 15%;
+  margin-top: 10%;
+}
+.movies {
+  width: 38%;
+  height: 500px;
+  position: absolute;
+  outline: 2px solid black;
+  margin-left: 100px;
+  margin-top: 370px;
+  overflow: auto;
+  /*outline: 2px solid black;*/
+  display: inline-block;
+  text-align: center;
+
+}
+.movie {
+  height: 200px;
+  width: 200px;
+  /*outline: 1px solid red;*/
+  display: inline-block;
+}
+
+
+
+
+
+
+
+.lbtn
+{
+    display:inline-block;
+    cursor:pointer;
+    background-repeat:repeat-x;
+    text-decoration:none;
+    margin-top: 25px;
+    margin-left: 960px;
+}
+
+.divMenuWrapper1
+{
+    height: 25px;
+    width: 75px;
+    position: relative;
+}
+
+.file_menu
+{
+    display:none;
+    width:125px;
+    border: 1px solid #1c1c1c;
+    border-radius: 5px;
+    background-color: white;
+    position:absolute;
+    z-index:100000;
+    position: relative;
+    margin-left: 900px;
+}
+
+.file_menu div
+{
+    background-color: white;
+    font-size:10pt;
+    position: relative;
+    border-radius: 5px;
+}
+
+.file_menu div a
+{
+    color:gray;
+    text-decoration:none;
+    padding:3px;
+    padding-left:15px;
+    display:block;
+    position: relative;
+}
+
+.file_menu div a:hover
+{
+    padding:3px;
+    padding-left:15px;
+    color: blue;
+    text-decoration:underline;
+    position: relative;
+}
+
+.timeline {
+  position: absolute;
+  margin-top: 370px;
+  margin-left: 700px;
+  height: 500px;
+  width: 45%;
+  outline: 2px solid black;
+}

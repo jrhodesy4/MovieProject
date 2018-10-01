@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 
-    <title>{{pagetitle}}</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}"/>
-    <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
-    <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}"/>
-  </head>
-  <body>
-    {% include "../global/navbar.html" %}
-    <div class="top-banner-more">
-      <a href="/discover">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
+  {% load staticfiles %}
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+  <title>{{pagetitle}}</title>
+  <!-- {% load staticfiles %} -->
+  <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css'%}" />
+  <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
+  <link rel="stylesheet" href="{% static 'movieApp/css/discover.css'%}" />
+</head>
+
+<body>
+  {% include "../global/navbar.html" %}
+  <div class="top-banner-more">
+    <a href="/discover">
       <div class="icon-holder">
         <svg class="icon-discover icon-keyboard-left-arrow-button">
           <use xlink:href="#icon-keyboard-left-arrow-button"></use>
-            <symbol id="icon-keyboard-left-arrow-button" viewBox="0 0 32 32">
+          <symbol id="icon-keyboard-left-arrow-button" viewBox="0 0 32 32">
             <title>keyboard-left-arrow-button</title>
             <path d="M25.867 3.733l-3.733-3.733-16 16 16 16 3.733-3.733-12.267-12.267z"></path>
-            </symbol>
+          </symbol>
         </svg>
       </div>
-      </a>
-      <h1 class="discover-label">{{pagetitle}}</h1>
-    </div>
-    {%if pagetype != "actors" %}
-    <div class="content-container">
-      {% for movie in movies %}
-      {% if pagetype == "movie" %}
-      <a href="/movie/{{ movie.id }}">
+    </a>
+    <h1 class="discover-label">{{pagetitle}}</h1>
+  </div>
+  {%if pagetype != "actors" %}
+  <div class="content-container">
+    {% for movie in movies %}
+    {% if pagetype == "movie" %}
+    <a href="/movie/{{ movie.id }}">
       {% else %}
       <a href="/show/{{ movie.id }}">
-      {% endif%}
+        {% endif%}
         <div class="movie-card-ext">
           {% if movie.backdrop_path == None %}
           <div class="backdrop-img-cover"></div>
           {% else %}
-          <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}" >
+          <img src="https://image.tmdb.org/t/p/original/{{movie.backdrop_path}}">
           {% endif%}
           <div class="info-plate-ext">
             {% if pagetype == "movie"%}
@@ -53,19 +58,20 @@
         </div>
       </a>
       {%endfor%}
-    </div>
-    {% endif %}
-    {%if pagetype == "actors"%}
-    {% for actor in movies %}
-    <a href="/people/{{actor.id}}">
-      <div class="actor-card-ext">
-        <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" >
-        <div class="info-plate">
-          <p>{{actor.name}}</p>
-        </div>
+  </div>
+  {% endif %}
+  {%if pagetype == "actors"%}
+  {% for actor in movies %}
+  <a href="/people/{{actor.id}}">
+    <div class="actor-card-ext">
+      <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}">
+      <div class="info-plate">
+        <p>{{actor.name}}</p>
       </div>
-    </a>
-    {%endfor%}
-    {%endif%}
-  </body>
+    </div>
+  </a>
+  {%endfor%}
+  {%endif%}
+</body>
+
 </html>

@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 
-    <title>actor name</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'movieApp/css/actors.css' %}">
-    <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
-    <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
-  </head>
-  <body>
-    {% include "../global/navbar.html" %}
-    <div class="top-banner">
-      <div class="bottom-line">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
+  {% load staticfiles %}
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 
-      </div>
-    </div>
-    <div class="top-info-section">
-      <div class="main-header">
-        <img src="https://image.tmdb.org/t/p/w500/{{ details.profile_path }}">
-          <div class="picture-space"></div>
-          <p class="actor-name">{{details.name}}</p>
-          <div class="actor-score">
-            <p class="avg-score-label">Avg Score</p>
-            <p class="avg-score">N/A</p>
-          </div>
-      </div>
+  <title>actor name</title>
+  <!-- {% load staticfiles %} -->
+  <link rel="stylesheet" href="{% static 'movieApp/css/actors.css' %}">
+  <link rel="stylesheet" href="{% static 'global/css/navbarStyle.css' %}">
+  <script type="text/javascript" src="{% static 'global/js/nav-bar.js'%}"></script>
+</head>
+
+<body>
+  {% include "../global/navbar.html" %}
+  <div class="top-banner">
+    <div class="bottom-line">
 
     </div>
-      {{credits.cast}}
-      <div class="middle-info-section">
-    
-      <p class="section-title">Most popular roles</p>
-      <div class="credits-section">
-        {% for role in credits %}
-        {% if role.title %}
-        <a href="/movie/{{ role.id }}">
+  </div>
+  <div class="top-info-section">
+    <div class="main-header">
+      <img src="https://image.tmdb.org/t/p/w500/{{ details.profile_path }}">
+      <div class="picture-space"></div>
+      <p class="actor-name">{{details.name}}</p>
+      <div class="actor-score">
+        <p class="avg-score-label">Avg Score</p>
+        <p class="avg-score">N/A</p>
+      </div>
+    </div>
+
+  </div>
+  {{credits.cast}}
+  <div class="middle-info-section">
+
+    <p class="section-title">Most popular roles</p>
+    <div class="credits-section">
+      {% for role in credits %}
+      {% if role.title %}
+      <a href="/movie/{{ role.id }}">
         <div class="movie-card">
           <img src="https://image.tmdb.org/t/p/w500/{{ role.poster_path }}">
           <div class="name-plate">
             <p>{{role.title}}</p>
           </div>
         </div>
-        </a>
-        {% endif %}
-        {% if role.name %}
-        <a href="/show/{{ role.id }}">
+      </a>
+      {% endif %}
+      {% if role.name %}
+      <a href="/show/{{ role.id }}">
         <div class="movie-card">
           <img src="https://image.tmdb.org/t/p/w500/{{ role.poster_path }}">
           <div class="name-plate">
             <p>{{role.name}}</p>
           </div>
         </div>
-        </a>
-        {% endif %}
-        {% endfor %}
-      </div>
+      </a>
+      {% endif %}
+      {% endfor %}
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

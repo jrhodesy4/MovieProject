@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+
+}
+.full-review-card {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 305px;
+  text-align: center;
+  z-index: 100 !important;
+}
+
+/*front side of card*/
+.full-card-holder {
+  display: inline-block;
+  position:relative;
+
+  left: 5px;
+  height: 305px;
+  width: auto;
+  vertical-align: top;
+  z-index: 100 !important;
+
+
+}
+.movie-poster {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: auto;
+  border-radius: 3px;
+  overflow: hidden;
+
+
+}
+.movie-poster img {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: auto;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+}
+.score-holder {
+  position: relative;
+  top: 50%;
+  left: -5px;
+  transform: translateY(-50%);
+  display: inline-block;
+  height: 90%;
+  width: 75px;
+  vertical-align: top;
+  margin: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  z-index: 9;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.score {
+  display: block;
+  height: 15.5%;
+  width: 100%;
+  position: relative;
+  padding-top: 3px;
+  text-align: center;
+  vertical-align: top !important;
+  border-bottom: 1px solid whitesmoke;
+
+}
+
+.score p {
+  font-size: .5em;
+  font-weight: 300;
+  margin: 0;
+}
+
+.score-number {
+  position: relative;
+
+  font-size: 1em !important;
+  font-weight: 800 !important;
+}
+
+
+
+
+
+
+/*here is for the image */
+.profile-image {
+  display: inline-block;
+
+  position: absolute;
+  left: -15px;
+  bottom: -15px;
+  z-index: 100!important;
+}
+.profile-img-holder {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 50px;
+  background-color:  #FC466B;
+
+
+}
+.profile-img-holder img {
+  height: 100%;
+  width: auto;
+
+}
+
+.profile-img-holder p {
+  display: inline-block;
+  margin: 0;
+  line-height: 40px;
+  vertical-align: center;
+  font-size: 1em;
+  color: white;
+}
+
+
+/*larger card */
+
+
+
+.review-extra-info {
+  z-index: 10 !important;
+  display: inline-block;
+  opacity: 0;
+  position: absolute;
+  left: -300px;
+  top:0;
+  width:300px;
+  height:300px;
+  white-space: normal;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+
+}
+.top-backdrop-image {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 49%;
+  overflow: hidden;
+  vertical-align: top;
+  margin: 0;
+  z-index: 20;
+}
+.top-backdrop-image img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 20;
+}
+.extra-info-review {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 50%;
+  width: 100%;
+  background-color: white;
+
+  margin-left: -1px;
+
+  z-index: 40;
+
+}
+.subscores-full {
+  vertical-align: top;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 25px;
+  text-align: center;
+  border-bottom: 1px solid whitesmoke;
+}
+.media-title-review {
+  margin: 0;
+  font-weight: 300;
+  vertical-align: middle;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+.os-title {
+margin-top: 5px;
+font-weight: 300;
+}
+.os-score-number {
+  font-size: 2em;
+  margin: 0;
+  font-weight: 800
+}
+
+.extra-scores-section {
+  padding-top: 5px;
+}
+
+
+
+
+.middle-section-review-extra {
+  display:inline-block;
+  position: relative;
+  width: 100%;
+  height: 125px;
+  text-align: center;
+}
+.mid-section {
+  position: relative;
+  display: inline-block;
+
+  height: 80%;
+  width: 48%;
+  vertical-align: top;
+
+}
+.info-holder-subscore {
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  text-align: left;
+  height: 23px;
+}
+
+
+.info-holder-subscore p {
+    margin: 0;
+    font-size: .3em;
+    font-weight: 300;
+}
+
+
+.bottom-section-review-extra {
+  position: absolute;
+  text-align: left;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 30px;
+  padding: 5px;
+}
+
+.bottom-section-review-extra p {
+  margin: 0;
+  font-weight:300;
+  font-size: .8em;
+  cursor: pointer;
+}
+.bottom-section-review-extra span {
+  font-size: .5em !important;
+  font-weight: 500 !important;
+}
+
+.reviewer-name {
+  text-transform: capitalize;
+}
+
+
+
+
+
+/*here is css for bars*/
+.bar-main {
+  position: relative;
+  display: inline-block;
+  width: 95%;
+  height: 5px;
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+  border-radius: 50px;
+  overflow: hidden;
+  vertical-align: top;
+  z-index: 40;
+  /*margin-bottom: ;*/
+
+}
+
+.bar-amount {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  /*background-color: #74E599;*/
+  border-radius: 50px;
+  z-index: 50;
+}
+
+.bottom-section-review-extra a {
+  text-decoration: none;
+  color: black;
+}
+
+/*score colors*/
+
+.green {
+  color: #74E599 !important;
+}
+.bar-amount.green {
+  background-color:#74E599 !important;
+}
+/*between 79 50*/
+.yellow {
+  color: #FCE071 !important;
+}
+.bar-amount.yellow {
+  background-color: #FCE071 !important;
+}
+
+
+/*below 50 */
+.red {
+  color: #FD9FA1 !important;
+}
+.bar-amount.red {
+  background-color:#FD9FA1 !important;
+}
+
+.odd-back {
+  background-color: whitesmoke;
+}
+
+
+.zero {
+  width: .01% !important;
+}
+
+.one {
+  width: 10% !important;
+}
+.two {
+  width: 20% !important;
+}
+.three {
+  width: 30% !important;
+}
+.four {
+  width: 40% !important;
+}
+.five {
+  width: 50% !important;
+}
+.six {
+  width: 60% !important;
+}
+.seven {
+  width: 70% !important;
+}
+.eight {
+  width: 80% !important;
+}
+.nine {
+  width: 90% !important;
+}
+.ten {
+  width: 100% !important;
+}
+
+
+
+
+
+
+
+
+
+
+/*end*/
